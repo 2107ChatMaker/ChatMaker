@@ -1,7 +1,9 @@
-import { Tag } from "./Enums/tag";
+import { Tag } from "../Utility/Enums/tag";
+import { databaseObject } from "./Interfaces/databaseObject";
+import { HashMap } from "./Interfaces/hashMap";
 
 // Stores users feedback on a given user response
-export class Feedback {
+export class Feedback implements databaseObject {
     // the email address of the user giving feedback
     email: String;
     // the question that the feedback is for
@@ -28,4 +30,18 @@ export class Feedback {
         this.offensive = offensive;
         this.makesNoSense = makesNoSense;
     }
+
+    /// converts given values into a HashMap
+    toHashMap(): HashMap {
+        return {
+            email: this.email,
+            question: this.question,
+            rating: this.rating,
+            tagsIncorrect: this.tagsIncorrect,
+            spellingBad: this.spellingBad,
+            offensive: this.offensive,
+            makesNoSense: this.makesNoSense
+        }
+    }
+
 }
