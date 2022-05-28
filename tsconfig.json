@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "BackEnd/Models/signUp.ts"  ],
+, "backEndRename/Models/signUp.ts"  ],
   "exclude": [
     "node_modules"
   ]
