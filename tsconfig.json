@@ -6,6 +6,15 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "node_modules",
+    "paths": {
+      "@/*": [
+        "../backEnd/*",
+      ],
+      "$/*": [
+        "../pages/*",
+      ]
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
