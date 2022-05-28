@@ -55,13 +55,15 @@ function App() {
                     <h2>Why did you rate it this way?</h2>
                     <hr />
                     <input type="checkbox" id="tagsBad" name="tagsBad" value="tagsBad"></input>
-                    <label for="tagsBad"> Tags Bad <br/> </label><br />
-                    <input type="checkbox" id="poorResp" name="poorResp" value="poorResp"></input>
-                    <label for="poorResp"> Poor Response<br /> </label><br />
+                    <label for="tagsBad"> Tags Incorrect <br/> </label><br />
+                    <input type="checkbox" id="badSpelling" name="badSpelling" value="badSpelling"></input>
+                    <label for="badSpelling"> Bad Spelling<br /> </label><br />
                     <input type="checkbox" id="fitPrompt" name="fitPrompt" value="fitPrompt"></input>
                     <label for="fitPrompt"> Doesn't fit the prompt!<br /> </label><br />
-                    <input type="checkbox" id="tagsBad2" name="tagsBad2" value="tagsBad2"></input>
-                    <label for="tagsBad2"> Tags Bad <br /></label><br /> <br />
+                    <input type="checkbox" id="offensive" name="offensive" value="offensive"></input>
+                    <label for="offensive"> Offensive <br /> </label><br />
+                    <input type="checkbox" id="makesNoSense" name="makesNoSense" value="makesNoSense"></input>
+                    <label for="makesNoSense"> Makes no sense <br /></label><br /> <br />
                     <span><button className="popupButton" onClick={toggleReviewPopup}>Done</button></span>
                     { /*later on, we will send these answers to be recorded in the database*/ }
                 </form>
