@@ -1,4 +1,3 @@
-import { Tag } from "../Utility/Enums/tag";
 import { databaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
 
@@ -20,7 +19,7 @@ export class Feedback implements databaseObject {
     // did the response make no sense given the question
     makesNoSense: boolean = false;
     
-    constructor(question: String, email: String, tags: [Tag], rating: number, tagsIncorrect: boolean = false, 
+    constructor(question: String, email: String, rating: number, tagsIncorrect: boolean = false, 
                 spellingBad: boolean = false, offensive: boolean = false, makesNoSense: boolean = false) {
         this.email = email;
         this.question = question;
