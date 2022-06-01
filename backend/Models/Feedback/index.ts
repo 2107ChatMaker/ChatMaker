@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+//import { ObjectId } from "mongodb";
 import { Schema, model, models } from "mongoose";
 
 const feedbackSchema = new Schema({
@@ -11,6 +11,7 @@ const feedbackSchema = new Schema({
 
 });
 
+//feedback collection in the database
 const Feedback = models.Feedback || model('feedback', feedbackSchema);
 
 export default Feedback;
