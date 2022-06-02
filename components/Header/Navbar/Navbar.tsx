@@ -1,6 +1,7 @@
 import styles from './Navbar.module.sass';
 import {useState} from 'react';
 
+//create new type call tab for navbar items
 interface Tab {
     tabName: string;
     tabActive: boolean;
@@ -32,7 +33,9 @@ export default function Navbar() {
     return (
         <nav className={styles.navbar}>
             <ul className={styles.navItems}>
-                {tabs.map(tab => (
+                
+                {//loop through tabs and display them
+                tabs.map(tab => (
                     <li 
                     className={`${styles.navItem} ${tab.tabActive ? styles.navItemActive : ''}`}
                     key={tab.tabName} 
