@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
-import Header from './components/Header/Header'
+import Header from '../components/Header/Header'
 
 export default function Home() {
   return (
@@ -20,7 +20,6 @@ export default function Home() {
         <p className={styles.description}>
           This is the index page. 
         </p>
-
         
       </main>
 
