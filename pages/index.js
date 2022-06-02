@@ -1,6 +1,15 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Header from '../components/Header/Header'
+import ContentCard from '../components/ContentCard/ContentCard'
+
+ function testFunc () {
+  return (
+      <div className={styles.CardContainer}>
+          WAKAWAKA
+      </div>
+  )
+}
 
 export default function Home() {
   return (
@@ -13,6 +22,8 @@ export default function Home() {
       </Head>
 			<Header/>
       <main className={styles.main}>
+      <ContentCard test={testFunc} height="CardContainer">
+        </ContentCard>
         <h1 className={styles.title}>
         Chat Maker
         </h1>
