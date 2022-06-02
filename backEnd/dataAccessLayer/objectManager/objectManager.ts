@@ -8,8 +8,8 @@ export class objectManager {
         /// The hashMapped values of the object
         const values = obj.toHashMap()
         /// The base mongoose model to build the object with
-        const mongooseModel = mongoose.model(collectionName, schema)
+        const MongooseModel = mongoose.model(collectionName, schema)
         /// the base mongoose model with values added to its fields
-        const finishedModel = new mongooseModel({values})
+        const finishedModel = new MongooseModel({values})
     }
 }
