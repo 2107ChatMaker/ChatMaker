@@ -1,9 +1,10 @@
-import connectDatabase from "../../backend/actions/database";
-import User from "../../backend/Models/User";
+import connectDatabase from "../../backEnd/actions/database";
+import User from "../../backEnd/Models/user";
 
 export default async function addUser(req, res) {
     try {
         console.log('connecting')
+        
         //connecting to database
         await connectDatabase();
 

@@ -1,6 +1,5 @@
-import { model } from "mongoose";
-import connectDatabase from "../../backend/actions/database";
-import Feedback from "../../backend/Models/Feedback";
+import connectDatabase from "../../backEnd/actions/database";
+import Feedback from "../../backEnd/Models/feedback";
 
 export default async function addFeedback(req, res) {
     try {

@@ -1,5 +1,5 @@
-import connectDatabase from "../../backend/actions/database";
-import Response from "../../backend/Models/Response";
+import connectDatabase from "../../backEnd/actions/database";
+import Response from "../../backEnd/Models/response";
 
 export default async function addResponse(req, res) {
     try {

@@ -1,5 +1,5 @@
-import connectDatabase from "../../backend/actions/database";
-import Question from "../../backend/Models/Question";
+import connectDatabase from "../../backEnd/actions/database";
+import Question from "../../backEnd/Models/question";
 
 export default async function addQuestion(req, res) {
     try {
@@ -9,9 +9,9 @@ export default async function addQuestion(req, res) {
         await connectDatabase();
 
         //creates the docuemnt in the data base
-        const question = await Question.create(req.body)
+        const question = await new Question()
 
-        //responds wit the question asked
+        //responds with the question asked
         res.json({question});
 
     }  catch (error) {
