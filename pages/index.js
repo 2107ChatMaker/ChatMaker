@@ -11,6 +11,14 @@ import ContentCard from '../components/ContentCard/ContentCard'
   )
 }
 
+let temp = [
+  searchQuestion("waka"),
+  searchQuestion("waka"),
+  searchQuestion("waka"),
+  searchQuestion("waka"),
+  searchQuestion("waka"),
+]
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -22,7 +30,7 @@ export default function Home() {
       </Head>
 			<Header/>
       <main className={styles.main}>
-      <ContentCard test={testFunc} height="CardContainer">
+      <ContentCard test={testFunc} height=temp>
         </ContentCard>
         <h1 className={styles.title}>
         Chat Maker
