@@ -20,6 +20,16 @@ export class SignUp extends User implements databaseObject{
         // needs to be salted and hashed
         this.password = password;
     }
+    /// Saves this object to the database or update it if it already exists
+    save() { 
+        // ObjectManager.saveObject(this, SignUp)
+    }
+    findAll() {
+        throw new Error("Method not implemented.");
+    }
+    find() {
+        throw new Error("Method not implemented.");
+    }
 
     // converts username, password, and email to a hashmap
     toHashMap(): HashMap {

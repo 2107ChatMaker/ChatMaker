@@ -10,6 +10,16 @@ export class SearchQuestion implements databaseObject {
 
         this.question = question;
     }
+    /// Saves this object to the database or update it if it already exists
+    save() { 
+        // ObjectManager.saveObject(this, SearchQuestion)
+    }
+    findAll() {
+        throw new Error("Method not implemented.");
+    }
+    find() {
+        throw new Error("Method not implemented.");
+    }
 
     /// converts users search query for questions into a hashmap containing an array of the words that made up that query
     toHashMap(): HashMap {

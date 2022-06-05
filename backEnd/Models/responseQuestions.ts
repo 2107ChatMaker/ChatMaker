@@ -13,6 +13,16 @@ export class Response implements databaseObject {
         this.questions = questions;
         this.tags = tags
     }
+    /// Saves this object to the database or update it if it already exists
+    save() { 
+        // ObjectManager.saveObject(this, Response)
+    }
+    findAll() {
+        throw new Error("Method not implemented.");
+    }
+    find() {
+        throw new Error("Method not implemented.");
+    }
 
     // Tags are returned as a hashmap
     toHashMap(): HashMap {

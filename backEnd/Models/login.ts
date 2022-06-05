@@ -21,6 +21,16 @@ import { HashMap } from "./Interfaces/hashMap";
         this.email = email;
         this.password = password;
     }
+    /// Saves this object to the database or update it if it already exists
+    save() { 
+        // ObjectManager.saveObject(this, Login)
+    }
+     findAll() {
+         throw new Error("Method not implemented.");
+     }
+     find() {
+         throw new Error("Method not implemented.");
+     }
 
     toHashMap(): HashMap {
         return {

@@ -13,6 +13,16 @@ export class ResponseSearchResult implements databaseObject {
         this.questionID = question;
         this.numberOfResponses = numberOfResponses;
     }
+    /// Saves this object to the database or update it if it already exists
+    save() { 
+        // ObjectManager.saveObject(this, ResonseSearchResult)
+    }
+    findAll() {
+        throw new Error("Method not implemented.");
+    }
+    find() {
+        throw new Error("Method not implemented.");
+    }
 
     /// converts given values into a HashMap
     toHashMap(): HashMap {

@@ -3,7 +3,7 @@ import { databaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
 
 // Stores users feedback on a given user response
-export class responseSubmission implements databaseObject {
+export class ResponseSubmission implements databaseObject {
     // the email address of the user giving feedback
     readonly email: String;
     // the question the user is being asked
@@ -24,6 +24,16 @@ export class responseSubmission implements databaseObject {
             throw new Error("Response Either too short or too long")
         }
     }
+  /// Saves this object to the database or update it if it already exists
+  save() { 
+    // ObjectManager.saveObject(this, ResponseSubmission)
+}
+  findAll() {
+    throw new Error("Method not implemented.");
+  }
+  find() {
+    throw new Error("Method not implemented.");
+  }
 		
 		/// converts given values into a HashMap
 		toHashMap(): HashMap {

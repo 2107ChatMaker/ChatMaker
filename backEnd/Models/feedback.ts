@@ -1,3 +1,5 @@
+import { ObjectManager } from "@/dataAccessLayer/objectManager/objectManager";
+import mongoose, { Schema } from "mongoose";
 import { databaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
 
@@ -28,6 +30,28 @@ export class Feedback implements databaseObject {
         this.spellingBad = spellingBad;
         this.offensive = offensive;
         this.makesNoSense = makesNoSense;
+    }
+    save() {
+
+        const feedbackSchema = new Schema({
+                    /// TODO delete when you can bring in abbes schemas
+            email: String,
+            question: String,
+            rating: Number,
+            tagsIncorrect: Boolean,
+            spellingBad: Boolean,
+            offensive: Boolean,
+            makesNoSense: Boolean
+        });
+
+        /// TODO the model argument is temp and should be replaced by abbes code when it is pushed
+        ObjectManager.saveObject(this, mongoose.model("feedback", feedbackSchema))
+    }
+    findAll() {
+        throw new Error("Method not implemented.");
+    }
+    find() {
+        throw new Error("Method not implemented.");
     }
 
     /// converts given values into a HashMap
