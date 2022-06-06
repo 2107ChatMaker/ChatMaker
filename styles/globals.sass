@@ -18,10 +18,12 @@ a
   padding: 10px 30px 
   //This makes the edges rounded
   border-radius: 12px
+  //font colour is offwhite, not plain white so it doesn't contrast
   color: whitesmoke
   background-color: midnightblue
   font-weight: bold
   box-shadow: 1px 2px #2E2E2E
+  //margin left and right are set to auto so it will center itself in it's space
   margin-left: auto
   margin-right: auto
   margin-bottom: 20px
@@ -32,11 +34,10 @@ a
   font-family: 'Times New Roman', serif
   position: fixed
   background: #c0c0c0
+  //width will be whatever the user's screen width is
   width: 100%
   height: 100vh
-  top: 0
-  left: 0
-  
+
 
 .loginForm
   background: #535353
@@ -49,18 +50,24 @@ a
   border-radius: 12px
   box-shadow: 1px 2px #2E2E2E
 
-.loginForm .account
+.loginForm .newAccount
   font-size: 12px
   padding-bottom: 20px
 
+  margin-top: 15px
+
+.loginForm .forgotPassword
+  font-size: 12px
+  padding-bottom: 40px
+  border: 1px 
+
 .loginForm h1
-  border-bottom: 1px solid
   text-align: center
   padding-bottom: 20px
+  margin-top: 40px
 
-.loginForm input
-  border-color: #686868
 
+//adding space to the top of only the first element in the log in for spacing
 .loginElements:first-of-type
   margin-top: 50px
 
@@ -69,14 +76,43 @@ a
   height: 50px
   border: none
   border-radius: 3px
-  margin-bottom: 20px
+  margin-bottom: 40px
 
 .loginElements label
   width: 130px
-  display: inline-block
   font-size: 18px
 
-.logoSpace
-  height: 200px
-  width: 200px
+.loginElements input
+  width: 250px
+  height: 35px
+  padding-left: 10px
+  padding-top: 5px
+  border-radius: 12px
+  border: 1px
+  box-shadow: 1px 2px #2E2E2E
+  
 
+@media (min-width: 600px) 
+  .loginForm
+    background: #535353
+    color: whitesmoke
+    width: 600px
+    overflow: hidden
+    margin: auto
+    margin: 20 450px
+    padding: 30px
+    border-radius: 12px
+    box-shadow: 1px 2px #2E2E2E
+
+  .button 
+    //making button look bigger on a bigger screen
+    padding: 15px 40px 
+    margin-bottom: 20px
+
+  .loginElements
+    width: 400px
+    display: inline-block
+    margin-bottom: 20px
+
+  .loginElements label
+    margin-right: 15px
