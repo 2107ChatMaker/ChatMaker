@@ -1,15 +1,15 @@
-import { databaseObject } from "./Interfaces/databaseObject";
+import { DatabaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
-import { User } from "./user";
-/**
- * Saves Sign Up information to be passed to MongoDB
- */
-export class SignUp extends User implements databaseObject{
+import { Saveable } from "./Interfaces/saveable";
+
+// Saves Sign Up information to be passed to MongoDB 
+export class SignUp implements DatabaseObject, Saveable{
+    // Stores The Users Email address
+    readonly email: String;
     // password given by user
     readonly password: String;
 
-    constructor(userName: String, email: String, password: String) {
-        super(userName, email);
+    constructor(email: String, password: String) {
 
         // validation may make more sense to be in controller
         // needs additional password validation
@@ -24,17 +24,10 @@ export class SignUp extends User implements databaseObject{
     save() { 
         // ObjectManager.saveObject(this, SignUp)
     }
-    findAll() {
-        throw new Error("Method not implemented.");
-    }
-    find() {
-        throw new Error("Method not implemented.");
-    }
 
     // converts username, password, and email to a hashmap
     toHashMap(): HashMap {
         return {
-            userName: this.userName,
             password: this.password,
             email: this.email
         }

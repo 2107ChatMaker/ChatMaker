@@ -1,10 +1,10 @@
-import { databaseObject } from "./Interfaces/databaseObject";
+import { DatabaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
 
 /**
  * Login Object for querying mongoDB Login
  */
- export class Login implements databaseObject {
+ export class Login implements DatabaseObject {
     // Stores The Users Given Name
     readonly email: String;
     // Stores The Users Email address
@@ -21,16 +21,11 @@ import { HashMap } from "./Interfaces/hashMap";
         this.email = email;
         this.password = password;
     }
-    /// Saves this object to the database or update it if it already exists
-    save() { 
-        // ObjectManager.saveObject(this, Login)
+
+    /// attempts to log in the user
+    attemptLogin() {
+        //TODO
     }
-     findAll() {
-         throw new Error("Method not implemented.");
-     }
-     find() {
-         throw new Error("Method not implemented.");
-     }
 
     toHashMap(): HashMap {
         return {

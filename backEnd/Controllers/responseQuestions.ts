@@ -1,9 +1,9 @@
 import { Tag } from "../Utility/Enums/tag";
-import { databaseObject } from "./Interfaces/databaseObject";
+import { DatabaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
 
 // Questions to be offered to the 
-export class Response implements databaseObject {
+export class Response implements DatabaseObject {
     // An array of returned questions and their associated ID's
     questions: [{id: String, question: String}];
     // The tags the user has selected to filter the responses they receive
@@ -15,13 +15,8 @@ export class Response implements databaseObject {
     }
     /// Saves this object to the database or update it if it already exists
     save() { 
+                //TODO must implement when abbes db code is merged
         // ObjectManager.saveObject(this, Response)
-    }
-    findAll() {
-        throw new Error("Method not implemented.");
-    }
-    find() {
-        throw new Error("Method not implemented.");
     }
 
     // Tags are returned as a hashmap
