@@ -1,10 +1,9 @@
 import axios from "axios";
+import { env } from "process";
 
-// an instance of AXIOS. use it to make fetch requests
 export const axiosIntance = axios.create(
     {
-        // the base URL set in the .env file
-        baseURL: process.env.BASEURL,
+        baseURL: env.BASEURL,
         // network time-out
         timeout: 1000
     }
