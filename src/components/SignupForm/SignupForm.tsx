@@ -2,8 +2,11 @@ import Input from '@components/Input/Input';
 import Button from '@components/Button/Button';
 import {Key, MailOutline} from '@mui/icons-material';
 import styles from './SignupForm.module.sass';
+import useForm from '@hook/useForm';
 
 export default function SignupForm() {
+    const [formData, handleChange] = useForm({email: "", password: "", passwordConfirm: ""});
+
     return (
         <form>
             <div className={styles.form}>
@@ -15,6 +18,8 @@ export default function SignupForm() {
                         type="email"
                         name="email"
                         placeholder="Email"
+                        value={formData.email}
+                        onChange={handleChange}
                         required={true}
                     >
                         <MailOutline color='disabled'/>
@@ -25,6 +30,8 @@ export default function SignupForm() {
                         type="password"
                         name="password"
                         placeholder="Password"
+                        value={formData.password}
+                        onChange={handleChange}
                         required={true}>
                         <Key color='disabled'/>
                     </Input>
@@ -34,6 +41,8 @@ export default function SignupForm() {
                         type="password"
                         name="passwordConfirm"
                         placeholder="Confirm Password"
+                        value={formData.passwordConfirm}
+                        onChange={handleChange}
                         required={true}>
                         <Key color='disabled'/>
                     </Input>

@@ -1,4 +1,5 @@
 import styles from './NavBar.module.sass';
+
 function NavBar() {
     return (
         <div className = {styles.navbar}>
