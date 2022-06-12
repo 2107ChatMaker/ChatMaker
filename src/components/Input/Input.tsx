@@ -34,8 +34,6 @@ export default function Input(props) {
                     </>
                 } 
             </div>
-
-            
             {
                 props.error != "" ? 
                     (<p className={styles.error}>{props.error}</p>): <></> //if error is not empty, show error message
