@@ -5,11 +5,17 @@ import styles from "./LoginForm.module.sass"
 import useForm from '@hook/useForm';
 
 export default function LoginForm(props) {
-    const [formData, handleChange] = useForm({email: "", password: ""});
-    
-    const handleSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
     }
+
+    const loginValidation = (formData) => {
+
+    }
+
+    const [formData, errors, handleChange, handleSubmit] = useForm({email: "", password: ""}, loginValidation, onSubmit);
+    
+    
 
     return (
         <form onSubmit={handleSubmit}>
