@@ -5,6 +5,7 @@ import FormLink from './FormLink/FormLink';
 import {motion} from 'framer-motion';
 
 
+
 export default function AuthFormWrapper({children}) {
     return (
         <motion.div
