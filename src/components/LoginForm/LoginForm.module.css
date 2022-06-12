@@ -1,0 +1,44 @@
+.form {
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.formTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.input {
+  margin-top: 1rem;
+}
+
+.resetPassword {
+  color: #1C98EC;
+  font-size: 0.875rem;
+}
+
+.formAction {
+  margin-top: 1.75rem;
+}
+
+@media screen and (max-width: 800px) {
+  .formTitle {
+    display: none;
+  }
+}
+/*# sourceMappingURL=LoginForm.module.css.map */

@@ -1,4 +1,5 @@
 import styles from './NavBar.module.sass';
+<<<<<<< HEAD
 import Link from 'next/link';
 import {Explore, Star, Person, AddBox, ExitToApp} from '@mui/icons-material';
 import { Icon } from "@mui/material";
@@ -108,4 +109,32 @@ function NavBar() {
         </motion.div>
     )
 }
+=======
+function NavBar() {
+    return (
+        <div className = {styles.navbar}>
+            <div className = {styles.logo}>
+            </div>
+            <ul className={styles.navItems}>
+                <li className={styles.navItem}>
+
+                </li>
+                <li className={styles.navItem}>
+                    
+                </li>
+                <li className={styles.navItem}>
+                    
+                </li>
+                <li className={styles.navItem}>
+                    
+                </li>
+                <li className={styles.navItem}>
+                    
+                </li>
+            </ul>            
+        </div>
+    )
+}
+
+>>>>>>> fb599f5 (update signup&login form)
 export default NavBar;

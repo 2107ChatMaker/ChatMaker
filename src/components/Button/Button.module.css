@@ -1,0 +1,16 @@
+.button {
+  padding: 0.5rem 2rem;
+  border-radius: 0.75rem;
+  background-color: #1C98EC;
+  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  color: white;
+  font-size: 0.875rem;
+  border: 0;
+  outline: 0;
+}
+
+.alert {
+  background-color: #D96E82;
+}
+/*# sourceMappingURL=Button.module.css.map */

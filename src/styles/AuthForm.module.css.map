@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;CAAG;;AAE1B,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EAC/B,AAAA,QAAQ,CAAC;IACN,WAAW,EAAE,KAAK;GAAG",
-    "sources": [
-        "AuthForm.module.sass"
-    ],
-    "names": [],
-    "file": "AuthForm.module.css"
-}
