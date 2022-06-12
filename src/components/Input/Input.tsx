@@ -1,5 +1,5 @@
 import styles from './Input.module.sass';
-import {PanoramaPhotosphereTwoTone, Visibility, VisibilityOff} from '@mui/icons-material';
+import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
 
 export default function Input(props) {
@@ -44,5 +44,3 @@ export default function Input(props) {
      
     )
 }
-
-
