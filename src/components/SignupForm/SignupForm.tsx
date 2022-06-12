@@ -5,10 +5,20 @@ import styles from './SignupForm.module.sass';
 import useForm from '@hook/useForm';
 
 export default function SignupForm() {
-    const [formData, handleChange] = useForm({email: "", password: "", passwordConfirm: ""});
+    
+    const onSubmit = (e) => {
+        e.preventDefault();
+    }
+    
+    const signUpValidation = (formData) => {
+        
+    }
 
+    const [formData, errors, handleChange, handleSubmit] = useForm({email: "", password: "", passwordConfirm: ""},signUpValidation, onSubmit);
+    
+    
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className={styles.form}>
                 <div className={styles.formTitle}>
                     Welcome!
