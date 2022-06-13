@@ -5,18 +5,27 @@ import styles from "./LoginForm.module.sass"
 import useForm from '@hook/useForm';
 
 export default function LoginForm(props) {
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
+        console.log("log in success");
     }
 
-    const loginValidation = (formData) => {
+    const validation = (formData) => {
+        let errors = {email: "", password: ""};
+        const emailPredicate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const passwordPredicate = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
 
+        if (!emailPredicate.test(formData.email)) {
+            errors.email = "Invalid email";
+        }
+
+        if (!passwordPredicate.test(formData.password)) {
+            errors.password = "wrong password";
+        }
+        return errors;
     }
 
-    const [formData, errors, handleChange, handleSubmit] = useForm({email: "", password: ""}, loginValidation, onSubmit);
+    const [formData, errors, handleChange, handleSubmit] = useForm({email: "", password: ""}, validation, onSubmit);
     
-    
-
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.form}>
@@ -31,6 +40,7 @@ export default function LoginForm(props) {
                     onChange={handleChange}
                     value={formData.email}
                     required={true}
+                    error={errors.email? errors.email: ""}
                 >
                     <MailOutline  color='disabled'/>
                 </Input>
@@ -43,6 +53,7 @@ export default function LoginForm(props) {
                         onChange={handleChange}
                         value={formData.password}
                         required={true}
+                        error={errors.password? errors.password: ""}
                     >
                         <Key color='disabled'/>
                     </Input>

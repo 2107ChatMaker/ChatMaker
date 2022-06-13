@@ -12,6 +12,7 @@ export default function useForm(initialState, validate, onSubmit) {
     }
 
     const handleSubmit = (e) => {
+        setErrors({});
         e.preventDefault();
         setErrors(validate(form));
         if (Object.keys(errors).length === 0) {

@@ -1,5 +1,5 @@
 import styles from './Input.module.sass';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
+import {PanoramaPhotosphereTwoTone, Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
 
 export default function Input(props) {
@@ -12,27 +12,36 @@ export default function Input(props) {
     }
 
     return (
-     <div className = {styles.inputContainer}>
-        {props.children}
-        <input
-            type={type}
-            placeholder={props.placeholder}
-            className={styles.input}
-            onChange={props.onChange}
-            value={props.value}
-            name={props.name}
-            required={props.required}
-        />
-        {
-            props.type === 'password' &&  
-            <>
-                {!showPassword?
-                    <Visibility onClick={passwordVisibleToggle} color='disabled'/>:
-                    <VisibilityOff onClick={passwordVisibleToggle} color='disabled'/>
-                }
-            </>
-        } 
-     </div>
+        <>
+            <div className = {styles.inputContainer}>
+                {props.children}
+                <input
+                    type={type}
+                    placeholder={props.placeholder}
+                    className={styles.input}
+                    onChange={props.onChange}
+                    value={props.value}
+                    name={props.name}
+                    required={props.required}
+                />
+                {
+                    props.type === 'password' &&  
+                    <>
+                        {!showPassword?
+                            <Visibility onClick={passwordVisibleToggle} color='disabled'/>:
+                            <VisibilityOff onClick={passwordVisibleToggle} color='disabled'/>
+                        }
+                    </>
+                } 
+            </div>
+
+            
+            {
+                props.error != "" ? 
+                    (<p className={styles.error}>{props.error}</p>): <></> //if error is not empty, show error message
+            }
+        </>
+     
     )
 }
 
