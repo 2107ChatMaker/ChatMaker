@@ -2,11 +2,19 @@ import styles from './AuthFormWrapper.module.sass';
 import FormNavItem from './FormNavItem/FormNavItem';
 import FormLogo from './FormLogo/FormLogo';
 import FormLink from './FormLink/FormLink';
+import {motion} from 'framer-motion';
+
 
 export default function AuthFormWrapper({children}) {
-    
     return (
-        <div className={styles.formWrapper}>
+        <motion.div
+        animate={{
+            width: "70%"
+        }}
+        initial={{
+            width: "65%"
+        }}
+        className={styles.formWrapper}>
             <div className={styles.formContainer}>
                 <div className={styles.formNav}>
                     <ul className={styles.navItems}>
@@ -29,7 +37,7 @@ export default function AuthFormWrapper({children}) {
             <div className={styles.logo}>
                 <FormLogo/>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
