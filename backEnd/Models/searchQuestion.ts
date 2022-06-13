@@ -23,4 +23,26 @@ export class SearchQuestion implements databaseObject {
             question: wordsInQuestion
         }
     }
+
+    getAnswers()
+    {
+        //declaring an array to hold all the responses we get
+        var answers = [] 
+        //will need to adjust when we get the db implementation code
+        /* Reference: https://www.mongodb.com/basics/database-search MongoDB Query Language, advanced searching*/
+        //setting the answers equal to whatever we get back from this function
+        
+        answers = db.prompts.aggregate([
+            {
+              $search: {
+                text: {
+                  query: this.question,
+                  path:"full_prompt_text"
+                }
+              }
+            }
+          ]);
+
+        return answers
+    }
 }
