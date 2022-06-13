@@ -1,0 +1,17 @@
+.logo {
+  padding: 0.5rem;
+  width: 7rem;
+  height: 7rem;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .logo {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+/*# sourceMappingURL=Logo.module.css.map */

@@ -1,0 +1,12 @@
+.navItem {
+  margin: 0 1rem;
+}
+
+.navItem:hover {
+  cursor: pointer;
+}
+
+.isActive {
+  color: #1C98EC;
+}
+/*# sourceMappingURL=FormNavItem.module.css.map */

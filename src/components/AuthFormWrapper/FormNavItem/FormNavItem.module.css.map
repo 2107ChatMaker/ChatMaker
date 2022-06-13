@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,MAAM,EAAE,MAAM;CAEU;;AAH5B,AAEI,QAFI,AAEH,MAAM,CAAC;EACJ,MAAM,EAAE,OAAO;CAAG;;AAG1B,AAAA,SAAS,CAAC;EACN,KAAK,EAAE,OAAO;CAAG",
+    "sources": [
+        "FormNavItem.module.sass"
+    ],
+    "names": [],
+    "file": "FormNavItem.module.css"
+}
