@@ -20,7 +20,7 @@
 
 .navItems 
     display: flex
-    font-size: 20px
+    font-size: 1.25rem
     font-weight: bold
     color: white
     list-style-type: none
@@ -48,12 +48,12 @@
 
     
     .formContainer
-        padding: 0
+        padding: 0 
         width: 100%
     
     .form 
         width: 100%
-        padding: 3rem 0
+        padding: 3rem 5rem
         justify-content: flex-start
 
     
@@ -74,4 +74,8 @@
         padding: 0
         padding-right: 0.25rem
         width: 100%
-    
+
+@media  screen and (max-width: 498px) 
+    .navItems
+        justify-content: flex-end
+        padding: 0

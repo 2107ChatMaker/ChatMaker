@@ -5,8 +5,35 @@ import styles from './SignupForm.module.sass';
 import useForm from '@hook/useForm';
 
 export default function SignupForm() {
-    const [formData, handleChange] = useForm({email: "", password: "", passwordConfirm: ""});
+    
+    const onSubmit = () => {
+        console.log("register success");
+    }
+    
+    const validation = (formData) => {
+        let errors = {email: "", password: "", passwordConfirm: ""};
+        const emailPredicate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const passwordPredicate = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
+        
+        if (!emailPredicate.test(formData.email)) {
+            errors.email = "Invalid email";
+        }
 
+        if (!passwordPredicate.test(formData.password)) {
+            errors.password = `Password must be 8-15 characters long, 
+                               contain at least one number, one uppercase letter, 
+                               one lowercase letter`;
+        }
+
+        if(formData.password !== formData.passwordConfirm) {
+            errors.passwordConfirm = "Passwords do not match";
+        }
+        return errors;
+    }
+
+    const [formData, errors, handleChange, handleSubmit] = useForm({email: "", password: "", passwordConfirm: ""},validation, onSubmit);
+    
+    
     return (
         <form>
             <div className={styles.form}>
@@ -21,6 +48,7 @@ export default function SignupForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required={true}
+                        error = {errors.email? errors.email: ""}
                     >
                         <MailOutline color='disabled'/>
                     </Input>
@@ -32,7 +60,9 @@ export default function SignupForm() {
                         placeholder="Password"
                         value={formData.password}
                         onChange={handleChange}
-                        required={true}>
+                        required={true}
+                        error = {errors.password? errors.password: ""}
+                        >
                         <Key color='disabled'/>
                     </Input>
                 </div>
@@ -43,13 +73,15 @@ export default function SignupForm() {
                         placeholder="Confirm Password"
                         value={formData.passwordConfirm}
                         onChange={handleChange}
-                        required={true}>
+                        required={true}
+                        error = {errors.passwordConfirm? errors.passwordConfirm: ""}
+                        >
                         <Key color='disabled'/>
                     </Input>
                 </div>
                 <div className={styles.formAction}>
                     <Button type={"submit"}>
-                        Login
+                        Signup
                     </Button>
                 </div>
             </div>  
