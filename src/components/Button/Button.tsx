@@ -1,8 +1,4 @@
 import styles from './Button.module.sass';
-<<<<<<< HEAD
-
-=======
->>>>>>> fb599f5 (update signup&login form)
 export default function Button(props) {
     return (
         <button

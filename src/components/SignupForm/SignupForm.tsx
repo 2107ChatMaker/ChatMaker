@@ -45,14 +45,10 @@ export default function SignupForm() {
                         type="email"
                         name="email"
                         placeholder="Email"
-<<<<<<< HEAD
                         value={formData.email}
                         onChange={handleChange}
                         required={true}
                         error = {errors.email? errors.email: ""}
-=======
-                        required={true}
->>>>>>> fb599f5 (update signup&login form)
                     >
                         <MailOutline color='disabled'/>
                     </Input>
@@ -62,15 +58,11 @@ export default function SignupForm() {
                         type="password"
                         name="password"
                         placeholder="Password"
-<<<<<<< HEAD
                         value={formData.password}
                         onChange={handleChange}
                         required={true}
                         error = {errors.password? errors.password: ""}
                         >
-=======
-                        required={true}>
->>>>>>> fb599f5 (update signup&login form)
                         <Key color='disabled'/>
                     </Input>
                 </div>
@@ -79,25 +71,17 @@ export default function SignupForm() {
                         type="password"
                         name="passwordConfirm"
                         placeholder="Confirm Password"
-<<<<<<< HEAD
                         value={formData.passwordConfirm}
                         onChange={handleChange}
                         required={true}
                         error = {errors.passwordConfirm? errors.passwordConfirm: ""}
                         >
-=======
-                        required={true}>
->>>>>>> fb599f5 (update signup&login form)
                         <Key color='disabled'/>
                     </Input>
                 </div>
                 <div className={styles.formAction}>
                     <Button type={"submit"}>
-<<<<<<< HEAD
                         Signup
-=======
-                        Login
->>>>>>> fb599f5 (update signup&login form)
                     </Button>
                 </div>
             </div>  

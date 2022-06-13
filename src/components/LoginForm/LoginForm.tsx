@@ -38,14 +38,9 @@ export default function LoginForm(props) {
                     name="email"
                     placeholder="Email"
                     onChange={handleChange}
-<<<<<<< HEAD
                     value={formData.email}
                     required={true}
                     error={errors.email? errors.email: ""}
-=======
-                    value={data.email}
-                    required={true}
->>>>>>> fb599f5 (update signup&login form)
                 >
                     <MailOutline  color='disabled'/>
                 </Input>
@@ -56,14 +51,9 @@ export default function LoginForm(props) {
                         name="password"
                         placeholder="Password"
                         onChange={handleChange}
-<<<<<<< HEAD
                         value={formData.password}
                         required={true}
                         error={errors.password? errors.password: ""}
-=======
-                        value={data.password}
-                        required={true}
->>>>>>> fb599f5 (update signup&login form)
                     >
                         <Key color='disabled'/>
                     </Input>
