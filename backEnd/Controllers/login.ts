@@ -1,5 +1,5 @@
-import { databaseObject } from "./Interfaces/databaseObject";
-import { HashMap } from "./Interfaces/hashMap";
+import { databaseObject } from "../Controllers/Interfaces/databaseObject";
+import { HashMap } from "../Controllers/Interfaces/hashMap";
 
 /**
  * Login Object for querying mongoDB Login

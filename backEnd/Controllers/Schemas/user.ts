@@ -1,7 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
 const userSchema = new Schema({
-   
     //the id of the user it will start at 0 and increase for each user created
     id:  {type: Number, required: false},
     //creates the username when the user signs up and it is kept with their id

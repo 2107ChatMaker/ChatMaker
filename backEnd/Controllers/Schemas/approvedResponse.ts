@@ -17,7 +17,6 @@ const approvedResponseSchema = new Schema({
     tag: {type: [], required: true},
     //how many times the question was rated
     timesRated: {type: Number, required: false}
-
 });
 
 //gets response collection in the database

@@ -17,17 +17,6 @@ const responseSchema = new Schema({
     //users will be able to filter through the responses and search by tag 
     //after merge change the type to tag enum
     tag: {type: [Tag], required: true},
-    // were the tags given in response incorrect 
-    tagsIncorrect: {boolean: false, required: false},
-    // was the spelling of the response bad
-    spellingBad: {boolean: false, required: false},
-    // was the response offensive
-    offensive: {boolean: false, required: false},
-    // did the response make no sense given the question
-    makesNoSense: {boolean: false, required: false},
-
-
-    
 });
 
 //gets response collection in the database

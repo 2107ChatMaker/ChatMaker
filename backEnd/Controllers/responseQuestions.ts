@@ -1,6 +1,6 @@
 import { Tag } from "../Utility/Enums/tag";
-import { databaseObject } from "./Interfaces/databaseObject";
-import { HashMap } from "./Interfaces/hashMap";
+import { databaseObject } from "../Controllers/Interfaces/databaseObject";
+import { HashMap } from "../Controllers/Interfaces/hashMap";
 
 // Questions to be offered to the 
 export class Response implements databaseObject {

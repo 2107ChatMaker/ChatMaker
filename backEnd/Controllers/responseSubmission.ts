@@ -1,6 +1,6 @@
 import { Tag } from "../Utility/Enums/tag";
-import { databaseObject } from "./Interfaces/databaseObject";
-import { HashMap } from "./Interfaces/hashMap";
+import { databaseObject } from "../Controllers/Interfaces/databaseObject";
+import { HashMap } from "../Controllers/Interfaces/hashMap";
 
 // Stores users feedback on a given user response
 export class responseSubmission implements databaseObject {
