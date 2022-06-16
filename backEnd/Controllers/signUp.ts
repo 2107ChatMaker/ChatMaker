@@ -1,5 +1,5 @@
-import { databaseObject } from "./Interfaces/databaseObject";
-import { HashMap } from "./Interfaces/hashMap";
+import { databaseObject } from "../Controllers/Interfaces/databaseObject";
+import { HashMap } from "../Controllers/Interfaces/hashMap";
 import { User } from "./user";
 /**
  * Saves Sign Up information to be passed to MongoDB

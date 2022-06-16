@@ -1,5 +1,5 @@
-import { databaseObject } from "./Interfaces/databaseObject";
-import { HashMap } from "./Interfaces/hashMap";
+import { databaseObject } from "../Controllers/Interfaces/databaseObject";
+import { HashMap } from "../Controllers/Interfaces/hashMap";
 
 // Represents all responses returned from the database for this question that match the chosen tags
 export class ResponseSearchResult implements databaseObject {
