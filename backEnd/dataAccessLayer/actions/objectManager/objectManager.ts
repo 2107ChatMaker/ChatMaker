@@ -1,13 +1,14 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { DatabaseObject } from "@/Controllers/Interfaces/databaseObject";
 import { Tag } from "@/Utility/Enums/tag";
+import Database from "@/Database/database";
 
 
 export class ObjectManager {
 
     /// save a copy of the given object as the supplied model to the database
     static async saveObject(obj: DatabaseObject, model: mongoose.Model<any>) {
-        await Database.setupClient(process.env.MONGODB_URI);
+        await Database.setupClient();
         /// The hashMapped values of the object
         const values = obj.toHashMap()
         const buildModel = new model(values)
@@ -20,7 +21,7 @@ export class ObjectManager {
     /// Ie> i'm getting all of the questions so i cast them as: question[]
     static async findAll(model: mongoose.Model<any>) {
         /// establishes a connection to the database
-        await Database.setupClient(process.env.MONGODB_URI);
+        await Database.setupClient();
         /// returns a mongoose query that needs to be Cast to the requested object type 
         const foundEntries = await model.find({})
 
@@ -31,7 +32,7 @@ export class ObjectManager {
     /// Cast the result as the object type you expect from the call.
     static async find(model: mongoose.Model<any>, id: string) {
         /// establishes a connection to the database
-        await Database.setupClient(process.env.MONGODB_URI);
+        await Database.setupClient();
         /// returns the request query that needs to be Cast to the requested object type 
         const foundEntry = await model.findById({ _id: id })
         
@@ -40,7 +41,7 @@ export class ObjectManager {
 
     static async findByTags(model: mongoose.Model<any>, inputTags: Tag[]) {
         /// establishes a connection to the database
-        await Database.setupClient(process.env.MONGODB_URI);
+        await Database.setupClient();
         /// returns a mongoose query that only includes documents that contain the same tags given to the array needs to be Cast to the requested object type 
         const foundEntries = await model.find({ tags: {$all:  [inputTags]} })
         
