@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Test() {
     const [name, setName] = useState('Phillip');
