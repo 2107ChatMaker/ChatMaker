@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export default function FormLink() {
+
+    //router for checking if user is in login or signup page
     const router = useRouter();
+    
+    //if user is in login page, link to signup page, else link to login page
     if (router.pathname === '/auth/signup') {
         return (
             <p className={styles.linkText}>

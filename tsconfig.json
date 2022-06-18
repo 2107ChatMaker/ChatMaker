@@ -23,6 +23,12 @@
       "@styles/*": [
         "../src/styles/*",
       ],
+      "@interfaces/*": [
+        "../src/interfaces/*",
+      ],
+      "@utils/*": [
+        "../src/utils/*",
+      ],
     },
     "allowJs": true,
     "skipLibCheck": true,
