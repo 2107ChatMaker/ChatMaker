@@ -3,28 +3,20 @@ import Input from "@components/Input/Input"
 import Button from "@components/Button/Button"
 import styles from "./LoginForm.module.sass"
 import useForm from '@hook/useForm';
+import {loginValidation as validation} from '@utils/LoginFormValidation';
+import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 
-export default function LoginForm(props) {
+export default function LoginForm() {
     const onSubmit = () => {
         console.log("log in success");
     }
 
-    const validation = (formData) => {
-        let errors = {email: "", password: ""};
-        const emailPredicate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const passwordPredicate = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
-
-        if (!emailPredicate.test(formData.email)) {
-            errors.email = "Invalid email";
-        }
-
-        if (!passwordPredicate.test(formData.password)) {
-            errors.password = "wrong password";
-        }
-        return errors;
-    }
-
-    const [formData, errors, handleChange, handleSubmit] = useForm({email: "", password: ""}, validation, onSubmit);
+    const [
+        formData, 
+        errors, 
+        handleChange, 
+        handleSubmit
+    ] = useForm<FormData>({email: "", password: ""}, validation, onSubmit);
     
     return (
         <form onSubmit={handleSubmit}>

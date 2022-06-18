@@ -4,8 +4,11 @@ import FormLogo from './FormLogo/FormLogo';
 import FormLink from './FormLink/FormLink';
 import {motion} from 'framer-motion';
 
+interface AuthFormWrapperProps {
+    children: React.ReactNode;
+}
 
-export default function AuthFormWrapper({children}) {
+export default function AuthFormWrapper({children}: AuthFormWrapperProps) {
     return (
         <motion.div
         animate={{

@@ -2,7 +2,18 @@ import styles from './Input.module.sass';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
 
-export default function Input(props) {
+interface InputProps {
+    type: string;
+    name: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    error?: string;
+    placeholder?: string;
+    required?: boolean;
+    children?: React.ReactNode;
+}
+
+export default function Input(props: InputProps) {
     const [type,setType] = useState(props.type);
     const [showPassword, setShowPassword] = useState(false)
     
@@ -12,7 +23,8 @@ export default function Input(props) {
     }
 
     return (
-     <div className = {styles.inputContainer}>
+    <>
+        <div className = {styles.inputContainer}>
         {props.children}
         <input
             type={type}
@@ -31,8 +43,11 @@ export default function Input(props) {
                     <VisibilityOff onClick={passwordVisibleToggle} color='disabled'/>
                 }
             </>
-        } 
-     </div>
+        }
+        </div>
+        {props.error !== ""?<div className={styles.error}>{props.error}</div>:null}
+    </>
+     
     )
 }
 

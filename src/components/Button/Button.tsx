@@ -1,6 +1,13 @@
 import styles from './Button.module.sass';
 
-export default function Button(props) {
+interface ButtonProps {
+    type: 'submit' | 'button';
+    onClick?: () => void;
+    children: React.ReactNode;
+    variant?: 'secondary' | 'primary' | 'alert';
+}
+
+export default function Button(props: ButtonProps) {
     return (
         <button
          type={props.type}
