@@ -11,9 +11,18 @@
       "@/*": [
         "../backEnd/*",
       ],
-      "$/*": [
-        "../pages/*",
-      ]
+      "@components/*": [
+        "../src/components/*",
+      ],
+      "@hook/*": [
+        "../src/hook/*"
+      ],
+      "@pages/*": [
+        "../src/pages/*",
+      ],
+      "@styles/*": [
+        "../src/styles/*",
+      ],
     },
     "allowJs": true,
     "skipLibCheck": true,
