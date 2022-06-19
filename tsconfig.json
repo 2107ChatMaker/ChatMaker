@@ -9,11 +9,26 @@
     "baseUrl": "node_modules",
     "paths": {
       "@/*": [
-        "../backEnd/*",
+        "../src/backEnd/*",
       ],
-      "$/*": [
-        "../pages/*",
-      ]
+      "@components/*": [
+        "../src/components/*",
+      ],
+      "@hook/*": [
+        "../src/hook/*"
+      ],
+      "@pages/*": [
+        "../src/pages/*",
+      ],
+      "@styles/*": [
+        "../src/styles/*",
+      ],
+      "@interfaces/*": [
+        "../src/interfaces/*",
+      ],
+      "@utils/*": [
+        "../src/utils/*",
+      ],
     },
     "allowJs": true,
     "skipLibCheck": true,
