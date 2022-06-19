@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.sass';
+import styles from '@styles/Home.module.sass';
 import Background from '@components/Background/Background';
 import NavBar from '@components/NavBar/NavBar';
 import NextHead from '@components/NextHead';
