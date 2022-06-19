@@ -4,13 +4,14 @@
     left: 0
     height: 100%
     background-color: #2B3344
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+    transition: box-shadow 0.3s ease
 
 .logo 
     display: flex
     flex-direction: row
     overflow: hidden
     padding: 1.2rem
-    
 
 .logoImage
     width: 2rem
@@ -35,9 +36,12 @@
     width: 15rem
     color: white
     margin: 1rem 0
+    font-size: 1rem 
     &:hover 
         color: #1C98EC
         cursor: pointer
+    & > * 
+        transition: 0.3s
 
 .navItemIcon
     width: 2rem
@@ -47,5 +51,48 @@
     justify-content: center
     align-items: center
 
-.link 
-    font-size: 1rem
+@media screen and (max-width: 768px) 
+    .navBar
+        top: initial
+        left: initial
+        bottom: 0
+        height: auto
+
+    .navItems
+        flex-direction: row 
+        justify-content: space-evenly
+        overflow: initial
+
+    .navItem
+        flex: 1
+        width: auto
+        flex-direction: column
+        align-items: center
+        font-size: 0.875rem
+        padding: 0 0.5rem
+
+    .navItemIcon
+        width: 100%
+        margin: 0
+        margin-bottom: 0.5rem
+
+    .link 
+        text-align: center
+    
+    .logo
+        display: none
+    
+    .explore
+        order: 2
+    
+    .profile
+        order: 3
+
+    .rating
+        order: 1
+
+    .logOut
+        display: none
+    
+    .addPrompt
+        display: none
