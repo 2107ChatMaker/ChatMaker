@@ -1,27 +1,31 @@
 import styles from './Input.module.sass';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
-import {useState} from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useState, ReactNode, ChangeEvent } from 'react';
 
 //props type
 interface InputProps {
     type: string;
     name: string;
     value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     error?: string;
     placeholder?: string;
     required?: boolean;
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 export default function Input(props: InputProps) {
     const [type,setType] = useState(props.type);
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
     
     const passwordVisibleToggle = () => {
         setShowPassword(!showPassword);
-        showPassword? setType('password'): setType('text');
-    }
+        if (showPassword) {
+            setType('password');
+        } else {
+            setType('text');
+        }
+    };
 
     return (
     <>
@@ -48,8 +52,7 @@ export default function Input(props: InputProps) {
         </div>
         {props.error !== ""?<div className={styles.error}>{props.error}</div>:null}
     </>
-     
-    )
+    );
 }
 
 

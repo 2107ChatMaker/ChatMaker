@@ -20,8 +20,8 @@ export default function useForm<T>(
         setForm({
             ...form,
             [e.target.name]: e.target.value
-        })
-    }
+        });
+    };
 
     //form submit handler
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,8 +38,8 @@ export default function useForm<T>(
         if (Object.keys(newErrors).length === 0) {
             onSubmit(form);        
         }
-    }
-    
+    };
+
     //return form state, errors, change handler and submit handler
     return [form, errors ,handleChange, handleSubmit];
 }

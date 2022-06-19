@@ -30,6 +30,6 @@ export class SignUp implements DatabaseObject, Saveable{
         return {
             password: this.password,
             email: this.email
-        }
+        };
     }
 }

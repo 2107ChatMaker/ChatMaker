@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {Explore, Star, Person, AddBox, ExitToApp} from '@mui/icons-material';
 import { Icon } from "@mui/material";
 import Image from 'next/image';
-import {useState, useCallback} from 'react';
+import {useState} from 'react';
 import {motion} from 'framer-motion';
 
 function NavBar() {
@@ -12,10 +12,14 @@ function NavBar() {
     const [showMenu, setShowMenu] = useState(false);
     
     //function to show sidebar
-    const memoOpenMenu = useCallback(()=>{setShowMenu(true)}, [showMenu]);
+    const openMenu = ()=>{
+            setShowMenu(true);
+        };
 
     //function to hide sidebar
-    const memoCloseMenu = useCallback(()=>{setShowMenu(false)}, [showMenu]);
+    const closeMenu = ()=>{
+        setShowMenu(false);
+    };
 
     return (
         <motion.div 
@@ -28,14 +32,14 @@ function NavBar() {
             }
             initial={{width: "4.5rem"}}
             transition={{duration: 0.5}}
-            className={`${styles.navbar} ${showMenu?styles.isOpen:""}`} 
-            onMouseOver={memoOpenMenu}
-            onMouseOut={memoCloseMenu}
+            className={`${styles.navBar}`} 
+            onMouseOver={openMenu}
+            onMouseOut={closeMenu}
             >
             <div className={styles.logo}>
                 <div className={styles.logoImage}>
                     <Icon fontSize='large'>
-                        <Image src={"/resources/Logo.svg"} width={"100%"} height={"100%"}/>
+                        <Image src={"/resources/Logo.svg"} width={"100%"} height={"100%"} alt="Logo"/>
                     </Icon>
                 </div>
                 <div className={styles.logoText}>ChatWriter</div>
@@ -109,7 +113,7 @@ function NavBar() {
                 </li>
             </ul>            
         </motion.div>
-    )
+    );
 }
 
 export default NavBar;

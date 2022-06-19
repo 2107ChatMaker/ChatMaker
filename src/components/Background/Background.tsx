@@ -1,8 +1,9 @@
 import styles from './Background.module.sass';
+import { ReactNode } from 'react';
 
 //props type
 interface BackgroundProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 function Background(props: BackgroundProps) {
@@ -10,7 +11,7 @@ function Background(props: BackgroundProps) {
         <div className={styles.background}>
             {props.children}
         </div>
-    )
+    );
 }
 
 export default Background;

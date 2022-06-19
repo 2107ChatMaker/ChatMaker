@@ -1,10 +1,11 @@
 import styles from './Button.module.sass';
+import { ReactNode } from 'react';
 
 //props type
 interface ButtonProps {
     type: 'submit' | 'button';
     onClick?: () => void;
-    children: React.ReactNode;
+    children: ReactNode;
     variant?: 'secondary' | 'primary' | 'alert';
 }
 
@@ -20,5 +21,5 @@ export default function Button(props: ButtonProps) {
             }>
             {props.children}
         </button>
-    )
+    );
 }

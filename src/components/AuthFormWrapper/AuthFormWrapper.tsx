@@ -2,11 +2,12 @@ import styles from './AuthFormWrapper.module.sass';
 import FormNavItem from './FormNavItem/FormNavItem';
 import FormLogo from './FormLogo/FormLogo';
 import FormLink from './FormLink/FormLink';
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 //props type
 interface AuthFormWrapperProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export default function AuthFormWrapper({children}: AuthFormWrapperProps) {
@@ -42,6 +43,6 @@ export default function AuthFormWrapper({children}: AuthFormWrapperProps) {
                 <FormLogo/>
             </div>
         </motion.div>
-    )
+    );
 }
 
