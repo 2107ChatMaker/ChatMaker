@@ -3,7 +3,7 @@ import Input from "@components/Input/Input";
 import Button from "@components/Button/Button";
 import styles from "./LoginForm.module.sass";
 import useForm from '@hook/useForm';
-import {loginValidation as validation} from '@utils/LoginFormValidation';
+import {loginValidation as validation} from '@utils/form/LoginValidation';
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 
 export default function LoginForm() {
