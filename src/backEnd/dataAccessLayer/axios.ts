@@ -8,4 +8,4 @@ export const axiosIntance = axios.create(
         // network time-out
         timeout: 1000
     }
-)
+);

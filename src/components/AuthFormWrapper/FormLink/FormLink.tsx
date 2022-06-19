@@ -16,14 +16,14 @@ export default function FormLink() {
                     <a className={styles.link}> Login</a>
                 </Link>
             </p>
-        )
+        );
     } else {
         return (
-            <p className={styles.linkText}>Don't have an account?
+            <p className={styles.linkText}>Don&apost have an account?
                 <Link href="/auth/signup">
                     <a className={styles.link}> Sign up</a>
                 </Link>
             </p>
-        )
+        );
     }
 }

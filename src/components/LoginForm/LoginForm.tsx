@@ -1,7 +1,7 @@
 import { Key, MailOutline} from '@mui/icons-material';
-import Input from "@components/Input/Input"
-import Button from "@components/Button/Button"
-import styles from "./LoginForm.module.sass"
+import Input from "@components/Input/Input";
+import Button from "@components/Button/Button";
+import styles from "./LoginForm.module.sass";
 import useForm from '@hook/useForm';
 import {loginValidation as validation} from '@utils/LoginFormValidation';
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
@@ -10,8 +10,8 @@ export default function LoginForm() {
 
     //form submit function
     const onSubmit = () => {
-        console.log("log in success");
-    }
+        //TODO: login
+    };
 
     //form state and handlers
     const [
@@ -63,5 +63,5 @@ export default function LoginForm() {
                 </div>
             </div>
         </form>
-    )
+    );
 }

@@ -10,8 +10,8 @@ export default function SignupForm() {
 
     //form submit function
     const onSubmit = () => {
-        console.log("register success");
-    }
+        //TODO: signup
+    };
 
     //form state and handlers
     const [
@@ -77,5 +77,5 @@ export default function SignupForm() {
                 </div>
             </div>  
         </form>
-    )
+    );
 }

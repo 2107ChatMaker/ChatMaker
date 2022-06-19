@@ -11,7 +11,7 @@ export class responseSubmission implements databaseObject {
     // The response the user has given
     readonly response: String;
 		// The tags the users has chosen for their response
-    readonly tags: [Tag]
+    readonly tags: [Tag];
     
     constructor(question: String, email: String, tags: [Tag], response: String) {
         this.email = email;
@@ -21,7 +21,7 @@ export class responseSubmission implements databaseObject {
             this.response = response;
         }
         else {
-            throw new Error("Response Either too short or too long")
+            throw new Error("Response Either too short or too long");
         }
     }
 		
@@ -32,6 +32,6 @@ export class responseSubmission implements databaseObject {
 					question: this.question,
 					response: this.response,
 					tags: this.tags
-			}
+			};
 	}
 }

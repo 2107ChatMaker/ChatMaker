@@ -27,6 +27,6 @@ export class SignUp extends User implements databaseObject{
             userName: this.userName,
             password: this.password,
             email: this.email
-        }
+        };
     }
 }

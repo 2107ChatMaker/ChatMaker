@@ -5,6 +5,6 @@ export default async function databaseConnection(){
     //connection URI to connect to database
     const uri = process.env.MONGODB_URI;
     //connection to the database
-    const connectDatabase = async () => mongoose.connect(uri)
-    connectDatabase()
+    const connectDatabase = async () => mongoose.connect(uri);
+    connectDatabase();
 }
