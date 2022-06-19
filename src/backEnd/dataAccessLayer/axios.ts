@@ -9,5 +9,3 @@ export const axiosIntance = axios.create(
         timeout: 1000
     }
 )
-
- 

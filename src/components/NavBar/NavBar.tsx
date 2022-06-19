@@ -7,9 +7,14 @@ import {useState, useCallback} from 'react';
 import {motion} from 'framer-motion';
 
 function NavBar() {
+    
+    //menu visibility state
     const [showMenu, setShowMenu] = useState(false);
     
+    //function to show sidebar
     const memoOpenMenu = useCallback(()=>{setShowMenu(true)}, [showMenu]);
+
+    //function to hide sidebar
     const memoCloseMenu = useCallback(()=>{setShowMenu(false)}, [showMenu]);
 
     return (
@@ -22,9 +27,7 @@ function NavBar() {
                 }
             }
             initial={{width: "4.5rem"}}
-            transition={{
-                duration: 0.5
-            }}
+            transition={{duration: 0.5}}
             className={`${styles.navbar} ${showMenu?styles.isOpen:""}`} 
             onMouseOver={memoOpenMenu}
             onMouseOut={memoCloseMenu}

@@ -12,5 +12,4 @@ export default async function approvedPromptRatings(){
     await ApprovedPrompt.insertMany(approvedList)
     //deletes those prompt from the previous collection
     await Prompt.deleteMany(approvedList)
-
 }

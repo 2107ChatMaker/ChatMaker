@@ -1,5 +1,6 @@
 import styles from './Background.module.sass';
 
+//props type
 interface BackgroundProps {
     children: React.ReactNode;
 }
