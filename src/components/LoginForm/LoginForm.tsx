@@ -7,10 +7,13 @@ import {loginValidation as validation} from '@utils/LoginFormValidation';
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 
 export default function LoginForm() {
+
+    //form submit function
     const onSubmit = () => {
         console.log("log in success");
     }
 
+    //form state and handlers
     const [
         formData, 
         errors, 

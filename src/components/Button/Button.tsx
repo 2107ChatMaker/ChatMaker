@@ -1,5 +1,6 @@
 import styles from './Button.module.sass';
 
+//props type
 interface ButtonProps {
     type: 'submit' | 'button';
     onClick?: () => void;

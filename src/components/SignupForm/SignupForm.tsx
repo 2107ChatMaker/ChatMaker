@@ -8,10 +8,12 @@ import { SignupFormData as FormData } from '@interfaces/SignupFormData';
 
 export default function SignupForm() {
 
+    //form submit function
     const onSubmit = () => {
         console.log("register success");
     }
 
+    //form state and handlers
     const [
         formData, 
         errors, 

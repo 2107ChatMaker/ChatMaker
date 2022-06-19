@@ -2,6 +2,7 @@ import styles from './Input.module.sass';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useState} from 'react';
 
+//props type
 interface InputProps {
     type: string;
     name: string;

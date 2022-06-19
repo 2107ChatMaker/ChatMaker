@@ -4,6 +4,7 @@ import FormLogo from './FormLogo/FormLogo';
 import FormLink from './FormLink/FormLink';
 import {motion} from 'framer-motion';
 
+//props type
 interface AuthFormWrapperProps {
     children: React.ReactNode;
 }

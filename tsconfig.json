@@ -9,7 +9,7 @@
     "baseUrl": "node_modules",
     "paths": {
       "@/*": [
-        "../backEnd/*",
+        "../src/backEnd/*",
       ],
       "@components/*": [
         "../src/components/*",
