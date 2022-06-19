@@ -19,7 +19,7 @@ export default function FormLink() {
         );
     } else {
         return (
-            <p className={styles.linkText}>Don&apost have an account?
+            <p className={styles.linkText}>Don&apos;t have an account?
                 <Link href="/auth/signup">
                     <a className={styles.link}> Sign up</a>
                 </Link>

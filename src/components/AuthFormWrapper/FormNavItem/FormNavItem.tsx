@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from './FormNavItem.module.sass';
+import { ReactNode } from "react";
 
 interface FormNavItemProps {
     direction: 'login' | 'signup';
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export default function FormNavItem({children, direction}: FormNavItemProps) {
@@ -22,5 +23,5 @@ export default function FormNavItem({children, direction}: FormNavItemProps) {
                 {children}
             </Link>
         </li>
-    )
+    );
 }
