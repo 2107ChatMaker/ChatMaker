@@ -3,7 +3,7 @@ import Button from '@components/Button/Button';
 import {Key, MailOutline} from '@mui/icons-material';
 import styles from './SignupForm.module.sass';
 import useForm from '@hook/useForm';
-import {signupValidation as validation} from '@utils/SignupFormValidation';
+import {signupValidation as validation} from '@utils/form/SignupValidation';
 import { SignupFormData as FormData } from '@interfaces/SignupFormData';
 
 export default function SignupForm() {
