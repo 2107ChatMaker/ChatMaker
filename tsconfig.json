@@ -17,9 +17,6 @@
       "@hook/*": [
         "../src/hook/*"
       ],
-      "@pages/*": [
-        "../src/pages/*",
-      ],
       "@styles/*": [
         "../src/styles/*",
       ],
@@ -28,6 +25,9 @@
       ],
       "@utils/*": [
         "../src/utils/*",
+      ],
+      "@constants/*": [
+        "../src/constants/*",
       ],
     },
     "allowJs": true,

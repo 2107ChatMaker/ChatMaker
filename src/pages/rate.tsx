@@ -3,19 +3,18 @@ import NavBar from '@components/NavBar/NavBar';
 import NextHead from '@components/NextHead';
 import ContentWrapper from '@components/ContentWrapper/ContentWrapper';
 
-export default function Profile() {
-    
+export default function Rating() {
     return (
         <Background>
             <NextHead
-                name="Profile"
-                content="Profile page"
-                title="Profile"
+                name="Rate responses"
+                content="Rate responses"
+                title="Rate responses"
             />
             <NavBar/>
             <ContentWrapper>
-                <h1>Profile</h1>
-                <p>This is Profile page</p>
+                <h1>Rate responses</h1>
+                <p>This is rate response page</p>
             </ContentWrapper>
         </Background>
     );

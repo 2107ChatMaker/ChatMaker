@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from './FormNavItem.module.sass';
 import { ReactNode } from "react";
+import { paths } from "@constants/paths";
 
 interface FormNavItemProps {
     direction: 'login' | 'signup';
@@ -17,9 +18,9 @@ export default function FormNavItem({children, direction}: FormNavItemProps) {
     return (
         <li className={
             `${styles.navItem}  
-             ${router.pathname === `/auth/${direction}` ? styles.isActive : ''}`
+             ${router.pathname === paths[direction] ? styles.isActive : ''}`
             }>
-            <Link href={`/auth/${direction}`}>
+            <Link href={paths[direction]}>
                 {children}
             </Link>
         </li>

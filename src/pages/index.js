@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.sass';
 import Background from '@components/Background/Background';
-import Navbar from '@components/Navbar/Navbar';
+import NavBar from '@components/NavBar/NavBar';
 import NextHead from '@components/NextHead';
 import ContentWrapper from '@components/ContentWrapper/ContentWrapper';
 
@@ -14,7 +14,7 @@ export default function Home() {
             content="Explore all the prompts"
             name="Explore"
           />
-          <Navbar />
+          <NavBar />
           <main className={styles.main}>
             <h1 className={styles.title}>
             Chat Maker
