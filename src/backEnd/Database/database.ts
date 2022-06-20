@@ -1,4 +1,3 @@
-import { connect } from "http2";
 import mongoose from "mongoose";
 
 export default async function databaseConnection(){
@@ -6,5 +5,5 @@ export default async function databaseConnection(){
     const uri = process.env.MONGODB_URI;
     //connection to the database
     const connectDatabase = async () => mongoose.connect(uri);
-    connectDatabase();
+    return await connectDatabase();
 }
