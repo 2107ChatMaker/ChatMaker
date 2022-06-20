@@ -1,10 +1,8 @@
 import { model, models, Schema } from "mongoose";
 
 const approvedResponseSchema = new Schema({
-    //id of the response can start at 0 and then go up as there is a new one
-    id: {type: Number, required: false},
     //gets the user id from the person that is responding
-    userID:{type: Number, required: false},
+    userID:{type: String, required: false},
     //this is the content of the response that the user enters 
     //required filed because tall responses must have content
     content: {type: String, required: false},
@@ -20,6 +18,6 @@ const approvedResponseSchema = new Schema({
 });
 
 //gets response collection in the database
-const ApprovedResponse = models.approvedResponse || model('Approvedresponse', approvedResponseSchema)
+const ApprovedResponseModel = models.ApprovedResponse || model('Approvedresponse', approvedResponseSchema)
 
-export default ApprovedResponse;
+export default ApprovedResponseModel;

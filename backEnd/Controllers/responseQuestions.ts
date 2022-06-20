@@ -1,6 +1,8 @@
+import { ObjectManager } from "@/dataAccessLayer/actions/objectManager/objectManager";
 import { Tag } from "../Utility/Enums/tag";
 import { DatabaseObject } from "./Interfaces/databaseObject";
 import { HashMap } from "./Interfaces/hashMap";
+import ResponseModel from "./Schemas/response";
 
 // Questions to be offered to the 
 export class Response implements DatabaseObject {
@@ -15,8 +17,7 @@ export class Response implements DatabaseObject {
     }
     /// Saves this object to the database or update it if it already exists
     save() { 
-                //TODO must implement when abbes db code is merged
-        // ObjectManager.saveObject(this, Response)
+        ObjectManager.saveObject(this, ResponseModel)
     }
 
     // Tags are returned as a hashmap
