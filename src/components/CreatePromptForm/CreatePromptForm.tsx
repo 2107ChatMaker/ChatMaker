@@ -1,21 +1,39 @@
 import Button from "@components/Button/Button";
-import Input from "@components/Input/Input";
+import { useState } from "react";
 import styles from "./CreatePromptForm.module.sass";
 
 
 export default function CreatePrompt(){
 
+    const [prompt, setPrompt] = useState("");
+
+    const handleChange = (e) => {
+        setPrompt(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //TO DO - submit prompt to server
+    }
+
+
     
 
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className ={styles.page}>
                 <div className={styles.pageTitle}>
                     Create Prompt
                     
                 </div>
                 <div className={styles.formInput}>
-                    <textarea rows={5}  placeholder="Max number of words: 30 "/>
+                    <textarea 
+                    rows={5}
+                    placeholder="Max number of words: 30 "
+                    onChange={handleChange}
+                    value={prompt}
+                    required={true}
+                    />
                 </div>
                 <div className={styles.formAction}>
                     <Button type="submit" >
