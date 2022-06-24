@@ -34,7 +34,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "backEnd/Controllers/signUp.ts"  ],
+, "src/backEnd/Controllers/signUp.ts"  ],
   "exclude": [
     "node_modules"
   ]
