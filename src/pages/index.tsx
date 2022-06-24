@@ -18,9 +18,9 @@ export default function Home() {
             </p>
           </main>
           <footer className={styles.footer}>
-            <h1>
+            <h2>
               This is the footer BB!
-            </h1>
+            </h2>
           </footer>
         </div>
     </Page>
