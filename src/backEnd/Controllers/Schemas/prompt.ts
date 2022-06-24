@@ -3,16 +3,12 @@ import { model, models, Schema } from "mongoose";
 
 const promptSchema = new Schema({
     //id is not required we can start it at 0 and increase it whenever there is a new prompt asked
-    id: {type: Number, required: false},
+    userID: {type: String, required: false},
     //the content of the question 
-    content: {type: String, required: true},
-    //have a selection of tags for the user to choose from
-    tag: {type: [Tag], required: true},
-    //rating of a prompt 
-    rating: {type: Number, required: false}
+    prompt: {type: String, required: true}
 }); 
 
 //questions collection in the database
-const Prompt = models.Prompt || model('prompts', promptSchema);
+const PromptModel = models.Prompt || model('Prompt', promptSchema);
 
-export default Prompt;
+export default PromptModel;

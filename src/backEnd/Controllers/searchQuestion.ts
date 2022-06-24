@@ -1,8 +1,8 @@
-import { databaseObject } from "../Controllers/Interfaces/databaseObject";
+import { DatabaseObject } from "../Controllers/Interfaces/databaseObject";
 import { HashMap } from "../Controllers/Interfaces/hashMap";
 
 // Stores user search string for finding questions and provides the ability to return a hashmap of the querys words
-export class SearchQuestion implements databaseObject {
+export class SearchQuestion implements DatabaseObject {
     // user submitted word or sentence used to find a corrisponding question in the database
     question: String;
 

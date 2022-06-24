@@ -1,10 +1,10 @@
-import { databaseObject } from "../Controllers/Interfaces/databaseObject";
-import { HashMap } from "../Controllers/Interfaces/hashMap";
+import { DatabaseObject } from "./Interfaces/databaseObject";
+import { HashMap } from "./Interfaces/hashMap";
 
 /**
  * Login Object for querying mongoDB Login
  */
- export class Login implements databaseObject {
+ export class Login implements DatabaseObject {
     // Stores The Users Given Name
     readonly email: String;
     // Stores The Users Email address
@@ -20,6 +20,11 @@ import { HashMap } from "../Controllers/Interfaces/hashMap";
         
         this.email = email;
         this.password = password;
+    }
+
+    /// attempts to log in the user
+    attemptLogin() {
+        //TODO
     }
 
     toHashMap(): HashMap {
