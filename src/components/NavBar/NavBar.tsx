@@ -48,11 +48,14 @@ function NavBar() {
             width: "17rem",
             transition: {
                 duration: 0.5,
+                delay: 0.3
             },
         }),
         hidden: {
             width: "4.5rem",
-            
+            transition: {
+                stiffness: 0,
+            }
         },
     } : {
         mobile: {

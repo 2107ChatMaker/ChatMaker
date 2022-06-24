@@ -1,9 +1,25 @@
 import styles from './FormLogo.module.sass';
 import Image from 'next/image';
+import {motion} from 'framer-motion';
 
 export default function FormLogo() {
     return (
-        <div className={styles.formLogo}>
+        <motion.div 
+            animate={{
+                width: "auto",
+                height: "auto",
+                opacity: 1,
+                scale: 1
+            
+            }}
+            initial={{
+                opacity: 0,
+                scale: 0
+            }}
+            transition={{
+                duration: 0.5,
+            }}
+            className={styles.formLogo}>
             <div className={styles.logo}>
                 <Image 
                     width={"100%"} 
@@ -16,6 +32,6 @@ export default function FormLogo() {
             <p className={styles.logoText}>
                 ChatWriter
             </p>
-        </div>
+        </motion.div>
         );
 }
