@@ -31,6 +31,6 @@ import { HashMap } from "./Interfaces/hashMap";
         return {
             email: this.email,
             password: this.password
-        }
+        };
     }
 }

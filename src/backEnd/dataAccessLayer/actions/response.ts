@@ -9,7 +9,7 @@ export async function deleteResponse(id: string) {
     //will get the response from the id of the response object that will be deleted
     //*need function to get the id from the response object*/
     //finds that response in the database
-    const responseToDelete = await Response.find({id: id})
+    const responseToDelete = await Response.find({id: id});
     //removes the user from the database so their account will be deleted.
     await Response.deleteOne(responseToDelete);
 }

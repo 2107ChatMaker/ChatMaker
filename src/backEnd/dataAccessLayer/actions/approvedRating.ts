@@ -7,10 +7,10 @@ import Database from "../../Database/database";
 export default async function approvedResponseRatings(){
     await Database.setupClient();
     //searches the database to find all the responses that have a rating above of 70
-    const approved = await Response.find({rating: { $gte: 70 }})
+    const approved = await Response.find({rating: { $gte: 70 }});
     //stores all the found responses in the approved list array so it can be moved to the approved databse
     const approvedList = approved;
-    await ApprovedResponse.insertMany(approvedList)
+    await ApprovedResponse.insertMany(approvedList);
     //deletes those responses from the previous collection
-    await  Response.deleteMany(approvedList)
+    await  Response.deleteMany(approvedList);
 }

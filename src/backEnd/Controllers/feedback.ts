@@ -8,7 +8,7 @@ export class Feedback implements DatabaseObject {
     // the _id of the user that is giving the feedback
     userID: String;
     // the rating the user gives the response
-    rating: Boolean
+    rating: Boolean;
     
     constructor(userID: String, responseID: String, rating: Boolean) {
         this.responseID = responseID;
@@ -22,7 +22,7 @@ export class Feedback implements DatabaseObject {
             responseID: this.responseID,
             userID: this.userID,
             rating: this.rating
-        }
+        };
     }
 
 }

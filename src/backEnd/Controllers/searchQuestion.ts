@@ -21,6 +21,6 @@ export class SearchQuestion implements DatabaseObject {
 
         return {
             question: wordsInQuestion
-        }
+        };
     }
 }

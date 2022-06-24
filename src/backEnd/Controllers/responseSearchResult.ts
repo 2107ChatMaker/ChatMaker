@@ -19,6 +19,6 @@ export class ResponseSearchResult implements DatabaseObject {
         return {
             promptID: this.promptID,
             numberOfResponses: this.numberOfResponses
-        }
+        };
     }
 }

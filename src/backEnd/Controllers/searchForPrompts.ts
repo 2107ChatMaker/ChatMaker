@@ -27,6 +27,6 @@ export class SearchForPrompts implements DatabaseObject {
     toHashMap(): HashMap {
         return {
             question: this.separateQuestionIntoWords()
-        }
+        };
     }
 }

@@ -18,6 +18,6 @@ export class SearchForResponses implements DatabaseObject {
         return {
             _id: this._id,
             questions: this.questions
-        }
+        };
     }
 }
