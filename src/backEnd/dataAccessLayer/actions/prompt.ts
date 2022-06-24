@@ -7,7 +7,7 @@ export async function deletePrompt(id: string) {
     await Database.setupClient();
     //need to add way to get the ID from the prompt when in the app
     //finds the prompt in the database by its ID
-    const promptToDelete = await Prompt.find({id: id})
+    const promptToDelete = await Prompt.find({id: id});
     //removes the prompt from the database 
     await Prompt.deleteOne(promptToDelete);
 }

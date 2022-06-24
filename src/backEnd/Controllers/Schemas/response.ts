@@ -18,6 +18,6 @@ const responseSchema = new Schema({
 });
 
 //gets response collection in the database
-const ResponseModel = models.Response || model('Response', responseSchema)
+const ResponseModel = models.Response || model('Response', responseSchema);
 
 export default ResponseModel;

@@ -7,7 +7,7 @@ export async function deleteFeedback(id: string) {
     //will get the feedback id from the object that will be deleted
     //*need function to get the id from the object so it can read what needs to get deleted*
     //finds that feedback ion the database 
-    const feedbackToDelete = await Feedback.find({id: id})
+    const feedbackToDelete = await Feedback.find({id: id});
     //removes the user from the database so their account will be deleted.
     await Feedback.deleteOne(feedbackToDelete);
 }

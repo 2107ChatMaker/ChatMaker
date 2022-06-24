@@ -13,7 +13,7 @@ export class responseSubmission implements DatabaseObject {
     // The response the user has given
     readonly response: String;
 		// The tags the users has chosen for their response
-    readonly tags: [Tag]
+    readonly tags: [Tag];
     
     constructor(promptID: String, userID: String, tags: [Tag], response: String) {
         this.userID = userID;
@@ -23,14 +23,14 @@ export class responseSubmission implements DatabaseObject {
             this.response = response;
         }
         else {
-            throw new Error("Response either too short or too long")
+            throw new Error("Response either too short or too long");
         }
     }
 
     
     /// Saves this object to the database or update it if it already exists
     save() { 
-        ObjectManager.saveObject(this, ResponseModel)
+        ObjectManager.saveObject(this, ResponseModel);
     }
 		
 		/// converts given values into a HashMap
@@ -40,6 +40,6 @@ export class responseSubmission implements DatabaseObject {
 					promptID: this.promptID,
 					response: this.response,
 					tags: this.tags
-			}
+			};
 	}
 }

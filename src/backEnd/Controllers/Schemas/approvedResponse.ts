@@ -18,6 +18,6 @@ const approvedResponseSchema = new Schema({
 });
 
 //gets response collection in the database
-const ApprovedResponseModel = models.ApprovedResponse || model('Approvedresponse', approvedResponseSchema)
+const ApprovedResponseModel = models.ApprovedResponse || model('Approvedresponse', approvedResponseSchema);
 
 export default ApprovedResponseModel;

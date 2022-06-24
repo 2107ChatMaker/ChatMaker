@@ -10,10 +10,10 @@ export class ObjectManager {
     static async saveObject(obj: DatabaseObject, model: mongoose.Model<any>) {
         await Database.setupClient();
         /// The hashMapped values of the object
-        const values = obj.toHashMap()
-        const buildModel = new model(values)
+        const values = obj.toHashMap();
+        const buildModel = new model(values);
         
-        return  buildModel.save()
+        return  buildModel.save();
     }
 
     /// return all entries in the database that match the given model
@@ -23,9 +23,9 @@ export class ObjectManager {
         /// establishes a connection to the database
         await Database.setupClient();
         /// returns a mongoose query that needs to be Cast to the requested object type 
-        const foundEntries = await model.find({})
+        const foundEntries = await model.find({});
 
-        return foundEntries
+        return foundEntries;
     }
 
     /// find a specific object by it's model and mongoose _id and returns a mongoose query
@@ -34,17 +34,17 @@ export class ObjectManager {
         /// establishes a connection to the database
         await Database.setupClient();
         /// returns the request query that needs to be Cast to the requested object type 
-        const foundEntry = await model.findById({ _id: id })
+        const foundEntry = await model.findById({ _id: id });
         
-        return foundEntry
+        return foundEntry;
     }
 
     static async findByTags(model: mongoose.Model<any>, inputTags: Tag[]) {
         /// establishes a connection to the database
         await Database.setupClient();
         /// returns a mongoose query that only includes documents that contain the same tags given to the array needs to be Cast to the requested object type 
-        const foundEntries = await model.find({ tags: {$all:  [inputTags]} })
+        const foundEntries = await model.find({ tags: {$all:  [inputTags]} });
         
-        return foundEntries
+        return foundEntries;
     }
 }

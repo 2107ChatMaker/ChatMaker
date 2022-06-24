@@ -31,7 +31,7 @@ export default class Database {
      */
     static async setupClient() {
         // connect the client to the server
-        const client = await mongoose.connect(Database.uri)
+        const client = await mongoose.connect(Database.uri);
 
 
         this.client = client;
