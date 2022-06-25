@@ -4,7 +4,7 @@ import Button from "@components/Button/Button";
 import styles from "./LoginForm.module.sass";
 import useForm from '@hook/useForm';
 import {loginValidation as validation} from '@utils/form/LoginValidation';
-import { LoginFormData as FormData } from '@interfaces/LoginFormData';
+import { LoginFormData as FormData } from '@constants/interfaces/LoginFormData';
 
 export default function LoginForm() {
 

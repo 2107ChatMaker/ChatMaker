@@ -1,4 +1,4 @@
-import {LoginFormData as FormData} from '@interfaces/LoginFormData';
+import {LoginFormData as FormData} from '@constants/interfaces/LoginFormData';
 
 export function loginValidation(formData: FormData): FormData {
     

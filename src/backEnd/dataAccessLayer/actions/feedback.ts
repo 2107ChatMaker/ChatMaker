@@ -1,24 +1,30 @@
-import connectDatabase from "../../Database/database";
-import Feedback from "@/Controllers/Schemas/feedback";
+import { ObjectManager } from "./objectManager/objectManager";
+import { Feedback } from "@constants/interfaces/Feedback";
+import { DatabaseObject } from "../../../constants/interfaces/DatabaseObject";
+import { HashMap } from "../../../constants/interfaces/HashMap";
 
-//for when user wants to delete feedback theyve given to a response 
-export async function deleteFeedback(id: string) {  
-    await connectDatabase();
-    //will get the feedback id from the object that will be deleted
-    //*need function to get the id from the object so it can read what needs to get deleted*
-    //finds that feedback ion the database 
-    const feedbackToDelete = await Feedback.find({id: id})
-    //removes the user from the database so their account will be deleted.
-    await Feedback.deleteOne(feedbackToDelete);
+/// used to give user feedback on a response
+export class FeedbackController implements DatabaseObject, Feedback {
+    // The _id of the response being rated
+    responseID: string;
+    // the rating the user gives the response (true == +1, false == -1)
+    rating: Boolean;
+    
+    constructor(responseID: string, rating: Boolean) {
+        this.responseID = responseID;
+        this.rating = rating;
+    }
+
+    /// updates the responses rating based on the rating given
+    giveFeedback() { 
+        ObjectManager.updateRatingByID(this.responseID, this.rating);
+    }
+
+    /// converts given values into a HashMap
+    toHashMap(): HashMap {
+        return {
+            responseID: this.responseID,
+            rating: this.rating
+        };
+    }
 }
-
-export async function addFeedback(id: String, responseID: Number, rating: 50){
-    await connectDatabase();
-    const feedback = new Feedback({
-        id,
-        responseID,
-        rating
-    });
-    return feedback.save();
-}
-

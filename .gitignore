@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+test.tsx
+test.js
+test.ts
 # dependencies
 /node_modules
 /.pnp
@@ -28,8 +30,6 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
-
-.env*
 
 # vercel
 .vercel
