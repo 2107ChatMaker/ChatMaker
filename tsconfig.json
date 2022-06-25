@@ -8,12 +8,14 @@
     ],
     "baseUrl": "node_modules",
     "paths": {
-      "@/*": [
-        "../backEnd/*",
-      ],
-      "$/*": [
-        "../pages/*",
-      ]
+      "@/*": ["../src/backEnd/*",],
+      "@components/*": ["../src/components/*",],
+      "@templates/*": ["../src/templates/*",],
+      "@hook/*": ["../src/hook/*"],
+      "@styles/*": ["../src/styles/*",],
+      "@interfaces/*": ["../src/interfaces/*",],
+      "@utils/*": ["../src/utils/*",],
+      "@constants/*": ["../src/constants/*",],
     },
     "allowJs": true,
     "skipLibCheck": true,
