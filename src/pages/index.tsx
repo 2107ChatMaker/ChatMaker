@@ -1,25 +1,18 @@
 import styles from '@styles/Home.module.sass';
-import Background from '@components/Background/Background';
-import NavBar from '@components/NavBar/NavBar';
-import NextHead from '@components/NextHead';
-import ContentWrapper from '@components/ContentWrapper/ContentWrapper';
+import Page from '@templates/Page';
 
 export default function Home() {
   return (
-    <Background>
-      <ContentWrapper>
+    <Page
+      headTitle="explore prompts"
+      headName="explore prompts"
+      headContent="explore prompts"
+    >
         <div className={styles.container}>
-          <NextHead 
-            title="Explore"
-            content="Explore all the prompts"
-            name="Explore"
-          />
-          <NavBar />
           <main className={styles.main}>
             <h1 className={styles.title}>
             Chat Maker
             </h1>
-
             <p className={styles.description}>
               This is the index page. 
             </p>
@@ -30,7 +23,6 @@ export default function Home() {
             </h1>
           </footer>
         </div>
-        </ContentWrapper>
-    </Background>
+    </Page>
   );
 }

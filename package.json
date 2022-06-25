@@ -9,14 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "framer-motion": "^6.3.11",
-    "axios": "^0.27.2",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.8.3",
+    "@next-auth/mongodb-adapter": "^1.0.3",
+    "axios": "^0.27.2",
+    "framer-motion": "^6.3.11",
     "mongoose": "^6.3.8",
     "next": "12.1.6",
+    "next-auth": "^4.5.0",
     "react": "18.1.0",
     "react-dom": "18.1.0"
   },
