@@ -10,12 +10,12 @@ import { useState } from 'react';
 
 export default function SignupForm() {
 
+    //state for serverside error
     const [error, setError] = useState<string | null>(null);
 
     //form submit function
     async function onSubmit() {
         const { email, password } = formData;
-
         try {
             const response = await axios.post('/api/authApi/register', {email, password});
         } catch(err) {
