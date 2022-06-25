@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema } from "mongoose";
-import { DatabaseObject } from "@constants/interfaces/DatabaseObject";
-import { Tag } from "@/utility/Enums/tag";
-import Database from "@/database/database";
+import { DatabaseObject } from "@interfaces/DatabaseObject";
+import { Tag } from "@/Utility/Enums/tag";
+import Database from "@/Database/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 
 export class ObjectManager {
@@ -78,7 +78,8 @@ export class ObjectManager {
         const retval = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, 
             function(error, result) {
                 if (error) {
-                    console.log(error);
+                    //console.log(error);
+                    throw new Error(error);
                 }
             });
     }

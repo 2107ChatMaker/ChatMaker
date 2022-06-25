@@ -1,6 +1,6 @@
 import { SignupFormData as FormData} from "@interfaces/SignupFormData";
 
-export function signupValidation (formData: FormData): FormData {
+export function signupValidation (formData: FormData): {} {
     
     //erros object to be returned
     let errors = {email: "", password: "", passwordConfirm: ""};

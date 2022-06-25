@@ -4,13 +4,14 @@ import Button from "@components/Button/Button";
 import styles from "./LoginForm.module.sass";
 import useForm from '@hook/useForm';
 import {loginValidation as validation} from '@utils/form/LoginValidation';
-import { LoginFormData as FormData } from '@constants/interfaces/LoginFormData';
+import { LoginFormData as FormData } from '@interfaces/LoginFormData';
+import axios from 'axios';
 
-export default function LoginForm() {
+export default function LoginForm({signIn}) {
 
     //form submit function
     const onSubmit = () => {
-        //TODO: login
+       signIn("credentials", { email: formData.email, password: formData.password });
     };
 
     //form state and handlers

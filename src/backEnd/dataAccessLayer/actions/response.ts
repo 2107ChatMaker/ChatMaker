@@ -1,8 +1,8 @@
-import { HashMap } from "@constants/interfaces/HashMap";
-import { Tag } from "@/utility/Enums/tag";
-import { Saveable } from "@constants/interfaces/Saveable";
-import { CMResponse } from "@constants/interfaces/Response";
-import { DatabaseObject } from "@constants/interfaces/DatabaseObject";
+import { HashMap } from "@interfaces/HashMap";
+import { Tag } from "@/Utility/Enums/tag";
+import { Saveable } from "@interfaces/Saveable";
+import { CMResponse } from "@interfaces/Response";
+import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { ObjectManager } from "./objectManager/objectManager";
 import ResponseModel from "../schemas/response";
 
