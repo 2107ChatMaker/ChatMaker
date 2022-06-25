@@ -3,9 +3,9 @@ import { Saveable } from "@constants/interfaces/Saveable";
 import { DatabaseObject } from "@constants/interfaces/DatabaseObject";
 import { Prompt } from "@constants/interfaces/Prompt";
 import { ObjectManager } from "./objectManager/objectManager";
-import PromptModel from "../schemas/prompt";
+import PromptModel from "../Schemas/prompt";
 
-// actions accessable to manipulate promps or add new ones
+// actions accessable to manipulate promps or add new ones.
 export class PromptController implements DatabaseObject, Saveable, Prompt {
     // The user submitting the prompts ID
     userID: String;
