@@ -2,9 +2,9 @@ import { Tag } from "@/Utility/Enums/tag";
 import { model, models, Schema } from "mongoose";
 
 const promptSchema = new Schema({
-    //id is not required we can start it at 0 and increase it whenever there is a new prompt asked
+    // id of the user who made the prompt
     userID: {type: String, required: false},
-    //the content of the question 
+    // the prompt written by the user to give context to future responses 
     prompt: {type: String, required: true}
 }); 
 

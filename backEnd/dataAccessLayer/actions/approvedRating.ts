@@ -1,6 +1,6 @@
 import connectDatabase from "../../Database/database";
-import Response from "@/Controllers/Schemas/response";
-import ApprovedResponse from "@/Controllers/Schemas/approvedResponse";
+import Response from "@/dataAccessLayer/Schemas/response";
+import ApprovedResponse from "@/dataAccessLayer/Schemas/approvedResponse";
 import Database from "../../Database/database";
 
 //moves the approved item from database to approved database

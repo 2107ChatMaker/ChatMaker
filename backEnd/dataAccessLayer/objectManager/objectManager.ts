@@ -1,7 +1,8 @@
 import mongoose, { Model, Schema } from "mongoose";
-import { DatabaseObject } from "@/Controllers/Interfaces/databaseObject";
+import { DatabaseObject } from "@/Interfaces/DatabaseObject";
 import { Tag } from "@/Utility/Enums/tag";
 import Database from "@/Database/database";
+import ResponseModel from "@/dataAccessLayer/Schemas/response";
 
 
 export class ObjectManager {
@@ -39,6 +40,17 @@ export class ObjectManager {
         return foundEntry
     }
 
+    /// delete an entry in the mongoose document for the given model that matches the given id
+    static async deleteByID(model: mongoose.Model<any>, id: string) {
+        /// establishes a connecti on to the database
+        await Database.setupClient();
+        /// deletes the given entry and returns whether it was successful
+        const deleteSuccessful = await model.deleteOne({ _id: id })
+        
+        return deleteSuccessful.deletedCount == 1
+    }
+
+    /// find all documents for the given model that contains the given tags
     static async findByTags(model: mongoose.Model<any>, inputTags: Tag[]) {
         /// establishes a connection to the database
         await Database.setupClient();
@@ -47,4 +59,30 @@ export class ObjectManager {
         
         return foundEntries
     }
+
+    /// find and return all the repsonses that match the given prompt(id)
+    static async findResponseByID( promptID: String) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        /// returns an array of responses with the matching promptID
+        const foundEntries: Response[] = await ResponseModel.find({ promptID: {$all:  promptID} })
+        
+        return foundEntries
+    }
+
+    /// updates the matching response rating based on the boolean recieved
+    static async updateRatingByID(_id: string, rating:Boolean) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        // find by ID and increase or decrease the rating value based on whether the rating is true or not. If there is an error log it
+        let inc: Number = rating? 1 : -1
+        const retval = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, 
+            function(error, result) {
+                if (error) {
+                    console.log(error);
+                }
+            });
+    }
+
+    
 }

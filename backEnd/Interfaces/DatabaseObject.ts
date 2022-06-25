@@ -1,4 +1,4 @@
-import { HashMap } from "./hashMap";
+import { HashMap } from "./HashMap";
 
 // Required for any object that may interact with the database
 export interface DatabaseObject {
