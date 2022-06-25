@@ -3,9 +3,9 @@ import LoginForm from "@components/LoginForm/LoginForm";
 import AuthFormWrapper from "@components/AuthFormWrapper/AuthFormWrapper";
 import styles from "@styles/AuthForm.module.sass";
 import NextHead from "@components/NextHead";
-import { getCsrfToken, signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
-export default function Login({csrfToken}) {
+export default function Login() {
     return (
         <Background>
             <NextHead 
@@ -22,10 +22,18 @@ export default function Login({csrfToken}) {
     );
 }
 
+//redirect page to explore if user is already logged in
 export async function getServerSideProps(context) {
+    const session = await getSession(context);
+    if (session && session.user) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            }
+        };
+    }
     return {
-        props: {
-            csrfToken: await getCsrfToken(context),
-          },
+        props: {},
     };
 }

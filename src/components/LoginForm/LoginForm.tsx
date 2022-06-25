@@ -5,9 +5,14 @@ import styles from "./LoginForm.module.sass";
 import useForm from '@hook/useForm';
 import {loginValidation as validation} from '@utils/form/LoginValidation';
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
-import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function LoginForm({signIn}) {
+    
+    const router = useRouter();
+
+    //server side valiation error
+    const { error } = router.query;
 
     //form submit function
     const onSubmit = () => {
@@ -36,7 +41,10 @@ export default function LoginForm({signIn}) {
                     onChange={handleChange}
                     value={formData.email}
                     required={true}
-                    error={errors.email? errors.email: ""}
+                    error={
+                        errors.email? errors.email: 
+                        error === "email does not exist"? error:""
+                    }
                 >
                     <MailOutline  color='disabled'/>
                 </Input>
@@ -49,7 +57,10 @@ export default function LoginForm({signIn}) {
                         onChange={handleChange}
                         value={formData.password}
                         required={true}
-                        error={errors.password? errors.password: ""}
+                        error={
+                            errors.password? errors.password:
+                            error === "password is incorrect"? error:""
+                        }
                     >
                         <Key color='disabled'/>
                     </Input>

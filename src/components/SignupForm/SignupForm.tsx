@@ -5,12 +5,22 @@ import styles from './SignupForm.module.sass';
 import useForm from '@hook/useForm';
 import {signupValidation as validation} from '@utils/form/SignupValidation';
 import { SignupFormData as FormData } from '@interfaces/SignupFormData';
+import { axiosInstance as axios } from '@constants/Axios/axios';
+import { useState } from 'react';
 
 export default function SignupForm() {
 
+    const [error, setError] = useState<string | null>(null);
+
     //form submit function
-    const onSubmit = () => {
-        //TODO: signup
+    async function onSubmit() {
+        const { email, password } = formData;
+
+        try {
+            const response = await axios.post('/api/authApi/register', {email, password});
+        } catch(err) {
+            setError(err.response.data.err);
+        }
     };
 
     //form state and handlers
@@ -39,7 +49,10 @@ export default function SignupForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required={true}
-                        error = {errors.email? errors.email: ""}
+                        error = {
+                            errors.email? errors.email:
+                            error? error : ""
+                        }
                     >
                         <MailOutline color='disabled'/>
                     </Input>

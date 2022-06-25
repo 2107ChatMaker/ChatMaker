@@ -31,6 +31,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             };
         }
 
+        res.status(201).json({
+            message: "account created"
+        });
+
     } catch(err: any) {
         const {code = 500, message} = err;
         res.status(code).json({err: message});

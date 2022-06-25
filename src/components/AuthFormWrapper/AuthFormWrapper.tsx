@@ -3,7 +3,8 @@ import FormNavItem from './FormNavItem/FormNavItem';
 import FormLogo from './FormLogo/FormLogo';
 import FormLink from './FormLink/FormLink';
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
+
 
 //props type
 interface AuthFormWrapperProps {
@@ -11,6 +12,7 @@ interface AuthFormWrapperProps {
 }
 
 export default function AuthFormWrapper({children}: AuthFormWrapperProps) {
+    
     return (
         <motion.div
         animate={{

@@ -42,11 +42,11 @@ export default NextAuth(
                         const isValid = await compare(password, user.password);
                         if (!isValid) {
                             //return password error if not matched
-                            return {error: "wrong password"};
+                            throw new Error('password is incorrect');
                         }
                     } else {
                         //return email error if user not found
-                        return {error: "wrong email"};
+                        throw new Error('email does not exist');
                     }
 
                     return {
@@ -59,7 +59,8 @@ export default NextAuth(
         pages: {
             signIn: paths.login,
             signOut: paths.explore,
-            newUser: paths.explore
+            newUser: paths.explore,
+            error: paths.login
         },
         callbacks: {
             async redirect() {

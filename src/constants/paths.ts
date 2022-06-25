@@ -3,7 +3,7 @@ export const paths = {
     explore: "/",
     signup: "/auth/signup",
     login: "/auth/login",
-    logout: "#",
+    logout: "/",
     profile: "/profile/1",
     addPrompt: "/add",
     rate: "/rate",
