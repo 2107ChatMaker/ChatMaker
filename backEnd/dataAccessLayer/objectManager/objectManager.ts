@@ -4,7 +4,6 @@ import { Tag } from "@/Utility/Enums/tag";
 import Database from "@/Database/database";
 import ResponseModel from "@/dataAccessLayer/Schemas/response";
 
-
 export class ObjectManager {
 
     /// save a copy of the given object as the supplied model to the database
@@ -83,6 +82,4 @@ export class ObjectManager {
                 }
             });
     }
-
-    
 }

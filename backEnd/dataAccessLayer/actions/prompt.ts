@@ -5,7 +5,6 @@ import { DatabaseObject } from "@/Interfaces/DatabaseObject";
 import PromptModel from "../Schemas/prompt";
 import { Prompt } from "@/Interfaces/Prompt";
 
-
 // actions accessable to manipulate promps or add new ones
 export class PromptController implements DatabaseObject, Saveable, Prompt {
     // The user submitting the prompts ID

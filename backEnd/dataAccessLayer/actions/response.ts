@@ -28,7 +28,6 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
         }
         this.tags = _tags
     }
-
     
     /// Saves this object to the database or update it if it already exists
     save() { 

@@ -2,7 +2,6 @@ import { ObjectManager } from "@/dataAccessLayer/objectManager/objectManager";
 import { Feedback } from "@/Interfaces/Feedback";
 import { DatabaseObject } from "../../Interfaces/DatabaseObject";
 import { HashMap } from "../../Interfaces/HashMap";
-import ResponseModel from "../Schemas/response";
 
 /// used to give user feedback on a response
 export class FeedbackController implements DatabaseObject, Feedback {

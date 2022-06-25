@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 //Reference Yudhvirs class 2107
-
 export default class Database {
     // MongoClient
     // uses typeof because it is importing the whole module not juast a class 
@@ -32,7 +31,6 @@ export default class Database {
     static async setupClient() {
         // connect the client to the server
         const client = await mongoose.connect(Database.uri)
-
 
         this.client = client;
     }
