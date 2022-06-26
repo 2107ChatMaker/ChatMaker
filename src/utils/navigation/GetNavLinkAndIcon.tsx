@@ -1,4 +1,4 @@
-import {Explore, Star, Person, AddBox, ExitToApp} from '@mui/icons-material';
+import {Explore, Star, Person, AddBox, ExitToApp, Login} from '@mui/icons-material';
 import { ReactElement } from 'react';
 import { paths } from '@constants/paths';
 
@@ -36,6 +36,11 @@ export function getNavLinkAndIcon(name): NavLinkAndIcon {
             return {
                 href: paths.logout,
                 icon: <ExitToApp fontSize='large'/>
+            };
+        case 'Login':
+            return {
+                href: paths.login,
+                icon: <Login fontSize='large'/>
             };
         default:
             return null;

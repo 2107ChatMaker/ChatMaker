@@ -1,7 +1,7 @@
 import { ObjectManager } from "./objectManager/objectManager";
-import { Feedback } from "@constants/interfaces/Feedback";
-import { DatabaseObject } from "../../../constants/interfaces/DatabaseObject";
-import { HashMap } from "../../../constants/interfaces/HashMap";
+import { Feedback } from "@interfaces/Feedback";
+import { DatabaseObject } from "@interfaces/DatabaseObject";
+import { HashMap } from "@interfaces/HashMap";
 
 /// used to give user feedback on a response
 export class FeedbackController implements DatabaseObject, Feedback {

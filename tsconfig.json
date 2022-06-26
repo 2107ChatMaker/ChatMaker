@@ -13,7 +13,7 @@
       "@templates/*": ["../src/templates/*",],
       "@hook/*": ["../src/hook/*"],
       "@styles/*": ["../src/styles/*",],
-      "@interfaces/*": ["../src/constants/interfaces/*",],
+      "@interfaces/*": ["../src/interfaces/*",],
       "@utils/*": ["../src/utils/*",],
       "@constants/*": ["../src/constants/*",],
     },

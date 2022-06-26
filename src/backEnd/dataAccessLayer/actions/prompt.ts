@@ -1,9 +1,9 @@
-import { HashMap } from "@constants/interfaces/HashMap";
-import { Saveable } from "@constants/interfaces/Saveable";
-import { DatabaseObject } from "@constants/interfaces/DatabaseObject";
-import { Prompt } from "@constants/interfaces/Prompt";
+import { HashMap } from "@interfaces/HashMap";
+import { Saveable } from "@interfaces/Saveable";
+import { DatabaseObject } from "@interfaces/DatabaseObject";
+import { Prompt } from "@interfaces/Prompt";
 import { ObjectManager } from "./objectManager/objectManager";
-import PromptModel from "../Schemas/prompt";
+import PromptModel from "../schemas/prompt";
 
 // actions accessable to manipulate promps or add new ones.
 export class PromptController implements DatabaseObject, Saveable, Prompt {
