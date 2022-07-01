@@ -5,9 +5,14 @@ import Image from 'next/image';
 import {useEffect, useState} from 'react';
 import {motion} from 'framer-motion';
 import NavItem from './NavItem/NavItem';
+import { signOut, useSession } from 'next-auth/react';
 
 function NavBar() {
     
+    //user session
+    const { data: session } = useSession();
+
+    //list of nav link
     const [links, setLinks] = useState([]);
 
     //menu visibility state
@@ -18,10 +23,21 @@ function NavBar() {
 
     //set links base on screen size
     useEffect(()=>{
+
+        //setting up navigation links
         if (isMobile) {
-            setLinks(["Explore", "Profile", "Rating"]);
+            if (session && session.user) {
+                setLinks(["Explore", "Profile", "Rating"]);
+            } else {
+                setLinks(["Explore", "Login", "Rating"]);
+            }
+            
         } else {
-            setLinks(["Explore prompts", "Rate responses", "Add a prompt", "Profile", "Logout"]);
+            if (session && session.user) {
+                setLinks(["Explore prompts", "Rate responses", "Add a prompt", "Profile", "Logout"]);
+            } else {
+                setLinks(["Explore prompts", "Login"]);
+            }
         }
 
         //clean up event listener
@@ -29,8 +45,8 @@ function NavBar() {
             window.removeEventListener('onMouseEnter', openMenu);
             window.removeEventListener('onMouseLeave', closeMenu);
         };
-    }, [isMobile]);
- 
+    }, [isMobile, session]);
+
 
     //function to show sidebar
     const openMenu = ()=>{
@@ -48,11 +64,14 @@ function NavBar() {
             width: "17rem",
             transition: {
                 duration: 0.5,
+                delay: 0.3
             },
         }),
         hidden: {
             width: "4.5rem",
-            
+            transition: {
+                stiffness: 0,
+            }
         },
     } : {
         mobile: {
@@ -84,7 +103,7 @@ function NavBar() {
             <ul className={styles.navItems}>
                 {links.map((link, index)=>{
                     return (
-                        <NavItem name={link} key={index}/>
+                        <NavItem name={link} key={index} onClick={link==="Logout"?()=>signOut():null}/>
                     );
                 })}
             </ul>            

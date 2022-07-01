@@ -1,3 +1,4 @@
+
 import Background from '@components/Background/Background';
 import NavBar from '@components/NavBar/NavBar';
 import NextHead from '@components/NextHead';

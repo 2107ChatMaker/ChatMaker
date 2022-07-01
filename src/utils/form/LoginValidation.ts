@@ -1,6 +1,6 @@
 import {LoginFormData as FormData} from '@interfaces/LoginFormData';
 
-export function loginValidation(formData: FormData): FormData {
+export function loginValidation(formData: FormData): {} {
     
     //erros object to be returned
     let errors = {email: "", password: ""};
@@ -19,5 +19,5 @@ export function loginValidation(formData: FormData): FormData {
         errors.password = "wrong password";
     }
     
-    return errors;
+    return errors.email !== "" && errors.password !== "" ? errors : {};
 }

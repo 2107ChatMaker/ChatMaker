@@ -1,27 +1,36 @@
-import connectDatabase from "../../Database/database";
-import Prompt from "@/Controllers/Schemas/prompt";
+import { HashMap } from "@interfaces/HashMap";
+import { Saveable } from "@interfaces/Saveable";
+import { DatabaseObject } from "@interfaces/DatabaseObject";
+import { Prompt } from "@interfaces/Prompt";
+import { ObjectManager } from "./objectManager/objectManager";
+import PromptModel from "../schemas/prompt";
 
+// actions accessable to manipulate promps or add new ones.
+export class PromptController implements DatabaseObject, Saveable, Prompt {
+    // The user submitting the prompts ID
+    userID: String;
+    // The prompt the user has given
+    prompt: String;
+    
+    constructor(userID: String, prompt: String) {
+        this.userID = userID;
+        this.prompt = prompt;
+    }
+    /// Saves this object to the database or update it if it already exists
+    save() { 
+        ObjectManager.saveObject(this, PromptModel);
+    }
 
-//for when user wants to delete a prompt theyve submitted
-export async function deletePrompt(id: string) {
-    await connectDatabase();
-    //need to add way to get the ID from the prompt when in the app
-    //finds the prompt in the database by its ID
-    const promptToDelete = await Prompt.find({id: id})
-    //removes the prompt from the database 
-    await Prompt.deleteOne(promptToDelete);
+    // retrieves all prompts
+    static getPrompts() {
+        return ObjectManager.findAll(PromptModel);
+    }
+
+    // Tags are returned as a hashmap
+    toHashMap(): HashMap {
+        return {
+            userID: this.userID,
+            prompt: this.prompt
+        };
+    }
 }
-
-//reference from yudhvirs class lecture 5 
-export async function addPrompt(content: string, tag: [], rating: 50){
-    await connectDatabase();
-    const prompt = new Prompt({
-        content,
-        tag,
-        rating
-    });
-    return prompt.save();
-}
-
-
-
