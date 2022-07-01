@@ -1,16 +1,22 @@
-import Page from '@templates/Page';
+
+import Background from '@components/Background/Background';
+import NavBar from '@components/NavBar/NavBar';
+import NextHead from '@components/NextHead';
+import ContentWrapper from '@components/ContentWrapper/ContentWrapper';
+import CreatePrompt from '@components/CreatePromptForm/CreatePromptForm';
 
 export default function AddPrompt() {
     return (
-        <Page
-            headTitle = "Add Prompt"
-            headName = "Add Prompt"
-            headContent = "Add a new prompt"
-        >
-            <div>
-                <h1>Add Prompt</h1>
-                <p>Add a new prompt</p>
-            </div>            
-        </Page>
+        <Background>
+            <NextHead
+                name="Add Prompt"
+                content="add prompt page"
+                title="add prompt"
+            />
+            <NavBar/>
+            <ContentWrapper>
+                <CreatePrompt/>
+            </ContentWrapper>
+        </Background>
     );
 }
