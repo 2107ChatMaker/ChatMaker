@@ -1,0 +1,115 @@
+
+// Structure
+
+$base__space-unit: 1.5rem
+
+// Colors
+
+$color__Buttons: #1C98EC
+$color__Cards: #EFF2F1
+
+$color__background-screen: #f1f1f1
+$color__text-screen: #21759b
+
+$color__background-hr: #ccc
+$color__background-pre: #eee
+$color__background-ins: #fff9c0
+$color__border-abbr: #666
+
+$color__link: royalblue
+$color__link-visited: purple
+$color__link-hover: midnightblue
+
+$color__branding_cyan: #00B9AE
+$color__branding_brown: #541C00
+$color__branding_dark_green: #3E5641
+
+
+
+// Typography
+
+$font__main: sans-serif
+$font__code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace
+$font__pre: "Courier 10 Pitch", Courier, monospace
+$font__header: Quicksand, serif
+$font__line-height-body: 1.5
+$font__line-height-pre: 1.6
+
+// screen sizes 
+
+$screen__mobile: 600px
+$screen__desktop: 1000px
+
+
+@mixin flex-c 
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+
+
+@media (max-width: $screen__mobile) 
+    .RateResponseBody
+        height: 100%
+        width: 100%
+        display: grid
+        grid-template-rows: 1fr 4fr 1fr 1.2fr
+
+    .RateResponseTitleContainer, .RateResponseOuterContainer
+        @include flex-c
+        
+    .RateResponseInnerContainer
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: space-around
+        background: $color__Cards
+        color: black
+        width: 90vw
+        height: 50Vh
+        border-radius: 20px
+        padding: 0vw 10vw
+
+    .RateResponseDeliniator
+        border: solid
+        width: 60vw
+
+    .RateResponseTagsContainer
+        // @include flex-c
+        width: 100%
+
+    .RateResponseTagsTitle
+        margin-left: 4vw
+        margin-bottom: 4vw
+
+    .RateResponseTagContainer
+        @include flex-c
+        background: #C4C4C4
+        border-radius: 11px
+        padding: 11px            
+
+    .RateResponseTagList
+        display: flex
+        align-items: center
+        justify-content: space-around
+        width: 100%
+
+    .RateResponseButtonContainer
+        display: flex
+        flex-direction: row
+        height: 100%
+        width: 100%
+        align-items: center
+        justify-content: space-around
+
+    .RateResponseButton
+        @include flex-c
+        background-color: $color__Buttons
+        width: 20vw
+        height: 20vw
+        border-radius: 100px
+    
+    .RateResponseResponse
+        text-align: center
+

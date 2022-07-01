@@ -39,6 +39,23 @@ export class ObjectManager {
         return foundEntry;
     }
 
+    // Reference:
+    // https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
+    /// find a specific object by it's model and mongoose _id and returns a mongoose query
+    /// Cast the result as the object type you expect from the call.
+    static async findRandom(model: mongoose.Model<any>, ratedResponseIDs: string[]) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        const numberOfDocuments: number = await model.estimatedDocumentCount();
+        var random = Math.floor(Math.random() * numberOfDocuments);        
+        /// returns the request query that needs to be Cast to the requested object type 
+        const foundEntry = await model.findOne({
+            '_id': { $nin: ratedResponseIDs }
+         }).skip(random);
+        
+        return foundEntry;
+    }
+
     /// delete an entry in the mongoose document for the given model that matches the given id
     static async deleteByID(model: mongoose.Model<any>, id: string) {
         /// establishes a connecti on to the database

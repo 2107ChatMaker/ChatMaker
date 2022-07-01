@@ -22,6 +22,11 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     }
 
     // retrieves all prompts
+    static getPrompt(_id: string) {
+        return ObjectManager.find(PromptModel, _id);
+    }
+
+    // retrieves all prompts
     static getPrompts() {
         return ObjectManager.findAll(PromptModel);
     }
