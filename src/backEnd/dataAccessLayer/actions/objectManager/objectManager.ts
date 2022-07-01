@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { Tag } from "@/Utility/Enums/tag";
+import { Tag } from "@/utility/Enums/tag";
 import Database from "@/Database/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 
