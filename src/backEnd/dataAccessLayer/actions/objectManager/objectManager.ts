@@ -92,12 +92,7 @@ export class ObjectManager {
         await Database.setupClient();
         // find by ID and increase or decrease the rating value based on whether the rating is true or not. If there is an error log it
         let inc: Number = rating? 1 : -1;
-        const retval = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, 
-            function(error, result) {
-                if (error) {
-                    //console.log(error);
-                    throw new Error(error);
-                }
-            });
+        const retval = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, { returnDocument: 'after' });
+        return retval;
     }
 }

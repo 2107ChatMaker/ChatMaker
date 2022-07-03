@@ -5,9 +5,12 @@ import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { ObjectManager } from "./objectManager/objectManager";
 import ResponseModel from "../schemas/response";
+import Rating from "../../../pages/rate";
 
 // actions accessable to manipulate responses or add new ones
 export class ResponseController implements DatabaseObject, Saveable, CMResponse {
+    // the id given to the user by mongo
+    readonly _id: string;
     // the userID of the user giving the response
     readonly userID: string;
     // the promptID the response belongs too
@@ -41,6 +44,10 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
 
     static getRandomResponse() {
         return ObjectManager.findRandom(ResponseModel, []);
+    }
+
+    static rateResponse(ratingID: string, rating: Boolean) {
+        return ObjectManager.updateRatingByID(ratingID, rating);
     }
 		
     /// converts given values into a HashMap
