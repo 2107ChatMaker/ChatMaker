@@ -5,13 +5,17 @@ import styles from "./explorePrompts.module.sass"
 
 export default function ExplorePrompt(){
 
+    function showPrompts() {
+        
+    }
+
     return(
         <div className={styles.page}>
             <div className={styles.pageTitle}>
                 Explore Prompts
             </div>
             <div className={styles.searchField}>
-                <input className={styles.input} placeholder="search" type="text" id="searchParam" size={50} name="sarchParam"/>
+                <input className={styles.input} placeholder="search for prompts" type="text" id="searchParam" size={70} name="sarchParam"/>
                 <button type="submit" className={styles.searchButton}>
                     <Image className={styles.buttonImage} src={searchIcon} width={"20%"} height={"20%"} alt="seachImage"/>
                 </button>
