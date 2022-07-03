@@ -19,7 +19,9 @@ export default function SignupForm() {
         try {
             const response = await axios.post('/api/authApi/register', {email, password});
         } catch(err) {
-            setError(err.response.data.err);
+            if(err.response){
+                setError(err.response.data.err);
+            }
         }
     };
 

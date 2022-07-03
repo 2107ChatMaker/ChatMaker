@@ -49,10 +49,7 @@ export default NextAuth(
                         throw new Error('email does not exist');
                     }
 
-                    return {
-                        id: user._id,
-                        email: user.email
-                    };
+                    return user;
                 }
             })
         ],
