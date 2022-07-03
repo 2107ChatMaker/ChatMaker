@@ -9,8 +9,6 @@ export default function CreatePrompt(){
     const [prompt, setPrompt] = useState("");
     const { data: session } = useSession();
 
-
-
     const handleChange = (e) => {
         setPrompt(e.target.value);
     };
@@ -18,13 +16,7 @@ export default function CreatePrompt(){
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(session);
-        
-        
-        
     };
-
-    
-    
 
     return(
         <form onSubmit={handleSubmit}>
