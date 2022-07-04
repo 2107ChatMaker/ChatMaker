@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+
 const userSchema = new Schema({
     email: {
         type: String,
@@ -34,7 +35,13 @@ const userSchema = new Schema({
             type: Date,
             default: null
         }
+    },
+
+    savedResponses: {
+        type: [String],
+        default: []
     }
+    
 });
 
 const UserModel = models.User || model('User', userSchema);
