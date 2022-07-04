@@ -38,7 +38,9 @@ const userSchema = new Schema({
     },
 
     savedResponses: {
-        type: [String],
+        type: [{
+            type: String
+        }],
         default: []
     }
     
