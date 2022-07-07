@@ -1,51 +1,7 @@
-
-// Structure
-
-$base__space-unit: 1.5rem
-
-// Colors
-
-$color__Buttons: #1C98EC
-$color__Cards: #EFF2F1
-
-$color__background-screen: #f1f1f1
-$color__text-screen: #21759b
-
-$color__background-hr: #ccc
-$color__background-pre: #eee
-$color__background-ins: #fff9c0
-$color__border-abbr: #666
-
-$color__link: royalblue
-$color__link-visited: purple
-$color__link-hover: midnightblue
-
-$color__branding_cyan: #00B9AE
-$color__branding_brown: #541C00
-$color__branding_dark_green: #3E5641
+@import 'includes.sass'
 
 
 
-// Typography
-
-$font__main: sans-serif
-$font__code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace
-$font__pre: "Courier 10 Pitch", Courier, monospace
-$font__header: Quicksand, serif
-$font__line-height-body: 1.5
-$font__line-height-pre: 1.6
-
-// screen sizes 
-
-$screen__mobile: 340px
-$screen__desktop: 769px
-
-
-@mixin flex-c 
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
 
 @media screen and (min-width: $screen__mobile) 
     .RateResponseBody
@@ -56,6 +12,10 @@ $screen__desktop: 769px
 
     .RateResponseTitleContainer, .RateResponseOuterContainer
         @include flex-c
+
+    .RateResponseTitleContainer
+        h1
+            font-size: 2rem
         
     .RateResponseInnerContainer
         display: flex
@@ -69,6 +29,9 @@ $screen__desktop: 769px
         border-radius: 20px
         padding: 0vw 10vw
 
+        h2, h3
+            font-weight: normal
+
     .RateResponseDeliniator
         border: solid
         width: 60vw
@@ -78,7 +41,7 @@ $screen__desktop: 769px
         width: 100%
 
     .RateResponseTagsTitle
-        margin-left: 4vw
+        margin-left: 2vw
         margin-bottom: 4vw
 
     .RateResponseTagContainer
@@ -110,6 +73,18 @@ $screen__desktop: 769px
 
     .RateResponseResponse
         text-align: center
+
+    .RateResponseButtonImageContainerA
+            width: 4.7vw
+            height: 4.7vw
+        
+    .RateResponseButtonImageContainerB
+        width: 8vw
+        height: 8vw
+
+    .RateResponseButtonImageContainerC
+        width: 7vw
+        height: 7vw
         
 
     @media screen and (min-width: $screen__desktop) 
@@ -118,6 +93,9 @@ $screen__desktop: 769px
 
         .RateResponseTitleContainer
             width: 60vw
+
+            h1
+                font-size: 2.3rem
         
         .RateResponseInnerContainer 
             width: 43vw
@@ -135,14 +113,35 @@ $screen__desktop: 769px
 
         .RateResponseTagsTitle
             margin-bottom: 1vw
+            margin-left: 3vw
+            
+        // .RateResponseTagsContainer
+        //     h3
+        //         font-size: 1.5rem
+
+        .RateResponseTagList
+            padding: 0px 1vw
 
         .RateResponseButtonContainer
             padding: 5vw 4vw 0vw 4vw
 
         .RateResponseButton
-            width: 120px
-            height: 120px
+            width: 6vw
+            height: 6vw
+
+        .RateResponseButtonImageContainerA
+            width: 1.5vw
+            height: 1.5vw
+        
+        .RateResponseButtonImageContainerB
+            width: 2.5vw
+            height: 2.5vw
+
+        .RateResponseButtonImageContainerC
+            width: 2vw
+            height: 2vw
 
         .RateResponseTagContainer
-            font-size: .6em
+            font-size: 0.6em
             padding: 1vw 1.5vw
+

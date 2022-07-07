@@ -24,7 +24,7 @@ export default function Rating(props: Props) {
     const [responseValues, setResponseValues] = useState(props.response);
     const [rating, setRating] = useState(true);
 
-    const iconSize: number = 20;
+    const iconSize: string = "100%";
 
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
     // generates a new secret santa list and saves it to the relevant collection in the database
@@ -104,9 +104,9 @@ export default function Rating(props: Props) {
                     </div>
                 </div>
                 <div className={styles.RateResponseButtonContainer}>
-                    <button className={styles.RateResponseButton} onClick={() => rate(false)}> <Image src="/resources/rateResponse/cross.png" alt="me" width={iconSize} height={iconSize} /> </button>
-                    <button className={styles.RateResponseButton} onClick={() => getNewCard()}> <Image src="/resources/rateResponse/skip.png" alt="me" width={iconSize} height={iconSize} /> </button>
-                    <button className={styles.RateResponseButton} onClick={() => rate(true)}> <Image src="/resources/rateResponse/check.png" alt="me" width={iconSize} height={iconSize} /> </button>
+                    <button className={styles.RateResponseButton} onClick={() => rate(false)}><div className={styles.RateResponseButtonImageContainerA}><Image src="/resources/rateResponse/cross.png" alt="me" width={iconSize} height={iconSize} /></div></button>
+                    <button className={styles.RateResponseButton} onClick={() => getNewCard()}><div className={styles.RateResponseButtonImageContainerB}><Image className='RateResponseSkipIcon' src="/resources/rateResponse/skip.png" alt="me" width={iconSize} height={iconSize} /></div></button>
+                    <button className={styles.RateResponseButton} onClick={() => rate(true)}><div className={styles.RateResponseButtonImageContainerC}><Image src="/resources/rateResponse/check.png" alt="me" width={iconSize} height={iconSize} /></div></button>
                 </div>
             </div>            
         </Page>
