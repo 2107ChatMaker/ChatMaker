@@ -10,7 +10,7 @@ const userSchema = new Schema({
         unique: true
     }, 
 
-    //user email is verified status
+    //user email verification status
     isVerified: {
         type: Boolean,
         required: true,
