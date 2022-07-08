@@ -28,7 +28,6 @@ const userSchema = new Schema({
         required: true
     },
     
-    //reset password 
     resetPassword: {
         
         //placeholder for new password
