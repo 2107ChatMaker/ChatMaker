@@ -39,9 +39,13 @@ export class ObjectManager {
         return foundEntry;
     }
 
+    /// find user document by email
     static async findByEmail(model: mongoose.Model<any>, email: any) {
+        /// establishes a connection to the database
         await Database.setupClient();
+        /// returns a mongoose query that only includes documents that contain the email
         const foundEntries = await model.findOne({email: email});
+
         return foundEntries;
     }
 

@@ -32,13 +32,3 @@ export async function sendEmailVerification(email: string, token: string, userId
         };
     }
 }
-
-//for testing with mailtrap
-// var transporter = nodemailer.createTransport({
-//     host: "smtp.mailtrap.io",
-//     port: 2525,
-//     auth: {
-//       user: "2592b7c602f16e",
-//       pass: "410760d1b299b8"
-//     }
-//   });
