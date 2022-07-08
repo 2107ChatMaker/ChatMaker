@@ -6,12 +6,13 @@ import { useRouter } from "next/router";
 
 export default function EmailVerification() {
 
-    //router for getting user id
+    //router for getting user id and navigate to login page
     const router = useRouter();
 
     //get user id
     const {_id} = router.query;
 
+    //send verification email to user
     async function sendVerificationEmail() {
         try {
             //send verification email
@@ -20,6 +21,11 @@ export default function EmailVerification() {
             //handle error
         }
     }
+
+    //redirect to login page
+    const toLogin = () => {
+        router.push("/auth/login");
+    };
     
     return (
         <VerficationTemplate>
@@ -37,7 +43,7 @@ export default function EmailVerification() {
                 <div>
                     <Button
                         type="button"
-                        onClick={()=>router.push("/auth/login")}
+                        onClick={toLogin}
                     >
                         back to login
                     </Button>
