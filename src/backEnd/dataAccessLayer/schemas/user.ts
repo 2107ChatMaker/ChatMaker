@@ -62,4 +62,5 @@ const userSchema = new Schema({
 
 //build user model from schema
 const UserModel = models.User || model('User', userSchema);
+
 export default UserModel;
