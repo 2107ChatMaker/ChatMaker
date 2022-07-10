@@ -1,14 +1,13 @@
 @import 'includes.sass'
 
-
-
-
+////////////////////////////////////////////////////////////////////// MOBILE SIZING //////////////////////////////////////////////////////////////////////
 @media screen and (min-width: $screen__mobile) 
     .RateResponseBody
         height: 100%
         width: 100%
         display: grid
         grid-template-rows: 1fr 4fr 1fr 1.2fr
+        overflow: hidden
 
     .RateResponseTitleContainer, .RateResponseOuterContainer
         @include flex-c
@@ -37,7 +36,6 @@
         width: 60vw
 
     .RateResponseTagsContainer
-        // @include flex-c
         width: 100%
 
     .RateResponseTagsTitle
@@ -75,8 +73,8 @@
         text-align: center
 
     .RateResponseButtonImageContainerA
-            width: 4.7vw
-            height: 4.7vw
+        width: 4.7vw
+        height: 4.7vw
         
     .RateResponseButtonImageContainerB
         width: 8vw
@@ -85,63 +83,97 @@
     .RateResponseButtonImageContainerC
         width: 7vw
         height: 7vw
-        
 
-    @media screen and (min-width: $screen__desktop) 
-        .RateResponseBody
-            grid-template-rows: 1fr 3fr 1fr .5fr
-
-        .RateResponseTitleContainer
-            width: 60vw
-
-            h1
-                font-size: 2.3rem
-        
-        .RateResponseInnerContainer 
-            width: 43vw
-            padding: 0vw 5vw
-
-            h2 
-                font-size: 2em
-            h3 
-                font-size: 1.7em
-
-        .RateResponseDeliniator
-            width: 30vw
-            border-width: .12vw
-            background-color: black
-
-        .RateResponseTagsTitle
-            margin-bottom: 1vw
-            margin-left: 3vw
+    .RateResponseCardOuterContainer
+        @include flex-c
             
-        // .RateResponseTagsContainer
-        //     h3
-        //         font-size: 1.5rem
+    .RateResponseCardInnerContainer
+        position: relative
+        width: 90vw
+        height: 50Vh
 
-        .RateResponseTagList
-            padding: 0px 1vw
+    .RateResponseHiddenCardContainer 
+        position: absolute
 
-        .RateResponseButtonContainer
-            padding: 5vw 4vw 0vw 4vw
+    .RateResponseFeaturedCardContainer
+        position: absolute
+        z-index: 5
 
-        .RateResponseButton
-            width: 6vw
-            height: 6vw
+    .RateResponseAnimateCardSlide
+        animation: CardTransisiton .7s linear
+        animation-fill-mode: forwards
 
-        .RateResponseButtonImageContainerA
-            width: 1.5vw
-            height: 1.5vw
+    @keyframes CardTransisiton
+        0%
+            left: 0vw
+
+        100%
+            left: 100vw
+
+////////////////////////////////////////////////////////////////////// Desktop SIZING //////////////////////////////////////////////////////////////////////
+@media screen and (min-width: $screen__desktop) 
+    .RateResponseBody
+        grid-template-rows: 1fr 3fr 1fr .5fr
+
+    .RateResponseTitleContainer
+        width: 60vw
+
+        h1
+            font-size: 2.3rem
+    
+    .RateResponseInnerContainer 
+        width: 43vw
+        padding: 0vw 5vw
+
+        h2 
+            font-size: 2em
+        h3 
+            font-size: 1.7em
+
+    .RateResponseDeliniator
+        width: 30vw
+        border-width: .12vw
+        background-color: black
+
+    .RateResponseTagsTitle
+        margin-bottom: 1vw
+        margin-left: 3vw
+
+    .RateResponseTagList
+        padding: 0px 1vw
+
+    .RateResponseButtonContainer
+        padding: 5vw 4vw 0vw 4vw
+
+    .RateResponseButton
+        width: 6vw
+        height: 6vw
+
+    .RateResponseButtonImageContainerA
+        width: 1.5vw
+        height: 1.5vw
+    
+    .RateResponseButtonImageContainerB
+        width: 2.5vw
+        height: 2.5vw
+
+    .RateResponseButtonImageContainerC
+        width: 2vw
+        height: 2vw
+
+    .RateResponseTagContainer
+        font-size: 0.6em
+        padding: 1vw 1.5vw
+
+    .RateResponseCardInnerContainer
+        width: 45vw
+
+    @keyframes CardTransisiton
+        0%
+            left: 0vw
+
+        100%
+            left: 60vw
+
+
         
-        .RateResponseButtonImageContainerB
-            width: 2.5vw
-            height: 2.5vw
-
-        .RateResponseButtonImageContainerC
-            width: 2vw
-            height: 2vw
-
-        .RateResponseTagContainer
-            font-size: 0.6em
-            padding: 1vw 1.5vw
-

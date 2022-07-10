@@ -1,112 +1,139 @@
-import Background from '@components/Background/Background';
-import NavBar from '@components/NavBar/NavBar';
-import NextHead from '@components/NextHead';
-import ContentWrapper from '@components/ContentWrapper/ContentWrapper';
-import Page from '@templates/Page';
+// react imports
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import styles from '../styles/rate.module.sass';
-import Image from 'next/image'
+import Image from 'next/image';
+// components
+import Page from '@templates/Page';
+import RateCard from '@components/RateCard/RateCard';
+// backend
 import { ResponseController } from '@/dataAccessLayer/actions/response';
-import { CMResponse } from '@interfaces/Response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
+// interfaces
 import { Prompt } from '@interfaces/Prompt';
-import { axiosInstance } from '@constants/Axios/axios';
+import { RatingCard } from '@interfaces/RatingCard';
+import { CMResponse } from '@interfaces/Response';
 
-// an interface for the contents of props
-interface Props {
-    response: CMResponse;
-    prompt: Prompt;
-}
-
-export default function Rating(props: Props) {
+// On this page the user is given a response and is asked to rate it
+export default function Rating(props: RatingCard) {
     const {data: session, status: loading} = useSession();
-    const [responseValues, setResponseValues] = useState(props.response);
+    // the Top level card that animates off screen when prompted
+    const [featuredCard, setFeaturedCard] = useState(props);
+    // the bottom level card
+    const [AlternateCard, setAlternateCard] = useState(props);
+    // the user assigned rating of the current response
     const [rating, setRating] = useState(true);
+    // triggers card transition
+    const [cardTransition, setCardTransition] = useState(false);
+    // guards multiple button presses before animation completes
+    const [buttonClicked, setButtonClicked] = useState(false);
 
-    const iconSize: string = "100%";
+    // makes the top card slide right off screen before setting its values to the same as the bottom card and returing it to its original position
+    function animateTopCard(newCard: RatingCard) {
+        // triggers card animation
+        setCardTransition(true);
+
+        // assigns a short delay to manage users trying to press the button before the animation finishes
+        setTimeout(function () {
+            // after .8 seconds
+            // update the now off screen feature cards values to match the onscreen card
+            setFeaturedCard(newCard); 
+            // returns featured card to its original position covereing the bottom card
+            setCardTransition(false);
+            // allows the user to press the button again
+            setButtonClicked(false);
+        }, 800);
+        
+    }
 
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
     // generates a new secret santa list and saves it to the relevant collection in the database
-    async function getNewCard() {
-        
-        // make an API fetch request to generate a new ss list, save it to the db, and return the new list of names
-        const response = await fetch(
-            'http://localhost:3000/api/rate',
-            {  
-                method: 'GET'
-            }
-        );
-        const rateResponse = await response.json(); // catches the response
-        const newResponse = JSON.parse(JSON.stringify(rateResponse)) as CMResponse; // parses return to a list of strings
-        setResponseValues(newResponse); // sets the hook to the new list of names
+    async function getNewCard(execute:boolean = false) {
+
+        // guards against multiple button presses
+        if (execute || (!execute && !buttonClicked)) {
+            // stop user from executing this function again until buttonClicked is set to false
+            setButtonClicked(true);
+
+            // make an API fetch request to generate a RateCard
+            const response = await fetch(
+                'http://localhost:3000/api/rate',
+                {  
+                    method: 'GET'
+                }
+            );
+            const rateResponse = await response.json(); // catches the response
+            const newCard = JSON.parse(JSON.stringify(rateResponse)) as RatingCard; // parses into a rating Card
+
+            // sets the bottom card with the new card values
+            setAlternateCard(newCard); 
+            // animates the top card off screen, applies the new cards values, then returns it to above the bottom card
+            animateTopCard(newCard);
+        }
     }
 
+    // adds or removes 1 from the current responses rating 
     async function rateResponse() {
-        // create an object with the values needed to regenerate the secret santa list
-    let rateValues = {
-        _id: responseValues._id, 
-        rating: String(rating)
-    };
+        
+        // build the values to send to the back end 
+        let rateValues = {
+            _id: featuredCard.responseId, 
+            rating: String(rating)
+        };
+        // stringify the values
+        const body = JSON.stringify(rateValues);
 
-    const body = JSON.stringify(rateValues) // stringify the object
-        // make an API fetch request to generate a new ss list, save it to the db, and return the new list of names
+        // make the request to update the responses rating
         const response = await fetch(
             'http://localhost:3000/api/rate',
             {  
                 method: 'PUT',
                 body: body,
                 headers: new Headers({
-                  'Content-Type': 'application/json',
-                  Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
                 }),
             }
         );
     };
 
+    // rate the current response and animate it
     async function rate(rating: boolean) {
+        // guard against multiple button presses
+        if (buttonClicked) {return;}
+        setButtonClicked(true);
+        // set rating depending on button pressed
         setRating(rating);
+        // assign the rating to the current response
         await rateResponse();
-        await getNewCard();
+        // get a new card and update the current cards with animations
+        await getNewCard(true);
     };
 
     return (
         <Page
-            headTitle = "Add Prompt"
-            headName = "Add Prompt"
-            headContent = "Add a new prompt"
+            headTitle = "Rate A Response"
+            headName = "Rate A Response"
+            headContent = "use this page to rate a response"
         >
             <div className={styles.RateResponseBody}>
                 <div className={styles.RateResponseTitleContainer}>
                     <h1>Rate The Response</h1>
                 </div>
-                <div className={styles.RateResponseOuterContainer}>
-                    <div className={styles.RateResponseInnerContainer}>
-                        <h2>{props.prompt.prompt}</h2>
-                        <div className={styles.RateResponseDeliniator}></div>
-                        <h3 className={styles.RateResponseResponse}>{`"${responseValues.response}"`}</h3>
-                        <div className={styles.RateResponseTagsContainer}>
-                            <h3 className={styles.RateResponseTagsTitle}>Tags:</h3>
-                            <div className={styles.RateResponseTagList}>
-                                {
-                                responseValues.tags.map((tag: string) => {
-                                    return (
-                                        <div key={tag}>
-                                            <div className={styles.RateResponseTagContainer}>
-                                                <h3 >{tag}</h3>
-                                            </div>
-                                        </div>
-                                    );
-                                })
-                                }
-                            </div>
+                <div className={styles.RateResponseCardOuterContainer}>
+                    <div className={styles.RateResponseCardInnerContainer}>
+                        <div className={`${styles.RateResponseFeaturedCardContainer} ${cardTransition? styles.RateResponseAnimateCardSlide : ""}` }>
+                            <RateCard response={featuredCard.response} prompt={featuredCard.prompt} tags={featuredCard.tags}/>
+                        </div>
+                        <div className={styles.RateResponseHiddenCardContainer}>
+                            <RateCard response={AlternateCard.response} prompt={AlternateCard.prompt} tags={AlternateCard.tags}/>
                         </div>
                     </div>
                 </div>
                 <div className={styles.RateResponseButtonContainer}>
-                    <button className={styles.RateResponseButton} onClick={() => rate(false)}><div className={styles.RateResponseButtonImageContainerA}><Image src="/resources/rateResponse/cross.png" alt="me" width={iconSize} height={iconSize} /></div></button>
-                    <button className={styles.RateResponseButton} onClick={() => getNewCard()}><div className={styles.RateResponseButtonImageContainerB}><Image className='RateResponseSkipIcon' src="/resources/rateResponse/skip.png" alt="me" width={iconSize} height={iconSize} /></div></button>
-                    <button className={styles.RateResponseButton} onClick={() => rate(true)}><div className={styles.RateResponseButtonImageContainerC}><Image src="/resources/rateResponse/check.png" alt="me" width={iconSize} height={iconSize} /></div></button>
+                    <button className={styles.RateResponseButton} onClick={() => rate(false)}><div className={styles.RateResponseButtonImageContainerA}><Image src="/resources/rateResponse/cross.png" alt="me" width={"100%"} height={"100%"} /></div></button>
+                    <button className={styles.RateResponseButton} onClick={() => getNewCard()}><div className={styles.RateResponseButtonImageContainerB}><Image className='RateResponseSkipIcon' src="/resources/rateResponse/skip.png" alt="me" width={"100%"} height={"100%"} /></div></button>
+                    <button className={styles.RateResponseButton} onClick={() => rate(true)}><div className={styles.RateResponseButtonImageContainerC}><Image src="/resources/rateResponse/check.png" alt="me" width={"100%"} height={"100%"} /></div></button>
                 </div>
             </div>            
         </Page>
@@ -114,18 +141,25 @@ export default function Rating(props: Props) {
 }
 
 export async function getServerSideProps() {
-    // get all lists associated with jimjam
+    // get a random response from the backend and parse it
     const queryResult = await ResponseController.getRandomResponse();
-    // parse the results into an array of SSList
-    const response = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
-    const promptqueryResult = await PromptController.getPrompt(response.promptID);
-    const prompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
+    const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
+    // get the corrisponding prompt from the backend and parse it
+    const promptqueryResult = await PromptController.getPrompt(newResponse.promptID);
+    const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
+
+    // build the values that will return as a RatingCard
+    const responseId = newResponse._id;
+    const tags = newResponse.tags;
+    const response = newResponse.response;
+    const prompt = newPrompt.prompt;
 
     return {
         props: {
-          response,
-          prompt
+            responseId,
+            prompt,
+            response,
+            tags
         }
     };
 }
-
