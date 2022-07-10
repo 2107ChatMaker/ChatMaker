@@ -1,6 +1,6 @@
 // react imports
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
 import Image from 'next/image';
 // components
@@ -17,6 +17,13 @@ import { CMResponse } from '@interfaces/Response';
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
     const {data: session, status: loading} = useSession();
+    useEffect(()=> {
+        if (session) {
+            setUserID(session.user.id);
+        }
+    }, [session]);
+    const [userID, setUserID] = useState('');
+
     // the Top level card that animates off screen when prompted
     const [featuredCard, setFeaturedCard] = useState(props);
     // the bottom level card
