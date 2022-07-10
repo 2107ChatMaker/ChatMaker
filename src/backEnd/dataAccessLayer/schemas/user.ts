@@ -4,59 +4,34 @@ import { model, models, Schema } from "mongoose";
 const userSchema = new Schema({
 
     //user email
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    }, 
+    email: {type: String, required: true, unique: true}, 
 
     //user email verification status
-    isVerified: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
+    isVerified: {type: Boolean, required: true, default: false},
 
     //email verification token
-    emailToken: {
-        type: String,
-    }, 
+    emailToken: {type: String,}, 
     
     //user password
-    password: {
-        type: String,
-        required: true
-    },
+    password: {type: String, required: true},
     
     resetPassword: {
         
         //placeholder for new password
-        provisionalPassword: {
-            type: String,
-            default: null
-        },
+        provisionalPassword: { type: String, default: null },
 
         //token to confirm password reset
-        resetPasswordToken: {
-            type: String,
-            default: null
-        },
+        resetPasswordToken: { type: String, default: null },
 
         //expiration date for reset password token
-        resetPasswordExpiration: {
-            type: Date,
-            default: null
-        }
+        resetPasswordExpiration: { type: Date, default: null }
     },
 
     //list of saved response ids
-    savedResponses: {
-        type: [{
-            type: String
-        }],
-        default: []
-    }
-    
+    responsesSaved: { type: [String], default: [] },
+
+    //list of saved response ids
+    responsesRated: { type: [String], default: [] }
 });
 
 //user collection in the database
