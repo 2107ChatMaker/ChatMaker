@@ -62,6 +62,9 @@ export default function Rating(props: RatingCard) {
             // stop user from executing this function again until buttonClicked is set to false
             setButtonClicked(true);
 
+            // forces card to exit right when skipping
+            if (!execute) {setRating(true);}
+
             // make an API fetch request to generate a RateCard
             const response = await fetch(
                 'http://localhost:3000/api/rate',
@@ -129,7 +132,7 @@ export default function Rating(props: RatingCard) {
                 </div>
                 <div className={styles.RateResponseCardOuterContainer}>
                     <div className={styles.RateResponseCardInnerContainer}>
-                        <div className={`${styles.RateResponseFeaturedCardContainer} ${cardTransition? styles.RateResponseAnimateCardSlide : ""}` }>
+                        <div className={`${styles.RateResponseFeaturedCardContainer} ${cardTransition? ((rating)? styles.RateResponseAnimateCardSlideR : styles.RateResponseAnimateCardSlideL) : ""}` }>
                             <RateCard response={featuredCard.response} prompt={featuredCard.prompt} tags={featuredCard.tags}/>
                         </div>
                         <div className={styles.RateResponseHiddenCardContainer}>

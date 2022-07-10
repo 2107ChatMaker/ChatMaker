@@ -99,16 +99,27 @@
         position: absolute
         z-index: 5
 
-    .RateResponseAnimateCardSlide
-        animation: CardTransisiton .7s linear
+    .RateResponseAnimateCardSlideR
+        animation: CardTransisitonR .7s linear
         animation-fill-mode: forwards
 
-    @keyframes CardTransisiton
+    .RateResponseAnimateCardSlideL
+        animation: CardTransisitonL .7s linear
+        animation-fill-mode: forwards
+
+    @keyframes CardTransisitonR
         0%
             left: 0vw
 
         100%
             left: 100vw
+            
+    @keyframes CardTransisitonL
+        0%
+            left: 0vw
+
+        100%
+            left: -100vw
 
 ////////////////////////////////////////////////////////////////////// Desktop SIZING //////////////////////////////////////////////////////////////////////
 @media screen and (min-width: $screen__desktop) 
@@ -168,12 +179,19 @@
     .RateResponseCardInnerContainer
         width: 45vw
 
-    @keyframes CardTransisiton
+    @keyframes CardTransisitonR
         0%
             left: 0vw
 
         100%
             left: 60vw
+
+    @keyframes CardTransisitonL
+        0%
+            left: 0vw
+
+        100%
+            left: -60vw
 
 
         
