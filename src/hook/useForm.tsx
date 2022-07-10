@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 export default function useForm<T>(
         initialState: T, 
         validate:(data: T)=> {}, 
-        onSubmit: ()=> void
+        onFinishValidation: ()=> void
         ): [
             T, any, 
             (e: React.ChangeEvent<HTMLInputElement>) => void, 
@@ -33,9 +33,10 @@ export default function useForm<T>(
         
         //set errors state to new errors object
         setErrors(newErrors);
+        
         //if no errors, submit form
         if (Object.keys(newErrors).length === 0) {
-            onSubmit();        
+            onFinishValidation();        
         }
     };
 

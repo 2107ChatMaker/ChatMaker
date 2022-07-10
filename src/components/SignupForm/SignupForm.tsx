@@ -1,27 +1,21 @@
 import Input from '@components/Input/Input';
 import Button from '@components/Button/Button';
-import {Key, MailOutline} from '@mui/icons-material';
+import {Key, MailOutline, Router} from '@mui/icons-material';
 import styles from './SignupForm.module.sass';
 import useForm from '@hook/useForm';
 import {signupValidation as validation} from '@utils/form/SignupValidation';
 import { SignupFormData as FormData } from '@interfaces/SignupFormData';
 import { axiosInstance as axios } from '@constants/Axios/axios';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function SignupForm() {
 
+    //router for navigate to email verification page
+    const router = useRouter();
+
     //state for serverside error
     const [error, setError] = useState<string | null>(null);
-
-    //form submit function
-    async function onSubmit() {
-        const { email, password } = formData;
-        try {
-            const response = await axios.post('/api/authApi/register', {email, password});
-        } catch(err) {
-            setError(err.response.data.err);
-        }
-    };
 
     //form state and handlers
     const [
@@ -33,7 +27,30 @@ export default function SignupForm() {
         email: '',
         password: '',
         passwordConfirm: ''
-    }, validation, onSubmit);
+    }, validation, onSignUp);
+
+    //sign up
+    async function onSignUp() {
+        const { email, password } = formData;
+        try {
+
+            //send signup request
+            const response = await axios.post('/api/authApi/register', {email, password});
+
+            //get user id
+            const { _id } = response.data;
+
+            //redirect to email verification page
+            router.push(`/auth/verification/email/${_id}`);
+
+        } catch(err) {
+            if (err.response) {
+                
+                //set server side error
+                setError(err.response.data.err);
+            }
+        }
+    };
     
     return (
         <form onSubmit={handleSubmit}>

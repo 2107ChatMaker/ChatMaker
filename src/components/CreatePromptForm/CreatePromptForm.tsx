@@ -9,12 +9,12 @@ export default function CreatePrompt(){
 
     const handleChange = (e) => {
         setPrompt(e.target.value);
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         //TO DO - submit prompt to server
-    }
+    };
 
 
     

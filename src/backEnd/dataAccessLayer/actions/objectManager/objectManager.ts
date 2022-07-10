@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { Tag } from "@/Utility/Enums/tag";
+import { Tag } from "@/utility/Enums/tag";
 import Database from "@/Database/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 
@@ -37,6 +37,16 @@ export class ObjectManager {
         const foundEntry = await model.findById({ _id: id });
         
         return foundEntry;
+    }
+
+    /// find user document by email
+    static async findByEmail(model: mongoose.Model<any>, email: any) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        /// returns a mongoose query that only includes document that contain the email
+        const foundEntries = await model.findOne({email: email});
+
+        return foundEntries;
     }
 
     /// delete an entry in the mongoose document for the given model that matches the given id
