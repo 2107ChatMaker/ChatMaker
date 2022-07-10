@@ -1,5 +1,5 @@
 // react imports
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
 import Image from 'next/image';
@@ -13,17 +13,21 @@ import { PromptController } from '@/dataAccessLayer/actions/prompt';
 import { Prompt } from '@interfaces/Prompt';
 import { RatingCard } from '@interfaces/RatingCard';
 import { CMResponse } from '@interfaces/Response';
+import { UserController } from '@/dataAccessLayer/actions/user';
 
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
+    // session that manages logged-in user
     const {data: session, status: loading} = useSession();
+    // assign session userID to state
     useEffect(()=> {
         if (session) {
             setUserID(session.user.id);
         }
     }, [session]);
-    const [userID, setUserID] = useState('');
 
+    // The logged in users ID
+    const [userID, setUserID] = useState('');
     // the Top level card that animates off screen when prompted
     const [featuredCard, setFeaturedCard] = useState(props);
     // the bottom level card
@@ -67,7 +71,7 @@ export default function Rating(props: RatingCard) {
 
             // make an API fetch request to generate a RateCard
             const response = await fetch(
-                'http://localhost:3000/api/rate',
+                `http://localhost:3000/api/rate?userID=${userID}`,
                 {  
                     method: 'GET'
                 }
@@ -87,8 +91,9 @@ export default function Rating(props: RatingCard) {
         
         // build the values to send to the back end 
         let rateValues = {
-            _id: featuredCard.responseId, 
-            rating: String(rating)
+            responseID: featuredCard.responseId, 
+            rating: String(rating),
+            userID: userID
         };
         // stringify the values
         const body = JSON.stringify(rateValues);
@@ -110,7 +115,7 @@ export default function Rating(props: RatingCard) {
     // rate the current response and animate it
     async function rate(rating: boolean) {
         // guard against multiple button presses
-        if (buttonClicked) {return;}
+        if (buttonClicked || featuredCard.responseId == "" || featuredCard.response == "") {return;}
         setButtonClicked(true);
         // set rating depending on button pressed
         setRating(rating);
@@ -150,19 +155,39 @@ export default function Rating(props: RatingCard) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req}) {
+    // retrieve session
+    const session = await getSession({ req });
+    // get uservalues by session id
+    const userValues:UserController = await UserController.getUserByID(session.user.id);
+    // create new usercontroller to properlly cast userValues
+    const user: UserController = new UserController(userValues);
     // get a random response from the backend and parse it
-    const queryResult = await ResponseController.getRandomResponse();
+    const queryResult = await ResponseController.getRandomResponse(user.responsesRated);
     const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
-    // get the corrisponding prompt from the backend and parse it
-    const promptqueryResult = await PromptController.getPrompt(newResponse.promptID);
-    const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
 
-    // build the values that will return as a RatingCard
-    const responseId = newResponse._id;
-    const tags = newResponse.tags;
-    const response = newResponse.response;
-    const prompt = newPrompt.prompt;
+    // default return values
+    let responseId = "";
+    let tags = [];
+    let response = "";
+    let prompt = "";
+
+    if (!!newResponse) {
+        // get the corrisponding prompt from the backend and parse it
+        const promptqueryResult = await PromptController.getPrompt(newResponse.promptID);
+        const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
+
+        // build the values that will return as a RatingCard
+        responseId = newResponse._id;
+        tags = newResponse.tags;
+        response = newResponse.response;
+        prompt = newPrompt.prompt;
+    }
+    else {
+        // return values if all responses have been rated
+        response = "you've rated all responses!\ntry creating a response of your own!";
+        prompt = "Wow Your Amazing";
+    }
 
     return {
         props: {
