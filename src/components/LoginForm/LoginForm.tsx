@@ -5,21 +5,28 @@ import styles from "./LoginForm.module.sass";
 import useForm from '@hook/useForm';
 import {loginValidation as validation} from '@utils/form/LoginValidation';
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
+import { useRouter } from 'next/router';
 
-export default function LoginForm() {
+export default function LoginForm({signIn}) {
+    
+    //router for getting error from server by query params
+    const router = useRouter();
 
-    //form submit function
-    const onSubmit = () => {
-        //TODO: login
+    //server side validation error
+    const { error } = router.query;
+
+    //sign in 
+    const onSignIn = () => {
+       signIn("credentials", { email: formData.email, password: formData.password });
     };
 
     //form state and handlers
     const [
-        formData, 
-        errors, 
-        handleChange, 
-        handleSubmit
-    ] = useForm<FormData>({email: "", password: ""}, validation, onSubmit);
+        formData,
+        errors,  
+        handleChange,
+        handleSubmit 
+    ] = useForm<FormData>({email: "", password: ""}, validation, onSignIn);
     
     return (
         <form onSubmit={handleSubmit}>
@@ -35,7 +42,11 @@ export default function LoginForm() {
                     onChange={handleChange}
                     value={formData.email}
                     required={true}
-                    error={errors.email? errors.email: ""}
+                    error={
+                        errors.email? errors.email: 
+                        error === "email does not exist"? error:
+                        error === "email is not verified"? error:""
+                    }
                 >
                     <MailOutline  color='disabled'/>
                 </Input>
@@ -48,7 +59,10 @@ export default function LoginForm() {
                         onChange={handleChange}
                         value={formData.password}
                         required={true}
-                        error={errors.password? errors.password: ""}
+                        error={
+                            errors.password? errors.password:
+                            error === "password is incorrect"? error:""
+                        }
                     >
                         <Key color='disabled'/>
                     </Input>

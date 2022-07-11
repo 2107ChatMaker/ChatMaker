@@ -1,6 +1,6 @@
 import { SignupFormData as FormData} from "@interfaces/SignupFormData";
 
-export function signupValidation (formData: FormData): FormData {
+export function signupValidation(formData: FormData): {} {
     
     //erros object to be returned
     let errors = {email: "", password: "", passwordConfirm: ""};
@@ -24,5 +24,7 @@ export function signupValidation (formData: FormData): FormData {
     if (formData.password !== formData.passwordConfirm) {
         errors.passwordConfirm = "Passwords do not match";
     }
-    return errors;
+    return errors.email !== "" || 
+           errors.password !== "" || 
+           errors.passwordConfirm !== "" ? errors : {};
 }

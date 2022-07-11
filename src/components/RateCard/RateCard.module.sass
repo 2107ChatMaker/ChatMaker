@@ -1,0 +1,70 @@
+@import '@styles/includes.sass'
+
+////////////////////////////////////////////////////////////////////// MOBILE SIZING //////////////////////////////////////////////////////////////////////
+@media screen and (min-width: $screen__mobile) 
+        
+    .RateResponseInnerContainer
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: space-around
+        background: $color__Cards
+        color: black
+        width: 90vw
+        height: 50Vh
+        border-radius: 20px
+        padding: 0vw 10vw
+
+        h2, h3
+            font-weight: normal
+
+    .RateResponseDeliniator
+        border: solid
+        width: 60vw
+
+    .RateResponseTagsContainer
+        width: 100%
+
+    .RateResponseTagsTitle
+        margin-left: 2vw
+        margin-bottom: 4vw
+
+    .RateResponseTagContainer
+        @include flex-c
+        background: #C4C4C4
+        border-radius: 11px
+        padding: 11px            
+
+    .RateResponseTagList
+        display: flex
+        align-items: center
+        justify-content: space-around
+        width: 100%
+
+////////////////////////////////////////////////////////////////////// Desktop SIZING //////////////////////////////////////////////////////////////////////
+@media screen and (min-width: $screen__desktop) 
+
+    .RateResponseInnerContainer 
+        width: 43vw
+        padding: 0vw 5vw
+
+        h2 
+            font-size: 2em
+        h3 
+            font-size: 1.7em
+
+    .RateResponseDeliniator
+        width: 30vw
+        border-width: .12vw
+        background-color: black
+
+    .RateResponseTagsTitle
+        margin-bottom: 1vw
+        margin-left: 3vw
+
+    .RateResponseTagList
+        padding: 0px 1vw
+
+    .RateResponseTagContainer
+        font-size: 0.6em
+        padding: 1vw 1.5vw

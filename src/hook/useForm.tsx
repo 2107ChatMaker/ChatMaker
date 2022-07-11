@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 //hook to update form change and errors and handling submit
 export default function useForm<T>(
         initialState: T, 
-        validate:(data: T)=> T, 
-        onSubmit: (data: T)=> void
+        validate:(data: T)=> {}, 
+        onFinishValidation: ()=> void
         ): [
             T, any, 
             (e: React.ChangeEvent<HTMLInputElement>) => void, 
@@ -25,7 +25,7 @@ export default function useForm<T>(
 
     //form submit handler
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+       e.preventDefault();
 
         //initialize new errors object 
         //this prevent errors state not updated immediately
@@ -36,7 +36,7 @@ export default function useForm<T>(
         
         //if no errors, submit form
         if (Object.keys(newErrors).length === 0) {
-            onSubmit(form);        
+            onFinishValidation();        
         }
     };
 

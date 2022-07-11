@@ -3,6 +3,7 @@ import AuthFormWrapper from "@components/AuthFormWrapper/AuthFormWrapper";
 import Background from "@components/Background/Background";
 import SignupForm from "@components/SignupForm/SignupForm";
 import NextHead from "@components/NextHead";
+import { getSession } from "next-auth/react";
 
 export default function Signup() {
     return (
@@ -19,4 +20,20 @@ export default function Signup() {
             </div>
         </Background>
     );
+}
+
+//redirect page to explore if user is already logged in
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+    if (session && session.user) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            }
+        };
+    }
+    return {
+        props: {},
+    };
 }

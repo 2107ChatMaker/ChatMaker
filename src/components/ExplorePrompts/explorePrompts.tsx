@@ -5,9 +5,7 @@ import styles from "./explorePrompts.module.sass"
 
 export default function ExplorePrompt(){
 
-    function showPrompts() {
-        
-    }
+ 
 
     return(
         <div className={styles.page}>
