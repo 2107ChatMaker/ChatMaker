@@ -1,7 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search';
 import Image from 'next/image';
-import searchIcon from "./searchIcon.png"
-import styles from "./explorePrompts.module.sass"
+import searchIcon from "./searchIcon.png";
+import styles from "./explorePrompts.module.sass";
 
 export default function ExplorePrompt(){
 
@@ -9,6 +9,9 @@ export default function ExplorePrompt(){
 
     return(
         <div className={styles.page}>
+            <div className={styles.mobilePageTitle}>
+                Explore
+            </div>
             <div className={styles.pageTitle}>
                 Explore Prompts
             </div>
