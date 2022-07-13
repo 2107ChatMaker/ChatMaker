@@ -6,7 +6,7 @@ const approvedResponseSchema = new Schema({
     // the id of the prompt that the response was made for
     promptID: {type: String, required: false},
     // the given response to be rated or retrieved
-    response: {type: String, required: true},
+    response: {type: String, required: true, unique: true},
     // tags used to give context to the responses
     tags: {type: [String], required: true}
 });

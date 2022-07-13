@@ -9,23 +9,24 @@ import { useRouter } from 'next/router';
 
 export default function LoginForm({signIn}) {
     
+    //router for getting error from server by query params
     const router = useRouter();
 
-    //server side valiation error
+    //server side validation error
     const { error } = router.query;
 
-    //form submit function
-    const onSubmit = () => {
+    //sign in 
+    const onSignIn = () => {
        signIn("credentials", { email: formData.email, password: formData.password });
     };
 
     //form state and handlers
     const [
-        formData, 
-        errors, 
-        handleChange, 
-        handleSubmit
-    ] = useForm<FormData>({email: "", password: ""}, validation, onSubmit);
+        formData,
+        errors,  
+        handleChange,
+        handleSubmit 
+    ] = useForm<FormData>({email: "", password: ""}, validation, onSignIn);
     
     return (
         <form onSubmit={handleSubmit}>
@@ -43,7 +44,8 @@ export default function LoginForm({signIn}) {
                     required={true}
                     error={
                         errors.email? errors.email: 
-                        error === "email does not exist"? error:""
+                        error === "email does not exist"? error:
+                        error === "email is not verified"? error:""
                     }
                 >
                     <MailOutline  color='disabled'/>

@@ -19,5 +19,5 @@ export function loginValidation(formData: FormData): {} {
         errors.password = "wrong password";
     }
     
-    return errors.email !== "" && errors.password !== "" ? errors : {};
+    return errors.email !== "" || errors.password !== "" ? errors : {};
 }
