@@ -49,7 +49,24 @@ export class UserController implements DatabaseObject, Saveable, User {
     static getUserByID(userID: string) {
         return ObjectManager.find(UserModel, userID);
     }
-		
+
+    // gets all users that belong to the given (email)
+    static getUserByEmail(email: string) {
+        return ObjectManager.findByEmail(UserModel, email);
+    }
+
+    // reset user password
+    static async resetPassword(userId: string, newPassword: string, token: string) {
+        const user = await UserController.getUserByID(userId);
+        if (user.resetPassword.resetPasswordToken === token) {
+            user.password = newPassword;
+            const userController = new UserController(user);
+            userController.save();
+        } else {
+            throw new Error("Invalid token");
+        }
+    }
+
     /// converts given values into a HashMap
     toHashMap(): HashMap {
         return {

@@ -35,7 +35,7 @@ export default function SignupForm() {
         try {
 
             //send signup request
-            const response = await axios.post('/api/authApi/register', {email, password});
+            const response = await axios.post('/api/authAPI/register', {email, password});
 
             //get user id
             const { _id } = response.data;

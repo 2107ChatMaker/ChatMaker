@@ -16,9 +16,10 @@ export default function EmailVerification() {
     async function sendVerificationEmail() {
         try {
             //send verification email
-            await axios.post(`/api/authApi/verification/email/${_id}`);
+            await axios.post(`/api/authAPI/verification/email/${_id}`);
         } catch(error) {
             //handle error
+            console.log(JSON.stringify(error));
         }
     }
 

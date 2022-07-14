@@ -19,7 +19,7 @@ function NavBar() {
     const [showMenu, setShowMenu] = useState(false);
 
     //track screen size
-    const isMobile = useMediaQuery('(max-width: 498px)');
+    const isMobile = useMediaQuery('(max-width: 768px)');
 
     //set links base on screen size
     useEffect(()=>{
@@ -76,6 +76,7 @@ function NavBar() {
     } : {
         mobile: {
             width: "100%",
+            height: "5rem",
             transition: {
                 duration: 0,
             }

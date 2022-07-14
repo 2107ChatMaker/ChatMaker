@@ -1,34 +1,31 @@
-import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 
 export async function sendEmailVerification(email: string, token: string, userId: string) {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            type: 'OAuth2',
-            user: process.env.NODEMAILER_USER,
-            pass: process.env.NODEMAILER_PASS,
-            clientId: process.env.NODEMAILER_CLIENTID,
-            clientSecret: process.env.NODEMAILER_CLIENTSECRET,
-            refreshToken: process.env.NODEMAILER_REFRESHTOKEN,
-        }
-    });
-
-    const mailOptions = {
-        from: 'ChatMaker no-reply <noreply@chatmaker.com>',
-        to: email,
-        subject: 'Email Verification',
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+        to: email, // Change to your recipient
+        from: 'chatmakers2107@gmail.com', // Change to your verified sender
+        subject: 'verify your email',
+        text: 'and easy to do anywhere, even with Node.js',
         html: `<h1>Welcome to Chat Writer</h1>
-        <p>Please click on the following link to verify your email:</p>
-        <a href="${process.env.BASEURL}/api/authAPI/verify/email/${userId}?token=${token}">Verify your email</a>`
+                <p>Please click on the following link to verify your email:</p>
+                <a href="${process.env.BASEURL}/api/authAPI/verification/email/${userId}?token=${token}">Verify your email</a>`
     };
+    await sgMail.send(msg);
+    return;
+}
 
-    try { 
-        await transporter.sendMail(mailOptions); 
-    } 
-    catch (error) {
-        throw {
-            code: 500,
-            message: "Error sending email verification"
-        };
-    }
+export async function sendPasswordConfirmation(email: string, token: string, userId: string) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+        to: email, // Change to your recipient
+        from: 'chatmakers2107@gmail.com', // Change to your verified sender
+        subject: 'Confirm your password change',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: `<h1>Welcome to Chat Writer</h1>
+               <p>Please click on the following link to confirm your password change:</p>
+               <a href="${process.env.BASEURL}/api/authAPI/reset/password/${userId}?token=${token}">confirm your password change</a>`
+    };
+    await sgMail.send(msg);
+    return;
 }

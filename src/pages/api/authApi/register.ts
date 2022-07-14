@@ -23,14 +23,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         emailToken: generateToken(email),
                     });
                     await user.save();
-
+                    
                     res.status(201).json({
                         message: "account created",
                         _id: user._id.toString()
                     });
 
-                    //send email verification
-                    await sendEmailVerification(email, user.emailToken, user._id.toString());
+                    try {
+                        //send email verification
+                        await sendEmailVerification(email, user.emailToken, user._id.toString());
+                    } catch(error) {
+                        console.log(error);
+                    }
+                    
 
                 } catch (error) {
                     throw {

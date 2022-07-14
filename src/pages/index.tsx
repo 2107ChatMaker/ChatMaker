@@ -1,15 +1,7 @@
 import styles from '@styles/Home.module.sass';
 import Page from '@templates/Page';
-import { useEffect } from 'react';
-import { useSession } from 'next-auth/react';
 
 export default function Home() {
-  const {data: session, status: loading} = useSession();
-  useEffect(()=> {
-    if(session) {
-      console.log(session);
-    }
-  },[session]);
   return (
     <Page
       headTitle="explore prompts"

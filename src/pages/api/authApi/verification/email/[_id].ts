@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 user.isVerified = true;
                 user.emailToken = null;
                 await user.save();
-                res.status(200).send("Your email is verify");
+                res.status(200).send("Your email is verified");
                 
             } catch {
                 throw {
@@ -73,12 +73,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         message: "User already verified"
                     };
                 }
-
+                try {
+                    await sendEmailVerification(user.email, user.emailToken, _id);
+                } catch(error) {
+                    throw {
+                        code: 400,
+                        message: "Invalid email"
+                    };
+                }
                 res.status(200).send("email sent");
-
-                //send email verification
-                await sendEmailVerification(user.email, user.emailToken, _id);
-
             } catch {
                 throw {
                     code: 400,
