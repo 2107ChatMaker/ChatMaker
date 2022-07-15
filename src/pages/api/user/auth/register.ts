@@ -33,7 +33,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         //send email verification
                         await sendEmailVerification(email, user.emailToken, user._id.toString());
                     } catch(error) {
-                        console.log(error);
+                        throw {
+                            code: 500,
+                            message: "cannot send email"
+                        };
                     }
                     
 

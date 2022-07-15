@@ -1,9 +1,8 @@
 import styles from "@styles/AuthForm.module.sass";
-import AuthFormWrapper from "@components/AuthFormWrapper/AuthFormWrapper";
 import Background from "@components/Background/Background";
-import SignupForm from "@components/SignupForm/SignupForm";
 import NextHead from "@components/NextHead";
 import { getSession } from "next-auth/react";
+import SignupForm from "@components/SignupForm";
 
 export default function Signup() {
     return (
@@ -14,9 +13,7 @@ export default function Signup() {
                 content="Welcome! Let's get started"
             />
             <div className={styles.content}>
-                <AuthFormWrapper>
-                    <SignupForm/> 
-                </AuthFormWrapper>
+                <SignupForm/> 
             </div>
         </Background>
     );

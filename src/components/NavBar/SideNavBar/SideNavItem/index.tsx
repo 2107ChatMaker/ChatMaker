@@ -1,6 +1,6 @@
-import styles from './NavItem.module.sass';
+import styles from './SideNavItem.module.sass';
 import Link from 'next/link';
-import { getNavLinkAndIcon } from '@utils/navigation/GetNavLinkAndIcon';
+import getTabLinkAndIcon  from '@utils/navigation/GetTabLinkAndIcon';
 import { useRouter } from 'next/router';
 
 export default function NavItem({name, onClick}: {name: string, onClick?: () => void}) {
@@ -9,12 +9,12 @@ export default function NavItem({name, onClick}: {name: string, onClick?: () => 
     const router = useRouter();
 
     //get link and icon for nav item
-    const { href, icon } = getNavLinkAndIcon(name);
+    const { href, icon } = getTabLinkAndIcon(name);
 
     return (
         <Link href={href}>
             <li className={`${styles.navItem} ${
-                router.asPath === href ? styles.isActive : ''
+                router.asPath === href && name !== "Logout"? styles.isActive : ''
             }`} onClick={onClick}>    
                 <div className={styles.navItemIcon}>
                 {icon}  

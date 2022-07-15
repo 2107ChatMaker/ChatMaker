@@ -1,7 +1,7 @@
 import styles from './FormLink.module.sass';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { paths } from '@constants/paths';
+import { paths } from '@utils/constants/paths';
 
 export default function FormLink() {
 

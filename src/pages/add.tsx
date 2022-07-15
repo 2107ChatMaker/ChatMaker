@@ -1,5 +1,7 @@
 import CreatePrompt from '@components/CreatePromptForm/CreatePromptForm';
-import Page from '@templates/Page';
+import Page from '@components/templates/Page';
+// eslint-disable-next-line camelcase
+import {getSession} from 'next-auth/react';
 
 export default function AddPrompt() {
     return (
@@ -11,4 +13,22 @@ export default function AddPrompt() {
             <CreatePrompt/>
         </Page>  
     );
+}
+
+//redirect page to login if user is not logged in
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (session && session.user) {
+      return {
+        props: {
+          user: JSON.parse(JSON.stringify(session.user)),
+        },
+      };
+  }
+  return {
+      redirect: {
+          destination: "/auth/login",
+          permanent: false,
+      }
+  };
 }

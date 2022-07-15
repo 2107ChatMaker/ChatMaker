@@ -55,28 +55,16 @@ export class UserController implements DatabaseObject, Saveable, User {
         return ObjectManager.findByEmail(UserModel, email);
     }
 
-    // reset user password
-    static async resetPassword(userId: string, newPassword: string, token: string) {
-        const user = await UserController.getUserByID(userId);
-        if (user.resetPassword.resetPasswordToken === token) {
-            user.password = newPassword;
-            const userController = new UserController(user);
-            userController.save();
-        } else {
-            throw new Error("Invalid token");
-        }
-    }
-
     /// converts given values into a HashMap
     toHashMap(): HashMap {
         return {
-                email: this.email,
-                isVerified: this.isVerified,
-                emailToken: this.emailToken,
-                password: this.password,
-                resetPassword: this.resetPassword,
-                responsesRated: this.responsesRated,
-                responsesSaved: this.responsesSaved
+            email: this.email,
+            isVerified: this.isVerified,
+            emailToken: this.emailToken,
+            password: this.password,
+            resetPassword: this.resetPassword,
+            responsesRated: this.responsesRated,
+            responsesSaved: this.responsesSaved
 	    };
     }
 }

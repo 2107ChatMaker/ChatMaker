@@ -1,14 +1,14 @@
 import {Explore, Star, Person, AddBox, ExitToApp, Login} from '@mui/icons-material';
-import { ReactElement } from 'react';
 import { paths } from '@constants/paths';
+import { ReactNode } from 'react';
 
 interface NavLinkAndIcon {
     href: string;
-    icon: ReactElement;
+    icon: ReactNode;
 }
 
-//get link and icon for nav item
-export function getNavLinkAndIcon(name): NavLinkAndIcon {
+//get link and icon for navigation tab
+export default function getTabLinkAndIcon(name): NavLinkAndIcon {
     switch (name) {
         case 'Explore':
         case 'Explore prompts':
@@ -16,7 +16,7 @@ export function getNavLinkAndIcon(name): NavLinkAndIcon {
                 href: paths.explore,
                 icon: <Explore fontSize='large'/>
             };
-        case 'Rating':
+        case 'Rate':
         case 'Rate responses':
             return {
                 href: paths.rate,
