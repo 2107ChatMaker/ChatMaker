@@ -2,21 +2,33 @@ import Button from "@components/Button/Button";
 import { useState } from "react";
 import styles from "./CreatePromptForm.module.sass";
 import { useSession } from "next-auth/react";
+import useForm from "@hook/useForm";
+import TextArea from "@components/TextArea";
+
 
 
 export default function CreatePrompt(){
 
-    const [prompt, setPrompt] = useState("");
+    
     const { data: session } = useSession();
 
-    const handleChange = (e) => {
-        setPrompt(e.target.value);
-    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onAddPrompt = () => {
         console.log(session);
     };
+    
+    const validatePrompt = ({prompt}) => {
+
+        if (prompt.length < 10) {
+            return {
+                prompt: "Prompt must be at least 10 characters long"
+            };
+        }
+        return {};
+    }
+
+    const [form, errors, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
+    
 
     return(
         <form onSubmit={handleSubmit}>
@@ -25,16 +37,13 @@ export default function CreatePrompt(){
                     Create a new prompt
                     
                 </div>
-                <div className={styles.formInput}>
-                    <textarea 
-                    rows={5}
-                    id="userPrompt"
-                    placeholder="Max number of words: 30 "
-                    onChange={handleChange}
-                    value={prompt}
-                    required={true}
+                    <TextArea
+                        value={form.prompt}
+                        onChange={handleChange}
+                        placeholder="Enter your prompt here"
+                        require={true}
+                        name="prompt" 
                     />
-                </div>
                 <div className={styles.formAction}>
                     <Button type="submit" >
                         Create

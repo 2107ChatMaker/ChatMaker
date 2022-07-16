@@ -7,7 +7,7 @@ export default function useForm<T>(
         onFinishValidation: ()=> void
         ): [
             T, any, 
-            (e: React.ChangeEvent<HTMLInputElement>) => void, 
+            (e: any) => void, 
             (e: React.FormEvent<HTMLFormElement>) => void
         ]  {            
     
@@ -16,7 +16,7 @@ export default function useForm<T>(
     const [errors, setErrors] = useState({});
     
     //input change handler
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: any ) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
