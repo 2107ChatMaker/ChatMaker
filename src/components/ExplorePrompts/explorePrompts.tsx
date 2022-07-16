@@ -2,6 +2,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Image from 'next/image';
 import searchIcon from "./searchIcon.png";
 import styles from "./explorePrompts.module.sass";
+import addIcon from "./pencilSquare.png";
 
 export default function ExplorePrompt(){
 
@@ -9,8 +10,20 @@ export default function ExplorePrompt(){
 
     return(
         <div className={styles.page}>
+            <div className={styles.mobileView}>
+                <div className={styles.mobilePageTitle}>
+                    Explore
+                </div> <div className={styles.mobileAdd}> 
+                    Add &nbsp; <Image src={addIcon} width={"40%"} height={"20%"} alt="addIcon"/>
+            
+                </div>
+            </div>
             <div className={styles.mobilePageTitle}>
                 Explore
+            </div>
+            <div className={styles.mobileAdd}> 
+                Add <Image src={addIcon} width={"25%"} height={"30%"} alt="addIcon"/>
+            
             </div>
             <div className={styles.pageTitle}>
                 Explore Prompts
