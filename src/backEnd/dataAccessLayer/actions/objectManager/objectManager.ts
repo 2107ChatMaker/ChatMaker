@@ -139,4 +139,14 @@ export class ObjectManager {
         
         return returnResult;
     } 
+
+    //finds the document that matches the regex string
+    static async  findByRegex(model: mongoose.Model<any>, regex: string, field: string) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        /// returns a mongoose query that only includes documents that contain regex string 
+        const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
+        
+        return foundEntries;
+    }
 }

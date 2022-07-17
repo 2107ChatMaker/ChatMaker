@@ -10,12 +10,38 @@ import Prompt from '@components/Prompt';
 import { PromptController as pController } from '@/dataAccessLayer/actions/prompt';
 import { getSession } from 'next-auth/react';
 import type { HashMap } from '@interfaces/HashMap';
+import axios from '@utils/constants/axios';
+import { useState } from 'react';
 
-export default function Explore() {
+export default function Explore({user, prompts}: HashMap) {
 
+  //list of all the prompts being displayed
+  const [promptsList, setPrompts] = useState(prompts);
 
+  //boolean to check if the screen size matches a mobile screen
   const match = useMediaQuery('(max-width:768px)');
+
+  //router to navigate to the create prompt and respond page
   const router = useRouter();
+
+  //search prompts by user input 
+  const onSearch = async (search: string) => {
+    try{
+
+      //if the search is empty, set the prompts to the original prompts
+      if(search ===  ""){
+        setPrompts(prompts);
+      } else{
+
+        //fetches the results from the search query
+        const {data} = await axios.get(`/api/prompt/search/${search}`);
+        setPrompts(data.reverse());
+      }
+    }
+      catch(error){
+        //TODO: handle error
+      }
+  };
 
   return (
     <Page
@@ -35,14 +61,14 @@ export default function Explore() {
                 </div>
             </PageTitle>
             <div className={styles.searchField}>
-                <SearchBar onSubmit={() => {}}
+                <SearchBar onSubmit={onSearch}
                     placeholder={"search for prompts"}
                 />
             </div>
             <div className={styles.prompts}>
-              {prompts && prompts.map(({prompt, _id}, index) => (
+              {promptsList? promptsList.map(({prompt, _id}, index) => (
                 <Prompt key={index} prompt={prompt}/>
-              ))}
+              )): <div className={styles.noPrompts}>No prompts found</div>}
             </div> 
         </div>
     </Page>
@@ -58,7 +84,7 @@ export async function getServerSideProps(context) {
       return {
         props: {
           user: JSON.parse(JSON.stringify(session.user)),
-          prompts: JSON.parse(JSON.stringify(prompts))
+          prompts: JSON.parse(JSON.stringify(prompts.reverse()))
         },
       };
   }

@@ -12,30 +12,33 @@ import PageTitle from '@components/PageTitle';
 
 export default function AddPrompt({user}: HashMap) {
 
-
     const onAddPrompt = async () => {
-        //console.log(user);
+
+        //get userID from session
         const userId = user.id;
         try{
+
+            //fetch request to add prompt
             const {data} = await axios.post('/api/prompt', {userId, prompt: form.prompt});
-            console.log(data);
+            
         } catch (error) {
-            console.log(error);
+            //TODO: handle error
         }
-    }
+    };
 
-
-    
+    //validates the prompt entered by the user
     const validatePrompt = ({prompt}) => {
 
+        //prompt length must be at least 10 characters
         if (prompt.length < 10) {
             return {
                 prompt: "Prompt must be at least 10 characters long"
             };
         }
         return {};
-    }
+    };
 
+    //create prompt form state and form handling methods
     const [form, errors, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
 
     return (

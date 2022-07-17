@@ -1,9 +1,13 @@
+@import "@styles/includes.sass"
+
 .page
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
-    padding: 1rem
+    padding: 1rem 2rem
+    
+
 
 .add
     display: flex
@@ -15,6 +19,7 @@
         font-size: 1.5rem
         margin: 0 0.5rem
 
+
 .searchField
     display: flex
     margin-top: 1.75rem
@@ -22,57 +27,26 @@
     & > * 
         width: 100%
 
-    
-
-.input
-    border: 0
-    outline: 0
+.noPrompts
+    color: white
+    font-size: 1.5rem
 
 .prompts
-    margin-top: 2rem
-    background: white 
-    color: black
-    height: 5rem
-    font-size: 25px
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 40rem
-    padding: .75rem
-    border-radius: 0.75rem
-    
+    @include flexC 
+    margin-top: 1.5rem
+    width: 100%
+    height: 100%
+    & > *
+        margin-bottom: 1.5rem
+        
 
-.searchButton
-    //border-radius: 0.75rem
-    background-color: #1C98EC
-    border: 0
-    outline: 0
-    padding-left: 1.5em
-    padding-right: 1rem
-    padding-top: .5rem
-    padding-bottom: .4rem
-    //border-radius-top-right: 0.75rem
-    border-top-right-radius: 1.3rem
-    border-bottom-right-radius: 1.3rem 
    
-.buttonImage 
-    padding: 2rem
-    
 
 @media screen and (max-width: 498px) 
-    .input
-        width: 90%
-    
-    .prompts
-        margin-top: 2rem
-        background: white 
-        color: black
-        height: 8rem
-        display: flex
-        align-items: center
-        justify-content: center
-        width: 97%
-        padding: .75rem
-        border-radius: 0.75rem
+
+    .page
+        padding: 2rem
+        padding-bottom: 5rem
+        
     
     
