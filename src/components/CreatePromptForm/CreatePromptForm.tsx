@@ -1,11 +1,13 @@
 import Button from "@components/Button";
 import { useState } from "react";
 import styles from "./CreatePromptForm.module.sass";
+import { useSession } from "next-auth/react";
 
 
 export default function CreatePrompt(){
 
     const [prompt, setPrompt] = useState("");
+    const { data: session } = useSession();
 
     const handleChange = (e) => {
         setPrompt(e.target.value);
@@ -13,22 +15,20 @@ export default function CreatePrompt(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //TO DO - submit prompt to server
+       // console.log(session);
     };
-
-
-    
 
     return(
         <form onSubmit={handleSubmit}>
             <div className ={styles.page}>
                 <div className={styles.pageTitle}>
-                    Create Prompt
+                    Create a new prompt
                     
                 </div>
                 <div className={styles.formInput}>
                     <textarea 
                     rows={5}
+                    id="userPrompt"
                     placeholder="Max number of words: 30 "
                     onChange={handleChange}
                     value={prompt}
