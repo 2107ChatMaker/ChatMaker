@@ -1,4 +1,4 @@
-import Page from "@components/Templates/Page";
+import Page from "@components/templates/Page";
 import { useRouter } from "next/router";
 import { getSession, signOut } from 'next-auth/react';
 import { Logout } from "@mui/icons-material";

@@ -1,19 +1,30 @@
 import Page from '@components/templates/Page';
 import styles from '@styles/Add.module.sass';
 import { HashMap } from '@interfaces/HashMap';
-// eslint-disable-next-line camelcase
+
+import axios from '@utils/constants/axios';
 import useForm from '@hook/useForm';
 import TextArea from '@components/TextArea';
 import Button from '@components/Button';
 import {getSession} from 'next-auth/react';
-import UserModel from '@/dataAccessLayer/schemas/user';
+import PageTitle from '@components/PageTitle';
+
 
 export default function AddPrompt({user}: HashMap) {
 
 
-    const onAddPrompt = () => {
-        console.log(user);
-    };
+    const onAddPrompt = async () => {
+        //console.log(user);
+        const userId = user.id;
+        try{
+            const {data} = await axios.post('/api/prompt', {userId, prompt: form.prompt});
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     
     const validatePrompt = ({prompt}) => {
 
@@ -35,10 +46,8 @@ export default function AddPrompt({user}: HashMap) {
         >
            <form onSubmit={handleSubmit}>
             <div className ={styles.page}>
-                <div className={styles.pageTitle}>
-                    Create a new prompt
-                    
-                </div>
+             <PageTitle title = "Create Prompt" />
+             <div className={styles.formInput}>
                     <TextArea
                         value={form.prompt}
                         onChange={handleChange}
@@ -46,6 +55,7 @@ export default function AddPrompt({user}: HashMap) {
                         require={true}
                         name="prompt" 
                     />
+             </div>
                 <div className={styles.formAction}>
                     <Button type="submit" >
                         Create
