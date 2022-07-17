@@ -1,7 +1,7 @@
-import Background from "@components/Background/Background";
+import Background from "@components/Background";
 import { ReactNode } from "react";
 import NextHead  from "@components/NextHead";
-import Card from "@components/Card/Card";
+import Card from "@components/Card";
 
 interface Props {
     headTitle?: string;

@@ -1,4 +1,4 @@
-import Background from "@components/Background/Background";
+import Background from "@components/Background";
 import styles from "@styles/AuthForm.module.sass";
 import NextHead from "@components/NextHead";
 import { getSession, signIn } from "next-auth/react";

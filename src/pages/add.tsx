@@ -4,7 +4,7 @@ import { HashMap } from '@interfaces/HashMap';
 // eslint-disable-next-line camelcase
 import useForm from '@hook/useForm';
 import TextArea from '@components/TextArea';
-import Button from '@components/Button/Button';
+import Button from '@components/Button';
 import {getSession} from 'next-auth/react';
 import UserModel from '@/dataAccessLayer/schemas/user';
 

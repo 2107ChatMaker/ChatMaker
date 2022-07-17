@@ -1,4 +1,4 @@
-import Background from '@components/Background/Background';
+import Background from '@components/Background';
 import NavBar from '@components/NavBar';
 import NextHead from '@components/NextHead';
 import ContentWrapper from '@components/ContentWrapper';

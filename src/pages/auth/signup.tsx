@@ -1,5 +1,5 @@
 import styles from "@styles/AuthForm.module.sass";
-import Background from "@components/Background/Background";
+import Background from "@components/Background";
 import NextHead from "@components/NextHead";
 import { getSession } from "next-auth/react";
 import SignupForm from "@components/SignupForm";

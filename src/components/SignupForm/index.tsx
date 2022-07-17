@@ -1,11 +1,11 @@
-import Input from '@components/Input/Input';
-import Button from '@components/Button/Button';
+import Input from '@components/Input';
+import Button from '@components/Button';
 import {Key, MailOutline, Router} from '@mui/icons-material';
 import styles from './SignupForm.module.sass';
 import useForm from '@utils/hook/useForm';
 import {signupValidation as validation} from '@utils/form/SignupValidation';
 import { SignupFormData as FormData } from '@interfaces/SignupFormData';
-import { axiosInstance as axios } from '@utils/constants/axios';
+import axios from '@utils/constants/axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import AuthFormWrapper from '@components/AuthFormWrapper';

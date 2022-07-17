@@ -1,6 +1,6 @@
-import Template from "@components/templates/Verification";
+import Template from "@components/Templates/Verification";
 import styles from "@styles/VerificationPage.module.sass";
-import Button from "@components/Button/Button";
+import Button from "@components/Button";
 import { useRouter } from "next/router";
 import { axiosInstance as axios } from "@utils/constants/axios";
 import { useState } from 'react';

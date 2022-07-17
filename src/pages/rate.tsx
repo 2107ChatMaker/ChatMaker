@@ -2,10 +2,12 @@
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
-import Image from 'next/image';
 // components
-import Page from '@components/templates/Page';
+import Page from '@components/Templates/Page';
 import RateCard from '@components/RateCard/RateCard';
+import RateButton from '@components/RateButton';
+import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
+import PageTitle from '@components/PageTitle';
 // backend
 import { ResponseController } from '@/dataAccessLayer/actions/response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
@@ -14,6 +16,8 @@ import { Prompt } from '@interfaces/Prompt';
 import { RatingCard } from '@interfaces/RatingCard';
 import { CMResponse } from '@interfaces/Response';
 import { UserController } from '@/dataAccessLayer/actions/user';
+// utils
+import axios from '@utils/constants/axios';
 
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
@@ -70,17 +74,14 @@ export default function Rating(props: RatingCard) {
             if (!execute) {setRating(true);}
 
             // make an API fetch request to generate a RateCard
-            const response = await fetch(
-                `http://localhost:3000/api/rate?userID=${userID}`,
-                {  
-                    method: 'GET'
-                }
-            );
-            const rateResponse = await response.json(); // catches the response
-            const newCard = JSON.parse(JSON.stringify(rateResponse)) as RatingCard; // parses into a rating Card
+            const {data: rateResponse}= await axios.get(`api/rate?userID=${userID}`); // catches the response
+
+            // parses into a rating Card
+            const newCard = rateResponse as RatingCard; 
 
             // sets the bottom card with the new card values
             setAlternateCard(newCard); 
+
             // animates the top card off screen, applies the new cards values, then returns it to above the bottom card
             animateTopCard(newCard);
         }
@@ -95,21 +96,8 @@ export default function Rating(props: RatingCard) {
             rating: String(rating),
             userID: userID
         };
-        // stringify the values
-        const body = JSON.stringify(rateValues);
-
-        // make the request to update the responses rating
-        const response = await fetch(
-            'http://localhost:3000/api/rate',
-            {  
-                method: 'PUT',
-                body: body,
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-            }
-        );
+        
+        const {data: response} = await axios.put("/api/rate", rateValues);
         
     };
 
@@ -133,9 +121,7 @@ export default function Rating(props: RatingCard) {
             headContent = "use this page to rate a response"
         >
             <div className={styles.RateResponseBody}>
-                <div className={styles.RateResponseTitleContainer}>
-                    <h1>Rate The Response</h1>
-                </div>
+                <PageTitle title="Rate A Response" />
                 <div className={styles.RateResponseCardOuterContainer}>
                     <div className={styles.RateResponseCardInnerContainer}>
                         <div className={`${styles.RateResponseFeaturedCardContainer} ${cardTransition? ((rating)? styles.RateResponseAnimateCardSlideR : styles.RateResponseAnimateCardSlideL) : ""}` }>
@@ -147,9 +133,15 @@ export default function Rating(props: RatingCard) {
                     </div>
                 </div>
                 <div className={styles.RateResponseButtonContainer}>
-                    <button className={styles.RateResponseButton} onClick={() => rate(false)}><div className={styles.RateResponseButtonImageContainerA}><Image src="/resources/rateResponse/cross.png" alt="me" width={"100%"} height={"100%"} /></div></button>
-                    <button className={styles.RateResponseButton} onClick={() => getNewCard()}><div className={styles.RateResponseButtonImageContainerB}><Image className='RateResponseSkipIcon' src="/resources/rateResponse/skip.png" alt="me" width={"100%"} height={"100%"} /></div></button>
-                    <button className={styles.RateResponseButton} onClick={() => rate(true)}><div className={styles.RateResponseButtonImageContainerC}><Image src="/resources/rateResponse/check.png" alt="me" width={"100%"} height={"100%"} /></div></button>
+                    <RateButton onClick={()=>rate(false)}>
+                        <Close fontSize='large' sx={{color: "white"}}/>
+                    </RateButton>
+                    <RateButton onClick={()=>getNewCard()}>
+                        <Skip fontSize='large' sx={{color: "white"}}/>
+                    </RateButton>
+                    <RateButton onClick={()=>rate(true)}>
+                        <Check fontSize='large' sx={{color: "white"}}/>
+                    </RateButton>
                 </div>
             </div>            
         </Page>

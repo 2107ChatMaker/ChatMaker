@@ -1,6 +1,6 @@
 import { Key, MailOutline} from '@mui/icons-material';
-import Input from "@components/Input/Input";
-import Button from "@components/Button/Button";
+import Input from "@components/Input";
+import Button from "@components/Button";
 import styles from "./LoginForm.module.sass";
 import useForm from '@utils/hook/useForm';
 import {loginValidation as validation} from '@utils/form/LoginValidation';

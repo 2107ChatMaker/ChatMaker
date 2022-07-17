@@ -1,5 +1,6 @@
 import styles from './Button.module.sass';
 import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
 //props type
 interface ButtonProps {
@@ -11,7 +12,9 @@ interface ButtonProps {
 
 export default function Button(props: ButtonProps) {
     return (
-        <button
+        <motion.button
+         whileTap={{scale: 0.9, backgroundColor: "#D96E82"}}
+         whileHover={{backgroundColor: "#D96E82"}}
          type={props.type}
          onClick={props.onClick}
          className={
@@ -20,6 +23,6 @@ export default function Button(props: ButtonProps) {
             `
             }>
             {props.children}
-        </button>
+        </motion.button>
     );
 }
