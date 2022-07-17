@@ -2,7 +2,7 @@ import Button from "@components/Button";
 import { useState } from "react";
 import styles from "./CreatePromptForm.module.sass";
 import { useSession } from "next-auth/react";
-
+import axios from "@utils/constants/axios";
 
 export default function CreatePrompt(){
 
@@ -13,9 +13,13 @@ export default function CreatePrompt(){
         setPrompt(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
        // console.log(session);
+        const response = axios.post("/api/prompt", {
+            prompt: prompt,
+            userId: session.user.id,
+        });
     };
 
     return(

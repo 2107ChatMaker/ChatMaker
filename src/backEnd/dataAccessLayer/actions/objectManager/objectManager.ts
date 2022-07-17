@@ -103,9 +103,8 @@ export class ObjectManager {
     static async findResponsesByIds(ids: string[]) {
         /// establishes a connection to the database
         await Database.setupClient();
-        // find by IDs and return the responses
-        var returnResult = await ResponseModel.find({_id: {$in: ids}});
-        
+        // find by ID and update the given values, returning the updated document when completed
+        var returnResult = await ResponseModel.find({"_id": {$in: ids}});
         return returnResult;
     }
 

@@ -15,7 +15,7 @@ export default function Profile({user, savedResponses}: HashMap) {
   const router = useRouter();
   
   const { id, email } = user;
-  
+
   return (
     <Page
         headTitle="Profile Page"
@@ -51,7 +51,7 @@ export default function Profile({user, savedResponses}: HashMap) {
             </h2>
         </div>
         <div className={styles.responses}>
-            { savedResponses }
+            
         </div>
       </div>
     </Page>
@@ -63,21 +63,15 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session && session.user) {
 
-        //get user save responses
+        //get user save responses ids
         const saveResponsesIds: string[] = await userController.getSavedResponses(session.user.id);
-        const saveResponses = await responseController.getResponsesByIds(saveResponsesIds);
-        let groupedResponses = [];
-        if (saveResponses.length > 0) {
-            groupedResponses = saveResponses.reduce(async (acc, curr) => {
-                const { promptID } = curr;
-                const { prompt } = await promptController.getPrompt(promptID);
-                if (!acc[prompt]) {
-                    acc[prompt] = [];
-                }
-                acc[prompt].push(curr);
-                return acc;
-            });
-        }
+
+        //get saved responses by ids
+        const savedResponses = await responseController.getResponsesByIds(saveResponsesIds);
+
+        //group responses by prompt
+        let groupedResponses = await groupResponse(savedResponses);
+
         return {
           props: {
             user: JSON.parse(JSON.stringify(session.user)),
@@ -92,4 +86,20 @@ export async function getServerSideProps(context) {
         }
     };
 }
-  
+
+//group responses by prompt
+const groupResponse = async (responses) => {
+    let groupedResponses = {};
+    if (responses.length > 0) {
+        for (let i = 0; i< responses.length; i++) {
+            const response = responses[i];
+            const { prompt } = await promptController.getPrompt(response.promptID);
+            if (groupedResponses[prompt]) {
+                groupedResponses[prompt].push(response);
+            } else {
+                groupedResponses[prompt] = [response];
+            }
+        }
+    }
+    return groupedResponses;
+};

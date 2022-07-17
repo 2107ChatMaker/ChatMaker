@@ -2,7 +2,6 @@
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
-import Image from 'next/image';
 // components
 import Page from '@components/Templates/Page';
 import RateCard from '@components/RateCard/RateCard';
@@ -17,6 +16,8 @@ import { Prompt } from '@interfaces/Prompt';
 import { RatingCard } from '@interfaces/RatingCard';
 import { CMResponse } from '@interfaces/Response';
 import { UserController } from '@/dataAccessLayer/actions/user';
+// utils
+import axios from '@utils/constants/axios';
 
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
@@ -73,17 +74,14 @@ export default function Rating(props: RatingCard) {
             if (!execute) {setRating(true);}
 
             // make an API fetch request to generate a RateCard
-            const response = await fetch(
-                `http://localhost:3000/api/rate?userID=${userID}`,
-                {  
-                    method: 'GET'
-                }
-            );
-            const rateResponse = await response.json(); // catches the response
-            const newCard = JSON.parse(JSON.stringify(rateResponse)) as RatingCard; // parses into a rating Card
+            const {data: rateResponse}= await axios.get(`api/rate?userID=${userID}`); // catches the response
+
+            // parses into a rating Card
+            const newCard = rateResponse as RatingCard; 
 
             // sets the bottom card with the new card values
             setAlternateCard(newCard); 
+
             // animates the top card off screen, applies the new cards values, then returns it to above the bottom card
             animateTopCard(newCard);
         }
@@ -98,21 +96,8 @@ export default function Rating(props: RatingCard) {
             rating: String(rating),
             userID: userID
         };
-        // stringify the values
-        const body = JSON.stringify(rateValues);
-
-        // make the request to update the responses rating
-        const response = await fetch(
-            'http://localhost:3000/api/rate',
-            {  
-                method: 'PUT',
-                body: body,
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-            }
-        );
+        
+        const {data: response} = await axios.put("/api/rate", rateValues);
         
     };
 

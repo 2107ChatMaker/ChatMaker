@@ -5,7 +5,7 @@ import styles from './SignupForm.module.sass';
 import useForm from '@utils/hook/useForm';
 import {signupValidation as validation} from '@utils/form/SignupValidation';
 import { SignupFormData as FormData } from '@interfaces/SignupFormData';
-import { axiosInstance as axios } from '@utils/constants/axios';
+import axios from '@utils/constants/axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import AuthFormWrapper from '@components/AuthFormWrapper';
