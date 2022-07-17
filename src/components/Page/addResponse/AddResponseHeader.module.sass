@@ -14,13 +14,18 @@
     display: flex
     flex-direction: column
     align-items: center
-    height: 30%
+    height: 32%
     min-height: 200px
     position: sticky
     top: 0px
     width: 100%
     background-color: #1D222E
-    
+    font-size: 1rem !important
+
+.labelStyle
+    font-size: 0.9rem
+    align-self: center
+    color: #a5a5a5
     
 .responseContainer
     overflow-y: visible
@@ -29,7 +34,7 @@
 
 .form
     margin: 10px
-    height:40%
+    min-height: 40%
     display: flex
     flex-direction: row
     justify-content: center
@@ -48,6 +53,20 @@
     margin-right: 20px
     margin-left: 20px
 
+.menu
+    border-radius: 8px
+    padding-left: 5px
+    padding-right: 5px
+    flex: 1 0 40%
+    margin-right: 20px
+    margin-left: 20px
+    height: auto
+    border: none
+    max-height: 70px
+    width: 450px
+    
+
+
 
 .form i
     position: absolute
@@ -61,6 +80,7 @@
     align-items: baseline
     display: flex
     width: 100%
+    font-size: 1rem
 
 
 .form Button
@@ -80,13 +100,13 @@
     flex: 1 0 45%
 
 
-
-
 //resizing when the screen makes it to 1000px
 @media screen and ( max-width:  800px)
     .form
+        display: flex
         flex-direction: column
         margin-top: 50px
+        flex-wrap: wrap
 
     .form input
         border-radius: 8px
@@ -104,6 +124,8 @@
         
     .container
         min-height: 300px
+        min-height: 30%
+        height: auto
 
     .headerDiv
         width: 100%
@@ -111,6 +133,26 @@
 
     .form input
         width: 80%
+        margin-left: auto
+        margin-right: auto
+        min-height: 30px
+        height: auto
+        text-wrap: wrap
+        margin-bottom: 10px
+
+    .menu
+        width: 80%
+        margin-left: auto
+        margin-right: auto
+        //height: auto
+        label: 0.9rem
+        //max-height: 30px
+
+
+    .form .secondRowDiv
+        width: 80%
+        margin-left: 15px
+         
     
     .responseInput
         width: 80% !important

@@ -1,13 +1,15 @@
+//react imports
+import { getSession, useSession } from 'next-auth/react';
+import { Key, useEffect, useState } from 'react';
+//component imports
 import ResponseDiv from '@components/Page/responseDiv/ResponseDiv';
 import AddResponseHeader from '@components/Page/addResponse/AddResponseHeader';
+import styles from '@components/Page/addResponse/AddResponseHeader.module.sass'
+import Page from '@templates/Page';
+//controllers
 import {ResponseController} from '@/dataAccessLayer/actions/response'
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
 import { CMResponse } from '@interfaces/Response';
-import styles from '@components/Page/addResponse/AddResponseHeader.module.sass'
-import { Key, useEffect, useState } from 'react';
-import Page from '@templates/Page';
-import { getSession, useSession } from 'next-auth/react';
-import { UserController } from '@/dataAccessLayer/actions/user';
 
 //interface with the types that will be held
 interface Props {
@@ -19,6 +21,8 @@ interface Props {
 //Reference: Yudhvir's lectures and notes
 export default function responsePage(props: Props) {
     const {data: session, status: loading} = useSession();
+    // The logged in users ID
+    const [userID, setUserID] = useState('');
     // assign session userID to state
     useEffect(()=> {
         if (session) {
@@ -26,8 +30,6 @@ export default function responsePage(props: Props) {
         }
     }, [session]);
 
-    // The logged in users ID
-    const [userID, setUserID] = useState('');
     return (
             <Page>
                 {/* displaying the prompt retrieved from the database */}
@@ -92,6 +94,6 @@ export async function getServerSideProps({req, query}){
                 destination: '/',
                 permanent: false,
               },
-            }
-    }
+            };
+    };
 };
