@@ -167,7 +167,7 @@ export async function getServerSideProps({req}) {
     const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
 
     // default return values
-    let responseId = "";
+    let responseId;
     let tags = [];
     let response = "";
     let prompt = "";

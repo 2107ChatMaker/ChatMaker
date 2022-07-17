@@ -7,6 +7,7 @@ import { CMResponse } from '@interfaces/Response';
 import styles from '@components/Page/addResponse/AddResponseHeader.module.sass'
 import { Key } from 'react';
 import Page from '@templates/Page';
+import { Router } from '@mui/icons-material';
 
 //interface with the types that will be held
 interface Props {
@@ -44,22 +45,36 @@ export default function responsePage(props: Props) {
 export async function getServerSideProps({query}){
     //using this to get the promptID from the URL
     const pID = query.promptID
-    console.log(pID)
-    //gets database prompt with this specific ID
-    const thisPrompt = await PromptController.findPromptByID(pID as string);
-    //formats our prompt object so we can access the attributes
-    const myPromptObject = JSON.parse(JSON.stringify(thisPrompt));
-    //grabbing the prompt attribute from the object
-    const thisprompt = myPromptObject.prompt;
-    //getting the responses associated with this ID from the approved responses DB
-    const DBresponses = await ResponseController.getApprovedResponsesByID(pID as string);
-    //parsing the responses so we can use them
-    const responses = JSON.parse(JSON.stringify(DBresponses));
-    //returning the info to props to be used on the page
-    return {
-            props: {
-                thisprompt,
-                responses
+    try {
+        //gets database prompt with this specific ID
+        const thisPrompt = await PromptController.findPromptByID(pID as string);
+        //formats our prompt object so we can access the attributes
+        const myPromptObject = JSON.parse(JSON.stringify(thisPrompt));
+        //grabbing the prompt attribute from the object
+        const thisprompt = myPromptObject.prompt;
+        //getting the responses associated with this ID from the approved responses DB
+        const DBresponses = await ResponseController.getApprovedResponsesByID(pID as string);
+        let responses;
+        if (DBresponses) {
+            responses = JSON.parse(JSON.stringify(DBresponses));
+        }
+        //parsing the responses so we can use them
+        
+        //returning the info to props to be used on the page
+        return {
+                props: {
+                    thisprompt,
+                    responses
+                }
+            };
+    } catch(err) {
+        //if there are any issues (such as wrong prompt, it will redirect us here)
+        console.log(err)
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+              },
             }
-        };
+    }
 };
