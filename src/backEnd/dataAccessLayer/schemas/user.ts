@@ -40,12 +40,6 @@ const userSchema = new Schema({
         resetPasswordToken: { 
             type: String, 
             default: null 
-        },
-
-        //expiration date for reset password token
-        resetPasswordExpiration: { 
-            type: Date, 
-            default: null 
         }
     },
 

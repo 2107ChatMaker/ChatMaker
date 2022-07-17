@@ -2,13 +2,13 @@ import {Explore, Star, Person, AddBox, ExitToApp, Login} from '@mui/icons-materi
 import { paths } from '@constants/paths';
 import { ReactNode } from 'react';
 
-interface NavLinkAndIcon {
+interface TabLinkAndIcon {
     href: string;
     icon: ReactNode;
 }
 
 //get link and icon for navigation tab
-export default function getTabLinkAndIcon(name): NavLinkAndIcon {
+export default function getTabLinkAndIcon(name): TabLinkAndIcon {
     switch (name) {
         case 'Explore':
         case 'Explore prompts':

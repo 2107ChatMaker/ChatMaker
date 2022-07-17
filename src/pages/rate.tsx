@@ -4,8 +4,11 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
 import Image from 'next/image';
 // components
-import Page from '@components/templates/Page';
+import Page from '@components/Templates/Page';
 import RateCard from '@components/RateCard/RateCard';
+import RateButton from '@components/RateButton';
+import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
+import PageTitle from '@components/PageTitle';
 // backend
 import { ResponseController } from '@/dataAccessLayer/actions/response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
@@ -133,9 +136,7 @@ export default function Rating(props: RatingCard) {
             headContent = "use this page to rate a response"
         >
             <div className={styles.RateResponseBody}>
-                <div className={styles.RateResponseTitleContainer}>
-                    <h1>Rate The Response</h1>
-                </div>
+                <PageTitle title="Rate A Response" />
                 <div className={styles.RateResponseCardOuterContainer}>
                     <div className={styles.RateResponseCardInnerContainer}>
                         <div className={`${styles.RateResponseFeaturedCardContainer} ${cardTransition? ((rating)? styles.RateResponseAnimateCardSlideR : styles.RateResponseAnimateCardSlideL) : ""}` }>
@@ -147,9 +148,15 @@ export default function Rating(props: RatingCard) {
                     </div>
                 </div>
                 <div className={styles.RateResponseButtonContainer}>
-                    <button className={styles.RateResponseButton} onClick={() => rate(false)}><div className={styles.RateResponseButtonImageContainerA}><Image src="/resources/rateResponse/cross.png" alt="me" width={"100%"} height={"100%"} /></div></button>
-                    <button className={styles.RateResponseButton} onClick={() => getNewCard()}><div className={styles.RateResponseButtonImageContainerB}><Image className='RateResponseSkipIcon' src="/resources/rateResponse/skip.png" alt="me" width={"100%"} height={"100%"} /></div></button>
-                    <button className={styles.RateResponseButton} onClick={() => rate(true)}><div className={styles.RateResponseButtonImageContainerC}><Image src="/resources/rateResponse/check.png" alt="me" width={"100%"} height={"100%"} /></div></button>
+                    <RateButton onClick={()=>rate(false)}>
+                        <Close fontSize='large' sx={{color: "white"}}/>
+                    </RateButton>
+                    <RateButton onClick={()=>getNewCard()}>
+                        <Skip fontSize='large' sx={{color: "white"}}/>
+                    </RateButton>
+                    <RateButton onClick={()=>rate(true)}>
+                        <Check fontSize='large' sx={{color: "white"}}/>
+                    </RateButton>
                 </div>
             </div>            
         </Page>

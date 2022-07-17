@@ -1,5 +1,5 @@
-import Input from '@components/Input/Input';
-import Button from '@components/Button/Button';
+import Input from '@components/Input';
+import Button from '@components/Button';
 import {Key, MailOutline, Router} from '@mui/icons-material';
 import styles from './SignupForm.module.sass';
 import useForm from '@utils/hook/useForm';

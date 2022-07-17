@@ -1,7 +1,7 @@
 @import 'includes.sass'
 
 ////////////////////////////////////////////////////////////////////// MOBILE SIZING //////////////////////////////////////////////////////////////////////
-@media screen and (min-width: $screen__mobile) 
+@media screen and (min-width: $screenMobile) 
     .RateResponseBody
         height: 100%
         width: 100%
@@ -10,18 +10,14 @@
         overflow: hidden
 
     .RateResponseTitleContainer, .RateResponseOuterContainer
-        @include flex-c
-
-    .RateResponseTitleContainer
-        h1
-            font-size: 2rem
+        @include flexC
         
     .RateResponseInnerContainer
         display: flex
         flex-direction: column
         align-items: center
         justify-content: space-around
-        background: $color__Cards
+        background: $bgLight
         color: black
         width: 90vw
         height: 50Vh
@@ -43,7 +39,7 @@
         margin-bottom: 4vw
 
     .RateResponseTagContainer
-        @include flex-c
+        @include flexC
         background: #C4C4C4
         border-radius: 11px
         padding: 11px            
@@ -62,35 +58,11 @@
         align-items: center
         justify-content: space-around
 
-    .RateResponseButton
-        @include flex-c
-        background-color: $color__Buttons
-        width: 20vw
-        height: 20vw
-        border-radius: 100px
-        border: 0
-        outline: none
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
-        &:hover 
-            background-color: #D96E82
-
     .RateResponseResponse
         text-align: center
 
-    .RateResponseButtonImageContainerA
-        width: 4.7vw
-        height: 4.7vw
-        
-    .RateResponseButtonImageContainerB
-        width: 8vw
-        height: 8vw
-
-    .RateResponseButtonImageContainerC
-        width: 7vw
-        height: 7vw
-
     .RateResponseCardOuterContainer
-        @include flex-c
+        @include flexC
             
     .RateResponseCardInnerContainer
         position: relative
@@ -127,7 +99,7 @@
             left: -100vw
 
 ////////////////////////////////////////////////////////////////////// Desktop SIZING //////////////////////////////////////////////////////////////////////
-@media screen and (min-width: $screen__desktop) 
+@media screen and (min-width: $screenDesktop) 
     .RateResponseBody
         grid-template-rows: 1fr 3fr 1fr .5fr
 
@@ -160,22 +132,6 @@
 
     .RateResponseButtonContainer
         padding: 5vw 4vw 0vw 4vw
-
-    .RateResponseButton
-        width: 6vw
-        height: 6vw
-
-    .RateResponseButtonImageContainerA
-        width: 1.5vw
-        height: 1.5vw
-    
-    .RateResponseButtonImageContainerB
-        width: 2.5vw
-        height: 2.5vw
-
-    .RateResponseButtonImageContainerC
-        width: 2vw
-        height: 2vw
 
     .RateResponseTagContainer
         font-size: 0.6em

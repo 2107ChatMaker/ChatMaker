@@ -1,0 +1,28 @@
+@import '@styles/includes.sass'
+
+.pageTitle 
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    color: $bgLight
+
+.title
+    font-size: 2rem
+    font-weight: bold
+    display: block
+
+.mobileMenu 
+    font-size: 1.25rem
+    display: none
+
+@media screen and (max-width: 768px) 
+    .mobileMenu
+        display: block
+
+    .isMobileTitle
+        display: flex
+        align-items: flex-end
+        justify-content: space-between
+
+

@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { Tag } from "@/utility/Enums/tag";
-import Database from "@/Database/database";
+import Database from "@/database/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";
 
@@ -97,6 +97,16 @@ export class ObjectManager {
         const foundEntries: Response[] = await ResponseModel.find({ promptID: {$all:  promptID} });
         
         return foundEntries;
+    }
+
+    //find responses by their ids
+    static async findResponsesByIds(ids: string[]) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        // find by IDs and return the responses
+        var returnResult = await ResponseModel.find({_id: {$in: ids}});
+        
+        return returnResult;
     }
 
     /// updates the matching response rating based on the boolean recieved

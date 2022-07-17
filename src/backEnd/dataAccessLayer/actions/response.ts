@@ -37,18 +37,22 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
     }
 
     // gets all responses that belong to the given prompt(id)
-    static getResponsesByID(promptID: string) {
-        return ObjectManager.findResponseByID(promptID);
+    static async getResponsesByID(promptID: string) {
+        return await ObjectManager.findResponseByID(promptID);
+    }
+
+    static async getResponsesByIds(ids: string[]) {
+        return await ObjectManager.findResponsesByIds(ids);
     }
 
     // get a random response thats not in the given id list
-    static getRandomResponse(ignoredIDs: [string?]) {
-        return ObjectManager.findRandom(ResponseModel, ignoredIDs);
+    static async getRandomResponse(ignoredIDs: [string?]) {
+        return await ObjectManager.findRandom(ResponseModel, ignoredIDs);
     }
 
     // add rating to the given response
-    static rateResponse(ratingID: string, rating: Boolean, userID: string) {
-        return ObjectManager.updateRatingByID(ratingID, rating);
+    static async rateResponse(ratingID: string, rating: Boolean, userID: string) {
+        return await ObjectManager.updateRatingByID(ratingID, rating);
     }
 		
     /// converts given values into a HashMap

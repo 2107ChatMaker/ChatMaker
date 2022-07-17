@@ -46,13 +46,19 @@ export class UserController implements DatabaseObject, Saveable, User {
     }
 
     // gets all users that belong to the given (id)
-    static getUserByID(userID: string) {
-        return ObjectManager.find(UserModel, userID);
+    static async getUserByID(userID: string) {
+        return await ObjectManager.find(UserModel, userID);
     }
 
     // gets all users that belong to the given (email)
-    static getUserByEmail(email: string) {
-        return ObjectManager.findByEmail(UserModel, email);
+    static async getUserByEmail(email: string) {
+        return await ObjectManager.findByEmail(UserModel, email);
+    }
+
+    //get user saved responses
+    static async getSavedResponses(userID: string) {
+        const user = await UserController.getUserByID(userID);
+        return user.responsesSaved;
     }
 
     /// converts given values into a HashMap

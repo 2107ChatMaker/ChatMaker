@@ -4,7 +4,7 @@ export const paths = {
     signup: "/auth/signup",
     login: "/auth/login",
     logout: "/",
-    profile: "/profile/1",
+    profile: "/profile",
     addPrompt: "/add",
     rate: "/rate",
 };

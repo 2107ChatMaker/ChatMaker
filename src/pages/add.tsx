@@ -1,5 +1,5 @@
 import CreatePrompt from '@components/CreatePromptForm/CreatePromptForm';
-import Page from '@components/templates/Page';
+import Page from '@components/Templates/Page';
 // eslint-disable-next-line camelcase
 import {getSession} from 'next-auth/react';
 

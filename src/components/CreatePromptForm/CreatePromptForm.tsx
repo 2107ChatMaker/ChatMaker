@@ -1,4 +1,4 @@
-import Button from "@components/Button/Button";
+import Button from "@components/Button";
 import { useState } from "react";
 import styles from "./CreatePromptForm.module.sass";
 
