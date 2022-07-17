@@ -27,8 +27,8 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     }
 
     // retrieves all prompts
-    static getPrompts() {
-        return ObjectManager.findAll(PromptModel);
+    static async getPrompts() {
+        return await ObjectManager.findAll(PromptModel);
     }
 
     // Tags are returned as a hashmap

@@ -1,9 +1,8 @@
-import Background from "@components/Background/Background";
-import LoginForm from "@components/LoginForm/LoginForm";
-import AuthFormWrapper from "@components/AuthFormWrapper/AuthFormWrapper";
+import Background from "@components/Background";
 import styles from "@styles/AuthForm.module.sass";
 import NextHead from "@components/NextHead";
 import { getSession, signIn } from "next-auth/react";
+import LoginForm from "@components/LoginForm";
 
 export default function Login() {
     return (
@@ -14,9 +13,7 @@ export default function Login() {
                 content="Welcome back! Login to ChatMaker"
             />
             <div className={styles.content}>
-                <AuthFormWrapper>
-                    <LoginForm signIn={signIn}/>
-                </AuthFormWrapper>
+                <LoginForm signIn={signIn}/>
             </div>
         </Background>
     );

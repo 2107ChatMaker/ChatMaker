@@ -1,14 +1,14 @@
 @import '@styles/includes.sass'
 
 ////////////////////////////////////////////////////////////////////// MOBILE SIZING //////////////////////////////////////////////////////////////////////
-@media screen and (min-width: $screen__mobile) 
+@media screen and (min-width: $screenMobile) 
         
     .RateResponseInnerContainer
         display: flex
         flex-direction: column
         align-items: center
         justify-content: space-around
-        background: $color__Cards
+        background: $bgLight
         color: black
         width: 90vw
         height: 50Vh
@@ -30,7 +30,7 @@
         margin-bottom: 4vw
 
     .RateResponseTagContainer
-        @include flex-c
+        @include flexC
         background: #C4C4C4
         border-radius: 11px
         padding: 11px            
@@ -42,7 +42,7 @@
         width: 100%
 
 ////////////////////////////////////////////////////////////////////// Desktop SIZING //////////////////////////////////////////////////////////////////////
-@media screen and (min-width: $screen__desktop) 
+@media screen and (min-width: $screenDesktop) 
 
     .RateResponseInnerContainer 
         width: 43vw

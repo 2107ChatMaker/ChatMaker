@@ -1,0 +1,54 @@
+@import "./includes.sass"
+
+.content 
+    padding: 2rem
+    @include flexC
+    & > * 
+        margin-bottom: 1rem
+
+    .profile
+        width: 100%
+
+.link
+    color: $primary
+    text-decoration: none
+    &:hover
+        color: $alert
+        transition: color 0.2s ease-in-out
+
+.info
+    width: 100%
+    display: flex
+    flex-direction: column
+    aligh-items: center
+    & > *
+        margin: 0.5rem 0
+    & > .label
+        font-size: 1.25rem
+        font-weight: bold
+        color: $bgLight
+
+.hr
+    width: 100%
+    color: $bgLight
+
+@media screen and (max-width: 768px) 
+    .content
+        padding: 0
+    
+    .profile
+        padding: 1rem
+
+    .logOut
+        display: flex
+        align-items: center
+        justify-content: flex-end
+        & > h2 
+            font-size: 1.25rem
+            font-weight: bold
+            padding: 0 0.5rem
+    
+    .label
+        margin-top: 3rem
+
+    
