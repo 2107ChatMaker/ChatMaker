@@ -1,9 +1,11 @@
-import mongoose, { Model, Schema } from "mongoose";
+import mongoose, { Model, ObjectId, Schema } from "mongoose";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { Tag } from "@/utility/Enums/tag";
+import { Tag } from "@/Utility/Enums/tag";
 import Database from "@/Database/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";
+import ApprovedResponseModel from "@/dataAccessLayer/schemas/approvedResponse";
+import { CMResponse } from "@interfaces/Response";
 
 export class ObjectManager {
 
@@ -39,6 +41,7 @@ export class ObjectManager {
         
         return foundEntry;
     }
+    
 
     // Reference:
     // https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
@@ -90,14 +93,15 @@ export class ObjectManager {
     }
 
     /// find and return all the repsonses that match the given prompt(id)
-    static async findResponseByID( promptID: String) {
+    static async findResponseByID( promptID: string) {
         /// establishes a connection to the database
         await Database.setupClient();
         /// returns an array of responses with the matching promptID
-        const foundEntries: Response[] = await ResponseModel.find({ promptID: {$all:  promptID} });
+        const foundEntries: CMResponse[] = await ApprovedResponseModel.find({ promptID: {$all:  promptID} });
         
-        return foundEntries;
+        return foundEntries as CMResponse[];
     }
+    
 
     /// updates the matching response rating based on the boolean recieved
     static async updateRatingByID(_id: string, rating:Boolean) {

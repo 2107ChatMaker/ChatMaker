@@ -1,0 +1,72 @@
+
+//specifically styled white div for the background
+.background
+    background-color: #fafafa
+    border-style: solid
+    border-width: 1px
+    border-color: #dddddd
+    box-shadow: 3px 5px 10px #505050
+    border-radius: 12px
+    width: 90%
+    height: auto
+    display: center
+    flex: 2
+    justify-content: center
+    margin: 10px auto 10px
+
+//container for the whole part inside the white div
+.backgroundContent
+    padding: 15px 0px
+    letter-spacing: 2px
+    display: flex
+    flex-direction: row
+    align-content: center
+    justify-content: space-between
+    align-items: center
+
+//the actual response part of the container
+.responseBox
+    display: inline
+    padding: 10px
+    float: left
+    width: 70%
+    margin-left: 20px
+    font-size: 0.9rem
+    color: black
+    overflow-wrap: break-word
+
+
+//container that holds the tag values
+.tagsContainer
+    display: inline-block
+    align-items: center
+    padding: 0px 5px
+    font-size: 0.7rem
+    width: 400px
+    flex-wrap: nowrap
+
+//save to user library
+.libraryAdd
+    float: inline-end
+    border: none
+    cursor: pointer 
+    margin-right: 20px
+    display: inline
+    background: inherit
+
+//resizing when the screen makes it to 1200px
+@media screen and ( max-width:  1200px)
+    .background
+        width: 90%
+
+    .backgroundContent
+        justify-content: center
+
+    .tagsContainer
+        display: none
+    //this is resizing the textbox in the response div to fill out the container more
+    .responseBox
+        width: 90%
+        margin-right: 20px
+        overflow-wrap: break-word
+        line-break: anywhere

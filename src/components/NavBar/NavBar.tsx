@@ -19,7 +19,7 @@ function NavBar() {
     const [showMenu, setShowMenu] = useState(false);
 
     //track screen size
-    const isMobile = useMediaQuery('(max-width: 498px)');
+    const isMobile = useMediaQuery('(max-width: 768px)');
 
     //set links base on screen size
     useEffect(()=>{

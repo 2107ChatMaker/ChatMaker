@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+import { ObjectId } from "mongoose";
 
 const promptSchema = new Schema({
     // id of the user who made the prompt
