@@ -6,19 +6,20 @@ import Chip from '@mui/material/Chip';
 import React from 'react';
 import { useRouter } from 'next/router';
 
-export default function AddResponseForm() {
+interface Props {
+    userID: string,
+    promptID: string,
+};
+
+export default function AddResponseForm(props: Props) {
     //setting the states for my data
     const [response, setResponse] = useState("");
     const [tempTag, setTempTag] = useState("");
     const [tags, setTags] = useState([]);
     const router = useRouter();
-    //const {promptID} = router.query
-    //const [PromptID, setThisPromptID] = useState("TestPrompt");
-    //const [UserID, setThisUserID] = useState("testUser");
-
     //test cases, will be removed for production
-    const promptID = "TestPrompt";
-    const userID = "TestUser0";
+    const promptID = props.promptID;
+    const userID = props.userID;
     //handling the input from the response input
     const handleResponseChange = (e) => {
         setResponse(e.target.value);
