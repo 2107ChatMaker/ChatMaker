@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const {body} = req;
             const {promptID} = body;
             //getting all the responses associated with the given promptID
-            const responses = await ResponseController.getResponsesByID(promptID);
+            const responses = await ResponseController.getApprovedResponsesByID(promptID);
             //sending a message to the user so we know our 'get' request was successful
             res.status(200).json(responses);
         }

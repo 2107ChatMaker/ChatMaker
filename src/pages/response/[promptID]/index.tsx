@@ -7,24 +7,12 @@ import { CMResponse } from '@interfaces/Response';
 import styles from '@components/Page/addResponse/AddResponseHeader.module.sass'
 import { Key } from 'react';
 import Page from '@templates/Page';
-import mongoose, { ObjectId } from 'mongoose';
-import { stringify } from 'querystring';
 
 //interface with the types that will be held
 interface Props {
     thisprompt: string,
     responses: CMResponse[];
 };
-//Reference:  useRouter docs
-// const getPromptID = () => {
-//     const router = useRouter()
-//     const  promptID  = router.query
-    
-//     return stringify(promptID)
-    
-// }
-// const myID = getPromptID();
-
 
 //Reference: Yudhvir's lectures and notes
 export default function responsePage(props: Props) {
@@ -53,20 +41,18 @@ export default function responsePage(props: Props) {
 };
 
 //getting the 'props' we want to use from the server
-export async function getServerSideProps(){
-    const thisPromptID = "testPrompt"
+export async function getServerSideProps({query}){
+    //using this to get the promptID from the URL
+    const pID = query.promptID
+    console.log(pID)
     //gets database prompt with this specific ID
-    const thisPrompt = await PromptController.findPromptByID('62ce5903137707e99cf82aaa');
-    //const thisPrompt = await PromptController.getThisPrompt({PromptID}});
-
+    const thisPrompt = await PromptController.findPromptByID(pID as string);
     //formats our prompt object so we can access the attributes
     const myPromptObject = JSON.parse(JSON.stringify(thisPrompt));
     //grabbing the prompt attribute from the object
     const thisprompt = myPromptObject.prompt;
     //getting the responses associated with this ID from the approved responses DB
-    const DBresponses = await ResponseController.getResponsesByID('TestPrompt');
-    //const DBresponses = await ResponseController.getResponsesByID({PromptID});
-
+    const DBresponses = await ResponseController.getApprovedResponsesByID(pID as string);
     //parsing the responses so we can use them
     const responses = JSON.parse(JSON.stringify(DBresponses));
     //returning the info to props to be used on the page

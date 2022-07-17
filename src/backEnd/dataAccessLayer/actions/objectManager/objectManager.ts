@@ -93,7 +93,16 @@ export class ObjectManager {
     }
 
     /// find and return all the repsonses that match the given prompt(id)
-    static async findResponseByID( promptID: string) {
+    static async findResponseByID(promptID: String) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        /// returns an array of responses with the matching promptID
+        const foundEntries: CMResponse[] = await ResponseModel.find({ promptID: {$all:  promptID} });
+        
+        return foundEntries as CMResponse[];
+    }
+
+    static async findApprovedResponseByID(promptID: String) {
         /// establishes a connection to the database
         await Database.setupClient();
         /// returns an array of responses with the matching promptID

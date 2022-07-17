@@ -5,7 +5,7 @@ import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { ObjectManager } from "./objectManager/objectManager";
 import ResponseModel from "../schemas/response";
-import { ObjectId } from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 
 // actions accessable to manipulate responses or add new ones
 export class ResponseController implements DatabaseObject, Saveable, CMResponse {
@@ -41,6 +41,11 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
     static getResponsesByID(promptID: string) {
         const theseResponses = ObjectManager.findResponseByID(promptID);
         return theseResponses
+    }
+
+    static getApprovedResponsesByID(PromptID: string) {
+        const responses = ObjectManager.findApprovedResponseByID(PromptID);
+        return responses;
     }
 
     // get a random response thats not in the given id list
