@@ -49,17 +49,22 @@ export class UserController implements DatabaseObject, Saveable, User {
     static getUserByID(userID: string) {
         return ObjectManager.find(UserModel, userID);
     }
-		
+
+    // gets all users that belong to the given (email)
+    static getUserByEmail(email: string) {
+        return ObjectManager.findByEmail(UserModel, email);
+    }
+
     /// converts given values into a HashMap
     toHashMap(): HashMap {
         return {
-                email: this.email,
-                isVerified: this.isVerified,
-                emailToken: this.emailToken,
-                password: this.password,
-                resetPassword: this.resetPassword,
-                responsesRated: this.responsesRated,
-                responsesSaved: this.responsesSaved
+            email: this.email,
+            isVerified: this.isVerified,
+            emailToken: this.emailToken,
+            password: this.password,
+            resetPassword: this.resetPassword,
+            responsesRated: this.responsesRated,
+            responsesSaved: this.responsesSaved
 	    };
     }
 }

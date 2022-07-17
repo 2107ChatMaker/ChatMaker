@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
 import Image from 'next/image';
 // components
-import Page from '@templates/Page';
+import Page from '@components/templates/Page';
 import RateCard from '@components/RateCard/RateCard';
 // backend
 import { ResponseController } from '@/dataAccessLayer/actions/response';
@@ -110,6 +110,7 @@ export default function Rating(props: RatingCard) {
                 }),
             }
         );
+        
     };
 
     // rate the current response and animate it
@@ -158,43 +159,53 @@ export default function Rating(props: RatingCard) {
 export async function getServerSideProps({req}) {
     // retrieve session
     const session = await getSession({ req });
-    // get uservalues by session id
-    const userValues:UserController = await UserController.getUserByID(session.user.id);
-    // create new usercontroller to properlly cast userValues
-    const user: UserController = new UserController(userValues);
-    // get a random response from the backend and parse it
-    const queryResult = await ResponseController.getRandomResponse(user.responsesRated);
-    const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
+    if (session) {
+        // get uservalues by session id
+        const userValues:UserController = await UserController.getUserByID(session.user.id);
+        // create new usercontroller to properlly cast userValues
+        const user: UserController = new UserController(userValues);
+        // get a random response from the backend and parse it
+        const queryResult = await ResponseController.getRandomResponse(user.responsesRated);
+        const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
 
-    // default return values
-    let responseId = "";
-    let tags = [];
-    let response = "";
-    let prompt = "";
+        // default return values
+        let responseId = "";
+        let tags = [];
+        let response = "";
+        let prompt = "";
 
-    if (!!newResponse) {
-        // get the corrisponding prompt from the backend and parse it
-        const promptqueryResult = await PromptController.getPrompt(newResponse.promptID);
-        const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
+        if (!!newResponse) {
+            // get the corrisponding prompt from the backend and parse it
+            const promptqueryResult = await PromptController.getPrompt(newResponse.promptID);
+            const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
 
-        // build the values that will return as a RatingCard
-        responseId = newResponse._id;
-        tags = newResponse.tags;
-        response = newResponse.response;
-        prompt = newPrompt.prompt;
-    }
-    else {
-        // return values if all responses have been rated
-        response = "you've rated all responses!\ntry creating a response of your own!";
-        prompt = "Wow Your Amazing";
-    }
-
-    return {
-        props: {
-            responseId,
-            prompt,
-            response,
-            tags
+            // build the values that will return as a RatingCard
+            responseId = newResponse._id;
+            tags = newResponse.tags;
+            response = newResponse.response;
+            prompt = newPrompt.prompt;
         }
-    };
+        else {
+            // return values if all responses have been rated
+            response = "you've rated all responses!\ntry creating a response of your own!";
+            prompt = "Wow Your Amazing";
+        }
+
+        return {
+            props: {
+                responseId,
+                prompt,
+                response,
+                tags
+            }
+        };
+    } else {
+        return {
+            redirect: {
+                pathname: '/auth/login',
+                permanent: false,
+            }
+        };
+    }
 }
+
