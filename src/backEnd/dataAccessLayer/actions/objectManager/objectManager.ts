@@ -98,7 +98,6 @@ export class ObjectManager {
         await Database.setupClient();
         /// returns an array of responses with the matching promptID
         const foundEntries: CMResponse[] = await ResponseModel.find({ promptID: {$all:  promptID} });
-        
         return foundEntries as CMResponse[];
     }
 
@@ -107,7 +106,6 @@ export class ObjectManager {
         await Database.setupClient();
         /// returns an array of responses with the matching promptID
         const foundEntries: CMResponse[] = await ApprovedResponseModel.find({ promptID: {$all:  promptID} });
-        
         return foundEntries as CMResponse[];
     }
     

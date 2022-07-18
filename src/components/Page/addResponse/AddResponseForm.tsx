@@ -32,7 +32,6 @@ export default function AddResponseForm(props: Props) {
         setResponse(e.target.value);
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         //wrapping in a try catch in case anything goes wrong
@@ -94,8 +93,7 @@ export default function AddResponseForm(props: Props) {
                 />
                 )}
             /> 
-            
-            
+
             <div className={styles.secondRowDiv}>
                 <Button type="submit">Add</Button>
                 {/* <div className={styles.tagDiv}>Tags:&nbsp;</div><div><Chip variant="outlined" size='small' label={tags[0]}  sx={{bgcolor: '#1D222E', color: '#ffffff'}}/>&nbsp;<Chip variant="outlined" size='small' label={tags[1]}  sx={{bgcolor: '#1D222E', color: '#ffffff'}}/>&nbsp;<Chip variant="outlined" size='small' label={tags[2]}  sx={{bgcolor: '#1D222E', color: '#ffffff'}}/></div> */}

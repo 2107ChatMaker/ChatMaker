@@ -10,6 +10,7 @@ import Page from '@templates/Page';
 import {ResponseController} from '@/dataAccessLayer/actions/response'
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
 import { CMResponse } from '@interfaces/Response';
+import { _id } from '@next-auth/mongodb-adapter';
 
 //interface with the types that will be held
 interface Props {
@@ -29,7 +30,7 @@ export default function responsePage(props: Props) {
             setUserID(session.user.id);
         }
     }, [session]);
-
+    
     return (
             <Page>
                 {/* displaying the prompt retrieved from the database */}
@@ -41,8 +42,8 @@ export default function responsePage(props: Props) {
                         (CMResponse) => {
                             return(
                                 <div key={ CMResponse._id as Key}>
-                                    <ResponseDiv prompt={CMResponse.response as string}>
-                                    {CMResponse.tags}    
+                                    <ResponseDiv responseID={CMResponse._id} thisPromptID={props.thisPromptID} userID={userID} prompt={CMResponse.response as string}>
+                                        {CMResponse.tags}    
                                     </ResponseDiv>
                                 </div>
                             );
