@@ -18,7 +18,7 @@ export function signupValidation(formData: FormData): {} {
     if (!passwordPredicate.test(formData.password)) {
         errors.password = `Password must be 8-15 characters long, 
                            contain at least one number, one uppercase letter, 
-                           one lowercase letter`;
+                           one lowercase letter and no special characters`;
     }
 
     if (formData.password !== formData.passwordConfirm) {

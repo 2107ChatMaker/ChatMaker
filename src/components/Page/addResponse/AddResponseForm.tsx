@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import React from 'react';
-import {Tag} from '@/Utility/Enums/tag'
+import {Tag} from '@/utility/Enums/tag';
 import styles from './AddResponseHeader.module.sass';
-import Button from '@components/Button/Button';
+import Button from '@components/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 

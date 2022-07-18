@@ -1,27 +1,28 @@
+@import '@styles/includes.sass'
+
 .form 
     padding: 0 1rem 
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
+    @include flexC
 
 .formTitle 
     font-size: 32px
     font-weight: bold
     margin-bottom: 1rem
     font-weight: bold
-    color: white
+    color: $bgLight
 
 .input 
     margin-top: 1rem 
     width: 100%
 
 .resetPassword
-     color: #1C98EC
+     color: $primary
      font-size: 14px
 
 .formAction 
     margin-top: 1.75rem
+    width: 100%
+    padding: 0 3rem
 
 @media screen and (max-width: 800px) 
    .formTitle 

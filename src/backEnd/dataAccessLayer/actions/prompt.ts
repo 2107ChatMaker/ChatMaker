@@ -24,13 +24,18 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     }
 
     // retrieves all prompts
-    static getPrompt(_id: string) {
-        return ObjectManager.find(PromptModel, _id);
+    static async getPrompt(_id: string) {
+        return await ObjectManager.find(PromptModel, _id);
     }
 
     // retrieves all prompts
-    static getPrompts() {
-        return ObjectManager.findAll(PromptModel);
+    static async getPrompts() {
+        return await ObjectManager.findAll(PromptModel);
+    }
+
+    // searchs prompts by user input 
+    static async searchPrompts(searchQuery: string) {
+        return await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
     }
 
     static findPromptByID(promptID: string) {

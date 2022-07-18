@@ -1,7 +1,7 @@
 import mongoose, { Model, ObjectId, Schema } from "mongoose";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { Tag } from "@/Utility/Enums/tag";
-import Database from "@/Database/database";
+import { Tag } from "@/utility/Enums/tag";
+import Database from "@/database/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";
 import ApprovedResponseModel from "@/dataAccessLayer/schemas/approvedResponse";
@@ -101,6 +101,14 @@ export class ObjectManager {
         return foundEntries as CMResponse[];
     }
 
+    //find responses by their ids
+    static async findResponsesByIds(ids: string[]) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        // find by ID and update the given values, returning the updated document when completed
+        var returnResult = await ResponseModel.find({"_id": {$in: ids}});
+        return returnResult;
+    }
     static async findApprovedResponseByID(promptID: String) {
         /// establishes a connection to the database
         await Database.setupClient();
@@ -141,4 +149,14 @@ export class ObjectManager {
         
         return returnResult;
     } 
+
+    //finds the document that matches the regex string
+    static async  findByRegex(model: mongoose.Model<any>, regex: string, field: string) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+        /// returns a mongoose query that only includes documents that contain regex string 
+        const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
+        
+        return foundEntries;
+    }
 }

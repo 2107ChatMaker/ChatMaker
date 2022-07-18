@@ -19,5 +19,5 @@ export default function AddResponseHeader(props: Props) {
                 <AddResponseForm userID={props.userID} promptID={props.promptID}/>
             </div> 
         </>
-    )
+    );
 };

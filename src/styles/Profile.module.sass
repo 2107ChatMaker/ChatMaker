@@ -1,0 +1,116 @@
+@import "./includes.sass"
+
+.content 
+    padding: 1rem 2rem
+    padding-bottom: 5rem
+    @include flexC
+    & > * 
+        width: 100%
+        margin-bottom: 1rem
+
+    .profile
+        width: 100%
+        height: 100%
+        flex: 1
+
+.link
+    color: $primary
+    text-decoration: none
+    &:hover
+        color: $alert
+        transition: color 0.2s ease-in-out
+
+.info
+    width: 100%
+    height: auto
+    display: flex
+    flex-direction: column
+    aligh-items: center
+    & > *
+        margin: 0.5rem 0
+    & > .label
+        font-size: 1.25rem
+        font-weight: bold
+        color: $bgLight
+
+.hr
+    width: 100%
+    color: $bgLight
+
+.responses
+    flex:100
+    width: 100%
+    padding: 1rem
+    background-color: $bgLight
+    color: black
+    border-radius: 1rem
+    margin-bottom: 0
+    height: 100%
+
+.favorite 
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    align-items: center
+    width: 100%
+    flex-wrap: nowrap
+
+.favoriteTitle
+    font-size: 1.5rem
+    display: block
+    flex: 1
+
+.action 
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    flex-wrap: nowrap
+    flex: 4
+    & > .btn
+        margin-right: 1rem
+        & > *
+            padding: 0.5rem 0.75rem
+
+    
+
+@media screen and (max-width: 768px) 
+    .content
+        padding: 0
+    
+    .profile
+        padding: 1rem
+
+    .logOut
+        display: flex
+        align-items: center
+        justify-content: flex-end
+        & > h2 
+            font-size: 1.25rem
+            font-weight: bold
+            padding: 0 0.5rem
+    
+    .label
+        margin-top: 3rem
+
+    .favoriteTitle
+        width: auto
+        flex: 0.5
+    
+    .favorite
+        padding: 0
+        width: 90%
+        margin: auto
+        margin-bottom: 1rem
+
+    .action
+        margin-left: 3%
+        flex: 1.5
+        justify-content: space-between
+        & > .btn 
+            margin: auto
+            & > *
+                font-size: 0.75rem
+
+    .responses
+        border-radius: 0
+        padding-bottom: 5rem

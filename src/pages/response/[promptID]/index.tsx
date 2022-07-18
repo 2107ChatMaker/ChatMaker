@@ -4,10 +4,10 @@ import { Key, useEffect, useState } from 'react';
 //component imports
 import ResponseDiv from '@components/Page/responseDiv/ResponseDiv';
 import AddResponseHeader from '@components/Page/addResponse/AddResponseHeader';
-import styles from '@components/Page/addResponse/AddResponseHeader.module.sass'
+import styles from '@components/Page/addResponse/AddResponseHeader.module.sass';
 import Page from '@templates/Page';
 //controllers
-import {ResponseController} from '@/dataAccessLayer/actions/response'
+import {ResponseController} from '@/dataAccessLayer/actions/response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
 import { CMResponse } from '@interfaces/Response';
 import { _id } from '@next-auth/mongodb-adapter';
@@ -20,7 +20,7 @@ interface Props {
 };
 
 //Reference: Yudhvir's lectures and notes
-export default function responsePage(props: Props) {
+export default function ResponsePage(props: Props) {
     const {data: session, status: loading} = useSession();
     // The logged in users ID
     const [userID, setUserID] = useState('');
