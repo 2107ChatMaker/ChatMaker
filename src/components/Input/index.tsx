@@ -30,30 +30,30 @@ export default function Input(props: InputProps) {
     };
 
     return (
-    <>
-        <div className = {styles.inputContainer}>
-        {props.children}
-        <input
-            type={type}
-            placeholder={props.placeholder}
-            className={styles.input}
-            onChange={props.onChange}
-            value={props.value}
-            name={props.name}
-            required={props.required}
-        />
-        {
-            props.type === 'password' &&  
-            <>
-                {!showPassword?
-                    <Visibility onClick={passwordVisibleToggle} color='disabled'/>:
-                    <VisibilityOff onClick={passwordVisibleToggle} color='disabled'/>
-                }
-            </>
-        }
-        </div>
-        {props.error !== ""?<div className={styles.error}>{props.error}</div>:null}
-    </>
+        <>
+            <div className = {styles.inputContainer}>
+            {props.children}
+            <input
+                type={type}
+                placeholder={props.placeholder}
+                className={styles.input}
+                onChange={props.onChange}
+                value={props.value}
+                name={props.name}
+                required={props.required}
+            />
+            {
+                props.type === 'password' &&  
+                <>
+                    {!showPassword?
+                        <Visibility onClick={passwordVisibleToggle} color='disabled'/>:
+                        <VisibilityOff onClick={passwordVisibleToggle} color='disabled'/>
+                    }
+                </>
+            }
+            </div>
+            {props.error !== ""?<div className={styles.error}>{props.error}</div>:null}
+        </>
     );
 }
 

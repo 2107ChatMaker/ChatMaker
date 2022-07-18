@@ -68,7 +68,7 @@ export class UserController implements DatabaseObject, Saveable, User {
         user.save();
     }
 
-    /// converts given values into a HashMap
+    // converts given values into a HashMap
     toHashMap(): HashMap {
         return {
             email: this.email,

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { paths } from '@utils/constants/paths';
 
 export default function FormLink() {
-
     //router for checking if user is in login or signup page
     const router = useRouter();
     

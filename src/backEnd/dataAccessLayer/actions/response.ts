@@ -19,7 +19,7 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
 	// The tags the users has chosen for their response
     readonly tags: Tag[];
     
-    constructor(userID: string, promptID: string, response: string,  tags: Tag[]) {
+    constructor(userID: string, promptID: string, response: string, tags: Tag[]) {
         this.userID = userID;
         this.promptID = promptID;
         if (response.length < 150 && response.length >= 2) {
@@ -41,6 +41,7 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
         return await ObjectManager.findResponseByID(promptID);
     }
 
+    // gets the responses by the specific ID
     static async getResponsesByIds(ids: string[]) {
         return await ObjectManager.findResponsesByIds(ids);
     }

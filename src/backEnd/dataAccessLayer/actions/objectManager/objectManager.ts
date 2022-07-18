@@ -41,7 +41,6 @@ export class ObjectManager {
         
         return foundEntry;
     }
-    
 
     // Reference:
     // https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
@@ -98,6 +97,7 @@ export class ObjectManager {
         await Database.setupClient();
         /// returns an array of responses with the matching promptID
         const foundEntries: CMResponse[] = await ResponseModel.find({ promptID: {$all:  promptID} });
+        
         return foundEntries as CMResponse[];
     }
 
@@ -107,16 +107,18 @@ export class ObjectManager {
         await Database.setupClient();
         // find by ID and update the given values, returning the updated document when completed
         var returnResult = await ResponseModel.find({"_id": {$in: ids}});
+        
         return returnResult;
     }
+
     static async findApprovedResponseByID(promptID: String) {
         /// establishes a connection to the database
         await Database.setupClient();
         /// returns an array of responses with the matching promptID
         const foundEntries: CMResponse[] = await ApprovedResponseModel.find({ promptID: {$all:  promptID} });
+        
         return foundEntries as CMResponse[];
     }
-    
 
     /// updates the matching response rating based on the boolean recieved
     static async updateRatingByID(_id: string, rating:Boolean) {
@@ -125,6 +127,7 @@ export class ObjectManager {
         // find by ID and increase or decrease the rating value based on whether the rating is true or not. If there is an error log it
         let inc: Number = rating? 1 : -1;
         const retval = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, { returnDocument: 'after' });
+        
         return retval;
     }
 
@@ -156,7 +159,7 @@ export class ObjectManager {
         await Database.setupClient();
         /// returns a mongoose query that only includes documents that contain regex string 
         const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
-        
+
         return foundEntries;
     }
 }

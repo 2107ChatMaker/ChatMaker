@@ -18,6 +18,7 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
         this.userID = userID;
         this.prompt = prompt;
     }
+
     /// Saves this object to the database or update it if it already exists
     save() { 
         ObjectManager.saveObject(this, PromptModel);
@@ -37,7 +38,7 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     static async searchPrompts(searchQuery: string) {
         return await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
     }
-
+    //searches by the promptID
     static findPromptByID(promptID: string) {
         return ObjectManager.find(PromptModel, promptID);
     }
