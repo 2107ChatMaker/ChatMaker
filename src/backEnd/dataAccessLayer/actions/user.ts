@@ -61,6 +61,13 @@ export class UserController implements DatabaseObject, Saveable, User {
         return user.responsesSaved;
     }
 
+    //update user saved responses
+    static async updateSavedResponses(userID: string, responseIDs: string[]) {
+        const user = await UserController.getUserByID(userID);
+        user.responsesSaved = responseIDs;
+        user.save();
+    }
+
     /// converts given values into a HashMap
     toHashMap(): HashMap {
         return {

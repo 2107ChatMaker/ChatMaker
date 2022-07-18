@@ -13,13 +13,13 @@ interface ButtonProps {
 export default function Button(props: ButtonProps) {
     return (
         <motion.button
-         whileTap={{scale: 0.9, backgroundColor: "#D96E82"}}
-         whileHover={{backgroundColor: "#D96E82"}}
+         whileTap={{scale: 0.9, backgroundColor: "#181D27"}}
+         whileHover={{backgroundColor: "#181D27"}}
          type={props.type}
          onClick={props.onClick}
          className={
-            `${styles.button}
-             ${props.variant? `${styles[props.variant]}`: ''}}   
+            `${styles.button} 
+             ${props.variant? styles[props.variant]: ''}  
             `
             }>
             {props.children}

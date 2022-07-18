@@ -3,7 +3,7 @@ import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import styles from '../styles/rate.module.sass';
 // components
-import Page from '@components/Templates/Page';
+import Page from '@components/templates/Page';
 import RateCard from '@components/RateCard/RateCard';
 import RateButton from '@components/RateButton';
 import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
