@@ -1,7 +1,7 @@
 import mongoose, { Model, ObjectId, Schema } from "mongoose";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { Tag } from "@/utility/Enums/tag";
-import Database from "@/database/database";
+import { Tag } from "@/utilityfix/Enums/tag";
+import Database from "@/databasefix/database";
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";
 import ApprovedResponseModel from "@/dataAccessLayer/schemas/approvedResponse";

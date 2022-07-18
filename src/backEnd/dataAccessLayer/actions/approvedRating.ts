@@ -1,4 +1,4 @@
-import Database from "@/database/database";
+import Database from "@/databasefix/database";
 import ApprovedResponseModel from "../schemas/approvedResponse";
 import ResponseModel from "../schemas/response";
 
