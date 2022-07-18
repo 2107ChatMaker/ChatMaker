@@ -4,6 +4,8 @@ import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { Prompt } from "@interfaces/Prompt";
 import { ObjectManager } from "./objectManager/objectManager";
 import PromptModel from "../schemas/prompt";
+import { _id } from "@next-auth/mongodb-adapter";
+import mongoose, { ObjectId } from "mongoose";
 
 // actions accessable to manipulate promps or add new ones.
 export class PromptController implements DatabaseObject, Saveable, Prompt {
@@ -34,6 +36,10 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     // searchs prompts by user input 
     static async searchPrompts(searchQuery: string) {
         return await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
+    }
+
+    static findPromptByID(promptID: string) {
+        return ObjectManager.find(PromptModel, promptID);
     }
 
     // Tags are returned as a hashmap

@@ -172,7 +172,7 @@ export async function getServerSideProps({req}) {
             const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
 
             // build the values that will return as a RatingCard
-            responseId = newResponse._id;
+            responseId = newResponse._id as string;
             tags = newResponse.tags;
             response = newResponse.response;
             prompt = newPrompt.prompt;
