@@ -1,8 +1,8 @@
-import Template from "@components/Templates/Verification";
+import Template from "@components/templates/Verification";
 import styles from "@styles/ResetPassword.module.sass";
 import Input from "@components/Input";
 import {useState} from "react";
-import {axiosInstance as axios} from "@utils/constants/axios";
+import axios from "@utils/constants/axios";
 import { Mail, Key } from "@mui/icons-material";
 import { signupValidation as validation } from "@utils/form/SignupValidation";
 import useForm from "@utils/hook/useForm";
