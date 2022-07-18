@@ -1,15 +1,9 @@
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './AddResponseHeader.module.sass';
-import Button from '@components/Button/Button';
-import Chip from '@mui/material/Chip';
-import React from 'react';
-import {Tag} from '@/Utility/Enums/tag'
-
+import Button from '@components/Button';
+import {Tag} from '@/utility/Enums/tag';
 import TextField from '@mui/material/TextField';
-import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
-import { bgcolor, border, fontSize, height, maxHeight } from '@mui/system';
-
+import Autocomplete from '@mui/material/Autocomplete';
 
 interface Props {
     userID: string,

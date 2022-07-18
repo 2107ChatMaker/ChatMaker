@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
 
             // assign our return values from our retrieved responses
-            responseId = newResponse._id;
+            responseId = newResponse._id as string;
             tags = newResponse.tags;
             response = newResponse.response;
             prompt = newPrompt.prompt;

@@ -1,7 +1,7 @@
-import { ResponseController } from "@/dataAccessLayer/actions/response"
-import { NextApiRequest, NextApiResponse } from "next"
+import { ResponseController } from "@/dataAccessLayer/actions/response";
+import { NextApiRequest, NextApiResponse } from "next";
 import { CMResponse } from "@interfaces/Response";
-import {User} from '@interfaces/User'
+import {User} from '@interfaces/User';
 import { UserController } from "@/dataAccessLayer/actions/user";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -29,24 +29,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             //grabbing the body from the request
             const {body} = req;
             //extracting the data we want to use
-            const {userID, responseID} = body
+            const {userID, responseID} = body;
             //grabbing the user object so we can add the responses
-            const user: UserController = await UserController.getUserByID(userID)
+            const user: UserController = await UserController.getUserByID(userID);
             //checking to see if the response is already saved for this specific user
             if (!user.responsesSaved.includes(responseID)) {
                 //pushing the response ID we were given to the responsesSaved array
-                await user.responsesSaved.push(responseID)
+                await user.responsesSaved.push(responseID);
                 //updating the user
-                await user.update()
+                await user.update();
                 //making sure the user is saved properly
                 user.save();
                 //logging so we know our save is successful
-                console.log("Response Saved")
+                console.log("Response Saved");
                 res.status(200).json({message: "Response saved"});
             } else {
                 //if we already have it, we won't save it again
-                console.log('response already saved')
-                res.status(200).json({message: "response already saved to profile!"})
+                console.log('response already saved');
+                res.status(200).json({message: "response already saved to profile!"});
             }
             
         }

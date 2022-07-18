@@ -1,9 +1,7 @@
 import { ReactNode } from "react";
-
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import Chip from '@mui/material/Chip';
 import styles from '@components/Page/responseDiv/ResponseDiv.module.sass';
-import { UserController } from "@/dataAccessLayer/actions/user";
 import * as React from 'react';
 import { ObjectId } from "mongoose";
 
@@ -21,8 +19,8 @@ export default function ResponseDiv(props: Props){
         let values = {
             userID,
             responseID
-        }
-        const body = JSON.stringify(values)
+        };
+        const body = JSON.stringify(values);
         const response = await fetch(
             'http://localhost:3000/api/responsePage',
             {  
@@ -33,7 +31,7 @@ export default function ResponseDiv(props: Props){
                     Accept: 'application/json',
                 }),
             }
-        )
+        );
     }
     return(
         <>
@@ -49,5 +47,5 @@ export default function ResponseDiv(props: Props){
             </div>
         </div>
         </>
-    )
+    );
 };

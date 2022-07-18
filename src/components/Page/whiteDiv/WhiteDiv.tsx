@@ -14,7 +14,7 @@ export default function WhiteDiv(props: Props) {
             <div className={styles.whiteDiv}>
                 <div className={styles.whiteDivContent}>{props.children}</div>
             </div>
-        )
+        );
     }
     //if we want a smaller div
     else {
@@ -22,6 +22,6 @@ export default function WhiteDiv(props: Props) {
             <div className={styles.smallWhiteDiv}>
                 <div className={styles.whiteDivContent}>{props.children}</div>
             </div>
-        )
+        );
     };
 };

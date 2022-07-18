@@ -66,8 +66,8 @@ export default function Explore({user, prompts}: HashMap) {
                 />
             </div>
             <div className={styles.prompts}>
-              {promptsList? promptsList.map(({prompt, _id}, index) => (
-                <Prompt key={index} prompt={prompt}/>
+              {promptsList && promptsList.length > 0? promptsList.map(({prompt, _id}, index) => (
+                <Prompt key={index} prompt={prompt} onClick={()=>router.push(`/response/${_id}`)}/>
               )): <div className={styles.noPrompts}>No prompts found</div>}
             </div> 
         </div>
