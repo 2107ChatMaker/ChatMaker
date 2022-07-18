@@ -2,7 +2,7 @@ import { Search } from "@mui/icons-material";
 import { useState, FormEvent } from "react";
 import styles from "./SearchBar.module.sass";
 
-
+//props for the search bar
 interface Props{
     onSubmit: (value: string) => void;
     placeholder?: string;
@@ -10,6 +10,7 @@ interface Props{
 
 export default function SearchBar(props: Props) {
 
+    //search bar state
     const [search, setSearch] = useState("");
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,7 +27,6 @@ export default function SearchBar(props: Props) {
                     <Search fontSize="medium" sx={{color: "white"}}/>
                 </button>
             </div>
-        </form>
-        
+        </form>    
     );
 }

@@ -8,15 +8,14 @@ import Button from '@components/Button';
 import {getSession} from 'next-auth/react';
 import PageTitle from '@components/PageTitle';
 
-
 export default function AddPrompt({user}: HashMap) {
 
     const onAddPrompt = async () => {
 
         //get userID from session
         const userId = user.id;
+        
         try{
-
             //fetch request to add prompt
             const {data} = await axios.post('/api/prompt', {userId, prompt: form.prompt});
             
