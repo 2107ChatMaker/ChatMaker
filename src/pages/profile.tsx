@@ -46,7 +46,7 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
             
             //delete selected responses from user saved responses
             const deletedResponses = savedResponsesIds.filter(response => selectedResponses.includes(response._id));
-            const { data } = await axios.put(`/api/user/${uid}/response/save`, {responseIDs: deletedResponses});
+            const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
             if (data.error) {
                 throw new Error(data.error);
             }
