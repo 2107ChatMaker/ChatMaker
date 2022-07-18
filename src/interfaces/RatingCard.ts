@@ -1,4 +1,4 @@
-import { Tag } from "@/utilityfix/Enums/tag";
+import { Tag } from "@/utility/Enums/tag";
 
 // represents a the data on card that is generated on the rate page
 export interface RatingCard {

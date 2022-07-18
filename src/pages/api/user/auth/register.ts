@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { hash } from 'bcrypt';
-import Database from "@/databasefix/database";
+import Database from "@/database/database";
 import User from "@/dataAccessLayer/schemas/user";
 import { sendEmailVerification } from "@utils/mailing/SendEmail";
 import { generateToken } from "@utils/token/Token";

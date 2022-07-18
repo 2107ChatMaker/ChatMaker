@@ -1,5 +1,5 @@
 import { HashMap } from "@interfaces/HashMap";
-import { Tag } from "@/utilityfix/Enums/tag";
+import { Tag } from "@/utility/Enums/tag";
 import { Saveable } from "@interfaces/Saveable";
 import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
