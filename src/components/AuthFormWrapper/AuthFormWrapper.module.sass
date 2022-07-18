@@ -1,7 +1,13 @@
+@import '@styles/includes.sass'
+
+.container 
+    @include flexC
+    max-width: 100vw
+
 .formWrapper 
     display: flex
     margin: auto
-    background-color: #2B3344
+    background-color: $bgDark
     border-radius: 1rem
     transition: 0.5s
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px
@@ -11,23 +17,20 @@
     padding: 1rem
 
 .form 
-    display: flex
-    flex-direction: column
-    align-items: center
-    justify-content: center
+    @include flexC
     padding: 5rem
 
 .navItems 
     display: flex
     font-size: 1.25rem
     font-weight: bold
-    color: white
+    color: $bgLight
     list-style-type: none
     padding: 0.5rem
 
 .logo
     width: 50%
-    background-color: #1C98EC
+    background-color: $primary
     border-radius: 0 1rem 1rem 0
     display: flex
     align-items: center
@@ -37,13 +40,8 @@
 .mobileLogo 
     display: none   
 
-.introduction
-    text-align: center
-    color: white
-    padding: 3rem
-    font-size: 1.5rem
-    & > p
-        margin-top: 1rem
+.mobileIntroduction 
+    display: none
 
 @media screen and (max-width: 800px) 
     .formWrapper
@@ -53,10 +51,7 @@
         align-items: center
         box-shadow: none
         margin-top: 2rem
-        overflow: hidden
-
-    .introduction
-        display: none
+        flex: 100
     
     .formContainer
         padding: 0 
@@ -66,7 +61,6 @@
         width: 100%
         padding: 3rem 5rem
         justify-content: flex-start
-
 
     .logo
         order: 1
@@ -79,6 +73,11 @@
         display: block
         margin-bottom: 1rem
 
+    .mobileIntroduction
+        display: block
+        width: 100%
+        flex: 1
+        margin-top: 3rem
 
     .navItems
         justify-content: space-between

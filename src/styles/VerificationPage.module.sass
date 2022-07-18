@@ -1,0 +1,23 @@
+@import 'includes.sass'
+
+.wrapper 
+    padding: 10rem 2rem
+    padding-top: 3rem
+    @include flexC
+    overflow: hidden
+    & > * 
+        display: flex
+        color: $bgLight
+        justify-content: center
+        align-items: center
+        margin-top: 3rem
+
+.error 
+    color: $alert
+    font-size: 1.25rem
+
+@media screen and (max-width: 768px) 
+    .wrapper
+        padding: 0
+
+

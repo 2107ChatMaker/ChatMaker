@@ -17,9 +17,9 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
     // The response the user has given
     readonly response: string;
 	// The tags the users has chosen for their response
-    readonly tags: [Tag];
+    readonly tags: Tag[];
     
-    constructor(userID: string, promptID: string, response: string,  _tags: [Tag]) {
+    constructor(userID: string, promptID: string, response: string, tags: Tag[]) {
         this.userID = userID;
         this.promptID = promptID;
         if (response.length < 150 && response.length >= 2) {
@@ -28,7 +28,7 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
         else {
             throw new Error("Response either too short or too long");
         }
-        this.tags = _tags;
+        this.tags = tags;
     }
     
     /// Saves this object to the database or update it if it already exists
@@ -37,18 +37,29 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
     }
 
     // gets all responses that belong to the given prompt(id)
-    static getResponsesByID(promptID: string) {
-        return ObjectManager.findResponseByID(promptID);
+    static async getResponsesByID(promptID: string) {
+        return await ObjectManager.findResponseByID(promptID);
+    }
+
+    // gets the responses by the specific ID
+    static async getResponsesByIds(ids: string[]) {
+        return await ObjectManager.findResponsesByIds(ids);
+    }
+
+    //get approved responses by id
+    static async getApprovedResponsesByID(PromptID: string) {
+        const responses = await ObjectManager.findApprovedResponseByID(PromptID);
+        return responses;
     }
 
     // get a random response thats not in the given id list
-    static getRandomResponse(ignoredIDs: [string?]) {
-        return ObjectManager.findRandom(ResponseModel, ignoredIDs);
+    static async getRandomResponse(ignoredIDs: [string?]) {
+        return await ObjectManager.findRandom(ResponseModel, ignoredIDs);
     }
 
     // add rating to the given response
-    static rateResponse(ratingID: string, rating: Boolean, userID: string) {
-        return ObjectManager.updateRatingByID(ratingID, rating);
+    static async rateResponse(ratingID: string, rating: Boolean, userID: string) {
+        return await ObjectManager.updateRatingByID(ratingID, rating);
     }
 		
     /// converts given values into a HashMap

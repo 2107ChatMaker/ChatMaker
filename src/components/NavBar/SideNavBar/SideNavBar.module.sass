@@ -1,0 +1,39 @@
+@import '@styles/includes.sass'
+
+.navBar
+    position: fixed
+    top: 0
+    left: 0
+    bottom: 0
+    height: 100%
+    background-color: $bgDark
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset
+    z-index: 100
+    overflow: auto
+
+.logo 
+    display: flex
+    flex-direction: row
+    overflow: hidden
+    padding: 1.2rem
+
+.logoImage
+    width: 2rem
+    height: 2rem
+    margin-right: 1.5rem
+    dipslay: flex
+    justify-content: center
+    
+.logoText
+    color: $bgLight
+    font-size: 2rem
+
+.navItems
+    display: flex
+    flex-direction: column
+    overflow: hidden
+
+@media screen and (max-width: 768px) 
+    .navBar 
+        display: none
+

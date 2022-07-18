@@ -1,9 +1,10 @@
 import { Tag } from "@/utility/Enums/tag";
+import mongoose, { ObjectId } from "mongoose";
 
 // represents a chat maker response to be saved to the database
 export interface CMResponse {
-    // mongo given id for response
-    readonly _id: string;
+    //generated ID of the response
+    readonly _id?: string | ObjectId;
     // the userID of the user giving feedback
     readonly userID: string;
     // the promptID of the question the user is being asked
@@ -13,3 +14,5 @@ export interface CMResponse {
 		// The tags the users has chosen for their response
     readonly tags: Tag[];
 }
+
+export namespace CMResponse{}

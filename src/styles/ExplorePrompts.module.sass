@@ -1,0 +1,49 @@
+@import "@styles/includes.sass"
+
+.page
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 1rem 2rem
+    
+
+
+.add
+    display: flex
+    flex-direction: row
+    justify-content: flex-end
+    align-items: center
+    flex-wrap: nowrap
+    & > h2 
+        font-size: 1.5rem
+        margin: 0 0.5rem
+
+
+.searchField
+    display: flex
+    margin-top: 1.75rem
+    width: 100%
+    & > * 
+        width: 100%
+
+.noPrompts
+    color: white
+    font-size: 1.5rem
+
+.prompts
+    @include flexC 
+    margin-top: 1.5rem
+    width: 100%
+    height: 100%
+    & > *
+        margin-bottom: 1.5rem
+
+@media screen and (max-width: 498px) 
+
+    .page
+        padding: 2rem
+        padding-bottom: 5rem
+        
+    
+    
