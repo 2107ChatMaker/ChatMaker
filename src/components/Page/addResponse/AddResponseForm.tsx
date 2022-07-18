@@ -68,7 +68,7 @@ export default function AddResponseForm(props: Props) {
                 id="tags"
                 options={tagValues}
                 className={styles.menu}
-                sx={{ bgcolor: '#FFFFFF', border: 'none'}}
+                sx={{ bgcolor: '#FFFFFF', border: 'none' }}
                 value={tags}
                 getOptionDisabled={(tagValues) => (tags.length > 2 ? true : false)}
                 onChange={(_event, newTag) => {
@@ -80,7 +80,6 @@ export default function AddResponseForm(props: Props) {
                     {...params}
                     variant="standard"
                     size='small'
-                    
                 />
                 )}
             /> 
