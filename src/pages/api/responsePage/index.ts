@@ -1,12 +1,10 @@
-import { ResponseController } from "@/dataAccessLayer/actions/response";
 import { NextApiRequest, NextApiResponse } from "next";
+import { ResponseController } from "@/dataAccessLayer/actions/response";
 import { CMResponse } from "@interfaces/Response";
-import {User} from '@interfaces/User';
 import { UserController } from "@/dataAccessLayer/actions/user";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        
         if (req.method == "POST") {
             //gives us JSON body
             const {body} = req;
@@ -48,7 +46,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 console.log('response already saved');
                 res.status(200).json({message: "response already saved to profile!"});
             }
-            
         }
         else {
             throw {
@@ -59,7 +56,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     catch(error) {
         const {code = 500, message} = error;
-
         res.status(code).json({message});
     };
   };

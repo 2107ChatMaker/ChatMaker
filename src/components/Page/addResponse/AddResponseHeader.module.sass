@@ -25,7 +25,8 @@
     font-size: 0.9rem
     align-self: center
     color: #a5a5a5
-    
+
+
 .responseContainer
     overflow-y: visible
     color: black
@@ -56,24 +57,26 @@
     padding-right: 5px
     flex: 1 0 40%
     margin-right: 20px
-    margin-left: 20px
-    height: auto
-    border: none
-    max-height: 70px
-    width: 450px
+    margin-left: 10px
+    border: none !important
+    width: 470px
+    display: inline-block
+    max-height: 50px
+    overflow: hidden
 
 .form i
     position: absolute
     padding-left: 20px
     text-align: center
     height: 100%
-    justify-content: cente
+    justify-content: center
 
 .form .secondRowDiv
     align-items: baseline
     display: flex
     width: 100%
     font-size: 1rem
+    z-index: 100
 
 .form Button
     height: 2rem
@@ -130,12 +133,16 @@
         height: auto
         text-wrap: wrap
         margin-bottom: 10px
-
+    .form Button
+        margin-top: 20px
+        
     .menu
         width: 80%
         margin-left: auto
         margin-right: auto
+        padding: 0
         label: 0.9rem
+        max-height: 35px
 
     .form .secondRowDiv
         width: 80%
