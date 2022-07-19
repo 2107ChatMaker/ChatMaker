@@ -16,101 +16,123 @@ import { useRouter } from "next/router";
 
 export default function Profile({user, savedResponses, savedResponsesIds}: HashMap) {
 
-  //list of selected saved responses
-  const [selectedResponses, setSelectedResponses] = useState([]);
+    //list of selected saved responses
+    const [selectedResponses, setSelectedResponses] = useState([]);
 
-  //user id and email
-  const { id: uid, email } = user;
+    //user id and email
+    const { id: uid, email } = user;
 
-  //handle selecting response 
-  const handleSelect = (_id: string, isSelected: boolean) => {
+    //handle selecting response 
+    const handleSelect = (_id: string, isSelected: boolean) => {
 
-    //if response is selected/checked
-    if (isSelected) {
+        //if response is selected/checked
+        if (isSelected) {
 
-      //add response to selected responses list
-      const res = selectedResponses.concat(_id);
-      setSelectedResponses(res);
-    } else {
-      // if not remove it from the selected responses list
-      setSelectedResponses(selectedResponses.filter(id => id !== _id));
-    }
-  };
-
-  //handle deleting selected responses
-  const handleDelete = async () => {
-    try {
-
-        //check if there is any selected response
-        if (selectedResponses.length > 0) {
-            
-            //delete selected responses from user saved responses
-            const deletedResponses = savedResponsesIds.filter(response => selectedResponses.includes(response._id));
-            const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
-            if (data.error) {
-                throw new Error(data.error);
-            }
+            //add response to selected responses list
+            const res = selectedResponses.concat(_id);
+            setSelectedResponses(res);
+        } else {
+            // if not remove it from the selected responses list
+            setSelectedResponses(selectedResponses.filter(id => id !== _id));
         }
-    } catch(error) {
-        //TODO: handle error
-    }
-  };
+    };
 
-  return (
-    <Page
-        headTitle="Profile Page"
-        headContent="Profile page"
-        headName="Profile Page"
-    >
-      <div className={styles.content}>
-        <div className={styles.profile}>
-            <PageTitle title="Profile">
-                <div className={styles.logOut} onClick={()=>signOut()}>
-                    <h2>Logout</h2>
-                    <Logout sx={{color: "#1C98EC", paddingRight: "0.25rem"}} fontSize="large"/>
+    //handle deleting selected responses
+    const handleDelete = async () => {
+        try {
+
+            //check if there is any selected response
+            if (selectedResponses.length > 0) {
+                
+                //delete selected responses from user saved responses
+                const deletedResponses = savedResponsesIds.filter(response => selectedResponses.includes(response._id));
+                const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+            }
+        } catch(error) {
+            //TODO: handle error
+        }
+    };
+
+    // reference https://stackoverflow.com/questions/34156282/how-do-i-save-json-to-local-text-file
+    async function download() {
+        // get the custom export json for the user id
+        const {status, data: response} = await axios.get(`api/exportResponses?userID=${uid}`);
+
+        // if the reques fails return without downloading
+        if (status != 200) {
+            return;
+        }
+
+        // create an a tag
+        var a = document.createElement("a");
+        // create a blob that holds our export json
+        var file = new Blob([response], {type: "application/json"});
+        // create a url containing our json information via our blob and assign it to our a tag
+        a.href = URL.createObjectURL(file);
+        // assigns a download filename to our a tag
+        a.download = `${email}_Saved_Responses.txt`;
+        // execute (click) on our nameTag
+        a.click();
+    }
+
+    return (
+        <Page
+            headTitle="Profile Page"
+            headContent="Profile page"
+            headName="Profile Page"
+        >
+            <div className={styles.content}>
+                <div className={styles.profile}>
+                    <PageTitle title="Profile">
+                        <div className={styles.logOut} onClick={()=>signOut()}>
+                            <h2>Logout</h2>
+                            <Logout sx={{color: "#1C98EC", paddingRight: "0.25rem"}} fontSize="large"/>
+                        </div>
+                    </PageTitle>
+                    <div className={styles.info}>
+                        <h1 className={styles.label}>
+                            Email
+                        </h1>
+                        <div className={styles.email}>
+                            {email}
+                        </div>
+                        <Link href={"/auth/reset/password"}>
+                            <a className={styles.link}>
+                                Reset Password
+                            </a>
+                        </Link>
+                    </div>
                 </div>
-            </PageTitle>
-            <div className={styles.info}>
-                <h1 className={styles.label}>
-                    Email
-                </h1>
-                <div className={styles.email}>
-                    {email}
+                <hr className={styles.hr}/>
+                <div className={styles.favorite}>
+                    <h2 className={styles.favoriteTitle}>
+                        Saved
+                    </h2>
+                    <div className={styles.action}>
+                        <div className={styles.btn}>
+                            <Button type="button" onClick={download}>
+                                Export To JSON
+                            </Button>
+                        </div>
+                        <div className={styles.btn}>
+                            <Button type="button" variant="alert" onClick={handleDelete}>
+                                Delete Selected
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-                <Link href={"/auth/reset/password"}>
-                    <a className={styles.link}>
-                        Reset Password
-                    </a>
-                </Link>
+                {savedResponses.length > 0 &&
+                <div className={styles.responses}>
+                    {Object.keys(savedResponses).map((prompt, index) => (
+                        <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
+                    ))}
+                </div>}
             </div>
-        </div>
-        <hr className={styles.hr}/>
-        <div className={styles.favorite}>
-            <h2 className={styles.favoriteTitle}>
-                Saved
-            </h2>
-            <div className={styles.action}>
-                <div className={styles.btn}>
-                    <Button type="button">
-                        Export To JSON
-                    </Button>
-                </div>
-                <div className={styles.btn}>
-                    <Button type="button" variant="alert" onClick={handleDelete}>
-                        Delete Selected
-                    </Button>
-                </div>
-            </div>
-        </div>
-        {savedResponses.length > 0 &&
-        <div className={styles.responses}>
-            {Object.keys(savedResponses).map((prompt, index) => (
-                <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
-            ))}
-        </div>}
-      </div>
-    </Page>
-  );
+        </Page>
+    );
 }
 
 //redirect page to login if user is not logged in and get list of user's saved responses
@@ -128,11 +150,11 @@ export async function getServerSideProps(context) {
         let groupedResponses = await groupResponse(savedResponses);
 
         return {
-          props: {
+            props: {
             user: JSON.parse(JSON.stringify(session.user)),
             savedResponses: JSON.parse(JSON.stringify(groupedResponses)),
             savedResponsesIds: JSON.parse(JSON.stringify(saveResponsesIds))
-          },
+            },
         };
     }
     return {
