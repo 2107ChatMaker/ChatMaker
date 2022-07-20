@@ -91,7 +91,6 @@ export async function getServerSideProps({req, query}){
             };
     } catch(err) {
         //if there are any issues (such as wrong promptID, it will redirect us here)
-        console.log(err)
         return {
             redirect: {
                 destination: '/',

@@ -44,8 +44,6 @@ export default function AddResponseForm(props: Props) {
                 response,
                 tags
             };
-            //logging the data so we can see it works
-            console.log(data);
             //doing a POST to the database
             const post = await fetch("http://localhost:3000/api/responsePage", 
                 {
@@ -57,7 +55,6 @@ export default function AddResponseForm(props: Props) {
                 });
             //catching any errors that come out
         } catch (err) {
-            console.log(err);
             };
         //since we already used the data, we will set these back to empty
         setResponse("");
