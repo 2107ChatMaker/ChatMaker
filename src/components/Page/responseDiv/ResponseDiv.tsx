@@ -27,7 +27,7 @@ export default function ResponseDiv(props: Props){
             //make a post request to save the response to user
             const response = await axios.post(`/api/user/${userID}/response/save`,values);
         } catch(error) {
-            console.log(error.response);
+            throw new Error(error);
         }
     }
     return(
