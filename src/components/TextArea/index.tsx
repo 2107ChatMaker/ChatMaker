@@ -22,5 +22,5 @@ export default function TextArea(props: Props){
                 name={props.name}
             />
         </div>
-    )
+    );
 }

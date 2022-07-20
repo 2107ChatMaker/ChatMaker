@@ -38,12 +38,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 await user.update();
                 //making sure the user is saved properly
                 user.save();
-                //logging so we know our save is successful
-                console.log("Response Saved");
                 res.status(200).json({message: "Response saved"});
             } else {
-                //if we already have it, we won't save it again
-                console.log('response already saved');
                 res.status(200).json({message: "response already saved to profile!"});
             }
         }

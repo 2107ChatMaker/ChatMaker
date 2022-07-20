@@ -62,7 +62,6 @@ export default function Rating(props: RatingCard) {
     }
 
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
-    // generates a new secret santa list and saves it to the relevant collection in the database
     async function getNewCard(execute:boolean = false) {
 
         // guards against multiple button presses
