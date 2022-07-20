@@ -29,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             } else {
                 //grabbing the responseId from the request body
                 const { responseID } = req.body;
+                
                 //checking to see if response id is valid
                 if (!responseID || typeof responseID !== "string") {
                     throw {
@@ -36,6 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         message: "invalid responseID"
                     };
                 } else {
+                    
                     //checking to see if the response is already saved for this specific user
                     if (!user.responsesSaved.includes(responseID)) {
                         //pushing the response ID we were given to the responsesSaved array
@@ -48,6 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     } else {
                         res.status(200).json({ message: "response already saved to profile!" });
                     }
+                    
                 }
             }
         }

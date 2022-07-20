@@ -61,7 +61,7 @@ export class ObjectManager {
         await Database.setupClient();
         // get the number of documents in the given model
         const numberOfDocuments: number = await model.estimatedDocumentCount();
-        //
+        //get updated response IDs - response which have been rated
         const updatedResponsesIds = await model.find({
             '_id': { $in: ratedResponseIDs }
         }).select('_id');
@@ -71,6 +71,7 @@ export class ObjectManager {
         const foundEntry = await model.findOne({
             '_id': { $nin: updatedResponsesIds }
         }).skip(random);
+
         return foundEntry;
     }
     
@@ -104,12 +105,12 @@ export class ObjectManager {
         return foundEntries;
     }
 
-    //// find user document by Name    
-     static async findByName(model: mongoose.Model<any>, name: string, entityName: string) {         
+    //// find documents by a query object   
+     static async findByQuery(model: mongoose.Model<any>, query: HashMap) {         
         /// establishes a connection to the database        
         await Database.setupClient();        
-        /// returns a mongoose query that only includes document that contain the Name      
-        const foundEntries = await model.findOne({[name]: entityName});          
+        /// returns a mongoose document that that matches the query    
+        const foundEntries = await model.findOne(query);          
         return foundEntries;    
      }
 

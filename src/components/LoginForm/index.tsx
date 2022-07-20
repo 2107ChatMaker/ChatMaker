@@ -8,7 +8,7 @@ import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import AuthFormWrapper from '@components/AuthFormWrapper';
-
+import { useEffect } from 'react';
 
 export default function LoginForm({signIn}) {
     
@@ -19,11 +19,9 @@ export default function LoginForm({signIn}) {
     const { error } = router.query;
 
     //sign in 
-    const onSignIn = () => {
+    const onSignIn = async() => {
         signIn("credentials", { email: formData.email, password: formData.password });
     };
-
-    
 
     //form state and handlers
     const [
@@ -50,8 +48,7 @@ export default function LoginForm({signIn}) {
                         required={true}
                         error={
                             errors.email? errors.email: 
-                            error === "email does not exist"? error:
-                            error === "email is not verified"? error:""
+                            error === "email does not exist"? error:""
                         }
                     >
                         <MailOutline  color='disabled'/>

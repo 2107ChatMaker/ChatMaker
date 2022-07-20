@@ -1,5 +1,5 @@
 import UserModel from "@/dataAccessLayer/schemas/user";
-import { verifyToken } from "@utils/token/Token";
+import { verifyToken, generateToken } from "@utils/token/Token";
 import { sendEmailVerification } from "@utils/mailing/SendEmail";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -53,10 +53,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
             
         } else if (req.method === "POST") {
-
             //get user id
             const { _id } = req.query;
-            
             //verify user id
             if (typeof _id !== "string") throw {
                 code: 400,
@@ -65,13 +63,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             try {
                  //get user
                 const user = await UserModel.findById(_id);
-                
                 //check if user has verified
                 if (user.isVerified) {
                     throw {
                         code: 400,
                         message: "User already verified"
                     };
+                    //check if email token has expired then generate a new one
+                } else if (!verifyToken(user.emailToken)) {
+                    user.emailToken = generateToken(user.email);
+                    await user.save();
                 }
                 try {
                     await sendEmailVerification(user.email, user.emailToken, _id);
@@ -82,11 +83,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     };
                 }
                 res.status(200).send("email sent");
-            } catch {
-                throw {
-                    code: 400,
-                    message: "Invalid id"
-                };
+            } catch(error) {
+                throw error;
             }
             
         } else {

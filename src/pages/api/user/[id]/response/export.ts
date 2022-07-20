@@ -6,6 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 // used to get the information to make a rating card or to update (+/-) a resonses rating
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
+
         if (req.method != "GET") {
             throw {
                 code: 405,
@@ -38,6 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 message: 'No matching responses'
             };
         }
+
         // empty array whihc will hold custom return json
         const exportResponse = [];
         
@@ -51,6 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });
             
         }
+        
         if (!exportResponse) {
             throw {
                 code: 204,

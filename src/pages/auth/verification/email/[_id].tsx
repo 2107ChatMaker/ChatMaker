@@ -13,6 +13,7 @@ export default function EmailVerification() {
     //get user id
     const {_id} = router.query;
     
+    //sending email error state
     const [error, setError] = useState(null);
 
     //send verification email to user
@@ -45,7 +46,7 @@ export default function EmailVerification() {
                         type="button"
                         onClick={sendVerificationEmail}
                     >
-                        Resend Link
+                        Send Link
                     </Button>
                 </div>
                 <div>

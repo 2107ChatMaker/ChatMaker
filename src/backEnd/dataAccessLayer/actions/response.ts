@@ -53,15 +53,16 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
         return await ObjectManager.findRandom(ResponseModel, ignoredIDs);
     }
 
-    // get response by response content
-    static async getResponse(content: string) {
-        return await ObjectManager.findByName(ResponseModel, "response", content);
+    // get response by response content and prompt id
+    static async getResponseByContentAndPrompt(content: string, promptID: string) {
+        return await ObjectManager.findByQuery(ResponseModel, { response: content, promptID });
     }
 
     // add rating to the given response
     static async rateResponse(ratingID: string, rating: Boolean, userID: string) {
         // find by ID and increase or decrease the rating value based on whether the rating is true or not. If there is an error log it
         let inc: Number = rating? 1 : -1;
+        //update response rating
         const retval = await ObjectManager.updateByID(ratingID , { $inc: { rating: inc } }, ResponseModel);
        
         if(retval.rating >= 30) {
@@ -71,6 +72,7 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
             // delete the response from the responses list
             await ObjectManager.deleteByID(ResponseModel, ratingID);
         } 
+
         return retval;
     }
 		

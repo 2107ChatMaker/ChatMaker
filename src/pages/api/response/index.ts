@@ -10,7 +10,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const {body} = req;
             //destructuring JSON body to grab what we need
             const {userID, promptID, response, tags} : CMResponse = body;
-            const isResponseExist = await ResponseController.getResponse(response);
+            //check if response with same content for this prompt exists
+            const isResponseExist = await ResponseController.getResponseByContentAndPrompt(response, promptID);
             if (isResponseExist) {
                 throw {
                     code: 400,

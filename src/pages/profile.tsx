@@ -40,22 +40,22 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 
     //handle deleting selected responses
     const handleDelete = async () => {
-        console.log("selected", selectedResponses);
-        console.log("savedIds", savedResponsesIds);
         try {
+            
             //check if there is any selected response
             if (selectedResponses.length > 0) {
                 //delete selected responses from user saved responses
                 const deletedResponses = savedResponsesIds.filter(response => !selectedResponses.includes(response));
-                console.log("delete", deletedResponses);
                 const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
                 //reload the page after delete 
-                //router.reload();
+                router.reload();
+               
+                //throw request error if there is any 
                 if (data.error) {
                     throw new Error(data.error);
                 }
-                
             }
+
         } catch(error) {
             //TODO: handle error
         }
@@ -146,13 +146,10 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session && session.user) {
-
         //get user save responses ids
         const saveResponsesIds: string[] = await userController.getSavedResponses(session.user.id);
-
         //get saved responses by ids
         const savedResponses = await arController.getApprovedResponses(saveResponsesIds);
-
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);
 
@@ -174,8 +171,11 @@ export async function getServerSideProps(context) {
 
 //group responses by prompt
 const groupResponse = async (responses) => {
+    //initialize empty object to store responses
     let groupedResponses = {};
+    //check if user has any saved response
     if (responses.length > 0) {
+        //loop through all responses and group them by prompt
         for (let i = 0; i< responses.length; i++) {
             const response = responses[i];
             const { prompt } = await promptController.getPrompt(response.promptID);
