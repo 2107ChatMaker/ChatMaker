@@ -17,11 +17,12 @@ export default function AddPrompt({user}: HashMap) {
         
         try{
             //fetch request to add prompt
-            const {data} = await axios.post('/api/prompt', {userId, prompt: form.prompt});
-            
+            const result = await axios.post('/api/prompt', {userId, prompt: form.prompt});
+            // alert users upload was successful
+            alert(result.data.message);
         } catch (error) {
             //TODO: handle error
-            alert(error.response.data.message);
+            alert(`${error.response.data.message}, please try agan later`);
         }
     };
 
@@ -34,13 +35,13 @@ export default function AddPrompt({user}: HashMap) {
                 prompt: "Prompt must be at least 10 characters long"
             };
         }
+
         return {};
     };
 
     //create prompt form state and form handling methods
     const [form, errors, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
     
-
     return (
         <Page
             headTitle = "Add Prompt"
