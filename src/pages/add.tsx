@@ -21,6 +21,7 @@ export default function AddPrompt({user}: HashMap) {
             
         } catch (error) {
             //TODO: handle error
+            alert(error.response.data.message);
         }
     };
 
@@ -38,6 +39,7 @@ export default function AddPrompt({user}: HashMap) {
 
     //create prompt form state and form handling methods
     const [form, errors, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
+    
 
     return (
         <Page

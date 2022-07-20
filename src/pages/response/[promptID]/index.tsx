@@ -42,9 +42,13 @@ export default function ResponsePage(props: Props) {
                         (CMResponse) => {
                             return(
                                 <div key={ CMResponse._id as Key}>
-                                    <ResponseDiv responseID={CMResponse._id} thisPromptID={props.thisPromptID} userID={userID} prompt={CMResponse.response as string}>
-                                        {CMResponse.tags}    
-                                    </ResponseDiv>
+                                    <ResponseDiv 
+                                        responseID={CMResponse._id} 
+                                        thisPromptID={props.thisPromptID} 
+                                        userID={userID} 
+                                        prompt={CMResponse.response as string}
+                                        tags={CMResponse.tags}
+                                    />
                                 </div>
                             );
                         }

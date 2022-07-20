@@ -5,7 +5,7 @@ import PageTitle from "@components/PageTitle";
 import styles from "@styles/Profile.module.sass";
 import Link from "next/link";
 import {UserController as userController} from "@/dataAccessLayer/actions/user";
-import { ResponseController as responseController } from "@/dataAccessLayer/actions/response";
+import { ApprovedResponseController as arController } from "@/dataAccessLayer/actions/approvedRating";
 import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
 import type { HashMap } from "@interfaces/HashMap";
 import SavedResponseList from "@components/SavedResponseList";
@@ -22,12 +22,13 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
     //user id and email
     const { id: uid, email } = user;
 
+    //router
+    const router = useRouter();
+
     //handle selecting response 
     const handleSelect = (_id: string, isSelected: boolean) => {
-
         //if response is selected/checked
         if (isSelected) {
-
             //add response to selected responses list
             const res = selectedResponses.concat(_id);
             setSelectedResponses(res);
@@ -40,17 +41,21 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
     //handle deleting selected responses
     const handleDelete = async () => {
         try {
-
+            
             //check if there is any selected response
             if (selectedResponses.length > 0) {
-                
                 //delete selected responses from user saved responses
-                const deletedResponses = savedResponsesIds.filter(response => selectedResponses.includes(response._id));
+                const deletedResponses = savedResponsesIds.filter(response => !selectedResponses.includes(response));
                 const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
+                //reload the page after delete 
+                router.reload();
+               
+                //throw request error if there is any 
                 if (data.error) {
                     throw new Error(data.error);
                 }
             }
+
         } catch(error) {
             //TODO: handle error
         }
@@ -59,7 +64,7 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
     // reference https://stackoverflow.com/questions/34156282/how-do-i-save-json-to-local-text-file
     async function download() {
         // get the custom export json for the user id
-        const {status, data: response} = await axios.get(`api/exportResponses?userID=${uid}`);
+        const {status, data: response} = await axios.get(`api/user/${uid}/response/export`);
 
         // if the reques fails return without downloading
         if (status != 200) {
@@ -124,28 +129,26 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
                         </div>
                     </div>
                 </div>
-                {savedResponses.length > 0 &&
-                <div className={styles.responses}>
-                    {Object.keys(savedResponses).map((prompt, index) => (
-                        <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
-                    ))}
-                </div>}
+                { savedResponsesIds.length > 0 &&
+                    <div className={styles.responses}>
+                        {Object.keys(savedResponses).map((prompt, index) => (
+                            <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
+                        ))}
+                    </div>
+                }
             </div>
         </Page>
-    );
+  );
 }
 
 //redirect page to login if user is not logged in and get list of user's saved responses
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session && session.user) {
-
         //get user save responses ids
         const saveResponsesIds: string[] = await userController.getSavedResponses(session.user.id);
-
         //get saved responses by ids
-        const savedResponses = await responseController.getResponsesByIds(saveResponsesIds);
-
+        const savedResponses = await arController.getApprovedResponses(saveResponsesIds);
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);
 
@@ -167,8 +170,11 @@ export async function getServerSideProps(context) {
 
 //group responses by prompt
 const groupResponse = async (responses) => {
+    //initialize empty object to store responses
     let groupedResponses = {};
+    //check if user has any saved response
     if (responses.length > 0) {
+        //loop through all responses and group them by prompt
         for (let i = 0; i< responses.length; i++) {
             const response = responses[i];
             const { prompt } = await promptController.getPrompt(response.promptID);

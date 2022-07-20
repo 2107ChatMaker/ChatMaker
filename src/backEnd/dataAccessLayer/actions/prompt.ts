@@ -34,6 +34,11 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
         return await ObjectManager.findAll(PromptModel);
     }
 
+    //get prompt by content
+    static async getPromptByContent(content: string) {
+        return await ObjectManager.findByQuery(PromptModel, { prompt: content });
+    }
+
     // searchs prompts by user input 
     static async searchPrompts(searchQuery: string) {
         return await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
