@@ -5,6 +5,7 @@ import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { ObjectManager } from "./objectManager/objectManager";
 import ResponseModel from "../schemas/response";
+import { ApprovedResponseController } from "./approvedRating";
 
 // actions accessable to manipulate responses or add new ones
 export class ResponseController implements DatabaseObject, Saveable, CMResponse {
@@ -41,11 +42,6 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
         return await ObjectManager.findResponseByID(promptID);
     }
 
-    // gets the responses by the specific ID
-    static async getResponsesByIds(ids: string[]) {
-        return await ObjectManager.findResponsesByIds(ids);
-    }
-
     //get approved responses by id
     static async getApprovedResponsesByID(PromptID: string) {
         const responses = await ObjectManager.findApprovedResponseByID(PromptID);
@@ -59,7 +55,20 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
 
     // add rating to the given response
     static async rateResponse(ratingID: string, rating: Boolean, userID: string) {
-        return await ObjectManager.updateRatingByID(ratingID, rating);
+        // find by ID and increase or decrease the rating value based on whether the rating is true or not. If there is an error log it
+        let inc: Number = rating? 1 : -1;
+        const retval = await ObjectManager.updateByID(ratingID , { $inc: { rating: inc } }, ResponseModel);
+       
+        if(retval.rating >= 30) {
+            const {response, userID, promptID, tags} = retval;
+            // if the response has a rating of 30 or more, add it to the approved responses list
+            const approved = await ApprovedResponseController.approvedResponse({response, userID, promptID, tags});
+            // delete the response from the responses list
+            //await ObjectManager.deleteByID(ResponseModel, ratingID);
+           
+        } 
+        
+        return retval;
     }
 		
     /// converts given values into a HashMap

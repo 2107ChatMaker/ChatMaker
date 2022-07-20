@@ -5,7 +5,7 @@ import PageTitle from "@components/PageTitle";
 import styles from "@styles/Profile.module.sass";
 import Link from "next/link";
 import {UserController as userController} from "@/dataAccessLayer/actions/user";
-import { ResponseController as responseController } from "@/dataAccessLayer/actions/response";
+import { ApprovedResponseController as arController } from "@/dataAccessLayer/actions/approvedRating";
 import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
 import type { HashMap } from "@interfaces/HashMap";
 import SavedResponseList from "@components/SavedResponseList";
@@ -36,6 +36,8 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
       setSelectedResponses(selectedResponses.filter(id => id !== _id));
     }
   };
+
+
 
   //handle deleting selected responses
   const handleDelete = async () => {
@@ -102,7 +104,7 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
                 </div>
             </div>
         </div>
-        {savedResponses.length > 0 &&
+        {savedResponsesIds.length > 0 &&
         <div className={styles.responses}>
             {Object.keys(savedResponses).map((prompt, index) => (
                 <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
@@ -122,7 +124,7 @@ export async function getServerSideProps(context) {
         const saveResponsesIds: string[] = await userController.getSavedResponses(session.user.id);
 
         //get saved responses by ids
-        const savedResponses = await responseController.getResponsesByIds(saveResponsesIds);
+        const savedResponses = await arController.getApprovedResponses(saveResponsesIds);
 
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);

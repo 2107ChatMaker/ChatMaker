@@ -6,6 +6,7 @@ import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";
 import ApprovedResponseModel from "@/dataAccessLayer/schemas/approvedResponse";
 import { CMResponse } from "@interfaces/Response";
+import { HashMap } from "@interfaces/HashMap";
 
 export class ObjectManager {
 
@@ -17,6 +18,15 @@ export class ObjectManager {
         const buildModel = new model(values);
         
         return  buildModel.save();
+    }
+
+    static async create(model: mongoose.Model<any>, values: any) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+       
+        const result = await model.create(values);
+
+        return result;
     }
 
     /// return all entries in the database that match the given model
@@ -102,11 +112,11 @@ export class ObjectManager {
     }
 
     //find responses by their ids
-    static async findResponsesByIds(ids: string[]) {
+    static async findByIds(ids: string[], model: mongoose.Model<any>) {
         /// establishes a connection to the database
         await Database.setupClient();
         // find by ID and update the given values, returning the updated document when completed
-        var returnResult = await ResponseModel.find({"_id": {$in: ids}});
+        var returnResult = await model.find({"_id": {$in: ids}});
         
         return returnResult;
     }
@@ -142,13 +152,11 @@ export class ObjectManager {
     } 
 
     /// updates the document that matches the id with the valuse in the obj parameter for the given model
-    static async updateByID(_id: string, obj: DatabaseObject, model: mongoose.Model<any>) {
+    static async updateByID(_id: string, obj: HashMap, model: mongoose.Model<any>) {
         /// establishes a connection to the database
         await Database.setupClient();
-        /// converts the obj values to a hashmap
-        const values = obj.toHashMap();
         // find by ID and update the given values, returning the updated document when completed
-        var returnResult = await model.findOneAndUpdate({_id: _id}, values, { returnDocument: 'after' });
+        var returnResult = await model.findOneAndUpdate({_id: _id}, obj, { returnDocument: 'after' });
         
         return returnResult;
     } 

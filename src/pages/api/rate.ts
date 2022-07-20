@@ -4,7 +4,7 @@ import { ResponseController } from "@/dataAccessLayer/actions/response";
 import { UserController } from "@/dataAccessLayer/actions/user";
 import { Prompt } from "@interfaces/Prompt";
 import { CMResponse } from "@interfaces/Response";
-import { NextApiRequest, NextApiResponse } from "next";
+import {NextApiResponse, NextApiRequest} from "next";
 
 // an interface used to help parse the request values when rating a response
 interface Rate {
