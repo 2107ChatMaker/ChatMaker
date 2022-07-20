@@ -10,8 +10,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const {body} = req;
             //destructuring JSON body to grab what we need
             const {userID, promptID, response, tags} : CMResponse = body;
+            const isResponseExist = await ResponseController.getResponse(response);
+            if (isResponseExist) {
+                throw {
+                    code: 400,
+                    message: "Response already exist"
+                };
+            }
             //creating a response controller object
-            const newResponse = new ResponseController(userID, promptID, response, tags);
+            const newResponse = new ResponseController(userID, promptID, response, tags); 
             //saving the new response we made
             newResponse.save();
             //letting user know the response was successful
@@ -38,12 +45,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 await user.update();
                 //making sure the user is saved properly
                 user.save();
-                //logging so we know our save is successful
-                console.log("Response Saved");
                 res.status(200).json({message: "Response saved"});
             } else {
-                //if we already have it, we won't save it again
-                console.log('response already saved');
                 res.status(200).json({message: "response already saved to profile!"});
             }
         }

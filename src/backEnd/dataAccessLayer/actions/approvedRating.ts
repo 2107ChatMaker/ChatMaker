@@ -19,5 +19,4 @@ export class ApprovedResponseController {
         //finds the responses by id     
         return await ObjectManager.create(ApprovedResponseModel, response);
     }
-
 }

@@ -61,13 +61,16 @@ export class ObjectManager {
         await Database.setupClient();
         // get the number of documents in the given model
         const numberOfDocuments: number = await model.estimatedDocumentCount();
+        //
+        const updatedResponsesIds = await model.find({
+            '_id': { $in: ratedResponseIDs }
+        }).select('_id');
         // get a random number of documents to skip
-        var random = Math.floor(Math.random() * (numberOfDocuments-ratedResponseIDs.length));  
+        var random = Math.floor(Math.random() * (numberOfDocuments-updatedResponsesIds.length));
         /// returns the request query that needs to be Cast to the requested object type 
         const foundEntry = await model.findOne({
-            '_id': { $nin: ratedResponseIDs }
+            '_id': { $nin: updatedResponsesIds }
         }).skip(random);
-        
         return foundEntry;
     }
     
@@ -81,14 +84,14 @@ export class ObjectManager {
         return foundEntries;
     }
 
-    /// delete an entry in the mongoose document for the given model that matches the given id
-    static async deleteByID(model: mongoose.Model<any>, id: string) {
-        /// establishes a connecti on to the database
+    //finds the document that matches the regex string
+    static async  findByRegex(model: mongoose.Model<any>, regex: string, field: string) {
+        /// establishes a connection to the database
         await Database.setupClient();
-        /// deletes the given entry and returns whether it was successful
-        const deleteSuccessful = await model.deleteOne({ _id: id });
-        
-        return deleteSuccessful.deletedCount == 1;
+        /// returns a mongoose query that only includes documents that contain regex string 
+        const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
+
+        return foundEntries;
     }
 
     /// find all documents for the given model that contains the given tags
@@ -99,6 +102,25 @@ export class ObjectManager {
         const foundEntries = await model.find({ tags: {$all:  [inputTags]} });
         
         return foundEntries;
+    }
+
+    //// find user document by Name    
+     static async findByName(model: mongoose.Model<any>, name: string, entityName: string) {         
+        /// establishes a connection to the database        
+        await Database.setupClient();        
+        /// returns a mongoose query that only includes document that contain the Name      
+        const foundEntries = await model.findOne({[name]: entityName});          
+        return foundEntries;    
+     }
+
+    /// delete an entry in the mongoose document for the given model that matches the given id
+    static async deleteByID(model: mongoose.Model<any>, id: string) {
+        /// establishes a connecti on to the database
+        await Database.setupClient();
+        /// deletes the given entry and returns whether it was successful
+        const deleteSuccessful = await model.deleteOne({ _id: id });
+        
+        return deleteSuccessful.deletedCount == 1;
     }
 
     /// find and return all the repsonses that match the given prompt(id)
@@ -160,14 +182,4 @@ export class ObjectManager {
         
         return returnResult;
     } 
-
-    //finds the document that matches the regex string
-    static async  findByRegex(model: mongoose.Model<any>, regex: string, field: string) {
-        /// establishes a connection to the database
-        await Database.setupClient();
-        /// returns a mongoose query that only includes documents that contain regex string 
-        const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
-
-        return foundEntries;
-    }
 }

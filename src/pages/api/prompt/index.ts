@@ -6,6 +6,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         switch(req.method) {
             case "POST":
                 const {prompt, userID} = req.body;
+                if (PromptController.getPrompt(prompt)) {
+                    throw {
+                        code: 400,
+                        message: "prompt already exists"
+                    };
+                }
                 const promptController = new PromptController(userID, prompt);
                 promptController.save();
                 res.status(200).json({message: "Prompt added"});
