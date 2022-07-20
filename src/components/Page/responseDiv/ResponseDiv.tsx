@@ -16,19 +16,19 @@ interface Props {
 };
 
 export default function ResponseDiv(props: Props){
-    const {thisPromptID, tags} = props;
-
     //saved response to user
     async function saveResp(userID: string, responseID: string) {
         //set the post request values
         let values = {
-            responseID,
-            promptID: thisPromptID,
-            userID,
-            tags
+            responseID
         };
-        //make a post request to save the response to user
-        const response = await axios.post(`/api/user/${userID}/response/save`,values);
+
+        try {
+            //make a post request to save the response to user
+            const response = await axios.post(`/api/user/${userID}/response/save`,values);
+        } catch(error) {
+            console.log(error.response);
+        }
     }
     return(
         <>

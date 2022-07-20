@@ -41,7 +41,7 @@ export default function AddResponseForm(props: Props) {
                 tags
             };
             //doing a POST to the database
-            const post = await axios.post("/api/response", data);
+            const post = await axios.post("/api/response/", data);
             //catching any errors that come out
         } catch (err) {
             alert(err.response.data.message);

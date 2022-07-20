@@ -42,8 +42,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     if (!user.responsesSaved.includes(responseID)) {
                         //pushing the response ID we were given to the responsesSaved array
                         await user.responsesSaved.push(responseID);
-                        //updating the user
-                        await user.update();
                         //making sure the user is saved properly
                         user.save();
                         res.status(200).json({ message: "Response saved" });

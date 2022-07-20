@@ -129,7 +129,6 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
                 { savedResponsesIds.length > 0 &&
                     <div className={styles.responses}>
                         {Object.keys(savedResponses).map((prompt, index) => (
@@ -138,20 +137,8 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
                     </div>
                 }
             </div>
-                
         </Page>
   );
-=======
-                {savedResponses.length > 0 &&
-                <div className={styles.responses}>
-                    {Object.keys(savedResponses).map((prompt, index) => (
-                        <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
-                    ))}
-                </div>}
-            </div>
-        </Page>
-    );
->>>>>>> origin/main
 }
 
 //redirect page to login if user is not logged in and get list of user's saved responses
