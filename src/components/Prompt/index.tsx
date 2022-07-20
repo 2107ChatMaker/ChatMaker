@@ -1,3 +1,4 @@
+//custom style
 import styles from './Prompt.module.sass';
 
 export default function Prompt({prompt, onClick}: {prompt: string, onClick: () => void}) {

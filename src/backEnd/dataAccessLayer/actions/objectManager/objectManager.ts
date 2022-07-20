@@ -1,11 +1,17 @@
-import mongoose, { Model, ObjectId, Schema } from "mongoose";
-import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { Tag } from "@/utility/Enums/tag";
+//mongoose imports
+import mongoose from "mongoose";
+//database
 import Database from "@/database/database";
+//models
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";
 import ApprovedResponseModel from "@/dataAccessLayer/schemas/approvedResponse";
+//interfaces
 import { CMResponse } from "@interfaces/Response";
+import { DatabaseObject } from "@interfaces/DatabaseObject";
+//tag enum
+import { Tag } from "@/utility/Enums/tag";
+
 
 export class ObjectManager {
 

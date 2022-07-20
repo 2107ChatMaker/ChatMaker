@@ -1,33 +1,35 @@
-import Page from "@components/templates/Page";
+import { useState } from "react";
+//react imports
 import { getSession, signOut } from 'next-auth/react';
-import { Logout } from "@mui/icons-material";
-import PageTitle from "@components/PageTitle";
-import styles from "@styles/Profile.module.sass";
 import Link from "next/link";
+//utils
+import axios from "@utils/constants/axios";
+//material UI
+import { Logout } from "@mui/icons-material";
+//components
+import Page from "@components/templates/Page";
+import PageTitle from "@components/PageTitle";
+import SavedResponseList from "@components/SavedResponseList";
+import Button from "@components/Button";
+//data access objects
 import {UserController as userController} from "@/dataAccessLayer/actions/user";
 import { ResponseController as responseController } from "@/dataAccessLayer/actions/response";
 import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
+//interfaces
 import type { HashMap } from "@interfaces/HashMap";
-import SavedResponseList from "@components/SavedResponseList";
-import Button from "@components/Button";
-import { useState } from "react";
-import axios from "@utils/constants/axios";
-import { useRouter } from "next/router";
+//custom styles
+import styles from "@styles/Profile.module.sass";
+
 
 export default function Profile({user, savedResponses, savedResponsesIds}: HashMap) {
-
   //list of selected saved responses
   const [selectedResponses, setSelectedResponses] = useState([]);
-
   //user id and email
   const { id: uid, email } = user;
-
   //handle selecting response 
   const handleSelect = (_id: string, isSelected: boolean) => {
-
     //if response is selected/checked
     if (isSelected) {
-
       //add response to selected responses list
       const res = selectedResponses.concat(_id);
       setSelectedResponses(res);
@@ -40,10 +42,8 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
   //handle deleting selected responses
   const handleDelete = async () => {
     try {
-
         //check if there is any selected response
         if (selectedResponses.length > 0) {
-            
             //delete selected responses from user saved responses
             const deletedResponses = savedResponsesIds.filter(response => selectedResponses.includes(response._id));
             const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
@@ -117,13 +117,10 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session && session.user) {
-
         //get user save responses ids
         const saveResponsesIds: string[] = await userController.getSavedResponses(session.user.id);
-
         //get saved responses by ids
         const savedResponses = await responseController.getResponsesByIds(saveResponsesIds);
-
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);
 

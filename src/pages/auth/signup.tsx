@@ -1,8 +1,12 @@
-import styles from "@styles/AuthForm.module.sass";
+//react imports
+import { getSession } from "next-auth/react";
+//components
 import Background from "@components/Background";
 import NextHead from "@components/NextHead";
-import { getSession } from "next-auth/react";
 import SignupForm from "@components/SignupForm";
+//custom styles
+import styles from "@styles/AuthForm.module.sass";
+
 
 export default function Signup() {
     return (

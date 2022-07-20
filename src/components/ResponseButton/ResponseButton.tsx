@@ -1,5 +1,5 @@
-//style of the general button
-import style from './ResponseButton.module.sass';
+//react import
+import { ReactNode } from 'react';
 //MUI imports for the icons in the buttons
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
@@ -8,7 +8,9 @@ import FastForwardOutlinedIcon from '@mui/icons-material/FastForwardOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import { ReactNode } from 'react';
+//custom style
+import style from './ResponseButton.module.sass';
+
 
 interface Props {
     style: string,

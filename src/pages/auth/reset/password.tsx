@@ -1,13 +1,19 @@
-import Template from "@components/templates/Verification";
-import styles from "@styles/ResetPassword.module.sass";
-import Input from "@components/Input";
-import {useState} from "react";
+//react imports
+import { useRouter } from "next/router";
+import { useState } from "react";
+//utils
 import axios from "@utils/constants/axios";
-import { Mail, Key } from "@mui/icons-material";
 import { signupValidation as validation } from "@utils/form/SignupValidation";
 import useForm from "@utils/hook/useForm";
+//material UI
+import { Mail, Key } from "@mui/icons-material";
+//components
+import Template from "@components/templates/Verification";
 import Button from "@components/Button";
-import { useRouter } from "next/router";
+import Input from "@components/Input";
+//custom styles
+import styles from "@styles/ResetPassword.module.sass";
+
 
 interface FormData {
     email: string; 

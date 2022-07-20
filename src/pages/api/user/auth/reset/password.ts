@@ -1,8 +1,12 @@
+//react imports
 import { NextApiRequest, NextApiResponse } from "next";
+//utils
 import { sendPasswordConfirmation } from "@utils/mailing/SendEmail";
-import { UserController } from "@/dataAccessLayer/actions/user";
 import { generateToken } from "@utils/token/Token";
 import { hash } from 'bcrypt';
+//data access object
+import { UserController } from "@/dataAccessLayer/actions/user";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {

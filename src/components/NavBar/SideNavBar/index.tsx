@@ -1,11 +1,17 @@
-import styles from './SideNavBar.module.sass';
-import { Icon } from "@mui/material";
+//react imports
 import Image from 'next/image';
-import {useEffect, useState} from 'react';
-import {motion} from 'framer-motion';
-import NavItem from './SideNavItem';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { signOut, useSession } from 'next-auth/react';
+//material UI
+import { Icon } from "@mui/material";
+//component
+import NavItem from './SideNavItem';
+//animation logic
 import animation from "@utils/constants/animations/sidenavbar";
+//custom style
+import styles from './SideNavBar.module.sass';
+
 
 export default function SideNavBar() {
     

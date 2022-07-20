@@ -1,7 +1,11 @@
-import UserModel from "@/dataAccessLayer/schemas/user";
+//react imports
+import { NextApiRequest, NextApiResponse } from "next";
+//utils
 import { verifyToken } from "@utils/token/Token";
 import { sendEmailVerification } from "@utils/mailing/SendEmail";
-import { NextApiRequest, NextApiResponse } from "next";
+//data access object
+import UserModel from "@/dataAccessLayer/schemas/user";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {

@@ -1,6 +1,9 @@
-import { Search } from "@mui/icons-material";
 import { useState, FormEvent } from "react";
+//material UI
+import { Search } from "@mui/icons-material";
+//custom style
 import styles from "./SearchBar.module.sass";
+
 
 //props for the search bar
 interface Props{

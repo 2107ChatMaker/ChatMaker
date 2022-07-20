@@ -1,6 +1,10 @@
-import styles from './Input.module.sass';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+//react imports
 import { useState, ReactNode, ChangeEvent } from 'react';
+//material UI imports
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+//custom style
+import styles from './Input.module.sass';
+
 
 interface InputProps {
     type: string;
@@ -14,7 +18,7 @@ interface InputProps {
 }
 
 export default function Input(props: InputProps) {
-
+    
     //states for managing the input type password
     const [type,setType] = useState(props.type);
     const [showPassword, setShowPassword] = useState(false);

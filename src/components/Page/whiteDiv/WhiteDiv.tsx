@@ -1,4 +1,6 @@
+//react import
 import { ReactNode } from 'react';
+//custom style
 import styles from './WhiteDiv.module.sass';
 
 interface Props {

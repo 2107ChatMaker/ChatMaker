@@ -1,13 +1,19 @@
-import { Key, MailOutline} from '@mui/icons-material';
-import Input from "@components/Input";
-import Button from "@components/Button";
-import styles from "./LoginForm.module.sass";
-import useForm from '@utils/hook/useForm';
-import {loginValidation as validation} from '@utils/form/LoginValidation';
-import { LoginFormData as FormData } from '@interfaces/LoginFormData';
+//react imports
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+//material UI
+import { Key, MailOutline} from '@mui/icons-material';
+//components
+import Input from "@components/Input";
+import Button from "@components/Button";
 import AuthFormWrapper from '@components/AuthFormWrapper';
+//utilities
+import {loginValidation as validation} from '@utils/form/LoginValidation';
+import useForm from '@utils/hook/useForm';
+//interfaces
+import { LoginFormData as FormData } from '@interfaces/LoginFormData';
+//style
+import styles from "./LoginForm.module.sass";
 
 
 export default function LoginForm({signIn}) {

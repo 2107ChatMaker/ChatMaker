@@ -1,8 +1,12 @@
-import { useRouter } from "next/router";
+//react imports
 import Link from "next/link";
-import styles from './FormNavItem.module.sass';
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
+//utils
 import { paths } from "@utils/constants/paths";
+//custom global sass file
+import styles from './FormNavItem.module.sass';
+
 
 interface FormNavItemProps {
     direction: 'login' | 'signup';

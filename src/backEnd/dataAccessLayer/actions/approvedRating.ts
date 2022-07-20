@@ -1,6 +1,9 @@
+//database
 import Database from "@/database/database";
+//models
 import ApprovedResponseModel from "../schemas/approvedResponse";
 import ResponseModel from "../schemas/response";
+
 
 //moves the approved item from database to approved database
 export default async function approvedResponseRatings(){

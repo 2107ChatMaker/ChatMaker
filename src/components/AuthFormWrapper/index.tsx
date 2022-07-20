@@ -1,10 +1,14 @@
+//react imports
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
+//style sheet
 import styles from './AuthFormWrapper.module.sass';
+//components
 import FormNavItem from './FormNavItem';
 import FormLogo from './FormLogo';
 import FormLink from './FormLink';
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
 import Introduction from '@components/Introduction';
+
 
 //props type
 interface AuthFormWrapperProps {
@@ -12,7 +16,6 @@ interface AuthFormWrapperProps {
 }
 
 export default function AuthFormWrapper({children}: AuthFormWrapperProps) {
-    
     return (
         <div className={styles.container}>
             <motion.div

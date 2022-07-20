@@ -1,26 +1,30 @@
-import styles from '@styles/ExplorePrompts.module.sass';
-import Page from '@components/templates/Page';
+//react imports
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { getSession } from 'next-auth/react';
 import Image from 'next/image';
-import { Icon } from "@mui/material";
+//utils
+import axios from '@utils/constants/axios';
+//material UI
+import { Icon, useMediaQuery } from "@mui/material";
+//components
+import Page from '@components/templates/Page';
 import PageTitle from '@components/PageTitle';
-import { useMediaQuery } from '@mui/material';
-import {useRouter} from 'next/router';
 import SearchBar from '@components/SearchBar';
 import Prompt from '@components/Prompt';
+//data access object
 import { PromptController as pController } from '@/dataAccessLayer/actions/prompt';
-import { getSession } from 'next-auth/react';
+//interfaces
 import type { HashMap } from '@interfaces/HashMap';
-import axios from '@utils/constants/axios';
-import { useState } from 'react';
+//custom styles
+import styles from '@styles/ExplorePrompts.module.sass';
+
 
 export default function Explore({user, prompts}: HashMap) {
-
   //list of all the prompts being displayed
   const [promptsList, setPrompts] = useState(prompts);
-
   //boolean to check if the screen size matches a mobile screen
   const match = useMediaQuery('(max-width:768px)');
-
   //router to navigate to the create prompt and respond page
   const router = useRouter();
 
@@ -32,7 +36,6 @@ export default function Explore({user, prompts}: HashMap) {
       if(search ===  ""){
         setPrompts(prompts);
       } else{
-
         //fetches the results from the search query
         const {data} = await axios.get(`/api/prompt/search/${search}`);
         setPrompts(data.reverse());
@@ -77,7 +80,6 @@ export default function Explore({user, prompts}: HashMap) {
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
-
   const session = await getSession(context);
   if (session && session.user) {
       const prompts = await pController.getPrompts();

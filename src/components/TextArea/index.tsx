@@ -1,5 +1,8 @@
-import styles from './TextArea.module.sass';
+//react imports
 import { ChangeEventHandler } from 'react';
+//custom style
+import styles from './TextArea.module.sass';
+
 
 interface Props{
     value: string,

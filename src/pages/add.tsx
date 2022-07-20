@@ -1,20 +1,24 @@
-import Page from '@components/templates/Page';
-import styles from '@styles/Add.module.sass';
-import { HashMap } from '@interfaces/HashMap';
-import axios from '@utils/constants/axios';
+//react imports
+import { getSession } from 'next-auth/react';
 import useForm from '@hook/useForm';
+//utils
+import axios from '@utils/constants/axios';
+//components
+import Page from '@components/templates/Page';
 import TextArea from '@components/TextArea';
 import Button from '@components/Button';
-import {getSession} from 'next-auth/react';
 import PageTitle from '@components/PageTitle';
+//interfaces
+import { HashMap } from '@interfaces/HashMap';
+//custom styles
+import styles from '@styles/Add.module.sass';
+
 
 export default function AddPrompt({user}: HashMap) {
-
     const onAddPrompt = async () => {
-
         //get userID from session
         const userId = user.id;
-        
+    
         try{
             //fetch request to add prompt
             const {data} = await axios.post('/api/prompt', {userId, prompt: form.prompt});
@@ -26,7 +30,6 @@ export default function AddPrompt({user}: HashMap) {
 
     //validates the prompt entered by the user
     const validatePrompt = ({prompt}) => {
-
         //prompt length must be at least 10 characters
         if (prompt.length < 10) {
             return {

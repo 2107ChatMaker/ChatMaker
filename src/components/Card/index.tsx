@@ -1,5 +1,8 @@
+//react import
 import { ReactNode } from "react";
+//custom style
 import styles from './Card.module.sass';
+
 
 interface Props {
     variant?: "dark" | "light",

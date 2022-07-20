@@ -1,10 +1,15 @@
+//react imports
 import { useState } from 'react';
 import React from 'react';
-import {Tag} from '@/utility/Enums/tag';
-import styles from './AddResponseHeader.module.sass';
-import Button from '@components/Button';
+//enum
+import { Tag } from '@/utility/Enums/tag';
+//material UI
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+//component
+import Button from '@components/Button';
+//custom style
+import styles from './AddResponseHeader.module.sass';
 
 
 interface Props {
@@ -13,14 +18,14 @@ interface Props {
 };
 
 export default function AddResponseForm(props: Props) {
-    //setting the states for my data
+    //setting the states for my response and tag data
     const [response, setResponse] = useState("");
     const [tags, setTags] = useState([]);
 
     //getting promptID and userID from the props that will be passed in by getServerSideProps when the page renders
     const promptID = props.promptID;
     const userID = props.userID;
-
+    //creating a list of the tags we have in the Enum file
     const tagValues = Object.values(Tag);
 
     //handling the input from the response input
@@ -58,11 +63,13 @@ export default function AddResponseForm(props: Props) {
         setResponse("");
         setTags([]);
     };
+
     return (
         <form onSubmit={handleSubmit} className={styles.form} id="myform">
-            <input type="text" value={response} id="newResponse" name="newResponse" placeholder="What is your response?" className={styles.responseInput} onChange={handleResponseChange} required />
+            {/* response input with HTML validation */}
+            <input type="text" value={response} id="newResponse" name="newResponse" placeholder="What is your response?" className={styles.responseInput} onChange={handleResponseChange} maxLength={145} minLength={2} required />
             <label className={styles.labelStyle}>Tags:</label>
-            {/*Reference: Material UI Docs*/}
+            {/*Reference: Material UI Autocomplete Docs*/}
             <Autocomplete
                 multiple
                 id="tags"

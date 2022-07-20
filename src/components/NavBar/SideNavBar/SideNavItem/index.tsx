@@ -1,7 +1,11 @@
-import styles from './SideNavItem.module.sass';
-import Link from 'next/link';
-import getTabLinkAndIcon  from '@utils/navigation/GetTabLinkAndIcon';
+//react imports
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+//custom style
+import styles from './SideNavItem.module.sass';
+//utilities
+import getTabLinkAndIcon  from '@utils/navigation/GetTabLinkAndIcon';
+
 
 export default function NavItem({name, onClick}: {name: string, onClick?: () => void}) {
     

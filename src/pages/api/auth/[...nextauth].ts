@@ -1,10 +1,15 @@
+//next-auth imports
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider  from 'next-auth/providers/credentials';
-import { compare } from 'bcrypt';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import Database from '@/database/database';
-import User from '@/dataAccessLayer/schemas/user';
+import { compare } from 'bcrypt';
+//utils
 import { paths } from "@utils/constants/paths";
+//database
+import Database from '@/database/database';
+//data access object
+import User from '@/dataAccessLayer/schemas/user';
+
 
 export const authOptions: NextAuthOptions = {
     adapter: MongoDBAdapter(Database.setupAdapterConnection()),

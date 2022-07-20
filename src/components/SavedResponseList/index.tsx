@@ -1,5 +1,7 @@
-import styles from './SavedResponseList.module.sass';
+//component
 import SavedResponse from './SavedResponse';
+//custom style
+import styles from './SavedResponseList.module.sass';
 
 export default function SavedResponseList({prompt, title, onSelect}) {
     return (

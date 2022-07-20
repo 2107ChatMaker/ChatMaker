@@ -1,4 +1,6 @@
+//mongoose imports
 import { model, models, Schema } from "mongoose";
+
 
 //user mongoose schema
 const userSchema = new Schema({

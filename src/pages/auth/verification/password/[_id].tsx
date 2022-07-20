@@ -1,9 +1,14 @@
-import Template from "@components/templates/Verification";
-import styles from "@styles/VerificationPage.module.sass";
-import Button from "@components/Button";
+//react imports
 import { useRouter } from "next/router";
-import axios from "@utils/constants/axios";
 import { useState } from 'react';
+//utils
+import axios from "@utils/constants/axios";
+//components
+import Template from "@components/templates/Verification";
+import Button from "@components/Button";
+//custom styles
+import styles from "@styles/VerificationPage.module.sass";
+
 
 export default function PasswordVerification() {
     const router = useRouter();

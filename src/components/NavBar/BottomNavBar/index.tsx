@@ -1,10 +1,14 @@
-import { BottomNavigation, BottomNavigationAction } from '@mui/material';
-import {useEffect, useState, SyntheticEvent} from 'react';
-import { Paper } from '@mui/material';
+//react imports
 import { useSession } from 'next-auth/react';
-import GetTabName from '@utils/navigation/GetTabName';
 import { useRouter } from 'next/router';
+import {useEffect, useState, SyntheticEvent} from 'react';
+//material UI
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { Paper } from '@mui/material';
+//utilities
+import GetTabName from '@utils/navigation/GetTabName';
 import getTabLinkAndIcon from '@utils/navigation/GetTabLinkAndIcon';
+
 
 const navStyle = {
     width: '100%',
@@ -25,13 +29,9 @@ const itemStyle = {
 };
 
 export default function BottomNavBar() {
-
   const router = useRouter();
-
   const [value, setValue] = useState(()=>GetTabName(router.asPath));
-
   const [navItems, setNavItems] = useState(['Rate', 'Explore', 'Login']);
-
   const {data: session} = useSession();
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {

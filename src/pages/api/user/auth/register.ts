@@ -1,9 +1,14 @@
+//react imports
 import { NextApiRequest, NextApiResponse } from "next";
 import { hash } from 'bcrypt';
-import Database from "@/database/database";
-import User from "@/dataAccessLayer/schemas/user";
+//utils
 import { sendEmailVerification } from "@utils/mailing/SendEmail";
 import { generateToken } from "@utils/token/Token";
+//database
+import Database from "@/database/database";
+//data access object
+import User from "@/dataAccessLayer/schemas/user";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { email , password }: {email: string, password: string} = req.body;

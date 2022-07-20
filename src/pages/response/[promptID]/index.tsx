@@ -1,6 +1,7 @@
 //react imports
 import { getSession, useSession } from 'next-auth/react';
 import { Key, useEffect, useState } from 'react';
+import { _id } from '@next-auth/mongodb-adapter';
 //component imports
 import ResponseDiv from '@components/Page/responseDiv/ResponseDiv';
 import AddResponseHeader from '@components/Page/addResponse/AddResponseHeader';
@@ -10,7 +11,8 @@ import Page from '@templates/Page';
 import {ResponseController} from '@/dataAccessLayer/actions/response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
 import { CMResponse } from '@interfaces/Response';
-import { _id } from '@next-auth/mongodb-adapter';
+
+
 
 //interface with the types that will be held
 interface Props {
@@ -32,26 +34,26 @@ export default function ResponsePage(props: Props) {
     }, [session]);
     
     return (
-            <Page>
-                {/* displaying the prompt retrieved from the database */}
-                <AddResponseHeader prompt={props.thisprompt} userID={userID} promptID={props.thisPromptID} />
-                {/* mapping the responses to the divs */}
-                <div className={styles.responseContainer}>
-                {
-                    props.responses.map(
-                        (CMResponse) => {
-                            return(
-                                <div key={ CMResponse._id as Key}>
-                                    <ResponseDiv responseID={CMResponse._id} thisPromptID={props.thisPromptID} userID={userID} prompt={CMResponse.response as string}>
-                                        {CMResponse.tags}    
-                                    </ResponseDiv>
-                                </div>
-                            );
-                        }
-                    )
-                };
-                </div>
-            </Page>
+        <Page>
+            {/* displaying the prompt retrieved from the database */}
+            <AddResponseHeader prompt={props.thisprompt} userID={userID} promptID={props.thisPromptID} />
+            {/* mapping the responses to the divs */}
+            <div className={styles.responseContainer}>
+            {
+                props.responses.map(
+                    (CMResponse) => {
+                        return(
+                            <div key={ CMResponse._id as Key}>
+                                <ResponseDiv responseID={CMResponse._id} thisPromptID={props.thisPromptID} userID={userID} prompt={CMResponse.response as string}>
+                                    {CMResponse.tags}    
+                                </ResponseDiv>
+                            </div>
+                        );
+                    }
+                )
+            };
+            </div>
+        </Page>
     );
 };
 

@@ -1,14 +1,21 @@
-import Input from '@components/Input';
-import Button from '@components/Button';
-import {Key, MailOutline, Router} from '@mui/icons-material';
-import styles from './SignupForm.module.sass';
-import useForm from '@utils/hook/useForm';
-import {signupValidation as validation} from '@utils/form/SignupValidation';
-import { SignupFormData as FormData } from '@interfaces/SignupFormData';
-import axios from '@utils/constants/axios';
+//react imports
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+//utils
+import useForm from '@utils/hook/useForm';
+import axios from '@utils/constants/axios';
+//material UI
+import { Key, MailOutline } from '@mui/icons-material';
+//components
+import Input from '@components/Input';
+import Button from '@components/Button';
 import AuthFormWrapper from '@components/AuthFormWrapper';
+//utilities
+import {signupValidation as validation} from '@utils/form/SignupValidation';
+//interfaces
+import { SignupFormData as FormData } from '@interfaces/SignupFormData';
+//custom style
+import styles from './SignupForm.module.sass';
 
 
 export default function SignupForm() {
