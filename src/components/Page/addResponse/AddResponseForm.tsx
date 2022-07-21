@@ -46,10 +46,11 @@ export default function AddResponseForm(props: Props) {
                 tags
             };
             //doing a POST to the database
-            const post = await axios.post("/api/response/", data);
+            const result = await axios.post("/api/response/", data);
+            alert(result.data.message);
             //catching any errors that come out
-        } catch (err) {
-            alert(err.response.data.message);
+        } catch (error) {
+            alert(`${error.response.data.message}, please try agan later`);
         };
         //since we already used the data, we will set these back to empty
         setResponse("");
