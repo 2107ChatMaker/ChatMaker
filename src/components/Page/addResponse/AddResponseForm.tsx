@@ -10,6 +10,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@components/Button';
 //custom style
 import styles from './AddResponseHeader.module.sass';
+import axios from '@utils/constants/axios';
 
 
 interface Props {
@@ -45,17 +46,11 @@ export default function AddResponseForm(props: Props) {
                 tags
             };
             //doing a POST to the database
-            const post = await fetch("http://localhost:3000/api/responsePage", 
-                {
-                    "method": "POST",
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": JSON.stringify(data)
-                });
+            const post = await axios.post("/api/response/", data);
             //catching any errors that come out
         } catch (err) {
-            };
+            alert(err.response.data.message);
+        };
         //since we already used the data, we will set these back to empty
         setResponse("");
         setTags([]);

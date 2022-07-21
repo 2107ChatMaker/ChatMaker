@@ -12,6 +12,7 @@ import { DatabaseObject } from "@interfaces/DatabaseObject";
 //tag enum
 import { Tag } from "@/utility/Enums/tag";
 
+import { HashMap } from "@interfaces/HashMap";
 
 export class ObjectManager {
 
@@ -23,6 +24,15 @@ export class ObjectManager {
         const buildModel = new model(values);
         
         return  buildModel.save();
+    }
+
+    static async create(model: mongoose.Model<any>, values: any) {
+        /// establishes a connection to the database
+        await Database.setupClient();
+       
+        const result = await model.create(values);
+
+        return result;
     }
 
     /// return all entries in the database that match the given model
@@ -57,13 +67,17 @@ export class ObjectManager {
         await Database.setupClient();
         // get the number of documents in the given model
         const numberOfDocuments: number = await model.estimatedDocumentCount();
+        //get updated response IDs - response which have been rated
+        const updatedResponsesIds = await model.find({
+            '_id': { $in: ratedResponseIDs }
+        }).select('_id');
         // get a random number of documents to skip
-        var random = Math.floor(Math.random() * (numberOfDocuments-ratedResponseIDs.length));  
+        var random = Math.floor(Math.random() * (numberOfDocuments-updatedResponsesIds.length));
         /// returns the request query that needs to be Cast to the requested object type 
         const foundEntry = await model.findOne({
-            '_id': { $nin: ratedResponseIDs }
+            '_id': { $nin: updatedResponsesIds }
         }).skip(random);
-        
+
         return foundEntry;
     }
     
@@ -77,14 +91,14 @@ export class ObjectManager {
         return foundEntries;
     }
 
-    /// delete an entry in the mongoose document for the given model that matches the given id
-    static async deleteByID(model: mongoose.Model<any>, id: string) {
-        /// establishes a connecti on to the database
+    //finds the document that matches the regex string
+    static async  findByRegex(model: mongoose.Model<any>, regex: string, field: string) {
+        /// establishes a connection to the database
         await Database.setupClient();
-        /// deletes the given entry and returns whether it was successful
-        const deleteSuccessful = await model.deleteOne({ _id: id });
-        
-        return deleteSuccessful.deletedCount == 1;
+        /// returns a mongoose query that only includes documents that contain regex string 
+        const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
+
+        return foundEntries;
     }
 
     /// find all documents for the given model that contains the given tags
@@ -95,6 +109,25 @@ export class ObjectManager {
         const foundEntries = await model.find({ tags: {$all:  [inputTags]} });
         
         return foundEntries;
+    }
+
+    //// find documents by a query object   
+     static async findByQuery(model: mongoose.Model<any>, query: HashMap) {         
+        /// establishes a connection to the database        
+        await Database.setupClient();        
+        /// returns a mongoose document that that matches the query    
+        const foundEntries = await model.findOne(query);          
+        return foundEntries;    
+     }
+
+    /// delete an entry in the mongoose document for the given model that matches the given id
+    static async deleteByID(model: mongoose.Model<any>, id: string) {
+        /// establishes a connecti on to the database
+        await Database.setupClient();
+        /// deletes the given entry and returns whether it was successful
+        const deleteSuccessful = await model.deleteOne({ _id: id });
+        
+        return deleteSuccessful.deletedCount == 1;
     }
 
     /// find and return all the repsonses that match the given prompt(id)
@@ -108,11 +141,11 @@ export class ObjectManager {
     }
 
     //find responses by their ids
-    static async findResponsesByIds(ids: string[]) {
+    static async findByIds(ids: string[], model: mongoose.Model<any>) {
         /// establishes a connection to the database
         await Database.setupClient();
         // find by ID and update the given values, returning the updated document when completed
-        var returnResult = await ResponseModel.find({"_id": {$in: ids}});
+        var returnResult = await model.find({"_id": {$in: ids}});
         
         return returnResult;
     }
@@ -148,24 +181,12 @@ export class ObjectManager {
     } 
 
     /// updates the document that matches the id with the valuse in the obj parameter for the given model
-    static async updateByID(_id: string, obj: DatabaseObject, model: mongoose.Model<any>) {
+    static async updateByID(_id: string, obj: HashMap, model: mongoose.Model<any>) {
         /// establishes a connection to the database
         await Database.setupClient();
-        /// converts the obj values to a hashmap
-        const values = obj.toHashMap();
         // find by ID and update the given values, returning the updated document when completed
-        var returnResult = await model.findOneAndUpdate({_id: _id}, values, { returnDocument: 'after' });
+        var returnResult = await model.findOneAndUpdate({_id: _id}, obj, { returnDocument: 'after' });
         
         return returnResult;
     } 
-
-    //finds the document that matches the regex string
-    static async  findByRegex(model: mongoose.Model<any>, regex: string, field: string) {
-        /// establishes a connection to the database
-        await Database.setupClient();
-        /// returns a mongoose query that only includes documents that contain regex string 
-        const foundEntries = await model.find({ [field]: {$regex: regex, $options: 'i'}});
-
-        return foundEntries;
-    }
 }

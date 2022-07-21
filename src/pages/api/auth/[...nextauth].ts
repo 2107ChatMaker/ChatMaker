@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
                     if (!user.isVerified) {
 
                         //return email not verified error if not verified
-                        throw new Error('email is not verified');
+                        throw new Error('email is not verified?' + user._id);
                     }
                 } else {
 

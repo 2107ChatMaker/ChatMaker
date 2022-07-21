@@ -8,7 +8,6 @@ import { UserController } from "@/dataAccessLayer/actions/user";
 import { Prompt } from "@interfaces/Prompt";
 import { CMResponse } from "@interfaces/Response";
 
-
 // an interface used to help parse the request values when rating a response
 interface Rate {
     // the mongoose generated id of the response being rated

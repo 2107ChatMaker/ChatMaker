@@ -25,7 +25,7 @@ export default function LoginForm({signIn}) {
     const { error } = router.query;
 
     //sign in 
-    const onSignIn = () => {
+    const onSignIn = async() => {
         signIn("credentials", { email: formData.email, password: formData.password });
     };
 
@@ -54,8 +54,7 @@ export default function LoginForm({signIn}) {
                         required={true}
                         error={
                             errors.email? errors.email: 
-                            error === "email does not exist"? error:
-                            error === "email is not verified"? error:""
+                            error === "email does not exist"? error:""
                         }
                     >
                         <MailOutline  color='disabled'/>
