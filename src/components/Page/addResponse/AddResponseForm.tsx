@@ -21,7 +21,6 @@ export default function AddResponseForm(props: Props) {
     //getting promptID and userID from the props that will be passed in by getServerSideProps when the page renders
     const promptID = props.promptID;
     const userID = props.userID;
-
     const tagValues = Object.values(Tag);
 
     //handling the input from the response input
@@ -41,15 +40,17 @@ export default function AddResponseForm(props: Props) {
                 tags
             };
             //doing a POST to the database
-            const post = await axios.post("/api/response/", data);
+            const result = await axios.post("/api/response/", data);
+            alert(result.data.message);
             //catching any errors that come out
-        } catch (err) {
-            alert(err.response.data.message);
+        } catch (error) {
+            alert(`${error.response.data.message}, please try agan later`);
         };
         //since we already used the data, we will set these back to empty
         setResponse("");
         setTags([]);
     };
+
     return (
         <form onSubmit={handleSubmit} className={styles.form} id="myform">
             <input type="text" value={response} id="newResponse" name="newResponse" placeholder="What is your response?" className={styles.responseInput} onChange={handleResponseChange} required />
