@@ -5,12 +5,12 @@ import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 //data access object
 import { ObjectManager } from "./objectManager/objectManager";
+import { ApprovedResponseController } from "./approvedRating";
 //model
 import ResponseModel from "../schemas/response";
 //tags enum
 import { Tag } from "@/utility/Enums/tag";
 
-import { ApprovedResponseController } from "./approvedRating";
 
 // actions accessable to manipulate responses or add new ones
 export class ResponseController implements DatabaseObject, Saveable, CMResponse {

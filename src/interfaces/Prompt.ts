@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose";
 
+
 // represents a prompt which is used to give context to the responses
 export interface Prompt {
     //generated ID of the prompt

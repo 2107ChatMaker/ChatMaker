@@ -1,5 +1,6 @@
 import { Tag } from "@/utility/Enums/tag";
 
+
 // represents a the data on card that is generated on the rate page
 export interface RatingCard {
     // the mongoose generated ID of the response

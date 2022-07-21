@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 //hook to update form change and errors and handling submit
 export default function useForm<T>(

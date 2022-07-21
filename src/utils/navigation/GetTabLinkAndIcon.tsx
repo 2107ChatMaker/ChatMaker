@@ -1,4 +1,4 @@
-import {Explore, Star, Person, AddBox, ExitToApp, Login} from '@mui/icons-material';
+import { Explore, Star, Person, AddBox, ExitToApp, Login } from '@mui/icons-material';
 import { paths } from '@constants/paths';
 import { ReactNode } from 'react';
 

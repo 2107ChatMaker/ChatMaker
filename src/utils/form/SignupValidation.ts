@@ -1,4 +1,4 @@
-import { SignupFormData as FormData} from "@interfaces/SignupFormData";
+import { SignupFormData as FormData } from "@interfaces/SignupFormData";
 
 export function signupValidation(formData: FormData): {} {
     

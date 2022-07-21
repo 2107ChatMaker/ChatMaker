@@ -1,6 +1,7 @@
 //react import
 import Head from "next/head";
 
+
 interface NextHeadProps {
     title?: string;
     name?: string;

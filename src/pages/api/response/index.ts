@@ -2,7 +2,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 //data access objects
 import { ResponseController } from "@/dataAccessLayer/actions/response";
-import { UserController } from "@/dataAccessLayer/actions/user";
 //interfaces
 import { CMResponse } from "@interfaces/Response";
 

@@ -1,7 +1,7 @@
 //react imports
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import {useEffect, useState, SyntheticEvent} from 'react';
+import { useEffect, useState, SyntheticEvent } from 'react';
 //material UI
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { Paper } from '@mui/material';

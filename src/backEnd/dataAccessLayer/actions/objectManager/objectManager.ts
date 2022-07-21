@@ -9,10 +9,10 @@ import ApprovedResponseModel from "@/dataAccessLayer/schemas/approvedResponse";
 //interfaces
 import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
+import { HashMap } from "@interfaces/HashMap";
 //tag enum
 import { Tag } from "@/utility/Enums/tag";
 
-import { HashMap } from "@interfaces/HashMap";
 
 export class ObjectManager {
 

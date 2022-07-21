@@ -2,13 +2,13 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 //material UI
-import { Key, MailOutline} from '@mui/icons-material';
+import { Key, MailOutline } from '@mui/icons-material';
 //components
 import Input from "@components/Input";
 import Button from "@components/Button";
 import AuthFormWrapper from '@components/AuthFormWrapper';
 //utilities
-import {loginValidation as validation} from '@utils/form/LoginValidation';
+import { loginValidation as validation } from '@utils/form/LoginValidation';
 import useForm from '@utils/hook/useForm';
 //interfaces
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
@@ -16,11 +16,10 @@ import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 import styles from "./LoginForm.module.sass";
 
 
-export default function LoginForm({signIn}) {
+export default function LoginForm({ signIn }) {
     
     //router for getting error from server by query params
     const router = useRouter();
-
     //server side validation error
     const { error } = router.query;
 

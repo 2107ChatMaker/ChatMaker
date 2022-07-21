@@ -8,10 +8,9 @@ import AddResponseHeader from '@components/Page/addResponse/AddResponseHeader';
 import styles from '@components/Page/addResponse/AddResponseHeader.module.sass';
 import Page from '@templates/Page';
 //controllers
-import {ResponseController} from '@/dataAccessLayer/actions/response';
+import { ResponseController } from '@/dataAccessLayer/actions/response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
 import { CMResponse } from '@interfaces/Response';
-
 
 
 //interface with the types that will be held

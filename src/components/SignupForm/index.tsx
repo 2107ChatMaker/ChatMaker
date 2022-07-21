@@ -4,14 +4,13 @@ import { useRouter } from 'next/router';
 //utils
 import useForm from '@utils/hook/useForm';
 import axios from '@utils/constants/axios';
+import {signupValidation as validation} from '@utils/form/SignupValidation';
 //material UI
 import { Key, MailOutline } from '@mui/icons-material';
 //components
 import Input from '@components/Input';
 import Button from '@components/Button';
 import AuthFormWrapper from '@components/AuthFormWrapper';
-//utilities
-import {signupValidation as validation} from '@utils/form/SignupValidation';
 //interfaces
 import { SignupFormData as FormData } from '@interfaces/SignupFormData';
 //custom style
