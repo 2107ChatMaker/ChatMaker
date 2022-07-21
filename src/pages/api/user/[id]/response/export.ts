@@ -1,7 +1,10 @@
+//react imports
+import { NextApiRequest, NextApiResponse } from "next";
+//data access objects
 import { PromptController } from "@/dataAccessLayer/actions/prompt";
 import { ApprovedResponseController } from "@/dataAccessLayer/actions/approvedRating";
 import { UserController } from "@/dataAccessLayer/actions/user";
-import { NextApiRequest, NextApiResponse } from "next";
+
 
 // used to get the information to make a rating card or to update (+/-) a resonses rating
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

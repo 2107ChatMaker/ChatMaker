@@ -1,4 +1,6 @@
+//custom style
 import styles from "./RateCard.module.sass";
+
 
 // Creates a card for the rating page using a given prompt and response to generate it.
 export default function RateCard({response, prompt, tags}) {

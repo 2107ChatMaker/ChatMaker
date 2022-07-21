@@ -1,14 +1,14 @@
 // react imports
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import styles from '../styles/rate.module.sass';
+//material UI
+import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
 // components
 import Page from '@components/templates/Page';
 import RateCard from '@components/RateCard/RateCard';
 import RateButton from '@components/RateButton';
-import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
 import PageTitle from '@components/PageTitle';
-// backend
+// data access objects
 import { ResponseController } from '@/dataAccessLayer/actions/response';
 import { PromptController } from '@/dataAccessLayer/actions/prompt';
 // interfaces
@@ -18,6 +18,9 @@ import { CMResponse } from '@interfaces/Response';
 import { UserController } from '@/dataAccessLayer/actions/user';
 // utils
 import axios from '@utils/constants/axios';
+//custom styles
+import styles from '../styles/rate.module.sass';
+
 
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
@@ -63,7 +66,7 @@ export default function Rating(props: RatingCard) {
 
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
     async function getNewCard(execute:boolean = false) {
-
+        
         // guards against multiple button presses
         if (execute || (!execute && !buttonClicked)) {
             // stop user from executing this function again until buttonClicked is set to false
@@ -88,16 +91,16 @@ export default function Rating(props: RatingCard) {
 
     // adds or removes 1 from the current responses rating 
     async function rateResponse() {
-        
+
         // build the values to send to the back end 
         let rateValues = {
             responseID: featuredCard.responseId, 
             rating: String(rating),
             userID: userID
         };
-        
+
         const {data: response} = await axios.put("/api/rate", rateValues);
-        
+
     };
 
     // rate the current response and animate it

@@ -1,10 +1,16 @@
+//react imports
 import { ReactNode } from "react";
+import * as React from 'react';
+//mongoose imports
+import { ObjectId } from "mongoose";
+//utils
+import axios from "@utils/constants/axios";
+//material UI
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import Chip from '@mui/material/Chip';
+//custom style
 import styles from '@components/Page/responseDiv/ResponseDiv.module.sass';
-import * as React from 'react';
-import { ObjectId } from "mongoose";
-import axios from "@utils/constants/axios";
+
 
 interface Props {
     children?: ReactNode
@@ -30,6 +36,7 @@ export default function ResponseDiv(props: Props){
             throw new Error(error);
         }
     }
+
     return(
         <>
         <div className={styles.background}>

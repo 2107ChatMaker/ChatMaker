@@ -1,18 +1,26 @@
-import Page from "@components/templates/Page";
-import { getSession, signOut } from 'next-auth/react';
-import { Logout } from "@mui/icons-material";
-import PageTitle from "@components/PageTitle";
-import styles from "@styles/Profile.module.sass";
+//react imports
+import { useRouter } from "next/router";
+import { useState } from "react";
 import Link from "next/link";
-import {UserController as userController} from "@/dataAccessLayer/actions/user";
-import { ApprovedResponseController as arController } from "@/dataAccessLayer/actions/approvedRating";
-import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
+import { getSession, signOut } from 'next-auth/react';
+//utils
+import axios from "@utils/constants/axios";
+//material UI
+import { Logout } from "@mui/icons-material";
+//interfaces
 import type { HashMap } from "@interfaces/HashMap";
+//components
+import Page from "@components/templates/Page";
+import PageTitle from "@components/PageTitle";
 import SavedResponseList from "@components/SavedResponseList";
 import Button from "@components/Button";
-import { useState } from "react";
-import axios from "@utils/constants/axios";
-import { useRouter } from "next/router";
+//controllers
+import { UserController as userController } from "@/dataAccessLayer/actions/user";
+import { ApprovedResponseController as arController } from "@/dataAccessLayer/actions/approvedRating";
+import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
+//custom style
+import styles from "@styles/Profile.module.sass";
+
 
 export default function Profile({user, savedResponses, savedResponsesIds}: HashMap) {
 

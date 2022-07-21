@@ -1,9 +1,13 @@
+//interfaces
 import { HashMap } from "@interfaces/HashMap";
 import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { ObjectManager } from "./objectManager/objectManager";
 import { User } from "@interfaces/User";
+//data access object
+import { ObjectManager } from "./objectManager/objectManager";
+//model
 import UserModel from "../schemas/user";
+
 
 // actions accessable to manipulate responses or add new ones
 export class UserController implements DatabaseObject, Saveable, User {

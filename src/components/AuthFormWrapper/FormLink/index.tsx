@@ -1,7 +1,11 @@
-import styles from './FormLink.module.sass';
+//react imports
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+//utils
 import { paths } from '@utils/constants/paths';
+//our custom global sass file
+import styles from './FormLink.module.sass';
+
 
 export default function FormLink() {
     //router for checking if user is in login or signup page

@@ -1,7 +1,11 @@
+//react imports
 import { NextApiRequest, NextApiResponse } from "next";
-import { UserController } from "@/dataAccessLayer/actions/user";
+//utils
 import { verifyToken } from "@utils/token/Token";
 import { sendPasswordConfirmation } from "@utils/mailing/SendEmail";
+//data access object
+import { UserController } from "@/dataAccessLayer/actions/user";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {

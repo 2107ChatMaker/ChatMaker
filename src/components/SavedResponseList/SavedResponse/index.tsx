@@ -1,6 +1,10 @@
-import styles from './SavedResponse.module.sass';
-import { Checkbox } from '@mui/material';
+//react import
 import { useState } from 'react';
+//material UI
+import { Checkbox } from '@mui/material';
+//custom style
+import styles from './SavedResponse.module.sass';
+
 
 export default function SavedResponse({response: {response: res, _id: id}, onSelect}) {
     

@@ -1,11 +1,15 @@
+//mongo imports
+import { _id } from "@next-auth/mongodb-adapter";
+//interfaces
 import { HashMap } from "@interfaces/HashMap";
 import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { Prompt } from "@interfaces/Prompt";
+//data access object
 import { ObjectManager } from "./objectManager/objectManager";
+//model
 import PromptModel from "../schemas/prompt";
-import { _id } from "@next-auth/mongodb-adapter";
-import mongoose, { ObjectId } from "mongoose";
+
 
 // actions accessable to manipulate promps or add new ones.
 export class PromptController implements DatabaseObject, Saveable, Prompt {

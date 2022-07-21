@@ -1,10 +1,13 @@
-import { ObjectManager } from "@/dataAccessLayer/actions/objectManager/objectManager";
+//react imports
+import { NextApiRequest, NextApiResponse } from "next";
+//data access objects
 import { PromptController } from "@/dataAccessLayer/actions/prompt";
 import { ResponseController } from "@/dataAccessLayer/actions/response";
 import { UserController } from "@/dataAccessLayer/actions/user";
+//interfaces
 import { Prompt } from "@interfaces/Prompt";
 import { CMResponse } from "@interfaces/Response";
-import {NextApiResponse, NextApiRequest} from "next";
+
 
 // an interface used to help parse the request values when rating a response
 interface Rate {

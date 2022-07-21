@@ -1,5 +1,8 @@
+//react imports
 import { ReactNode } from 'react';
+//custom style
 import styles from './PageTitle.module.sass';
+
 
 interface Props {
     children?: ReactNode;

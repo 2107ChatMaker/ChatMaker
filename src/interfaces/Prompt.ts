@@ -1,4 +1,5 @@
-import mongoose, { ObjectId } from "mongoose";
+import { ObjectId } from "mongoose";
+
 
 // represents a prompt which is used to give context to the responses
 export interface Prompt {

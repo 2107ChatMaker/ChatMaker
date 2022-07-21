@@ -1,9 +1,14 @@
-import VerficationTemplate from "@components/templates/Verification";
-import styles from '@styles/VerificationPage.module.sass';
-import Button from "@components/Button";
-import axios from "@utils/constants/axios";
+//react imports
 import { useRouter } from "next/router";
 import { useState } from "react";
+//utils
+import axios from "@utils/constants/axios";
+//components
+import VerficationTemplate from "@components/templates/Verification";
+import Button from "@components/Button";
+//custom styles
+import styles from '@styles/VerificationPage.module.sass';
+
 
 export default function EmailVerification() {
 

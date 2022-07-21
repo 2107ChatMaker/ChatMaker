@@ -1,7 +1,10 @@
+//react imports
 import { NextApiRequest, NextApiResponse } from "next";
+//data access objects
 import { ResponseController } from "@/dataAccessLayer/actions/response";
+//interfaces
 import { CMResponse } from "@interfaces/Response";
-import { UserController } from "@/dataAccessLayer/actions/user";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
