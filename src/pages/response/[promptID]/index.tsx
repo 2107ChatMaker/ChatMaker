@@ -42,7 +42,7 @@ export default function ResponsePage(props: Props) {
                     props.responses.map(
                         (CMResponse) => {
                             return(
-                                <div key={ CMResponse._id as Key}>
+                                <div key={CMResponse._id as Key}>
                                     <ResponseDiv 
                                         responseID={CMResponse._id} 
                                         thisPromptID={props.thisPromptID} 
@@ -51,17 +51,17 @@ export default function ResponsePage(props: Props) {
                                         tags={CMResponse.tags}
                                     />
                                 </div>
-                            );
+                            )
                         }
                     )
-                };
+                }
                 </div>
             </Page>
     );
 };
 
 //getting the 'props' we want to use from the server
-export async function getServerSideProps({req, query}){
+export async function getServerSideProps({ req, query }){
     //using this to get the promptID from the URL
     const pID = query.promptID;
     const thisPromptID = pID;
