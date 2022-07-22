@@ -18,7 +18,7 @@ export default function RateCard({response, prompt, tags}) {
                             return (
                                 <div key={tag}>
                                     <div className={styles.RateResponseTagContainer}>
-                                        <h3 >{tag}</h3>
+                                        <h3 className={styles.RateResponseTag}>{tag}</h3>
                                     </div>
                                 </div>
                             );
