@@ -1,31 +1,30 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //utilities
-import { verifyToken, generateToken } from "@utils/token/Token";
-import { sendEmailVerification } from "@utils/mailing/SendEmail";
+import { verifyToken, generateToken } from "@utils/token";
+import { sendEmailVerification } from "@utils/mailing";
 //data access object
-import UserModel from "@/dataAccessLayer/schemas/user";
+import { UserController as userController } from "@/dataAccessLayer/actions/user";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
+
         if (req.method === "GET") {
             const { token, _id } = req.query;
             
             //verify token
             if (typeof token !== "string" || typeof _id !== "string" || !verifyToken(token)) {
-                
                 throw {
                     code: 400,
                     message: "Invalid token or id"
                 };
-                
             }
 
             try {
 
                 //get user by id
-                const user = await UserModel.findById(_id);
+                const user = await userController.getUserByID(_id);
 
                 //check if user has verified
                 if (user.isVerified) {
@@ -39,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (user.emailToken !== token) {
                     throw {
                         code: 400,
-                        message: "Invalid token or id"
+                        message: "Invalid token"
                     };
                 }
 
@@ -49,10 +48,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 await user.save();
                 res.status(200).send("Your email is verified");
                 
-            } catch {
+            } catch(error) {
+                const {code = 400, message = "Invalid id"} = error;
                 throw {
-                    code: 400,
-                    message: "Invalid id"
+                    code, message
                 };
             }
             
@@ -65,8 +64,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 message: "Invalid id"
             };
             try {
-                 //get user
-                const user = await UserModel.findById(_id);
+
+                //get user
+                const user = await userController.getUserByID(_id);
+
                 //check if user has verified
                 if (user.isVerified) {
                     throw {
@@ -78,17 +79,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     user.emailToken = generateToken(user.email);
                     await user.save();
                 }
+
                 try {
                     await sendEmailVerification(user.email, user.emailToken, _id);
+                    res.status(200).send("email sent");
                 } catch(error) {
+                    const {code = 500, message = "error sending email"} = error;
                     throw {
-                        code: 400,
-                        message: "Invalid email"
+                        code, message
                     };
                 }
-                res.status(200).send("email sent");
+
             } catch(error) {
-                throw error;
+                const {code = 400, message = "Invalid id"} = error;
+                throw {
+                    code, message
+                };
             }
             
         } else {

@@ -6,7 +6,7 @@ import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { Prompt } from "@interfaces/Prompt";
 //data access object
-import { ObjectManager } from "./objectManager/objectManager";
+import { ObjectManager } from "./objectManager";
 //model
 import PromptModel from "../schemas/prompt";
 

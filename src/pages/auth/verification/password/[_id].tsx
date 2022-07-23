@@ -12,14 +12,16 @@ import styles from "@styles/VerificationPage.module.sass";
 
 export default function PasswordVerification() {
     const router = useRouter();
-    const {_id} = router.query;
+    const { _id } = router.query;
     const [error, setError] = useState();
 
     async function resendLink() {
         try {
+
             //send password verification link to email
             await axios.post(`/api/user/auth/verification/password`, {id: _id});
         } catch(err) {
+
             //handle error
             setError(err.response.data.err);
         }

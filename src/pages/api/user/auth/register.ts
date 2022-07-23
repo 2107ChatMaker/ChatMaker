@@ -1,56 +1,54 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
-import { hash } from 'bcrypt';
 //utils
-import { sendEmailVerification } from "@utils/mailing/SendEmail";
-import { generateToken } from "@utils/token/Token";
+import { sendEmailVerification } from "@utils/mailing";
 //database
-import Database from "@/database/database";
+import Database from "@/database";
 //data access object
-import User from "@/dataAccessLayer/schemas/user";
+import { UserController as userController} from "@/dataAccessLayer/actions/user";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { email , password }: {email: string, password: string} = req.body;
+    const { email , password } = req.body;
+    
     try {
 
         switch(req.method) {
 
             case "POST":
+                
                 //wait for the database connection
                 await Database.setupClient();
 
                 //check if user already exists
                 try {
-                    const user = new User({
-                        email,
-                        password: await hash(password, 10),
-                        emailToken: generateToken(email),
-                    });
-                    await user.save();
-                    
-                    res.status(201).json({
-                        message: "account created",
-                        _id: user._id.toString()
-                    });
+                    const user = await userController.register(email, password);
 
                     try {
+                        
                         //send email verification
-                        await sendEmailVerification(email, user.emailToken, user._id.toString());
-                    } catch(error) {
+                        await sendEmailVerification(email, user.emailToken, user._id);
+
+                        //send user id as response
+                        res.status(201).json({
+                            message: "account created",
+                            _id: user._id.toString()
+                        });
+
+                    } catch {
                         throw {
                             code: 500,
                             message: "cannot send email"
                         };
                     }
-                    
-
-                } catch (error) {
+        
+                } catch {
                     throw {
                         code: 400,
                         message: "Email already exists"
                     };
                 }
+            
                 break;
             default:
                 throw {

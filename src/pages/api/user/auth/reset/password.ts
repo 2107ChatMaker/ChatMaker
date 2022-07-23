@@ -1,8 +1,8 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //utils
-import { sendPasswordConfirmation } from "@utils/mailing/SendEmail";
-import { generateToken } from "@utils/token/Token";
+import { sendPasswordConfirmation } from "@utils/mailing";
+import { generateToken } from "@utils/token";
 import { hash } from 'bcrypt';
 //data access object
 import { UserController } from "@/dataAccessLayer/actions/user";
@@ -27,22 +27,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             } else {
 
                 //generate reset password token
-                const passwordResetToken = generateToken(user._id.toString());
+                const passwordResetToken = generateToken(user._id);
 
-                //set password reset token to user
-                user.resetPassword.resetPasswordToken = passwordResetToken;
+                //set user provisional password and reset password token
+                await UserController.setProvisionalPassword(user._id, await hash(newPassword, 10), passwordResetToken);
 
-                //set provisional password
-                user.resetPassword.provisionalPassword = await hash(newPassword, 10);
+                try {
+                    //send password reset email
+                    await sendPasswordConfirmation(user.email, passwordResetToken, user._id);
 
-                //update user in database with provisional password and reset password token
-                await user.save();
-
-                //send user id as response
-                res.status(200).json({ _id: user._id.toString() });
-
-                //send password reset verification link to user email
-                sendPasswordConfirmation(user.email, passwordResetToken, user._id);
+                    //send user id as response
+                    res.status(200).json({ _id: user._id });
+                } catch {
+                    throw {
+                        code: 500,
+                        message: "error sending email"
+                    };
+                }
             }
         } else {
             throw {

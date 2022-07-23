@@ -3,8 +3,8 @@ import { getSession, useSession } from 'next-auth/react';
 import { Key, useEffect, useState } from 'react';
 import { _id } from '@next-auth/mongodb-adapter';
 //component imports
-import ResponseDiv from '@components/Page/responseDiv/ResponseDiv';
-import AddResponseHeader from '@components/Page/addResponse/AddResponseHeader';
+import ResponseDiv from '@components/ResponsePageComponents/responseDiv';
+import AddResponseHeader from '@components/ResponsePageComponents/addResponse/AddResponseHeader';
 import styles from '@components/Page/addResponse/AddResponseHeader.module.sass';
 import Page from '@templates/Page';
 //controllers
