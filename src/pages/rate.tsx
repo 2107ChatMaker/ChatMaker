@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
 // components
 import Page from '@components/templates/Page';
-import RateCard from '@components/RateCard/RateCard';
+import RateCard from '@components/RateCard';
 import RateButton from '@components/RateButton';
 import PageTitle from '@components/PageTitle';
 // data access objects

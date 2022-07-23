@@ -1,5 +1,5 @@
 import ApprovedResponseModel from "../schemas/approvedResponse";
-import { ObjectManager } from "./objectManager/objectManager";
+import { ObjectManager } from "./objectManager";
 import { HashMap } from "@interfaces/HashMap";
 
 
