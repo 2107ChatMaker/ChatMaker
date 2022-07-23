@@ -5,7 +5,7 @@ import { _id } from '@next-auth/mongodb-adapter';
 //component imports
 import ResponseDiv from '@components/ResponsePageComponents/responseDiv';
 import AddResponseHeader from '@components/ResponsePageComponents/addResponse/AddResponseHeader';
-import styles from '@components/Page/addResponse/AddResponseHeader.module.sass';
+import styles from '@components/ResponsePageComponents/addResponse/AddResponseHeader.module.sass';
 import Page from '@templates/Page';
 //controllers
 import { ResponseController } from '@/dataAccessLayer/actions/response';
@@ -61,7 +61,9 @@ export default function ResponsePage(props: Props) {
 };
 
 //getting the 'props' we want to use from the server
-export async function getServerSideProps({ req, query }){
+export async function getServerSideProps({req, query, res}) {
+    //caching
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     //using this to get the promptID from the URL
     const pID = query.promptID;
     const thisPromptID = pID;

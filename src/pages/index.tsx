@@ -80,6 +80,8 @@ export default function Explore({user, prompts}: HashMap) {
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
+  //caching
+  context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   const session = await getSession(context);
   if (session && session.user) {
       const prompts = await pController.getPrompts();

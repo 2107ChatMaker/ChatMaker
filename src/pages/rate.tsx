@@ -150,7 +150,9 @@ export default function Rating(props: RatingCard) {
     );
 }
 
-export async function getServerSideProps({req}) {
+export async function getServerSideProps({req, res}) {
+    //caching
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     // retrieve session
     const session = await getSession({ req });
     if (session) {
