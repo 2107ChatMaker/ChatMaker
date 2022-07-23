@@ -5,7 +5,7 @@ import { _id } from '@next-auth/mongodb-adapter';
 //component imports
 import ResponseDiv from '@components/ResponsePageComponents/responseDiv';
 import AddResponseHeader from '@components/ResponsePageComponents/addResponse/AddResponseHeader';
-import styles from '@components/Page/addResponse/AddResponseHeader.module.sass';
+import styles from '@components/ResponsePageComponents/addResponse/AddResponseHeader.module.sass';
 import Page from '@templates/Page';
 //controllers
 import { ResponseController } from '@/dataAccessLayer/actions/response';
