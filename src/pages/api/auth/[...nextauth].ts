@@ -6,7 +6,7 @@ import { compare } from 'bcrypt';
 //utils
 import { paths } from "@utils/constants/paths";
 //database
-import Database from '@/database/database';
+import Database from '@/database';
 //data access object
 import User from '@/dataAccessLayer/schemas/user';
 

@@ -29,9 +29,6 @@ export default function ResetPassword() {
     //state for serverside error
     const [error, setError] = useState<string | null>(null);
 
-    //userId 
-    const [userId, setUserId] = useState<string | null>(null);
-
     async function onResetPassword() {
         try {
             //send reset password request
@@ -39,13 +36,9 @@ export default function ResetPassword() {
                 email: data.email,
                 newPassword: data.password,
             });
-            //retrieve user id
-            setUserId(response.data._id);
+            router.push(`/auth/verification/password/${response.data._id}`);
         } catch (error) {
             setError(error.response.data.err);
-        } finally {
-            //redirect to password verification page with userId as query
-            router.push(`/auth/verification/password/${userId}`);
         }
     };
 

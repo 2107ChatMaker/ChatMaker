@@ -1,7 +1,7 @@
 //mongoose imports
 import mongoose from "mongoose";
 //database
-import Database from "@/database/database";
+import Database from "@/database";
 //models
 import ResponseModel from "@/dataAccessLayer/schemas/response";
 import UserModel from "@/dataAccessLayer/schemas/user";

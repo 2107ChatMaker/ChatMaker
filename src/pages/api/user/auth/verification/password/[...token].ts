@@ -1,8 +1,8 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //utils
-import { verifyToken } from "@utils/token/Token";
-import { sendPasswordConfirmation } from "@utils/mailing/SendEmail";
+import { verifyToken, generateToken } from "@utils/token";
+import { sendPasswordConfirmation } from "@utils/mailing";
 //data access object
 import { UserController } from "@/dataAccessLayer/actions/user";
 
@@ -25,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                     //check if user's token matches the token in the request query
                     if (user.resetPassword.resetPasswordToken === token) {
+                        
                        //set user password to provisional password
                        user.password = user.resetPassword.provisionalPassword;
 
@@ -35,11 +36,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                        //update user in database
                        await user.save();
                     }
-                    res.status(200).json({ message: "password reset" });
-                } catch(error) {
+                    res.status(200).send("Your password has been reset");
+                } catch (error) {
+                    const { code = 400, message = "Invalid id" } = error;
                     throw {
-                        code: 400,
-                        message: "Invalid id"
+                        code, message
                     };
                 }
             } else {
@@ -57,14 +58,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const user = await UserController.getUserByID(id);
 
             //check if user exists
-            if (user) {
+            if (user && user.resetPassword.resetPasswordToken) {
+
+                //check if token is expired
+                if (!verifyToken(user.resetPassword.resetPasswordToken)) {
+                    const newToken = await generateToken(user._id);
+                    user.resetPassword.resetPasswordToken = newToken;
+                    await user.save();
+                }
+
                 //send password confirmation link to user email
-                sendPasswordConfirmation(user.email, user.resetPassword.resetPasswordToken, user._id);
+                await sendPasswordConfirmation(user.email, user.resetPassword.resetPasswordToken, user._id);
                 res.status(200).json({ message: "send password confirmation" });
             } else {
                 throw {
                     code: 400,
-                    message: "Invalid id"
+                    message: "Invalid request"
                 };
             }
         } else {
