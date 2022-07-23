@@ -9,7 +9,7 @@ import axios from "@utils/constants/axios";
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import Chip from '@mui/material/Chip';
 //custom style
-import styles from '@components/Page/responseDiv/ResponseDiv.module.sass';
+import styles from './ResponseDiv.module.sass';
 
 
 interface Props {
