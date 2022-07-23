@@ -2,10 +2,9 @@
 import { ReactNode } from 'react';
 //components
 import Background from '@components/Background';
-import NavBar from '@components/NavBar';
 import NextHead from '@components/NextHead';
 import ContentWrapper from '@components/ContentWrapper';
-
+import NavBar from '@components/NavBar';
 
 interface Props {
     headTitle?: string;
@@ -15,6 +14,7 @@ interface Props {
 }
 
 export default function Page(props: Props) {
+
     return (
         <>
             <Background>
