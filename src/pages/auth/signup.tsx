@@ -3,12 +3,18 @@ import { getSession } from "next-auth/react";
 //components
 import Background from "@components/Background";
 import NextHead from "@components/NextHead";
-import SignupForm from "@components/SignupForm";
 //custom styles
 import styles from "@styles/AuthForm.module.sass";
-
+//next
+import dynamic from "next/dynamic";
 
 export default function Signup() {
+
+    //code splitting, lazy loading for signup form
+    const SignupForm = dynamic(() => import("@components/SignupForm"), {
+        loading: () => <h1 style={{color: "white", textAlign: "center", marginTop: "30%"}}>...loading</h1>
+    });
+    
     return (
         <Background>
             <NextHead
@@ -25,6 +31,8 @@ export default function Signup() {
 
 //redirect page to explore if user is already logged in
 export async function getServerSideProps(context) {
+    //caching
+    context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     const session = await getSession(context);
     if (session && session.user) {
         return {

@@ -3,12 +3,18 @@ import { getSession, signIn } from "next-auth/react";
 //components
 import Background from "@components/Background";
 import NextHead from "@components/NextHead";
-import LoginForm from "@components/LoginForm";
 //custom styles
 import styles from "@styles/AuthForm.module.sass";
-
+//next
+import dynamic from "next/dynamic";
 
 export default function Login() {
+
+    //code splitting, lazy loading for lagin form
+    const LoginForm = dynamic(() => import("@components/LoginForm"),{
+        loading: () => <h1 style={{color: "white", textAlign: "center", marginTop: "30%"}}>...loading</h1>
+      });
+    
     return (
         <Background>
             <NextHead 
@@ -30,6 +36,8 @@ export default function Login() {
 
 //redirect page to explore if user is already logged in
 export async function getServerSideProps(context) {
+    //caching
+    context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     const session = await getSession(context);
     const error = context.query.error;
     if (error && String(error).includes("email is not verified")) {

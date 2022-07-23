@@ -9,7 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         switch(req.method) {
             case "POST":
                 const {prompt, userID} = req.body;
-                if (await PromptController.getPromptByContent(prompt)) {
+                const isPromptExist = await PromptController.getPromptByContent(prompt);
+                if (isPromptExist) {
                     throw {
                         code: 400,
                         message: "prompt already exists"

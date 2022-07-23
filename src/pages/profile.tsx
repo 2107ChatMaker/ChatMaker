@@ -150,6 +150,8 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 
 //redirect page to login if user is not logged in and get list of user's saved responses
 export async function getServerSideProps(context) {
+    //caching
+    context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     const session = await getSession(context);
     if (session && session.user) {
         //get user save responses ids

@@ -61,7 +61,9 @@ export default function ResponsePage(props: Props) {
 };
 
 //getting the 'props' we want to use from the server
-export async function getServerSideProps({req, query}){
+export async function getServerSideProps({req, query, res}) {
+    //caching
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     //using this to get the promptID from the URL
     const pID = query.promptID;
     const thisPromptID = pID;

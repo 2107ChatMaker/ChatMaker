@@ -42,7 +42,7 @@ export default function AddPrompt({user}: HashMap) {
     };
 
     //create prompt form state and form handling methods
-    const [form, errors, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
+    const [form, _, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
     
     return (
         <Page
@@ -89,6 +89,8 @@ export default function AddPrompt({user}: HashMap) {
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
+  //caching
+  context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   const session = await getSession(context);
   if (session && session.user) {
       return {
