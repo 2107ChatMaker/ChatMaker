@@ -28,7 +28,6 @@ export default function VerficationTemplate({children, headTitle, headContent, h
             <NextHead 
                 title={headTitle}
                 content={headContent}
-                name={headName}
             />
             <div style={cardStyle}>
                 <Card variant="dark">
