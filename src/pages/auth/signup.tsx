@@ -19,7 +19,6 @@ export default function Signup() {
         <Background>
             <NextHead
                 title="Welcome to chatmaker"
-                name="Signup ChatMaker"
                 content="
                 Welcome! Login to chat maker or create an account.
                 Create an account to start responding to prompts and create your own prompts.

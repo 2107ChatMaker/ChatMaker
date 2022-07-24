@@ -10,7 +10,6 @@ import NavBar from '@components/NavBar';
 interface Props {
     headTitle?: string;
     headContent?: string;
-    headName?: string;
     children?: ReactNode;
 }
 
@@ -22,7 +21,6 @@ export default function Page(props: Props) {
                 <NextHead 
                     title={props.headTitle}
                     content={props.headContent}
-                    name={props.headName}
                 />
                 <ContentWrapper>
                     {props.children}
