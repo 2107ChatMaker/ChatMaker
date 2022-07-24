@@ -42,7 +42,7 @@ export default function ResponsePage(props: Props) {
                     props.responses.map(
                         (CMResponse) => {
                             return(
-                                <div key={ CMResponse._id as Key}>
+                                <div key={CMResponse._id as Key}>
                                     <ResponseDiv 
                                         responseID={CMResponse._id} 
                                         thisPromptID={props.thisPromptID} 
@@ -51,10 +51,10 @@ export default function ResponsePage(props: Props) {
                                         tags={CMResponse.tags}
                                     />
                                 </div>
-                            );
+                            )
                         }
                     )
-                };
+                }
                 </div>
             </Page>
     );
