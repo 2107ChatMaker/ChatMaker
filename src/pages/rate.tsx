@@ -118,9 +118,14 @@ export default function Rating(props: RatingCard) {
 
     return (
         <Page
-            headTitle = "Rate A Response"
-            headName = "Rate A Response"
-            headContent = "use this page to rate a response"
+            headTitle = " rate"
+            headName = "chat maker - Chat Maker rate responses"
+            headContent="
+            welcome to the chat maker rate page, 
+            rate response. here you can rate and vote for different response that others have contributed.
+            Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+            prompts and response for ingame dialogues.
+            "
         >
             <div className={styles.RateResponseBody}>
                 <PageTitle title="Rate A Response" />
@@ -151,8 +156,6 @@ export default function Rating(props: RatingCard) {
 }
 
 export async function getServerSideProps({req, res}) {
-    //caching
-    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     // retrieve session
     const session = await getSession({ req });
     if (session) {
@@ -186,7 +189,8 @@ export async function getServerSideProps({req, res}) {
             response = "you've rated all responses!\ntry creating a response of your own!";
             prompt = "Wow Your Amazing";
         }
-
+        //caching
+        res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
         return {
             props: {
                 responseId,

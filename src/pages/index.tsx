@@ -48,9 +48,14 @@ export default function Explore({user, prompts}: HashMap) {
 
   return (
     <Page
-      headTitle="explore prompts"
-      headName="explore prompts"
-      headContent="explore prompts"
+      headTitle=" explore prompts"
+      headName="Chat maker explore page, explore prompts"
+      headContent="
+      welcome to the chat maker explore page, 
+      explore prompts. here you can find prompts for game development.
+      Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+      prompts and response for ingame dialogues.
+      "
     >
        <div className={styles.page}>
             <PageTitle title = {match? "Explore": "Explore Prompts"}>
@@ -80,10 +85,10 @@ export default function Explore({user, prompts}: HashMap) {
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
-  //caching
-  context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   const session = await getSession(context);
   if (session && session.user) {
+      //caching
+      context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
       const prompts = await pController.getPrompts();
       return {
         props: {

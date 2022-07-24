@@ -46,9 +46,14 @@ export default function AddPrompt({user}: HashMap) {
     
     return (
         <Page
-            headTitle = "Add Prompt"
-            headContent= "add prompt page"
-            headName= "add prompt"
+            headTitle = " add prompt"
+            headName= "ChatMaker add prompt"
+            headContent="
+            welcome to the chat maker, 
+            add prompts. here you can contribute to community by adding a prompt of your own.
+            Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+            prompts and response for ingame dialogues.
+            "
         >
            <form onSubmit={handleSubmit}>
             <div className ={styles.page}>
@@ -89,10 +94,10 @@ export default function AddPrompt({user}: HashMap) {
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
-  //caching
-  context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   const session = await getSession(context);
   if (session && session.user) {
+      //caching
+      context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
       return {
         props: {
           user: JSON.parse(JSON.stringify(session.user)),

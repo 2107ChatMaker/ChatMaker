@@ -18,9 +18,14 @@ export default function Login() {
     return (
         <Background>
             <NextHead 
-                title="Login" 
+                title="Welcome back to chatmaker" 
                 name="Login Page" 
-                content="Welcome back! Login to ChatMaker"
+                content="
+                Welcome back! Login to chat maker or create an account.
+                Create an account to start responding to prompts and create your own prompts.
+                Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+                prompts and response for ingame dialogues.
+                "
             />
             <div className={styles.content}>
                 <LoginForm signIn={signIn}/>
@@ -28,11 +33,6 @@ export default function Login() {
         </Background>
     );
 }
-
-// if(String(error).includes("email is not verified")) {
-//     const userId = String(error).split("?")[1];
-//     router.push(`/auth/verification/email/${userId}`);
-// }
 
 //redirect page to explore if user is already logged in
 export async function getServerSideProps(context) {
