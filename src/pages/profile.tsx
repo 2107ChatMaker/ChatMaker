@@ -92,7 +92,7 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 
     return (
         <Page
-            headTitle="Profile Page"
+            headTitle=" profile"
             headContent="Profile page"
             headName="Profile Page"
         >
@@ -150,8 +150,6 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 
 //redirect page to login if user is not logged in and get list of user's saved responses
 export async function getServerSideProps(context) {
-    //caching
-    context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     const session = await getSession(context);
     if (session && session.user) {
         //get user save responses ids
@@ -160,7 +158,8 @@ export async function getServerSideProps(context) {
         const savedResponses = await arController.getApprovedResponses(saveResponsesIds);
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);
-
+        //caching
+        context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
         return {
             props: {
             user: JSON.parse(JSON.stringify(session.user)),

@@ -18,9 +18,14 @@ export default function Signup() {
     return (
         <Background>
             <NextHead
-                title="Signup"
-                name="Signup Page"
-                content="Welcome! Let's get started"
+                title="Welcome to chatmaker"
+                name="Signup ChatMaker"
+                content="
+                Welcome! Login to chat maker or create an account.
+                Create an account to start responding to prompts and create your own prompts.
+                Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+                prompts and response for ingame dialogues.
+                "
             />
             <div className={styles.content}>
                 <SignupForm/> 
