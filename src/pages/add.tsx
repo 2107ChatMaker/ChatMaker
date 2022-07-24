@@ -47,7 +47,6 @@ export default function AddPrompt({user}: HashMap) {
     return (
         <Page
             headTitle = " add prompt"
-            headName= "ChatMaker add prompt"
             headContent="
             welcome to the chat maker, 
             add prompts. here you can contribute to community by adding a prompt of your own.
@@ -103,11 +102,12 @@ export async function getServerSideProps(context) {
           user: JSON.parse(JSON.stringify(session.user)),
         },
       };
-  }
-  return {
-      redirect: {
-          destination: "/auth/login",
-          permanent: false,
-      }
-  };
+  } else {
+        return {
+            redirect: {
+                destination: "/auth/login",
+                permanent: false,
+            }
+        };
+    }
 }

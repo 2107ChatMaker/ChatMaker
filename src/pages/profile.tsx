@@ -94,7 +94,6 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
         <Page
             headTitle=" profile"
             headContent="Profile page"
-            headName="Profile Page"
         >
             <div className={styles.content}>
                 <div className={styles.profile}>

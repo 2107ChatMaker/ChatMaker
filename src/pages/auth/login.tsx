@@ -18,8 +18,7 @@ export default function Login() {
     return (
         <Background>
             <NextHead 
-                title="Welcome back to chatmaker" 
-                name="Login Page" 
+                title="Welcome back to chatmaker"  
                 content="
                 Welcome back! Login to chat maker or create an account.
                 Create an account to start responding to prompts and create your own prompts.

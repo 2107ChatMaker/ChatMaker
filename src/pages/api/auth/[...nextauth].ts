@@ -68,7 +68,7 @@ export const authOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: paths.login,
-        signOut: paths.explore,
+        signOut: paths.login,
         newUser: paths.explore,
         error: paths.login
     },

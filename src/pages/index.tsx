@@ -49,7 +49,6 @@ export default function Explore({user, prompts}: HashMap) {
   return (
     <Page
       headTitle=" explore prompts"
-      headName="Chat maker explore page, explore prompts"
       headContent="
       welcome to the chat maker explore page, 
       explore prompts. here you can find prompts for game development.
@@ -87,8 +86,6 @@ export default function Explore({user, prompts}: HashMap) {
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   if (session && session.user) {
-      //caching
-      context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
       const prompts = await pController.getPrompts();
       return {
         props: {
@@ -96,13 +93,14 @@ export async function getServerSideProps(context) {
           prompts: JSON.parse(JSON.stringify(prompts.reverse()))
         },
       };
+  } else {
+      return {
+        redirect: {
+            destination: "/auth/login",
+            permanent: false,
+        }
+    };
   }
-  return {
-      redirect: {
-          destination: "/auth/login",
-          permanent: false,
-      }
-  };
 }
 
 

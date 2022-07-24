@@ -119,7 +119,6 @@ export default function Rating(props: RatingCard) {
     return (
         <Page
             headTitle = " rate"
-            headName = "chat maker - Chat Maker rate responses"
             headContent="
             welcome to the chat maker rate page, 
             rate response. here you can rate and vote for different response that others have contributed.
