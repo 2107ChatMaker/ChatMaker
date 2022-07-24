@@ -67,7 +67,7 @@ export default function SideNavBar() {
                         <Image src={"/resources/Logo.svg"} width={"100%"} height={"100%"} alt="Logo"/>
                     </Icon>
                 </div>
-                <div className={styles.logoText}>ChatWriter</div>
+                <div className={styles.logoText}>ChatMaker</div>
             </div>
             <ul className={styles.navItems}>
                 {tabs.map((tab, index)=>{
