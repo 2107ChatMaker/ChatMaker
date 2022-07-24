@@ -51,7 +51,7 @@ export default function ResponsePage(props: Props) {
                                         tags={CMResponse.tags}
                                     />
                                 </div>
-                            )
+                            );
                         }
                     )
                 }

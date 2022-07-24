@@ -48,7 +48,7 @@ export default function BottomNavBar() {
   }, [session]);
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 , zIndex: "100"}}>
       <BottomNavigation sx={navStyle} value={value} onChange={handleChange} showLabels={true}>
         { navItems.map((name, index) => {
             const {icon} = getTabLinkAndIcon(name);
