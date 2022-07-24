@@ -93,7 +93,7 @@ export async function getServerSideProps({req, query, res}) {
                     thisprompt,
                     responses,
                     thisPromptID,
-                    userId: session.user.id,
+                    userID: session.user.id,
                 }
             };
         } else {
