@@ -33,7 +33,7 @@ export default function FormLogo() {
                 />
             </div>
             <p className={styles.logoText}>
-                ChatWriter
+                ChatMaker
             </p>
         </motion.div>
         );

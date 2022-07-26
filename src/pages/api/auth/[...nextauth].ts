@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
                 await Database.setupClient();
 
                 //find user by email
-                const user = await User.findOne({ email });
+                const user = await User.findOne({ email: email.toLowerCase() });
 
                 if (user) {
                     

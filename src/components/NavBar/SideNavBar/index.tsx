@@ -1,6 +1,6 @@
 //react imports
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { signOut, useSession } from 'next-auth/react';
 //material UI
@@ -12,34 +12,21 @@ import animation from "@utils/constants/animations/sidenavbar";
 //custom style
 import styles from './SideNavBar.module.sass';
 
-
 export default function SideNavBar() {
     
     //user session
     const { data: session } = useSession();
 
-    //list of tabs
-    const [tabs, setTabs] = useState([]);
-
     //menu visibility state
     const [showMenu, setShowMenu] = useState(false);
 
-    //set links base on screen size
-    useEffect(()=>{
-
-        //set tab for navigation
+    //set tabs base on user session
+    const tabs = useMemo(()=> {
         if (session && session.user) {
-            setTabs(["Explore prompts", "Rate responses", "Add a prompt", "Profile", "Logout"]);
-        } else {
-            setTabs(["Explore prompts", "Login"]);
-        }
-        //clean up event listener
-        return ()=>{
-            window.removeEventListener('onMouseEnter', openMenu);
-            window.removeEventListener('onMouseLeave', closeMenu);
-        };
+            return ["Explore prompts", "Rate responses", "Add a prompt", "Profile", "Logout"];
+        } 
+        return ['Rate', 'Explore', 'Login'];
     }, [session]);
-
 
     //function to show sidebar
     const openMenu = ()=>{
@@ -67,7 +54,7 @@ export default function SideNavBar() {
                         <Image src={"/resources/Logo.svg"} width={"100%"} height={"100%"} alt="Logo"/>
                     </Icon>
                 </div>
-                <div className={styles.logoText}>ChatWriter</div>
+                <div className={styles.logoText}>ChatMaker</div>
             </div>
             <ul className={styles.navItems}>
                 {tabs.map((tab, index)=>{

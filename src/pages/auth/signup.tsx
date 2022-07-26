@@ -35,6 +35,7 @@ export default function Signup() {
 
 //redirect page to explore if user is already logged in
 export async function getServerSideProps(context) {
+    
     //caching
     context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
     const session = await getSession(context);
