@@ -19,21 +19,22 @@ import dynamic from "next/dynamic";
 import CircularProgress from '@mui/material/CircularProgress';
 
 import WhiteDiv from '@components/ResponsePageComponents/whiteDiv'
+import { Prompt } from '@interfaces/Prompt';
+import { ApprovedResponseController } from '@/dataAccessLayer/actions/approvedRating';
 
 //import Content from './Content'
 
 //interface with the types that will be held
-interface Props {
-    thisprompt: string,
-    responses: CMResponse[];
-    thisPromptID: string,
+interface ResponseProps {
+    returnPrompt: string,
+    PID: string,
     userID: string;
     retrievedIDs: string[],
     retrievedResponses: CMResponse[]
 };
 
 //Reference: Yudhvir's lectures and notes
-export default function ResponsePage(props: Props) {
+export default function ResponsePage(props: ResponseProps) {
     const router = useRouter();
     // assign session userID to state
     useEffect(()=> {
@@ -50,10 +51,10 @@ export default function ResponsePage(props: Props) {
     return (
         <Page>
             {/* displaying the prompt retrieved from the database */}
-            <AddResponseHeader prompt={props.thisprompt} userID={props.userID} promptID={props.thisPromptID} />
+            <AddResponseHeader prompt={props.returnPrompt} userID={props.userID} promptID={props.PID} />
             {/* mapping the responses to the divs */}
             <div id='scrollContainer' className={styles.responseContainer}>
-                <Content data={props} />
+                <Content returnPrompt={props.returnPrompt} PID = {props.PID} userID = {props.userID} retrievedIDs = {props.retrievedIDs} retrievedResponses = {props.retrievedResponses}/>
             </div>
         </Page>
     );
@@ -64,54 +65,46 @@ export default function ResponsePage(props: Props) {
 //getting the 'props' we want to use from the server
 export async function getServerSideProps({req, query, res}) {
     //using this to get the promptID from the URL
-    const pID = query.promptID;
-    console.log('pID ', pID)
-    const thisPromptID = String(pID);
-    console.log('thispromptid ', thisPromptID)
-    let skip = 0
-    //now we need to get the session to get the userID for the page
-    const session = await getSession({ req });
+    const PID = String(query.promptID);
+    // console.log('promptID: ', PID)
+    
     //try catch block so we only do the things we want to do
     try {
-        //gets database prompt with this specific ID
-        const thisPrompt = await PromptController.findPromptByID(pID as string);
-        //formats our prompt object so we can access the attributes
-        const myPromptObject = JSON.parse(JSON.stringify(thisPrompt));
-        //grabbing the prompt attribute from the object
-        const thisprompt = myPromptObject.prompt;
-        // //getting the responses associated with this ID from the approved responses DB
-        // const DBresponses = await ResponseController.getApprovedResponsesByID(pID as string);
-        // //declaring variable here so we can use it below if we have any responses matching the prompt ID
-        // let responses;
-        // //checking to see if we have any responses in the database before we try to manipulate the data
-        // if (DBresponses) {
-        //     //there was at least one response, so we can parse and stringiify the data to be used
-        //     responses = JSON.parse(JSON.stringify(DBresponses));
-        // }
-        
+        //now we need to get the session to get the userID for the page
+        const session = await getSession({ req });
+
         //returning the info to props to be used on the page
         if (session && session.user) {
-            console.log('server side props')
+            //gets database prompt with this specific ID
+            const retrievedPrompt: Prompt = await PromptController.findPromptByID(PID) as Prompt;
+            // console.log("retrieved prompt: ", retrievedPrompt)
+            //formats our prompt object so we can access the attributes
+            //grabbing the prompt attribute from the object
+            const returnPrompt = retrievedPrompt.prompt;
+            // console.log('returnPrompt: ', returnPrompt)
 
             let retrievedIDs: string[] = [];
-            let retrievedResponses: CMResponse[] = []
+            let retrievedResponses: CMResponse[] = [];
 
-            for (let i = 0; i <= 10; i++) {
+            for (let i = 0; i < 10; i++) {
+                // console.log("iteration: ", i)
                 // get a random response from the backend and parse it
-                const queryResult = await ResponseController.getRandomResponse(retrievedIDs as [string]);
+                const queryResult = await ApprovedResponseController.getRandomResponse(retrievedIDs as [string], PID);
+                // console.log("queryResult: ", queryResult)
+                if (queryResult == null) {
+                    break;
+                } 
                 const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
+                // console.log("newResponse: ", newResponse)
                 retrievedIDs.push(String(newResponse._id))
                 retrievedResponses.push(newResponse)
             }
-            // console.log('test1', retrievedIDs)
-            // console.log('test2', retrievedResponses)
-            //caching
+
             res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
             return {
                 props: {
-                    thisprompt,
-                    //responses,
-                    thisPromptID,
+                    returnPrompt,
+                    PID,
                     userID: session.user.id,
                     retrievedIDs,
                     retrievedResponses
