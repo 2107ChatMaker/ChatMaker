@@ -5,6 +5,10 @@ import { ResponseController } from "@/dataAccessLayer/actions/response";
 //interfaces
 import { CMResponse } from "@interfaces/Response";
 
+interface Data  {
+    promptID: string,
+    retrievedIDs: string[]
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -28,12 +32,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             //letting user know the response was successful
             res.status(200).json({message: "Response added"});
         } else if(req.method == "GET"){
-            const {body} = req;
-            const {promptID} = body;
+
+            console.log("getting request")
+            const promptID: string = String(req.query.promptID)
+            const retrievedIDs = req.query.retrievedIDs
+
+            // const parsedIDs = JSON.parse(retrievedIDs[0])
+            
+            // const test = data as Data
+            // const {body} = req;
+            // const {promptID, retrievedIDs} = req.query.data;
+            console.log('promptID ', promptID)
+            console.log('retrievedID ', retrievedIDs)
+
+            // let retrievedIDs: string[] = [];
+            let retrievedResponses: CMResponse[] = []
+            // let returnResult = {
+            //     retrievedIDs: retrievedIDs,
+            //     retrievedResponses: retrievedResponses
+            // }
+
+            for (let i = 0; i <= 10; i++) {
+                // get a random response from the backend and parse it
+                const queryResult = await ResponseController.getRandomResponse(retrievedIDs as [string]);
+                const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
+                retrievedIDs.push(String(newResponse._id))
+                retrievedResponses.push(newResponse)
+            }
             //getting all the responses associated with the given promptID
-            const responses = await ResponseController.getApprovedResponsesByID(promptID);
+            //const responses = await ResponseController.getApprovedResponsesByID(promptID);
+            // console.log(responses)
             //sending a message to the user so we know our 'get' request was successful
-            res.status(200).json(responses);
+            // console.log('return result ', returnResult)
+            const returnValue = JSON.parse(JSON.stringify(
+                retrievedResponses
+            ))
+            console.log('return value ', returnValue)
+            res.status(200).json(returnValue);
         } else {
             throw {
                 code: 405,
