@@ -33,9 +33,9 @@ export default function AddPrompt({user}: HashMap) {
     //validates the prompt entered by the user
     const validatePrompt = ({prompt}) => {
         //prompt length must be at least 10 characters
-        if (prompt.length < 10) {
+        if (prompt.length < 2 && prompt.length > 30) {
             return {
-                prompt: "Prompt must be at least 10 characters long"
+                prompt: "Prompt must be between 2 and 30 characters"
             };
         }
 
