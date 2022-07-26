@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
 // components
 import Page from '@components/templates/Page';
-import RateCard from '@components/RateCard/RateCard';
+import RateCard from '@components/RateCard';
 import RateButton from '@components/RateButton';
 import PageTitle from '@components/PageTitle';
 // data access objects
@@ -20,7 +20,6 @@ import { UserController } from '@/dataAccessLayer/actions/user';
 import axios from '@utils/constants/axios';
 //custom styles
 import styles from '../styles/rate.module.sass';
-
 
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
@@ -118,9 +117,13 @@ export default function Rating(props: RatingCard) {
 
     return (
         <Page
-            headTitle = "Rate A Response"
-            headName = "Rate A Response"
-            headContent = "use this page to rate a response"
+            headTitle = " rate"
+            headContent="
+            welcome to the chat maker rate page, 
+            rate response. here you can rate and vote for different response that others have contributed.
+            Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+            prompts and response for ingame dialogues.
+            "
         >
             <div className={styles.RateResponseBody}>
                 <PageTitle title="Rate A Response" />
@@ -150,7 +153,7 @@ export default function Rating(props: RatingCard) {
     );
 }
 
-export async function getServerSideProps({req}) {
+export async function getServerSideProps({req, res}) {
     // retrieve session
     const session = await getSession({ req });
     if (session) {
@@ -181,10 +184,11 @@ export async function getServerSideProps({req}) {
         }
         else {
             // return values if all responses have been rated
-            response = "you've rated all responses!\ntry creating a response of your own!";
-            prompt = "Wow Your Amazing";
+            response = "You've rated all responses!\nTry creating a response of your own!";
+            prompt = "Wow You're Amazing";
         }
-
+        //caching
+        res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
         return {
             props: {
                 responseId,

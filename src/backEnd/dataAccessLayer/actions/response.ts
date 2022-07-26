@@ -4,7 +4,7 @@ import { Saveable } from "@interfaces/Saveable";
 import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 //data access object
-import { ObjectManager } from "./objectManager/objectManager";
+import { ObjectManager } from "./objectManager";
 import { ApprovedResponseController } from "./approvedRating";
 //model
 import ResponseModel from "../schemas/response";

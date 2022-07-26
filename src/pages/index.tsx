@@ -48,9 +48,13 @@ export default function Explore({user, prompts}: HashMap) {
 
   return (
     <Page
-      headTitle="explore prompts"
-      headName="explore prompts"
-      headContent="explore prompts"
+      headTitle=" explore prompts"
+      headContent="
+      welcome to the chat maker explore page, 
+      explore prompts. here you can find prompts for game development.
+      Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+      prompts and response for ingame dialogues.
+      "
     >
        <div className={styles.page}>
             <PageTitle title = {match? "Explore": "Explore Prompts"}>
@@ -65,7 +69,7 @@ export default function Explore({user, prompts}: HashMap) {
             </PageTitle>
             <div className={styles.searchField}>
                 <SearchBar onSubmit={onSearch}
-                    placeholder={"search for prompts"}
+                    placeholder={"Search for prompts..."}
                 />
             </div>
             <div className={styles.prompts}>
@@ -89,13 +93,14 @@ export async function getServerSideProps(context) {
           prompts: JSON.parse(JSON.stringify(prompts.reverse()))
         },
       };
+  } else {
+      return {
+        redirect: {
+            destination: "/auth/login",
+            permanent: false,
+        }
+    };
   }
-  return {
-      redirect: {
-          destination: "/auth/login",
-          permanent: false,
-      }
-  };
 }
 
 

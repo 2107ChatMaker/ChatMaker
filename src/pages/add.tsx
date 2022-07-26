@@ -16,6 +16,7 @@ import styles from '@styles/Add.module.sass';
 
 export default function AddPrompt({user}: HashMap) {
     const onAddPrompt = async () => {
+
         //get userID from session
         const userId = user.id;
     
@@ -43,13 +44,17 @@ export default function AddPrompt({user}: HashMap) {
     };
 
     //create prompt form state and form handling methods
-    const [form, errors, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
+    const [form, _, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
     
     return (
         <Page
-            headTitle = "Add Prompt"
-            headContent= "add prompt page"
-            headName= "add prompt"
+            headTitle = " add prompt"
+            headContent="
+            welcome to the chat maker, 
+            add prompts. here you can contribute to community by adding a prompt of your own.
+            Chat maker is a free, crowdsourced platform for creating, referencing, and sharing 
+            prompts and response for ingame dialogues.
+            "
         >
            <form onSubmit={handleSubmit}>
             <div className ={styles.page}>
@@ -92,16 +97,20 @@ export default function AddPrompt({user}: HashMap) {
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   if (session && session.user) {
+    
+      //caching
+      context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
       return {
         props: {
           user: JSON.parse(JSON.stringify(session.user)),
         },
       };
-  }
-  return {
-      redirect: {
-          destination: "/auth/login",
-          permanent: false,
-      }
-  };
+  } else {
+        return {
+            redirect: {
+                destination: "/auth/login",
+                permanent: false,
+            }
+        };
+    }
 }

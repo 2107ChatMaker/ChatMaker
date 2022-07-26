@@ -78,7 +78,6 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
         if (status != 200) {
             return;
         }
-
         // create an a tag
         var a = document.createElement("a");
         // create a blob that holds our export json
@@ -86,16 +85,15 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
         // create a url containing our json information via our blob and assign it to our a tag
         a.href = URL.createObjectURL(file);
         // assigns a download filename to our a tag
-        a.download = `${email}_Saved_Responses.txt`;
+        a.download = `${email}_Saved_Responses.json`;
         // execute (click) on our nameTag
         a.click();
     }
 
     return (
         <Page
-            headTitle="Profile Page"
+            headTitle=" profile"
             headContent="Profile page"
-            headName="Profile Page"
         >
             <div className={styles.content}>
                 <div className={styles.profile}>
@@ -159,7 +157,8 @@ export async function getServerSideProps(context) {
         const savedResponses = await arController.getApprovedResponses(saveResponsesIds);
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);
-
+        //caching
+        context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
         return {
             props: {
             user: JSON.parse(JSON.stringify(session.user)),

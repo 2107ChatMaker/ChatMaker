@@ -4,10 +4,13 @@ import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { User } from "@interfaces/User";
 //data access object
-import { ObjectManager } from "./objectManager/objectManager";
+import { ObjectManager } from "./objectManager";
 //model
 import UserModel from "../schemas/user";
-
+//utils
+import { generateToken } from "@utils/token";
+//bcrypt
+import { hash } from "bcrypt";
 
 // actions accessable to manipulate responses or add new ones
 export class UserController implements DatabaseObject, Saveable, User {
@@ -49,6 +52,18 @@ export class UserController implements DatabaseObject, Saveable, User {
         return ObjectManager.updateByID(this._id, this, UserModel);
     }
 
+    // add/register a new user
+    static async register(email: string, password: string) {
+        
+        // add a new user to database
+        const user = await ObjectManager.create(UserModel, {
+            email,
+            password: await hash(password, 10),
+            emailToken: generateToken(email),
+        });
+        return user;
+    }
+
     // gets all users that belong to the given (id)
     static async getUserByID(userID: string) {
         return await ObjectManager.find(UserModel, userID);
@@ -56,7 +71,7 @@ export class UserController implements DatabaseObject, Saveable, User {
 
     // gets all users that belong to the given (email)
     static async getUserByEmail(email: string) {
-        return await ObjectManager.findByEmail(UserModel, email);
+        return await ObjectManager.findByEmail(UserModel, email.toLowerCase());
     }
 
     //get user saved responses
@@ -69,6 +84,14 @@ export class UserController implements DatabaseObject, Saveable, User {
     static async updateSavedResponses(userID: string, responseIDs: string[]) {
         const user = await UserController.getUserByID(userID);
         user.responsesSaved = responseIDs;
+        user.save();
+    }
+
+    //set user provisional password and reset password reset token
+    static async setProvisionalPassword(userID: string, provisionalPassword: string, resetPasswordToken: string) {
+        const user = await UserController.getUserByID(userID);
+        user.resetPassword.provisionalPassword = provisionalPassword;
+        user.resetPassword.resetPasswordToken = resetPasswordToken;
         user.save();
     }
 

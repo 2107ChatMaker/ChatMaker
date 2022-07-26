@@ -6,7 +6,7 @@ import { compare } from 'bcrypt';
 //utils
 import { paths } from "@utils/constants/paths";
 //database
-import Database from '@/database/database';
+import Database from '@/database';
 //data access object
 import User from '@/dataAccessLayer/schemas/user';
 
@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
                 await Database.setupClient();
 
                 //find user by email
-                const user = await User.findOne({ email });
+                const user = await User.findOne({ email: email.toLowerCase() });
 
                 if (user) {
                     
@@ -68,7 +68,7 @@ export const authOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: paths.login,
-        signOut: paths.explore,
+        signOut: paths.login,
         newUser: paths.explore,
         error: paths.login
     },
