@@ -9,7 +9,7 @@ import { Paper } from '@mui/material';
 import GetTabName from '@utils/navigation/GetTabName';
 import getTabLinkAndIcon from '@utils/navigation/GetTabLinkAndIcon';
 
-
+//navbar style
 const navStyle = {
     width: '100%',
     height: '5rem',
@@ -21,6 +21,7 @@ const navStyle = {
     }
 };
 
+//tab styles
 const itemStyle = {
   color:"white",
   "& > *" : {
@@ -29,8 +30,14 @@ const itemStyle = {
 };
 
 export default function BottomNavBar() {
+
+  //router for navigate between pages
   const router = useRouter();
+
+  //get tabs names
   const [value, setValue] = useState(()=>GetTabName(router.asPath));
+
+  //get user session
   const {data: session} = useSession();
 
   //handle tabs change
@@ -39,6 +46,7 @@ export default function BottomNavBar() {
     router.push(getTabLinkAndIcon(newValue).href);
   };
 
+  //set tabs base on user session
   const tabs = useMemo(()=>{
     if (session && session.user) {
       return ['Rate', 'Explore', 'Profile'];

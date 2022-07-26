@@ -15,6 +15,7 @@ import styles from '@styles/Add.module.sass';
 
 export default function AddPrompt({user}: HashMap) {
     const onAddPrompt = async () => {
+
         //get userID from session
         const userId = user.id;
     
@@ -95,6 +96,7 @@ export default function AddPrompt({user}: HashMap) {
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   if (session && session.user) {
+    
       //caching
       context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
       return {

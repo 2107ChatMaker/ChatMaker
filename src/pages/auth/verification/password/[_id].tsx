@@ -18,6 +18,7 @@ export default function PasswordVerification() {
     const [error, setError] = useState();
     const {data: session} = useSession();
 
+    //resend password confirmation email
     async function resendLink() {
         try {
 
@@ -30,6 +31,7 @@ export default function PasswordVerification() {
         }
     }
 
+    //redirect to login and logged out user after password is reset
     function exitToLogin() {
         if (session && session.user) signOut();
         router.push("/auth/login");

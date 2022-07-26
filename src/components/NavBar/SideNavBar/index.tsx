@@ -20,7 +20,7 @@ export default function SideNavBar() {
     //menu visibility state
     const [showMenu, setShowMenu] = useState(false);
 
-    //set tabs
+    //set tabs base on user session
     const tabs = useMemo(()=> {
         if (session && session.user) {
             return ["Explore prompts", "Rate responses", "Add a prompt", "Profile", "Logout"];
