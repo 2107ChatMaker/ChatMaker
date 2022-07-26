@@ -7,7 +7,6 @@ import Database from "@/database";
 //data access object
 import { UserController as userController} from "@/dataAccessLayer/actions/user";
 
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { email , password } = req.body;
     
@@ -22,12 +21,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 //check if user already exists
                 try {
-                    const user = await userController.register(email, password);
+                    const user = await userController.register(email.toLowerCase(), password);
 
                     try {
                         
                         //send email verification
-                        await sendEmailVerification(email, user.emailToken, user._id);
+                        await sendEmailVerification(email.toLowerCase(), user.emailToken, user._id);
 
                         //send user id as response
                         res.status(201).json({

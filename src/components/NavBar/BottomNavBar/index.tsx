@@ -1,7 +1,7 @@
 //react imports
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState, SyntheticEvent } from 'react';
+import { useMemo, useState, SyntheticEvent } from 'react';
 //material UI
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { Paper } from '@mui/material';
@@ -31,26 +31,25 @@ const itemStyle = {
 export default function BottomNavBar() {
   const router = useRouter();
   const [value, setValue] = useState(()=>GetTabName(router.asPath));
-  const [navItems, setNavItems] = useState(['Rate', 'Explore', 'Login']);
   const {data: session} = useSession();
 
+  //handle tabs change
   const handleChange = (event: SyntheticEvent, newValue: string) => {
     setValue(newValue);
     router.push(getTabLinkAndIcon(newValue).href);
   };
 
-  useEffect(()=>{
+  const tabs = useMemo(()=>{
     if (session && session.user) {
-      setNavItems(['Rate', 'Explore', 'Profile']);
-    } else {
-      setNavItems(['Rate', 'Explore', 'Login']);
-    }
+      return ['Rate', 'Explore', 'Profile'];
+    } 
+    return ['Rate', 'Explore', 'Login'];
   }, [session]);
 
   return (
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
       <BottomNavigation sx={navStyle} value={value} onChange={handleChange} showLabels={true}>
-        { navItems.map((name, index) => {
+        { tabs.map((name, index) => {
             const {icon} = getTabLinkAndIcon(name);
             return <BottomNavigationAction 
                       key={index} 
