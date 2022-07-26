@@ -15,6 +15,7 @@ export default function NextHead({title, content}: NextHeadProps) {
             <meta name="keywords" content="
                 chat maker, ChatMaker, create prompt, create response, Chat Maker, chatmaker, rate user response"
             />
+            <meta name="google-site-verification" content="CwW2xEuw2kIqpQCO04CkuiC31zrjkwSxB2D95YOqd08" />
             <link rel="icon" href="/resources/Logo.svg" />
         </Head>
     );
