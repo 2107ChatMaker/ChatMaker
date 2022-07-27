@@ -69,6 +69,7 @@ export default function AddResponseForm(props: Props) {
                 id="tags"
                 options={tagValues}
                 className={styles.menu}
+                
                 sx={{ bgcolor: '#FFFFFF', border: 'none' }}
                 value={tags}
                 getOptionDisabled={(tagValues) => (tags.length > 2 ? true : false)}
@@ -79,8 +80,13 @@ export default function AddResponseForm(props: Props) {
                 renderInput={(params) => (
                 <TextField
                     {...params}
+                    required
                     variant="standard"
                     size='small'
+                    InputProps={{
+                        ...params.InputProps,
+                        required: tags.length === 0,
+                      }}
                 />
                 )}
             /> 

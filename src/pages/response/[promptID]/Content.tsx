@@ -1,12 +1,11 @@
-import { ResponseController } from "@/dataAccessLayer/actions/response";
+
 import ResponseDiv from "@components/ResponsePageComponents/responseDiv";
-import WhiteDiv from "@components/ResponsePageComponents/whiteDiv";
 import { CMResponse } from "@interfaces/Response";
-import { PostAddSharp } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+
 
 //interface with the types that will be held
 interface ResponseProps {
@@ -18,52 +17,40 @@ interface ResponseProps {
 };
 
 const Content = (data: ResponseProps) => {
-    //const theseResponses = data.responses
+    //setting variables to hold each item
     const [responses, setResponses] = useState(data.retrievedResponses);
     const [retrivedIDs, setRetrievedIDs] = useState(data.retrievedIDs);
     const [hasMore, setHasMore] = useState(true);
-    const [skip, setSkip] = useState(10)
-
-    const promptID = data.PID
-    // console.log('this prompt ID ', data.returnPrompt)
 
     // reference: https://stackoverflow.com/questions/42898009/multiple-fields-with-same-key-in-query-params-axios-request
     const getNewResponses = async () => {
-        // console.log("getnewresponses")
-
-        // console.log("data promptID: ", data.PID)
+        //getting a list of the IDs of the responses already rendered
         const newResponse = JSON.parse(JSON.stringify(retrivedIDs))
-        // console.log('content prompt ID', promptID)
+        // this variable allows us to pass in multiple variables to our axios get request
         var params = new URLSearchParams();
         params.append('promptID', data.PID)
         params.append('retrivedIDs', newResponse)
+        //making an axios get request to our response API, passing in promptID(PID) and the retrieved ID list
         const res = await axios.get(`/api/response`, {
-            params: params});
-        // console.log('res ', res.data)
-        console.log("responses before: ", responses)
+            params: params}
+        );
+        //getting the responses and the retrieved IDs back from the database, and then adding them to the lists
         setResponses((responses) => [...responses, ...res.data.retrievedResponses])
         setRetrievedIDs((retrivedIDs) => [...retrivedIDs, ...res.data.newRetrievedIDs])
-        console.log("\n\n\nresponses after: ", responses)
     }
-    // useEffect(() => {
-    //     // console.log('test', responses)
-    //     // getNewResponses()
-        
-    // }, [])
 
-
+    
     return (
         <>
             <InfiniteScroll
             dataLength={responses.length}
             next={getNewResponses}
             hasMore={hasMore}
-            loader={<div>loading...</div>}
+            loader={<div><CircularProgress/></div>}
             endMessage={<h4>Nothing more to show</h4>}
             >
                 {
                     responses.map((response) => {
-                        // console.log('response ', response)
                         return(
                             <div key={String(response._id)}>
                                 <ResponseDiv 
@@ -77,10 +64,8 @@ const Content = (data: ResponseProps) => {
                         )
                     })
                 }
-
             </InfiniteScroll>
         </>
-
     );
 };
 
