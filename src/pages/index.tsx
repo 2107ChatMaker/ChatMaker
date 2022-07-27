@@ -13,7 +13,7 @@ import PageTitle from '@components/PageTitle';
 import SearchBar from '@components/SearchBar';
 import Prompt from '@components/Prompt';
 //data access object
-import { PromptController as pController } from '@/dataAccessLayer/actions/prompt';
+import { PromptController as pController } from '@/dataAccessLayer/controllers/prompt';
 //interfaces
 import type { HashMap } from '@interfaces/HashMap';
 //custom styles

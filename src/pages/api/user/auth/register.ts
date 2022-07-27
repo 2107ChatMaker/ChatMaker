@@ -5,7 +5,7 @@ import { sendEmailVerification } from "@utils/mailing";
 //database
 import Database from "@/database";
 //data access object
-import { UserController as userController} from "@/dataAccessLayer/actions/user";
+import { UserController as userController} from "@/dataAccessLayer/controllers/user";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { email , password } = req.body;

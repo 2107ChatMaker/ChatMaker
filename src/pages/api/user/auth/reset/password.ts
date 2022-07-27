@@ -5,7 +5,7 @@ import { sendPasswordConfirmation } from "@utils/mailing";
 import { generateToken } from "@utils/token";
 import { hash } from 'bcrypt';
 //data access object
-import { UserController } from "@/dataAccessLayer/actions/user";
+import { UserController } from "@/dataAccessLayer/controllers/user";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

@@ -12,7 +12,7 @@ import PromptModel from "../schemas/prompt";
 
 
 // actions accessable to manipulate promps or add new ones.
-export class PromptController implements DatabaseObject, Saveable, Prompt {
+export class PromptController implements DatabaseObject, Saveable {
     // The user submitting the prompts ID
     userID: string;
     // The prompt the user has given
@@ -30,26 +30,31 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
 
     // retrieves all prompts
     static async getPrompt(_id: string) {
-        return await ObjectManager.find(PromptModel, _id);
+        const results = await ObjectManager.find(PromptModel, _id);
+        return results; 
     }
 
     // retrieves all prompts
     static async getPrompts() {
-        return await ObjectManager.findAll(PromptModel);
+        const results = await ObjectManager.findAll(PromptModel);
+        return results; 
     }
 
     //get prompt by content
     static async getPromptByContent(content: string) {
-        return await ObjectManager.findByQuery(PromptModel, { prompt: content });
+        const results = await ObjectManager.findByQuery(PromptModel, { prompt: content });
+        return results; 
     }
 
     // searchs prompts by user input 
     static async searchPrompts(searchQuery: string) {
-        return await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
+        const results = await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
+        return results; 
     }
     //searches by the promptID
-    static findPromptByID(promptID: string) {
-        return ObjectManager.find(PromptModel, promptID);
+    static async findPromptByID(promptID: string) {
+        const results = await ObjectManager.find(PromptModel, promptID);
+        return results; 
     }
 
     // Tags are returned as a hashmap
