@@ -33,10 +33,14 @@ const LoadPrompts = ({prompts, setPrompts}: PromptProps) => {
     //setting variables to hold each item
     const [hasMore, setHasMore] = useState(true);
     const [skip, setSkip] = useState(0);
-
+    
     // reference: https://stackoverflow.com/questions/42898009/multiple-fields-with-same-key-in-query-params-axios-request
     const getNewPrompts = async () => {
+
+        //new skip variable to pass in the query params in case skip is not updated fast enough
         const newSkip = skip + 10;
+
+        //set skip to new skip variable
         setSkip(newSkip);
 
         //getting a list of the IDs of the responses already rendered
@@ -49,8 +53,10 @@ const LoadPrompts = ({prompts, setPrompts}: PromptProps) => {
             params: params}
         );
 
+        //retrieve extra prompts and get the total number of prompts in the database
         const { retrievedPrompts, numberOfPrompts } = res.data;
 
+        //check if number of prompts returned more than 0 and prompts already rendered is less than the total number of prompts
         if (retrievedPrompts.length > 0 && prompts.length < numberOfPrompts) {
 
             //getting the responses and the retrieved IDs back from the database, and then adding them to the lists
@@ -58,9 +64,9 @@ const LoadPrompts = ({prompts, setPrompts}: PromptProps) => {
         } else {
             setHasMore(false);
         }
-        console.log("prompts", prompts);
     };
 
+    //if prompts is empty, display no prompts warning
     if (prompts.lengt < 1 ) {
         return (
             <div className={styles.noPrompts}>no prompt found</div>
@@ -70,7 +76,7 @@ const LoadPrompts = ({prompts, setPrompts}: PromptProps) => {
     return (
         <>
             <InfiniteScroll
-            dataLength={skip*10}
+            dataLength={prompts.length}
             next={getNewPrompts}
             hasMore={hasMore}
             loader={<div><CircularProgress/></div>}

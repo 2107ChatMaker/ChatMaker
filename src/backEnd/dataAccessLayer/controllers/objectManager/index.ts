@@ -68,7 +68,7 @@ export class ObjectManager {
         const numberOfDocuments: number = await model.estimatedDocumentCount();
 
         /// returns a mongoose query that needs to be Cast to the requested object type 
-        const foundEntries = await model.find({}).limit(10).skip(skipVal);
+        const foundEntries = await model.find({}).sort({$natural: -1}).limit(10).skip(skipVal);
 
         return foundEntries;
     }
