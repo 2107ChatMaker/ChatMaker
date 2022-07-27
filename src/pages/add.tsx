@@ -64,7 +64,7 @@ export default function AddPrompt({user}: HashMap) {
                         require={true}
                         name="prompt" 
                         minLength={4}
-                        maxLength={40}
+                        maxLength={140}
                     />
              </div>
                 <div className={styles.formAction}>
