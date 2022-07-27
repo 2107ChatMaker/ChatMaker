@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
+
 //utils
 import { paths } from "@utils/constants/paths";
+
 //custom global sass file
 import styles from './FormNavItem.module.sass';
 
@@ -29,4 +31,5 @@ export default function FormNavItem({children, direction}: FormNavItemProps) {
             </Link>
         </li>
     );
+
 }

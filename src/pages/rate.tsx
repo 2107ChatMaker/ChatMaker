@@ -1,66 +1,84 @@
 // react imports
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+
 //material UI
 import { Check, Close, SkipNext as Skip } from '@mui/icons-material';
+
 // components
 import Page from '@components/templates/Page';
 import RateCard from '@components/RateCard';
 import RateButton from '@components/RateButton';
 import PageTitle from '@components/PageTitle';
+
 // data access objects
 import { ResponseController } from '@/dataAccessLayer/controllers/response';
 import { PromptController } from '@/dataAccessLayer/controllers/prompt';
+
 // interfaces
 import { Prompt } from '@interfaces/Prompt';
 import { RatingCard } from '@interfaces/RatingCard';
 import { CMResponse } from '@interfaces/Response';
 import { UserController } from '@/dataAccessLayer/controllers/user';
+
 // utils
 import axios from '@utils/constants/axios';
+
 //custom styles
 import styles from '../styles/rate.module.sass';
 
+
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
+
     // session that manages logged-in user
     const {data: session, status: loading} = useSession();
+
     // assign session userID to state
     useEffect(()=> {
         if (session) {
             setUserID(session.user.id);
-        }
+        } 
     }, [session]);
 
     // The logged in users ID
     const [userID, setUserID] = useState('');
+
     // the Top level card that animates off screen when prompted
     const [featuredCard, setFeaturedCard] = useState(props);
+
     // the bottom level card
     const [AlternateCard, setAlternateCard] = useState(props);
+
     // the user assigned rating of the current response
     const [rating, setRating] = useState(true);
+
     // triggers card transition
     const [cardTransition, setCardTransition] = useState(false);
+
     // guards multiple button presses before animation completes
     const [buttonClicked, setButtonClicked] = useState(false);
 
     // makes the top card slide right off screen before setting its values to the same as the bottom card and returing it to its original position
     function animateTopCard(newCard: RatingCard) {
+
         // triggers card animation
         setCardTransition(true);
 
         // assigns a short delay to manage users trying to press the button before the animation finishes
         setTimeout(function () {
+
             // after .8 seconds
             // update the now off screen feature cards values to match the onscreen card
             setFeaturedCard(newCard); 
+
             // returns featured card to its original position covereing the bottom card
             setCardTransition(false);
+
             // allows the user to press the button again
             setButtonClicked(false);
-        }, 800);
         
+        }, 800);
     }
 
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
@@ -68,6 +86,7 @@ export default function Rating(props: RatingCard) {
         
         // guards against multiple button presses
         if (execute || (!execute && !buttonClicked)) {
+
             // stop user from executing this function again until buttonClicked is set to false
             setButtonClicked(true);
 
@@ -97,22 +116,25 @@ export default function Rating(props: RatingCard) {
             rating: String(rating),
             userID: userID
         };
-
         const {data: response} = await axios.put("/api/rate", rateValues);
-
     };
 
     // rate the current response and animate it
     async function rate(rating: boolean) {
+
         // guard against multiple button presses
         if (buttonClicked || featuredCard.responseId == "" || featuredCard.response == "") {return;}
         setButtonClicked(true);
+
         // set rating depending on button pressed
         setRating(rating);
+
         // assign the rating to the current response
         await rateResponse();
+
         // get a new card and update the current cards with animations
         await getNewCard(true);
+    
     };
 
     return (
@@ -151,16 +173,23 @@ export default function Rating(props: RatingCard) {
             </div>            
         </Page>
     );
+
 }
 
 export async function getServerSideProps({req, res}) {
-    // retrieve session
+
+    // retrieve user session
     const session = await getSession({ req });
+
+    // check if user session exists
     if (session) {
+
         // get uservalues by session id
         const userValues:UserController = await UserController.getUserByID(session.user.id);
+
         // create new usercontroller to properlly cast userValues
         const user: UserController = new UserController(userValues);
+
         // get a random response from the backend and parse it
         const queryResult = await ResponseController.getRandomResponse(user.responsesRated);
         const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
@@ -172,6 +201,7 @@ export async function getServerSideProps({req, res}) {
         let prompt = "";
 
         if (!!newResponse) {
+
             // get the corrisponding prompt from the backend and parse it
             const promptqueryResult = await PromptController.getPrompt(newResponse.promptID);
             const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
@@ -181,14 +211,17 @@ export async function getServerSideProps({req, res}) {
             tags = newResponse.tags;
             response = newResponse.response;
             prompt = newPrompt.prompt;
-        }
-        else {
+        } else {
+
             // return values if all responses have been rated
             response = "You've rated all responses!\nTry creating a response of your own!";
             prompt = "Wow You're Amazing";
         }
+
         //caching
         res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+
+        // return response Id, prompt, response, tags of response as props
         return {
             props: {
                 responseId,

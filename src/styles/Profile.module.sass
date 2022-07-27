@@ -53,7 +53,7 @@
     justify-content: flex-start
     align-items: center
     width: 100%
-    flex-wrap: nowrap
+    flex-wrap: wrap
 
 .favoriteTitle
     font-size: 1.5rem
@@ -65,13 +65,19 @@
     justify-content: flex-start
     align-items: center
     flex-wrap: nowrap
-    flex: 4
+    flex: 2
     & > .btn
         margin-right: 1rem
+        width: 45%
         & > *
-            padding: 0.5rem 0.75rem
+            padding: 0.75rem 0.75rem
 
-    
+.isEmptySavedResponse 
+    font: $bgLight
+    font-size: 1.5rem
+    width: 100%
+    text-align: center
+    margin-top: 1rem
 
 @media screen and (max-width: 768px) 
     .content
@@ -101,15 +107,22 @@
         width: 90%
         margin: auto
         margin-bottom: 1rem
+        flex-direction: column
 
     .action
-        margin-left: 3%
-        flex: 1.5
+        flex: 1
+        width: 90%
+        margin: auto
+        margin-top: 1rem
         justify-content: space-between
         & > .btn 
-            margin: auto
+            margin: 0
+            width: 45%
             & > *
                 font-size: 0.75rem
+    
+    .favoriteTitle
+        flex: 1
 
     .responses
         border-radius: 0

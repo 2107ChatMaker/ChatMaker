@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 
+
 //generate a jwt
 export function generateToken(seed: string): string {
   return jwt.sign({ seed }, process.env.JWT_SECRET, {

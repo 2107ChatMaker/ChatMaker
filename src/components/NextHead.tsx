@@ -1,4 +1,4 @@
-//react import
+//next import
 import Head from "next/head";
 
 
@@ -17,6 +17,7 @@ export default function NextHead({title, content}: NextHeadProps) {
             />
             <meta name="google-site-verification" content="CwW2xEuw2kIqpQCO04CkuiC31zrjkwSxB2D95YOqd08" />
             <link rel="icon" href="/resources/Logo.svg" />
+            <link rel="apple-touch-icon" href="/resources/Logo.svg"/>
         </Head>
     );
 }

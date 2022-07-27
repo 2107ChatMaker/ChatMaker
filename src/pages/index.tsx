@@ -3,35 +3,43 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import Image from 'next/image';
+
 //utils
 import axios from '@utils/constants/axios';
+
 //material UI
 import { CircularProgress, Icon, useMediaQuery } from "@mui/material";
+
 //components
 import Page from '@components/templates/Page';
 import PageTitle from '@components/PageTitle';
 import SearchBar from '@components/SearchBar';
-import Prompt from '@components/Prompt';
+
 //data access object
-import { PromptController as pController, PromptController } from '@/dataAccessLayer/controllers/prompt';
+import { PromptController } from '@/dataAccessLayer/controllers/prompt';
+
 //interfaces
 import type { HashMap } from '@interfaces/HashMap';
 import { Prompt as PromptInterface } from '@interfaces/Prompt';
+
 //custom styles
 import styles from '@styles/ExplorePrompts.module.sass';
 import dynamic from 'next/dynamic';
 
 
-export default function Explore(props, {user, prompts}: HashMap) {
-
+export default function Explore({user, retrievedPrompts}: HashMap) {
   const LoadPrompts = dynamic(() => import('@components/Prompt/LoadPrompts'), {
+
     //will show a blue loading circle while loading in the content
     loading: () => <div><CircularProgress /></div>
-  })
+  });
+
   //list of all the prompts being displayed
-  const [promptsList, setPrompts] = useState(prompts);
+  const [promptsList, setPrompts] = useState(retrievedPrompts);
+
   //boolean to check if the screen size matches a mobile screen
   const match = useMediaQuery('(max-width:768px)');
+
   //router to navigate to the create prompt and respond page
   const router = useRouter();
 
@@ -40,15 +48,15 @@ export default function Explore(props, {user, prompts}: HashMap) {
     try{
 
       //if the search is empty, set the prompts to the original prompts
-      if(search ===  ""){
-        setPrompts(prompts);
-      } else{
+      if(search ===  "") {
+        setPrompts(retrievedPrompts);
+      } else {
+
         //fetches the results from the search query
         const {data} = await axios.get(`/api/prompt/search/${search}`);
         setPrompts(data.reverse());
-      }
-    }
-      catch(error){
+      } 
+    } catch(error){
         alert(`${error.response.data.message}, please try agan later`);
       }
   };
@@ -64,7 +72,8 @@ export default function Explore(props, {user, prompts}: HashMap) {
       "
     >
        <div className={styles.page}>
-            <PageTitle title = {match? "Explore": "Explore Prompts"}>
+        <div className={styles.header} >
+          <PageTitle title = {match? "Explore": "Explore Prompts"}>
                 <div className={styles.add} onClick={() => router.push("/add")}>
                     <h2>
                         Add
@@ -75,20 +84,13 @@ export default function Explore(props, {user, prompts}: HashMap) {
                 </div>
             </PageTitle>
             <div className={styles.searchField}>
-                <SearchBar onSubmit={onSearch}
-                    placeholder={"Search for prompts..."}
-                />
+              <SearchBar onSubmit={onSearch}
+                  placeholder={"Search for prompts..."}
+              />
             </div>
-            <div className={styles.prompts}>
-              {/* {promptsList && promptsList.length > 0? promptsList.map((
-                  {prompt, _id}, index) => (
-                <Prompt key={index} prompt={prompt} onClick={()=>router.push(`/response/${_id}`)}
-                />
-              )): <div className={styles.noPrompts}>No prompts found</div>} */}
-              <LoadPrompts retrievedPrompts={props.retrievedPrompts} />
-              
-            </div> 
         </div>
+        <LoadPrompts retrievedPrompts={retrievedPrompts} prompts={promptsList} setPrompts={setPrompts}/>
+      </div>
     </Page>
   );
 }
@@ -96,22 +98,23 @@ export default function Explore(props, {user, prompts}: HashMap) {
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
     const session = await getSession(context);
+
     if (session && session.user) {
+
         //declaring an array to hold all the response IDs we've already gotten
         //an array to hold all of the responses we will show
         let retrievedPrompts: PromptInterface[] = [];
-
-        const queryResult = await PromptController.getPrompts(0)
-        const newPrompt = JSON.parse(JSON.stringify(queryResult))
-        console.log("stringified JSON", newPrompt)
-        retrievedPrompts = newPrompt
+        const queryResult = await PromptController.getPrompts(0);
+        const newPrompt = JSON.parse(JSON.stringify(queryResult));
+        retrievedPrompts = newPrompt;
         
         //const prompts = await pController.getPrompts();
         return {
           props: {
             user: JSON.parse(JSON.stringify(session.user)),
+
             //prompts: JSON.parse(JSON.stringify(prompts.reverse())),
-            retrievedPrompts
+            retrievedPrompts: retrievedPrompts
           },
         };
     } else {

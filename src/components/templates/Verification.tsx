@@ -1,5 +1,6 @@
 //react import
 import { ReactNode } from "react";
+
 //components
 import Background from "@components/Background";
 import NextHead  from "@components/NextHead";
@@ -36,4 +37,4 @@ export default function VerficationTemplate({children, headTitle, headContent, h
             </div>
         </Background>
     );
-};
+}

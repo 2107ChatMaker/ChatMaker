@@ -1,9 +1,12 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
+
 //utils
 import { sendEmailVerification } from "@utils/mailing";
+
 //database
 import Database from "@/database";
+
 //data access object
 import { UserController as userController} from "@/dataAccessLayer/controllers/user";
 
@@ -26,6 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const user = await userController.register(email.toLowerCase(), password);
 
             try {
+
                 //send email verification
                 await sendEmailVerification(email.toLowerCase(), user.emailToken, user._id);
 
@@ -34,14 +38,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     message: "account created",
                     _id: user._id.toString()
                 });
-
             } catch {
                 throw {
                     code: 500,
                     message: "cannot send email"
                 };
             }
-
         } catch {
             throw {
                 code: 400,

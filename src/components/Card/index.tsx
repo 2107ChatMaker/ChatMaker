@@ -1,5 +1,6 @@
 //react import
 import { ReactNode } from "react";
+
 //custom style
 import styles from './Card.module.sass';
 
@@ -16,4 +17,5 @@ export default function Card({children, variant, isDraggable}: Props) {
             {children}
         </div>
     );
+
 }

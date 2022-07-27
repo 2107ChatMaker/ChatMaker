@@ -1,16 +1,20 @@
 //react imports
 import { getSession } from "next-auth/react";
+
 //components
 import Background from "@components/Background";
 import NextHead from "@components/NextHead";
+
 //custom styles
 import styles from "@styles/AuthForm.module.sass";
+
 //next
 import dynamic from "next/dynamic";
 
+
 export default function Signup() {
 
-    //code splitting, lazy loading for signup form
+    //lazy loading for signup form
     const SignupForm = dynamic(() => import("@components/SignupForm"), {
         loading: () => <h1 style={{color: "white", textAlign: "center", marginTop: "30%"}}>...loading</h1>
     });
@@ -38,8 +42,14 @@ export async function getServerSideProps(context) {
     
     //caching
     context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+
+    //get user session
     const session = await getSession(context);
+
+    //check if use session exists
     if (session && session.user) {
+
+        //redirect to explore page
         return {
             redirect: {
                 destination: "/",
@@ -47,6 +57,7 @@ export async function getServerSideProps(context) {
             }
         };
     }
+
     return {
         props: {},
     };

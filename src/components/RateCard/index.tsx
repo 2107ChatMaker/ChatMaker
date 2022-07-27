@@ -13,8 +13,7 @@ export default function RateCard({response, prompt, tags}) {
                 <div className={styles.RateResponseTagsContainer}>
                     <h3 className={styles.RateResponseTagsTitle}>Tags:</h3>
                     <div className={styles.RateResponseTagList}>
-                        {
-                        tags.map((tag: string) => {
+                        { tags.map((tag: string) => {
                             return (
                                 <div key={tag}>
                                     <div className={styles.RateResponseTagContainer}>
@@ -22,11 +21,11 @@ export default function RateCard({response, prompt, tags}) {
                                     </div>
                                 </div>
                             );
-                        })
-                        }
+                        })}
                     </div>
                 </div>
             </div>
         </div>
     );
+
 }

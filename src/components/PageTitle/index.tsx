@@ -1,5 +1,6 @@
 //react imports
 import { ReactNode } from 'react';
+
 //custom style
 import styles from './PageTitle.module.sass';
 
@@ -20,4 +21,5 @@ export default function PageTitle(props: Props) {
             }
         </div>
     );
+
 }

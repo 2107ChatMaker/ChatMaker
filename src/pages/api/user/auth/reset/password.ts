@@ -1,12 +1,13 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
+
 //utils
 import { sendPasswordConfirmation } from "@utils/mailing";
 import { generateToken } from "@utils/token";
 import { hash } from 'bcrypt';
+
 //data access object
 import { UserController } from "@/dataAccessLayer/controllers/user";
-
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -38,6 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await UserController.setProvisionalPassword(user._id, await hash(newPassword, 10), passwordResetToken);
 
             try {
+                
                 //send password reset email
                 await sendPasswordConfirmation(user.email, passwordResetToken, user._id);
 

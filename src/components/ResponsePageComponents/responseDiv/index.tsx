@@ -1,18 +1,21 @@
 //react imports
 import { ReactNode, useState } from "react";
-import * as React from 'react';
+
 //mongoose imports
-import { ObjectId, Query } from "mongoose";
+import { ObjectId } from "mongoose";
+
 //utils
 import axios from "@utils/constants/axios";
+
 //material UI
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import Chip from '@mui/material/Chip';
 import CheckIcon from '@mui/icons-material/Check';
+
 //custom style
 import styles from './ResponseDiv.module.sass';
 
-import { useRouter } from 'next/router'
+//next-auth
 import { getSession } from "next-auth/react";
 
 
@@ -26,37 +29,39 @@ interface Props {
 };
 
 export default function ResponseDiv(props: Props){
-    //setting variables hold the state of the response icon, we will change it based on the state
-    const [iconBool, setIconBool] = useState(false)
 
-    
-    
+    //setting variables hold the state of the response icon, we will change it based on the state
+    const [iconBool, setIconBool] = useState(false);
+
     //saved response to user
-    async function saveResp(req, responseID: string) {
+    async function saveResp() {
+        
         //set the post request values
         let values = {
             responseID: props.responseID
         };
         const session = await getSession();
-        const id = session.user.id
+        const id = session.user.id;
 
         try {
+
             //make a post request to save the response to user
             const response = await axios.post(`/api/user/${id}/response/save`,values);
         } catch(error) {
-            console.log(error);
+            alert(error);
         }
     }
 
     //reference https://stackoverflow.com/questions/58257228/how-to-switch-materialui-icon-when-clicked
     const libraryOnClick = () => {
-        saveResp(props.userID, props.responseID as string)
-        setIconBool(true)
-    }
+        saveResp();
+        setIconBool(true);
+    };
     
     if (!props.tags) {
-        return
+        return;
     }
+
     return(
         <>
         <div className={styles.background}>

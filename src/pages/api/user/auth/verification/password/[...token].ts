@@ -1,8 +1,10 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
+
 //utils
 import { verifyToken, generateToken } from "@utils/token";
 import { sendPasswordConfirmation } from "@utils/mailing";
+
 //data access object
 import { UserController } from "@/dataAccessLayer/controllers/user";
 
@@ -49,8 +51,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     message: "Invalid token or id"
                 };
             }
-
         } else if (req.method==="POST") {
+
             //retrieve user id from request query
             const { id } = req.body;
 
@@ -69,14 +71,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 //send password confirmation link to user email
                 await sendPasswordConfirmation(user.email, user.resetPassword.resetPasswordToken, user._id);
-                res.status(200).json({ message: "send password confirmation" });
+                res.status(200).json({ message: "send password confirmation" });        
             } else {
                 throw {
                     code: 400,
                     message: "Invalid request"
                 };
             }
-            
         } else {
             throw {
                 code: 400,

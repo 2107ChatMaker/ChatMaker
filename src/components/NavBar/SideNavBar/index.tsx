@@ -3,14 +3,19 @@ import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { signOut, useSession } from 'next-auth/react';
+
 //material UI
 import { Icon } from "@mui/material";
+
 //component
 import NavItem from './SideNavItem';
+
 //animation logic
 import animation from "@utils/constants/animations/sidenavbar";
+
 //custom style
 import styles from './SideNavBar.module.sass';
+
 
 export default function SideNavBar() {
     
@@ -25,6 +30,7 @@ export default function SideNavBar() {
         if (session && session.user) {
             return ["Explore prompts", "Rate responses", "Add a prompt", "Profile", "Logout"];
         } 
+
         return ['Rate', 'Explore', 'Login'];
     }, [session]);
 
@@ -58,9 +64,11 @@ export default function SideNavBar() {
             </div>
             <ul className={styles.navItems}>
                 {tabs.map((tab, index)=>{
+                    
                     return (
                         <NavItem name={tab} key={index} onClick={tab==="Logout"?()=>signOut():null}/>
                     );
+
                 })}
             </ul>            
         </motion.div>
