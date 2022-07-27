@@ -104,7 +104,7 @@ export async function getServerSideProps({req, query, res}) {
 
             //caching
             res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
-
+            
             return {
                 props: {
                     thisprompt,

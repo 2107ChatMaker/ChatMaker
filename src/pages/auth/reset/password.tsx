@@ -40,7 +40,7 @@ export default function ResetPassword() {
                 email: data.email,
                 newPassword: data.password,
             });
-
+            
             //redirect to password verification page
             router.push(`/auth/verification/password/${response.data._id}`);
         } catch (error) {

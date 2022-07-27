@@ -11,6 +11,8 @@ import Button from "@components/Button";
 
 //custom styles
 import styles from "@styles/VerificationPage.module.sass";
+//next-auth
+import { signOut, useSession } from "next-auth/react";
 
 //next-auth
 import { signOut, useSession } from "next-auth/react";
@@ -28,7 +30,7 @@ export default function PasswordVerification() {
 
     //user session
     const {data: session} = useSession();
-
+    
     //resend password confirmation email
     async function resendLink() {
         try {
