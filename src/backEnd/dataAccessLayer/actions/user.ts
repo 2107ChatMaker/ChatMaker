@@ -3,31 +3,43 @@ import { HashMap } from "@interfaces/HashMap";
 import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { User } from "@interfaces/User";
+
 //data access object
 import { ObjectManager } from "./objectManager";
+
 //model
 import UserModel from "../schemas/user";
+
 //utils
 import { generateToken } from "@utils/token";
+
 //bcrypt
 import { hash } from "bcrypt";
 
 // actions accessable to manipulate responses or add new ones
 export class UserController implements DatabaseObject, Saveable, User {
+
     // the id given to the user by mongo
     readonly _id: string;
+
     // the users email address
     readonly email: string;
+
     // defines if the users account has been validated
     readonly isVerified: boolean;
+
     // the generated email token
     readonly emailToken: string;
+
     // the users password for logging in
     readonly password: string;
+
     // the temp password assigned when resetting the password
     readonly resetPassword;
+
     // list of rated response ids
     responsesRated: [string?];
+
     // list of saved response ids
     responsesSaved: [string?];
     
@@ -61,6 +73,7 @@ export class UserController implements DatabaseObject, Saveable, User {
             password: await hash(password, 10),
             emailToken: generateToken(email),
         });
+
         return user;
     }
 
@@ -77,6 +90,7 @@ export class UserController implements DatabaseObject, Saveable, User {
     //get user saved responses
     static async getSavedResponses(userID: string) {
         const user = await UserController.getUserByID(userID);
+        
         return user.responsesSaved;
     }
 
