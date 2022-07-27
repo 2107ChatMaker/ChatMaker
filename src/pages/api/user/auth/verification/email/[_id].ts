@@ -9,7 +9,6 @@ import { UserController as userController } from "@/dataAccessLayer/actions/user
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-
         if (req.method === "GET") {
             const { token, _id } = req.query;
             
@@ -22,7 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
 
             try {
-
                 //get user by id
                 const user = await userController.getUserByID(_id);
 
@@ -63,8 +61,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 code: 400,
                 message: "Invalid id"
             };
-            try {
 
+            try {
                 //get user
                 const user = await userController.getUserByID(_id);
 

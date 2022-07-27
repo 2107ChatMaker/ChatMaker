@@ -49,8 +49,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     message: "Invalid token or id"
                 };
             }
-        } else if (req.method==="POST") {
 
+        } else if (req.method==="POST") {
             //retrieve user id from request query
             const { id } = req.body;
 
@@ -76,6 +76,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     message: "Invalid request"
                 };
             }
+            
         } else {
             throw {
                 code: 400,
