@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 promptController.save();
                 res.status(200).json({message: "Prompt added"});
                 break;
+            
             default:
                 throw {
                     code: 405,

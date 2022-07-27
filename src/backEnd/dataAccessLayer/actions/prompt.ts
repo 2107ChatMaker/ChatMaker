@@ -52,6 +52,11 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
         return ObjectManager.find(PromptModel, promptID);
     }
 
+    // get a random response thats not in the given id list
+    static async getRandomPrompt(ignoredIDs: [string?]) {
+        return await ObjectManager.findRandom(PromptModel, ignoredIDs);
+    }
+
     // Tags are returned as a hashmap
     toHashMap(): HashMap {
         return {
