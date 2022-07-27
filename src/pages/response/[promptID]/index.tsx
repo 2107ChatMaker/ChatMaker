@@ -40,7 +40,7 @@ export default function ResponsePage(props: ResponseProps) {
     }, [props.userID, router]);
 
     //dynamically loading the responses in case it takes some time to load
-    const Content = dynamic(() => import("./Content"), {
+    const Content = dynamic(() => import("../../../components/ResponsePageComponents/Content"), {
         //will show a blue loading circle while loading in the content
         loading: () => <div><CircularProgress /></div>
     })
