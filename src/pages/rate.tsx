@@ -213,8 +213,8 @@ export async function getServerSideProps({req, res}) {
         } else {
 
             // return values if all responses have been rated
-            response = "you've rated all responses!\ntry creating a response of your own!";
-            prompt = "Wow Your Amazing";
+            response = "You've rated all responses!\nTry creating a response of your own!";
+            prompt = "Wow You're Amazing";
         }
 
         //caching

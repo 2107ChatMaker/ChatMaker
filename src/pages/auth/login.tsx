@@ -11,6 +11,7 @@ import styles from "@styles/AuthForm.module.sass";
 //next
 import dynamic from "next/dynamic";
 
+
 export default function Login() {
 
     //code splitting, lazy loading for lagin form

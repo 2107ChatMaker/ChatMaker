@@ -1,6 +1,5 @@
 //react imports
-import { ReactNode } from "react";
-
+import { ReactNode, useState } from "react";
 import * as React from 'react';
 
 //mongoose imports
@@ -12,6 +11,7 @@ import axios from "@utils/constants/axios";
 //material UI
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import Chip from '@mui/material/Chip';
+import CheckIcon from '@mui/icons-material/Check';
 
 //custom style
 import styles from './ResponseDiv.module.sass';
@@ -26,6 +26,9 @@ interface Props {
 };
 
 export default function ResponseDiv(props: Props){
+
+    //setting variables hold the state of the response icon, we will change it based on the state
+    const [iconBool, setIconBool] = useState(false);
 
     //saved response to user
     async function saveResp(userID: string, responseID: string) {
@@ -44,6 +47,12 @@ export default function ResponseDiv(props: Props){
         }   
     }
 
+    //reference https://stackoverflow.com/questions/58257228/how-to-switch-materialui-icon-when-clicked
+    const libraryOnClick = () => {
+        saveResp(props.userID, props.responseID as string);
+        setIconBool(true);
+    };
+    
     return(
         <>
         <div className={styles.background}>
@@ -54,7 +63,11 @@ export default function ResponseDiv(props: Props){
                 <Chip variant="outlined" size="small" label={tag} sx={{bgcolor: '#1D222E', color: '#ffffff'}} key={index}/>
             ))}
             </div>
-            <button className={styles.libraryAdd} onClick={() => saveResp(props.userID, props.responseID as string)}><LibraryAddOutlinedIcon fontSize="medium"/></button>
+                <button className={styles.libraryAdd} onClick={libraryOnClick}>
+                        {
+                            iconBool ? <CheckIcon /> : <LibraryAddOutlinedIcon fontSize="medium"/>
+                        }
+                </button>
             </div>
         </div>
         </>

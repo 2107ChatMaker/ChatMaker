@@ -1,6 +1,6 @@
 //react imports
 import { getSession } from 'next-auth/react';
-import { Key, useEffect, useState } from 'react';
+import { Key, useEffect } from 'react';
 import { _id } from '@next-auth/mongodb-adapter';
 
 //component imports
@@ -45,9 +45,8 @@ export default function ResponsePage(props: Props) {
             {
                 props.responses.map(
                     (CMResponse) => {
-
                         return(
-                            <div key={ CMResponse._id as Key}>
+                            <div key={CMResponse._id as Key}>
                                 <ResponseDiv 
                                     responseID={CMResponse._id} 
                                     thisPromptID={props.thisPromptID} 
@@ -56,10 +55,10 @@ export default function ResponsePage(props: Props) {
                                     tags={CMResponse.tags}
                                 />
                             </div>
-                        );                        
+                        );
                     }
                 )
-            };
+            }
             </div>
         </Page>
     );

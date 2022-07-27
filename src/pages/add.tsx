@@ -17,6 +17,7 @@ import { HashMap } from '@interfaces/HashMap';
 //custom styles
 import styles from '@styles/Add.module.sass';
 
+
 export default function AddPrompt({user}: HashMap) {
     const onAddPrompt = async () => {
 
