@@ -7,7 +7,7 @@ import styles from './ContentWrapper.module.sass';
 
 export default function ContentWrapper({children}: {children: ReactNode}) {
     return(
-        <div className={styles.contentWrapper}>
+        <div className={styles.contentWrapper} id="scrollableDiv">
             {children}
         </div>
     );

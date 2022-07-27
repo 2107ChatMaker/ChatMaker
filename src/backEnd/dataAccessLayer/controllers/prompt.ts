@@ -55,6 +55,13 @@ export class PromptController implements DatabaseObject, Saveable {
         return results; 
     }
 
+    //get number of prompts
+    static async getNumberOfPrompts() {
+        const results = await ObjectManager.getNumberOfDocuments(PromptModel);
+
+        return results;
+    }
+
     // searchs prompts by user input 
     static async searchPrompts(searchQuery: string) {
         const results = await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");

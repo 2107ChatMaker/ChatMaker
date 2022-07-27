@@ -68,9 +68,20 @@ export class ObjectManager {
         const numberOfDocuments: number = await model.estimatedDocumentCount();
 
         /// returns a mongoose query that needs to be Cast to the requested object type 
-        const foundEntries = await model.find({}).sort({$natural: -1}).limit(10).skip(skipVal);
+        const foundEntries = await model.find({}).limit(10).skip(skipVal);
 
         return foundEntries;
+    }
+
+    static async getNumberOfDocuments(model: mongoose.Model<any>) {
+        
+        /// establishes a connection to the database
+        await Database.setupClient();
+
+        /// returns the number of documents in the given model
+        const numberOfDocuments: number = await model.estimatedDocumentCount();
+
+        return numberOfDocuments;
     }
 
     /// find a specific object by it's model and mongoose _id and returns a mongoose query
