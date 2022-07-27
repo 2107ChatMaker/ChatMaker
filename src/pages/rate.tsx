@@ -12,14 +12,14 @@ import RateButton from '@components/RateButton';
 import PageTitle from '@components/PageTitle';
 
 // data access objects
-import { ResponseController } from '@/dataAccessLayer/actions/response';
-import { PromptController } from '@/dataAccessLayer/actions/prompt';
+import { ResponseController } from '@/dataAccessLayer/controllers/response';
+import { PromptController } from '@/dataAccessLayer/controllers/prompt';
 
 // interfaces
 import { Prompt } from '@interfaces/Prompt';
 import { RatingCard } from '@interfaces/RatingCard';
 import { CMResponse } from '@interfaces/Response';
-import { UserController } from '@/dataAccessLayer/actions/user';
+import { UserController } from '@/dataAccessLayer/controllers/user';
 
 // utils
 import axios from '@utils/constants/axios';

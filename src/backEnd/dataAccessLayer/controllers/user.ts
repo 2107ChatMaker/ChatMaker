@@ -2,7 +2,6 @@
 import { HashMap } from "@interfaces/HashMap";
 import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
-import { User } from "@interfaces/User";
 
 //data access object
 import { ObjectManager } from "./objectManager";
@@ -18,7 +17,7 @@ import { hash } from "bcrypt";
 
 
 // actions accessable to manipulate responses or add new ones
-export class UserController implements DatabaseObject, Saveable, User {
+export class UserController implements DatabaseObject, Saveable {
 
     // the id given to the user by mongo
     readonly _id: string;
@@ -80,12 +79,16 @@ export class UserController implements DatabaseObject, Saveable, User {
 
     // gets all users that belong to the given (id)
     static async getUserByID(userID: string) {
-        return await ObjectManager.find(UserModel, userID);
+        const results = await ObjectManager.find(UserModel, userID);
+
+        return results;
     }
 
     // gets all users that belong to the given (email)
     static async getUserByEmail(email: string) {
-        return await ObjectManager.findByEmail(UserModel, email.toLowerCase());
+        const results = await ObjectManager.findByEmail(UserModel, email.toLowerCase());
+
+        return results;
     }
 
     //get user saved responses

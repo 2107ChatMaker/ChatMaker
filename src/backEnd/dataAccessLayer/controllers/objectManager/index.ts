@@ -59,6 +59,20 @@ export class ObjectManager {
 
     }
 
+    static async findTen(model: mongoose.Model<any>, skipVal: number) {
+
+        /// establishes a connection to the database
+        await Database.setupClient();
+
+        //get documents count
+        const numberOfDocuments: number = await model.estimatedDocumentCount();
+
+        /// returns a mongoose query that needs to be Cast to the requested object type 
+        const foundEntries = await model.find({}).sort({$natural: -1}).limit(10).skip(skipVal);
+
+        return foundEntries;
+    }
+
     /// find a specific object by it's model and mongoose _id and returns a mongoose query
     /// Cast the result as the object type you expect from the call.
     static async find(model: mongoose.Model<any>, id: string) {
@@ -97,6 +111,30 @@ export class ObjectManager {
         const foundEntry = await model.findOne({
             '_id': { $nin: updatedResponsesIds }
         }).skip(random);
+
+        return foundEntry;
+    }
+
+    // Reference:
+    // https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
+    /// get a random approved response that isn't in our retrieved response ids and that matches the given prompt ID
+    static async findRandomApproved(model: mongoose.Model<any>, retrievedResponseIDs: [string?], promptID: string) {
+
+        /// establishes a connection to the database
+        await Database.setupClient();
+
+        // get the number of documents in the given model
+        const numberOfDocuments: number = await model.countDocuments({promptID: promptID});
+        
+        // get a random number of documents to skip
+        var random = Math.floor(Math.random() * (numberOfDocuments-retrievedResponseIDs.length));
+
+        /// returns the request query that needs to be Cast to the requested object type 
+        const foundEntry = await model.findOne({
+            promptID: promptID,
+            '_id': { $nin: retrievedResponseIDs }
+            }
+            ).skip(random);
 
         return foundEntry;
     }
@@ -191,7 +229,7 @@ export class ObjectManager {
         await Database.setupClient();
 
         /// returns an array of responses with the matching promptID
-        const foundEntries: CMResponse[] = await ApprovedResponseModel.find({ promptID: {$all:  promptID} });
+        const foundEntries: CMResponse[] = await ApprovedResponseModel.find({ promptID: {$all:  promptID} }).limit(10);
         
         return foundEntries as CMResponse[];
     }
@@ -204,9 +242,9 @@ export class ObjectManager {
 
         // find by ID and increase or decrease the rating value based on whether the rating is true or not. If there is an error log it
         let inc: Number = rating? 1 : -1;
-        const retval = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, { returnDocument: 'after' });
+        const retVal = ResponseModel.findOneAndUpdate({_id: _id}, { $inc: { rating: inc } }, { returnDocument: 'after' });
         
-        return retval;
+        return retVal;
     }
 
     /// updates the document that matches the id with the valuse in the obj parameter for the given model

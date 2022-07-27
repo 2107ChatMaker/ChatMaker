@@ -20,9 +20,9 @@ import SavedResponseList from "@components/SavedResponseList";
 import Button from "@components/Button";
 
 //controllers
-import { UserController as userController } from "@/dataAccessLayer/actions/user";
-import { ApprovedResponseController as arController } from "@/dataAccessLayer/actions/approvedRating";
-import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
+import { UserController as userController } from "@/dataAccessLayer/controllers/user";
+import { ApprovedResponseController as arController } from "@/dataAccessLayer/controllers/approvedRating";
+import { PromptController as promptController } from "@/dataAccessLayer/controllers/prompt";
 
 //custom style
 import styles from "@styles/Profile.module.sass";

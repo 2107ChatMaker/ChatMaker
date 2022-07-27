@@ -1,7 +1,6 @@
 //interfaces
 import { HashMap } from "@interfaces/HashMap";
 import { Saveable } from "@interfaces/Saveable";
-import { CMResponse } from "@interfaces/Response";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 
 //data access object
@@ -16,7 +15,7 @@ import { Tag } from "@/utility/Enums/tag";
 
 
 // actions accessable to manipulate responses or add new ones
-export class ResponseController implements DatabaseObject, Saveable, CMResponse {
+export class ResponseController implements DatabaseObject, Saveable {
 
     // the id given to the user by mongo
     readonly _id: string;
@@ -53,7 +52,9 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
 
     // gets all responses that belong to the given prompt(id)
     static async getResponsesByID(promptID: string) {
-        return await ObjectManager.findResponseByID(promptID);
+        const results = await ObjectManager.findResponseByID(promptID);
+
+        return results;
     }
 
     //get approved responses by id
@@ -65,12 +66,16 @@ export class ResponseController implements DatabaseObject, Saveable, CMResponse 
 
     // get a random response thats not in the given id list
     static async getRandomResponse(ignoredIDs: [string?]) {
-        return await ObjectManager.findRandom(ResponseModel, ignoredIDs);
+        const results = await ObjectManager.findRandom(ResponseModel, ignoredIDs);
+
+        return results; 
     }
 
     // get response by response content and prompt id
     static async getResponseByContentAndPrompt(content: string, promptID: string) {
-        return await ObjectManager.findByQuery(ResponseModel, { response: content, promptID });
+        const results = await ObjectManager.findByQuery(ResponseModel, { response: content, promptID });
+        
+        return results; 
     }
 
     // add rating to the given response

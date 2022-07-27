@@ -12,6 +12,8 @@ interface Props{
     require?: boolean,
     error?: string,
     name: string
+    minLength?: number
+    maxLength?: number
 }
 
 export default function TextArea(props: Props) {
@@ -24,6 +26,9 @@ export default function TextArea(props: Props) {
                 value={props.value}
                 required={props.require}
                 name={props.name}
+                minLength={props.minLength}
+                maxLength={props.maxLength}
+
             />
         </div>
     );

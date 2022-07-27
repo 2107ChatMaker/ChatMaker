@@ -11,7 +11,7 @@
     "padding-line-between-statements": ["warn", {
       "blankLine": "always",
       "prev": "*",
-      "next": ["block-like", "return"]
+      "next": ["block-like", "return", "export"]
     }],
     "lines-around-comment": ["warn", { "beforeLineComment": true}],
     "newline-before-return": "warn"

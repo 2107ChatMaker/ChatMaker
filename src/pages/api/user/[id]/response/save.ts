@@ -2,7 +2,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 //data access object
-import { UserController } from "@/dataAccessLayer/actions/user";
+import { UserController } from "@/dataAccessLayer/controllers/user";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -12,8 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 message: "method not allowed"
             };
         } else {
-
-            //grobbing the user id
+            
+            //grabbing the user id
             const { id } = req.query;
 
             //check to see if id is valid

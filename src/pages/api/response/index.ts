@@ -2,14 +2,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 //data access objects
-import { ResponseController } from "@/dataAccessLayer/actions/response";
+import { ResponseController } from "@/dataAccessLayer/controllers/response";
 
 //interfaces
 import { CMResponse } from "@interfaces/Response";
+import { ApprovedResponseController } from "@/dataAccessLayer/controllers/approvedRating";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        if (req.method == "POST") {
+        if (req.method === "POST") {
 
             //gives us JSON body
             const { body } = req;
@@ -35,16 +36,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             //letting user know the response was successful
             res.status(200).json({message: "Response added"});
-        
-        } else if(req.method == "GET"){
-            const {body} = req;
-            const {promptID} = body;
 
-            //getting all the responses associated with the given promptID
-            const responses = await ResponseController.getApprovedResponsesByID(promptID);
+        } else if(req.method === "GET"){
+            const {promptID, retrivedIDs} = req.query;
+            const idString: string = retrivedIDs as string;
+            let newRetrievedIDs: string[] = idString.split(',');
+            let retrievedResponses: CMResponse[] = [];
 
-            //sending a message to the user so we know our 'get' request was successful
-            res.status(200).json(responses);
+            for (let i = 0; i < 10; i++) {
+
+                // get a random response from the backend and parse it
+                const queryResult = await ApprovedResponseController.getRandomResponse(newRetrievedIDs as [string], promptID as string);
+                
+                if (queryResult == null) {
+                    break;
+                }
+                const newResponse = JSON.parse(JSON.stringify(queryResult)) as CMResponse;
+                newRetrievedIDs.push(String(newResponse._id));
+                retrievedResponses.push(newResponse);
+            }
+            const returnValue = JSON.parse(JSON.stringify(
+                {
+                retrievedResponses,
+                newRetrievedIDs
+                }
+            ));
+            res.status(200).json(returnValue);
         } else {
             throw {
                 code: 405,
