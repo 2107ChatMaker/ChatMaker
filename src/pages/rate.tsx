@@ -21,7 +21,6 @@ import axios from '@utils/constants/axios';
 //custom styles
 import styles from '../styles/rate.module.sass';
 
-
 // On this page the user is given a response and is asked to rate it
 export default function Rating(props: RatingCard) {
     // session that manages logged-in user

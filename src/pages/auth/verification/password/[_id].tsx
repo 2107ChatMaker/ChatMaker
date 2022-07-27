@@ -8,13 +8,17 @@ import Template from "@components/templates/Verification";
 import Button from "@components/Button";
 //custom styles
 import styles from "@styles/VerificationPage.module.sass";
+//next-auth
+import { signOut, useSession } from "next-auth/react";
 
 
 export default function PasswordVerification() {
     const router = useRouter();
     const { _id } = router.query;
     const [error, setError] = useState();
+    const {data: session} = useSession();
 
+    //resend password confirmation email
     async function resendLink() {
         try {
 
@@ -25,6 +29,12 @@ export default function PasswordVerification() {
             //handle error
             setError(err.response.data.err);
         }
+    }
+
+    //redirect to login and logged out user after password is reset
+    function exitToLogin() {
+        if (session && session.user) signOut();
+        router.push("/auth/login");
     }
     
     return (
@@ -49,9 +59,7 @@ export default function PasswordVerification() {
                 </div>
                 <div>
                     <Button type="button"
-                        onClick={() => {
-                            router.push("/auth/login");
-                        }}
+                        onClick={exitToLogin}
                     >
                         Back To Login
                     </Button>

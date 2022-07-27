@@ -52,7 +52,10 @@ export class UserController implements DatabaseObject, Saveable, User {
         return ObjectManager.updateByID(this._id, this, UserModel);
     }
 
+    // add/register a new user
     static async register(email: string, password: string) {
+        
+        // add a new user to database
         const user = await ObjectManager.create(UserModel, {
             email,
             password: await hash(password, 10),
@@ -68,7 +71,7 @@ export class UserController implements DatabaseObject, Saveable, User {
 
     // gets all users that belong to the given (email)
     static async getUserByEmail(email: string) {
-        return await ObjectManager.findByEmail(UserModel, email);
+        return await ObjectManager.findByEmail(UserModel, email.toLowerCase());
     }
 
     //get user saved responses
