@@ -18,19 +18,30 @@
 
 Must have an internet connection on a mobile or desktop device
 
-### Option 1: Clone the project
+### Step 1: Clone the project
 
 ```
 $ git clone https://github.com/2107ChatMaker/ChatMaker.git
 ```
 
-### Option 2: Set up environment variables
+### Step 2: Set up modules
 
 ```
 $ npm i
 ```
 
-### Option 3: Run development server
+### Step 3: Set up environment variables
+
+```
+MONGODB_URI
+NEXTAUTH_URL
+BASEURL
+NEXTAUTH_SECRET
+JWT_SECRET
+SENDGRID_API_KEY
+```
+
+### Step 4: Run development server
 
 ```
 $ npm run dev
