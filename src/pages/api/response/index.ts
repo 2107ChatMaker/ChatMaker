@@ -12,17 +12,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (req.method == "POST") {
 
             //gives us JSON body
-<<<<<<< HEAD
-            const {body} = req;
-
-            //destructuring JSON body to grab what we need
-            const {userID, promptID, response, tags} : CMResponse = body;
-
-=======
             const { body } = req;
+
             //destructuring JSON body to grab what we need
             const { userID, promptID, response, tags } : CMResponse = body;
->>>>>>> origin/main
+            
             //check if response with same content for this prompt exists
             const isResponseExist = await ResponseController.getResponseByContentAndPrompt(response, promptID);
             
