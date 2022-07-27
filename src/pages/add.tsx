@@ -1,6 +1,7 @@
 //react imports
 import { getSession } from 'next-auth/react';
 import useForm from '@hook/useForm';
+import { useState } from 'react';
 //utils
 import axios from '@utils/constants/axios';
 //components
@@ -15,36 +16,27 @@ import styles from '@styles/Add.module.sass';
 
 
 export default function AddPrompt({user}: HashMap) {
-    const onAddPrompt = async () => {
+    const onAddPrompt = async (event) => {
+        event.preventDefault();
 
         //get userID from session
         const userId = user.id;
     
         try{
             //fetch request to add prompt
-            const result = await axios.post('/api/prompt', {userId, prompt: form.prompt});
+            const result = await axios.post('/api/prompt', {userId, prompt: form});
             // alert users upload was successful
             alert(result.data.message);
         } catch (error) {
-            //TODO: handle error
             alert(`${error.response.data.message}, please try agan later`);
         }
     };
+   
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setForm(e.target.value);
+    }
 
-    //validates the prompt entered by the user
-    const validatePrompt = ({prompt}) => {
-        //prompt length must be at least 10 characters
-        if (prompt.length < 10) {
-            return {
-                prompt: "Prompt must be at least 10 characters long"
-            };
-        }
-
-        return {};
-    };
-
-    //create prompt form state and form handling methods
-    const [form, _, handleChange, handleSubmit] = useForm({prompt : "" }, validatePrompt, onAddPrompt);
+    const [form, setForm] = useState("");
     
     return (
         <Page
@@ -56,16 +48,18 @@ export default function AddPrompt({user}: HashMap) {
             prompts and response for ingame dialogues.
             "
         >
-           <form onSubmit={handleSubmit}>
+           <form onSubmit={onAddPrompt}>
             <div className ={styles.page}>
              <PageTitle title = "Create Prompt" />
              <div className={styles.formInput}>
                     <TextArea
-                        value={form.prompt}
+                        value={form}
                         onChange={handleChange}
                         placeholder="Enter your prompt here"
                         require={true}
                         name="prompt" 
+                        minLength={4}
+                        maxLength={40}
                     />
              </div>
                 <div className={styles.formAction}>
