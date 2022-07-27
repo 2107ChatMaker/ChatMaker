@@ -11,8 +11,6 @@ import Button from "@components/Button";
 
 //custom styles
 import styles from "@styles/VerificationPage.module.sass";
-//next-auth
-import { signOut, useSession } from "next-auth/react";
 
 //next-auth
 import { signOut, useSession } from "next-auth/react";
