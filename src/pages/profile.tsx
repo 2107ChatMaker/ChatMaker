@@ -151,13 +151,13 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
                         </div>
                     </div>
                 </div>
-                { savedResponsesIds.length > 0 &&
+                { savedResponsesIds.length > 0 ?
                     <div className={styles.responses}>
                         {Object.keys(savedResponses).map((prompt, index) => (
                             <SavedResponseList key={index} prompt={savedResponses[prompt]} title={prompt} onSelect={handleSelect}/>
                         ))}
-                    </div>
-                }
+                    </div> :
+                <div className={styles.isEmptySavedResponse}>{"You don't have any favorite response yet"}</div>}
             </div>
         </Page>
   );
