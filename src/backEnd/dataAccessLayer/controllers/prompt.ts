@@ -35,9 +35,9 @@ export class PromptController implements DatabaseObject, Saveable {
     }
 
     // retrieves all prompts
-    static async getPrompts() {
-        const results = await ObjectManager.findAll(PromptModel);
-        return results; 
+    static async getPrompts(skip: number) {
+        const getPrompts = await ObjectManager.findTen(PromptModel, skip);
+        return getPrompts;
     }
 
     //get prompt by content
@@ -55,6 +55,11 @@ export class PromptController implements DatabaseObject, Saveable {
     static async findPromptByID(promptID: string) {
         const results = await ObjectManager.find(PromptModel, promptID);
         return results; 
+    }
+
+    // get a random response thats not in the given id list
+    static async getRandomPrompt(ignoredIDs: [string?]) {
+        return await ObjectManager.findRandom(PromptModel, ignoredIDs);
     }
 
     // Tags are returned as a hashmap

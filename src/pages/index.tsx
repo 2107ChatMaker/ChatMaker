@@ -6,21 +6,28 @@ import Image from 'next/image';
 //utils
 import axios from '@utils/constants/axios';
 //material UI
-import { Icon, useMediaQuery } from "@mui/material";
+import { CircularProgress, Icon, useMediaQuery } from "@mui/material";
 //components
 import Page from '@components/templates/Page';
 import PageTitle from '@components/PageTitle';
 import SearchBar from '@components/SearchBar';
 import Prompt from '@components/Prompt';
 //data access object
-import { PromptController as pController } from '@/dataAccessLayer/controllers/prompt';
+import { PromptController as pController, PromptController } from '@/dataAccessLayer/controllers/prompt';
 //interfaces
 import type { HashMap } from '@interfaces/HashMap';
+import { Prompt as PromptInterface } from '@interfaces/Prompt';
 //custom styles
 import styles from '@styles/ExplorePrompts.module.sass';
+import dynamic from 'next/dynamic';
 
 
-export default function Explore({user, prompts}: HashMap) {
+export default function Explore(props, {user, prompts}: HashMap) {
+
+  const LoadPrompts = dynamic(() => import('@components/Prompt/LoadPrompts'), {
+    //will show a blue loading circle while loading in the content
+    loading: () => <div><CircularProgress /></div>
+  })
   //list of all the prompts being displayed
   const [promptsList, setPrompts] = useState(prompts);
   //boolean to check if the screen size matches a mobile screen
@@ -73,11 +80,12 @@ export default function Explore({user, prompts}: HashMap) {
                 />
             </div>
             <div className={styles.prompts}>
-              {promptsList && promptsList.length > 0? promptsList.map((
+              {/* {promptsList && promptsList.length > 0? promptsList.map((
                   {prompt, _id}, index) => (
                 <Prompt key={index} prompt={prompt} onClick={()=>router.push(`/response/${_id}`)}
                 />
-              )): <div className={styles.noPrompts}>No prompts found</div>}
+              )): <div className={styles.noPrompts}>No prompts found</div>} */}
+              <LoadPrompts retrievedPrompts={props.retrievedPrompts} />
               
             </div> 
         </div>
@@ -87,23 +95,33 @@ export default function Explore({user, prompts}: HashMap) {
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (session && session.user) {
-      const prompts = await pController.getPrompts();
-      return {
-        props: {
-          user: JSON.parse(JSON.stringify(session.user)),
-          prompts: JSON.parse(JSON.stringify(prompts.reverse()))
-        },
+    const session = await getSession(context);
+    if (session && session.user) {
+        //declaring an array to hold all the response IDs we've already gotten
+        //an array to hold all of the responses we will show
+        let retrievedPrompts: PromptInterface[] = [];
+
+        const queryResult = await PromptController.getPrompts(0)
+        const newPrompt = JSON.parse(JSON.stringify(queryResult))
+        console.log("stringified JSON", newPrompt)
+        retrievedPrompts = newPrompt
+        
+        //const prompts = await pController.getPrompts();
+        return {
+          props: {
+            user: JSON.parse(JSON.stringify(session.user)),
+            //prompts: JSON.parse(JSON.stringify(prompts.reverse())),
+            retrievedPrompts
+          },
+        };
+    } else {
+        return {
+          redirect: {
+              destination: "/auth/login",
+              permanent: false,
+          }
       };
-  } else {
-      return {
-        redirect: {
-            destination: "/auth/login",
-            permanent: false,
-        }
-    };
-  }
+    }
 }
 
 

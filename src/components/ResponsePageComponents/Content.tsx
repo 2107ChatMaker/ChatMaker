@@ -5,6 +5,7 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import WhiteDiv from "./whiteDiv";
 
 
 //interface with the types that will be held
@@ -39,14 +40,16 @@ const Content = (data: ResponseProps) => {
         setRetrievedIDs((retrivedIDs) => [...retrivedIDs, ...res.data.newRetrievedIDs])
     }
 
-    
+    if (!responses) {
+        setHasMore(false)
+    }
     return (
         <>
             <InfiniteScroll
             dataLength={responses.length}
             next={getNewResponses}
             hasMore={hasMore}
-            loader={<div><CircularProgress/></div>}
+            loader={<WhiteDiv> No responses yet</WhiteDiv>}
             endMessage={<h4>Nothing more to show</h4>}
             >
                 {
