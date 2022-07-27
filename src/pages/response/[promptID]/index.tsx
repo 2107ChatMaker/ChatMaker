@@ -37,7 +37,10 @@ export default function ResponsePage(props: Props) {
     }, [props.userID, router]);
     
     return (
-        <Page>
+        <Page
+            headTitle="Response Page"
+            headContent="Response Page"
+        >
             {/* displaying the prompt retrieved from the database */}
             <AddResponseHeader prompt={props.thisprompt} userID={props.userID} promptID={props.thisPromptID} />
             {/* mapping the responses to the divs */}
