@@ -42,7 +42,7 @@ export default function Explore({user, prompts}: HashMap) {
       }
     }
       catch(error){
-        //TODO: handle error
+        alert(`${error.response.data.message}, please try agan later`);
       }
   };
 

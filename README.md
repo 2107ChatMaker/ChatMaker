@@ -1,34 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img src="public/resources/chatmakerlogo.png">
 
-## Chat Maker''
+## ChatMaker is a web application that allows users to submit prompts and also lets users have the ability to give responses to prompts for future use in game development or other industries. It generates a sense of community with users participating together.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
+- Written in NextJS
+- Styled using Sass
+- Uses MongoDB database
+- Desktop and mobile compatable
+- Ablility to export saved responses
+- Create prompts
+- Search through prompts
+- Respond to prompts
+- Rate responses
+
+## Installation
+
+Must have an internet connection on a mobile or desktop device
+
+### Option 1: Clone the project
+
+```
+$ git clone https://github.com/2107ChatMaker/ChatMaker.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Option 2: Set up environment variables
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+$ npm i
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Option 3: Run development server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+$ npm run dev
+```
 
-## Learn More
+### File Structure
 
-To learn more about Next.js, take a look at the following resources:
+- CHATMAKER (root)
+  - Src (contains all of the files needed for the application to work)
+    - backEnd (contains all backend files relating to database and database functions)
+      - dataAccessLayer
+        - controller (actions relating to the database)
+        - schemas (schemas for each collection in the database)
+      - database (connection of the database to the application)
+      - utility (includes tag for responses)
+    - components (contains reusable components that are used throughout the page)
+    - interfaces
+    - pages (actaul webpages that users can navigate to and use)
+      - api (API requests for prompts, users and responses)
+    - styles (styling of pages)
+    - utils (utility functions used throughout the application)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Software used in this project:
 
-## Deploy on Vercel
+- [NextJS](https://www.swift.org/)
+- [MongoDB](https://developer.apple.com/xcode/)
+- [Mongoose](https://mongoosejs.com/)
+- [Axios](https://www.npmjs.com/package/react-axios)
+- [Sass](https://sass-lang.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Next-Auth](https://next-auth.js.org/)
+- [React-Infinite-Scroll-Component](https://www.npmjs.com/package/react-infinite-scroll-component)
+- [JWT](https://jwt.io/)
+- [SendGrid](https://sendgrid.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Many of symbols and imagery are from SF symbols:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [MaterialUI](https://mui.com/)
+
+## Authors
+
+- Abbe Azale
+- Phillip Chadwick
+- Son Minh Nguyen
+- Kelsey Zirk
+
+## License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
