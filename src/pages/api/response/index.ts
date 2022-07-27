@@ -1,10 +1,10 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //data access objects
-import { ResponseController } from "@/dataAccessLayer/actions/response";
+import { ResponseController } from "@/dataAccessLayer/controllers/response";
 //interfaces
 import { CMResponse } from "@interfaces/Response";
-import { ApprovedResponseController } from "@/dataAccessLayer/actions/approvedRating";
+import { ApprovedResponseController } from "@/dataAccessLayer/controllers/approvedRating";
 
 interface Data  {
     promptID: string,

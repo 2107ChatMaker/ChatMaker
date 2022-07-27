@@ -13,7 +13,7 @@ import PageTitle from '@components/PageTitle';
 import SearchBar from '@components/SearchBar';
 import Prompt from '@components/Prompt';
 //data access object
-import { PromptController as pController, PromptController } from '@/dataAccessLayer/actions/prompt';
+import { PromptController as pController, PromptController } from '@/dataAccessLayer/controllers/prompt';
 //interfaces
 import type { HashMap } from '@interfaces/HashMap';
 import { Prompt as PromptInterface } from '@interfaces/Prompt';
@@ -49,7 +49,7 @@ export default function Explore(props, {user, prompts}: HashMap) {
       }
     }
       catch(error){
-        //TODO: handle error
+        alert(`${error.response.data.message}, please try agan later`);
       }
   };
 

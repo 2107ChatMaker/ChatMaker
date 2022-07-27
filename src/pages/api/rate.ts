@@ -1,9 +1,9 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //data access objects
-import { PromptController } from "@/dataAccessLayer/actions/prompt";
-import { ResponseController } from "@/dataAccessLayer/actions/response";
-import { UserController } from "@/dataAccessLayer/actions/user";
+import { PromptController } from "@/dataAccessLayer/controllers/prompt";
+import { ResponseController } from "@/dataAccessLayer/controllers/response";
+import { UserController } from "@/dataAccessLayer/controllers/user";
 //interfaces
 import { Prompt } from "@interfaces/Prompt";
 import { CMResponse } from "@interfaces/Response";

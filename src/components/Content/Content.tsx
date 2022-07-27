@@ -1,4 +1,4 @@
-import { ResponseController } from "@/dataAccessLayer/actions/response";
+import { ResponseController } from "@/dataAccessLayer/controllers/response";
 import ResponseDiv from "@components/ResponsePageComponents/responseDiv";
 import WhiteDiv from "@components/ResponsePageComponents/whiteDiv";
 import { CMResponse } from "@interfaces/Response";

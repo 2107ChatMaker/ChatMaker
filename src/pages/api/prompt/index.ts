@@ -1,8 +1,8 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //data access object
-import { PromptController } from "@/dataAccessLayer/actions/prompt"; 
 import { Prompt } from "@interfaces/Prompt";
+import { PromptController } from "@/dataAccessLayer/controllers/prompt"; 
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
