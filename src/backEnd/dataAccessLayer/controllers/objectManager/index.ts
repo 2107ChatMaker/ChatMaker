@@ -73,6 +73,17 @@ export class ObjectManager {
         return foundEntries;
     }
 
+    static async getNumberOfDocuments(model: mongoose.Model<any>) {
+        
+        /// establishes a connection to the database
+        await Database.setupClient();
+
+        /// returns the number of documents in the given model
+        const numberOfDocuments: number = await model.estimatedDocumentCount();
+
+        return numberOfDocuments;
+    }
+
     /// find a specific object by it's model and mongoose _id and returns a mongoose query
     /// Cast the result as the object type you expect from the call.
     static async find(model: mongoose.Model<any>, id: string) {

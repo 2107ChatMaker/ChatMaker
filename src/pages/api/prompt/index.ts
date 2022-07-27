@@ -24,17 +24,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } 
         else if (req.method === "GET") {
             let { skip } = req.query;
+            const numberOfPrompts = await PromptController.getNumberOfPrompts();
             let skipNum = parseInt(skip as string);
             let retrievedPrompts: Prompt[] = [];
             const queryResult = await PromptController.getPrompts(skipNum);
             const newPrompt = JSON.parse(JSON.stringify(queryResult)) as Prompt;
             retrievedPrompts.push(newPrompt);
-            const returnValue = JSON.parse(JSON.stringify(
-                {
-                retrievedPrompts
-                }
-            ));
-            res.status(200).json(returnValue);
+            res.status(200).json({retrievedPrompts, numberOfPrompts});
         }
         else {
             throw {
