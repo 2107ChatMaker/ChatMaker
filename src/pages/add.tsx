@@ -17,7 +17,6 @@ import styles from '@styles/Add.module.sass';
 
 export default function AddPrompt({user}: HashMap) {
     const onAddPrompt = async (event) => {
-
         event.preventDefault();
 
         //get userID from session
@@ -29,7 +28,6 @@ export default function AddPrompt({user}: HashMap) {
             // alert users upload was successful
             alert(result.data.message);
         } catch (error) {
-            //TODO: handle error
             alert(`${error.response.data.message}, please try agan later`);
         }
     };
