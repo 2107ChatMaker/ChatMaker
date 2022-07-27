@@ -1,4 +1,4 @@
-<img src="chatmakerlogo.png">
+<img src="public/resources/chatmakerlogo.png">
 
 ## ChatMaker is a web application that allows users to submit prompts and also lets users have the ability to give responses to prompts for future use in game development or other industries. It generates a sense of community with users participating together.
 
@@ -10,7 +10,7 @@
 - Desktop and mobile compatable
 - Ablility to export saved responses
 - Create prompts
-- Search through prompts 
+- Search through prompts
 - Respond to prompts
 - Rate responses
 
@@ -36,14 +36,12 @@ $ npm i
 $ npm run dev
 ```
 
-
-
 ### File Structure
 
 - CHATMAKER (root)
   - Src (contains all of the files needed for the application to work)
     - backEnd (contains all backend files relating to database and database functions)
-      - dataAccessLayer 
+      - dataAccessLayer
         - controller (actions relating to the database)
         - schemas (schemas for each collection in the database)
       - database (connection of the database to the application)
@@ -51,7 +49,7 @@ $ npm run dev
     - components (contains reusable components that are used throughout the page)
     - interfaces
     - pages (actaul webpages that users can navigate to and use)
-        - api (API requests for prompts, users and responses)
+      - api (API requests for prompts, users and responses)
     - styles (styling of pages)
     - utils (utility functions used throughout the application)
 
