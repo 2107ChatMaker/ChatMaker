@@ -24,7 +24,7 @@ import dynamic from 'next/dynamic';
 
 export default function Explore(props, {user, prompts}: HashMap) {
 
-  const LoadPrompts = dynamic(() => import('@components/Prompt/LoadPrompts'), {
+  const LoadPrompts = dynamic(() => import('@components/Prompt/LoadPromptsFIX'), {
     //will show a blue loading circle while loading in the content
     loading: () => <div><CircularProgress /></div>
   })
