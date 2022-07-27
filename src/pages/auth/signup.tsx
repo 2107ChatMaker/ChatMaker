@@ -11,6 +11,7 @@ import styles from "@styles/AuthForm.module.sass";
 //next
 import dynamic from "next/dynamic";
 
+
 export default function Signup() {
 
     //lazy loading for signup form

@@ -1,6 +1,7 @@
 //next import
 import Head from "next/head";
 
+
 interface NextHeadProps {
     title?: string;
     content?: string;

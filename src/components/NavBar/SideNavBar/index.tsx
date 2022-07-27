@@ -16,6 +16,7 @@ import animation from "@utils/constants/animations/sidenavbar";
 //custom style
 import styles from './SideNavBar.module.sass';
 
+
 export default function SideNavBar() {
     
     //user session

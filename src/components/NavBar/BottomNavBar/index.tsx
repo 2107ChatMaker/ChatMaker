@@ -11,6 +11,7 @@ import { Paper } from '@mui/material';
 import GetTabName from '@utils/navigation/GetTabName';
 import getTabLinkAndIcon from '@utils/navigation/GetTabLinkAndIcon';
 
+
 //navbar style
 const navStyle = {
     width: '100%',

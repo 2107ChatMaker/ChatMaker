@@ -21,6 +21,7 @@ import { SignupFormData as FormData } from '@interfaces/SignupFormData';
 //custom style
 import styles from './SignupForm.module.sass';
 
+
 export default function SignupForm() {
 
     //router for navigate to email verification page

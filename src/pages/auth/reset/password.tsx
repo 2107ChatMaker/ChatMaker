@@ -18,6 +18,7 @@ import Input from "@components/Input";
 //custom styles
 import styles from "@styles/ResetPassword.module.sass";
 
+
 interface FormData {
     email: string; 
     password: string;

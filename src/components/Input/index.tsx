@@ -7,6 +7,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 //custom style
 import styles from './Input.module.sass';
 
+
 interface InputProps {
     type: string;
     name: string;

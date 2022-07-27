@@ -8,6 +8,7 @@ import styles from './SideNavItem.module.sass';
 //utilities
 import getTabLinkAndIcon  from '@utils/navigation/GetTabLinkAndIcon';
 
+
 export default function NavItem({name, onClick}: {name: string, onClick?: () => void}) {
     
     //router for checking which tab is active

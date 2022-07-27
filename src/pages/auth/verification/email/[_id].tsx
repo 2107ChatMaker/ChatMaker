@@ -12,6 +12,7 @@ import Button from "@components/Button";
 //custom styles
 import styles from '@styles/VerificationPage.module.sass';
 
+
 export default function EmailVerification() {
 
     //router for getting user id and navigate to login page

@@ -15,6 +15,7 @@ import styles from "@styles/VerificationPage.module.sass";
 //next-auth
 import { signOut, useSession } from "next-auth/react";
 
+
 export default function PasswordVerification() {
 
     //router for getting user id and navigate to login page

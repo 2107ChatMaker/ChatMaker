@@ -10,21 +10,18 @@ export class ApprovedResponseController {
 
         //finds the responses by id     
         return await ObjectManager.find(ApprovedResponseModel, id);   
-
     }
 
     static async getApprovedResponses(ids: string[]) {
 
         //finds the responses by id     
         return await ObjectManager.findByIds(ids, ApprovedResponseModel);
-
     }
 
     static async approvedResponse(response: HashMap) {
 
         //finds the responses by id     
         return await ObjectManager.create(ApprovedResponseModel, response);
-
     }
-    
+
 }

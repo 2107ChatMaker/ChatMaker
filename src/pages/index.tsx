@@ -25,6 +25,7 @@ import type { HashMap } from '@interfaces/HashMap';
 //custom styles
 import styles from '@styles/ExplorePrompts.module.sass';
 
+
 export default function Explore({user, prompts}: HashMap) {
 
   //list of all the prompts being displayed

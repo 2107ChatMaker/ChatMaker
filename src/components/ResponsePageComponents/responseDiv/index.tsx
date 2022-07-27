@@ -16,6 +16,7 @@ import CheckIcon from '@mui/icons-material/Check';
 //custom style
 import styles from './ResponseDiv.module.sass';
 
+
 interface Props {
     children?: ReactNode
     prompt: string

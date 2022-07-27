@@ -20,6 +20,7 @@ import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 //style
 import styles from "./LoginForm.module.sass";
 
+
 export default function LoginForm({ signIn }) {
     
     //router for getting error from server by query params

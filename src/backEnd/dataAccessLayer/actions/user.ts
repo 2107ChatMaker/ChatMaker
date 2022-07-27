@@ -16,6 +16,7 @@ import { generateToken } from "@utils/token";
 //bcrypt
 import { hash } from "bcrypt";
 
+
 // actions accessable to manipulate responses or add new ones
 export class UserController implements DatabaseObject, Saveable, User {
 
@@ -90,7 +91,7 @@ export class UserController implements DatabaseObject, Saveable, User {
     //get user saved responses
     static async getSavedResponses(userID: string) {
         const user = await UserController.getUserByID(userID);
-        
+
         return user.responsesSaved;
     }
 

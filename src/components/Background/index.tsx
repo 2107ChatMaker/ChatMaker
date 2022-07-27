@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 //custom styles page
 import styles from './Background.module.sass';
 
+
 //props type
 interface BackgroundProps {
     children: ReactNode;
