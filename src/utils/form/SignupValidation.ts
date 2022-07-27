@@ -24,6 +24,7 @@ export function signupValidation(formData: FormData): {} {
     if (formData.password !== formData.passwordConfirm) {
         errors.passwordConfirm = "Passwords do not match";
     }
+    
     return errors.email !== "" || 
            errors.password !== "" || 
            errors.passwordConfirm !== "" ? errors : {};

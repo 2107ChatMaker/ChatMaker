@@ -1,6 +1,8 @@
 import { useState, FormEvent } from "react";
+
 //material UI
 import { Search } from "@mui/icons-material";
+
 //custom style
 import styles from "./SearchBar.module.sass";
 
@@ -15,6 +17,7 @@ export default function SearchBar(props: Props) {
 
     //search bar state
     const [search, setSearch] = useState("");
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         props.onSubmit(search);
@@ -32,4 +35,4 @@ export default function SearchBar(props: Props) {
             </div>
         </form>    
     );
-}
+};

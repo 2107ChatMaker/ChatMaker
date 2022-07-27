@@ -1,8 +1,8 @@
 //react imports
 import { motion } from 'framer-motion';
+
 //custom sass
 import styles from "./Introduction.module.sass";
-
 
 export default function About() {
     return (

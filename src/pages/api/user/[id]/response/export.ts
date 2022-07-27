@@ -1,15 +1,14 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
+
 //data access objects
 import { PromptController } from "@/dataAccessLayer/actions/prompt";
 import { ApprovedResponseController } from "@/dataAccessLayer/actions/approvedRating";
 import { UserController } from "@/dataAccessLayer/actions/user";
 
-
 // used to get the information to make a rating card or to update (+/-) a resonses rating
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-
         if (req.method != "GET") {
             throw {
                 code: 405,
@@ -19,14 +18,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // gets the userID passed in the url
         const {id} = req.query;
+
         if (!id || typeof id !== "string") {
             throw {
                 code: 400,
                 message: 'username does not exist'
             };
-        }
+        }   
+
         //get user saved responses ids
         const saveResponsesIds: string[] = await UserController.getSavedResponses(id);
+
         if (!saveResponsesIds) {
             throw {
                 code: 204,
@@ -36,6 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         
         // translate reponse id's into responses
         const savedResponses = await ApprovedResponseController.getApprovedResponses(saveResponsesIds);
+
         if (!savedResponses) {
             throw {
                 code: 204,
@@ -54,7 +57,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 response: savedResponses[i].response,
                 tags: savedResponses[i].tags
             });
-            
         }
         
         if (!exportResponse) {
@@ -66,12 +68,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // stringify the values for return
         const test = JSON.stringify(exportResponse);
+
         // successful return of json
         res.status(200).json(test);
-            
     } catch(error) {
         const {code = 500, message} = error;
-
         res.status(code).json({message});
     }
 }

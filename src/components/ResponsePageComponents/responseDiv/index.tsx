@@ -1,16 +1,20 @@
 //react imports
 import { ReactNode } from "react";
+
 import * as React from 'react';
+
 //mongoose imports
 import { ObjectId } from "mongoose";
+
 //utils
 import axios from "@utils/constants/axios";
+
 //material UI
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
 import Chip from '@mui/material/Chip';
+
 //custom style
 import styles from './ResponseDiv.module.sass';
-
 
 interface Props {
     children?: ReactNode
@@ -22,19 +26,22 @@ interface Props {
 };
 
 export default function ResponseDiv(props: Props){
+
     //saved response to user
     async function saveResp(userID: string, responseID: string) {
+
         //set the post request values
         let values = {
             responseID
         };
 
         try {
+
             //make a post request to save the response to user
             const response = await axios.post(`/api/user/${userID}/response/save`,values);
         } catch(error) {
-            throw new Error(error);
-        }
+            throw new Error(error);       
+        }   
     }
 
     return(

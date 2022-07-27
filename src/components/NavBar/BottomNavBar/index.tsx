@@ -2,9 +2,11 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useMemo, useState, SyntheticEvent } from 'react';
+
 //material UI
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { Paper } from '@mui/material';
+
 //utilities
 import GetTabName from '@utils/navigation/GetTabName';
 import getTabLinkAndIcon from '@utils/navigation/GetTabLinkAndIcon';
@@ -50,8 +52,9 @@ export default function BottomNavBar() {
   const tabs = useMemo(()=>{
     if (session && session.user) {
       return ['Rate', 'Explore', 'Profile'];
-    } 
-    return ['Rate', 'Explore', 'Login'];
+  }
+
+  return ['Rate', 'Explore', 'Login'];
   }, [session]);
 
   return (
@@ -59,6 +62,7 @@ export default function BottomNavBar() {
       <BottomNavigation sx={navStyle} value={value} onChange={handleChange} showLabels={true}>
         { tabs.map((name, index) => {
             const {icon} = getTabLinkAndIcon(name);
+
             return <BottomNavigationAction 
                       key={index} 
                       label={name} 
@@ -66,8 +70,7 @@ export default function BottomNavBar() {
                       icon={icon}
                       value={name}
                     />;
-          }
-         )}
+        })}
       </BottomNavigation>
     </Paper>
   );

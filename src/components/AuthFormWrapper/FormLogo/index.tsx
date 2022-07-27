@@ -1,6 +1,7 @@
 //react imports
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+
 //our custom global sass file
 import styles from './FormLogo.module.sass';
 
@@ -36,5 +37,5 @@ export default function FormLogo() {
                 ChatMaker
             </p>
         </motion.div>
-        );
+    );
 }

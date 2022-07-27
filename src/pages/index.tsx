@@ -3,28 +3,36 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import Image from 'next/image';
+
 //utils
 import axios from '@utils/constants/axios';
+
 //material UI
 import { Icon, useMediaQuery } from "@mui/material";
+
 //components
 import Page from '@components/templates/Page';
 import PageTitle from '@components/PageTitle';
 import SearchBar from '@components/SearchBar';
 import Prompt from '@components/Prompt';
+
 //data access object
 import { PromptController as pController } from '@/dataAccessLayer/actions/prompt';
+
 //interfaces
 import type { HashMap } from '@interfaces/HashMap';
+
 //custom styles
 import styles from '@styles/ExplorePrompts.module.sass';
 
-
 export default function Explore({user, prompts}: HashMap) {
+
   //list of all the prompts being displayed
   const [promptsList, setPrompts] = useState(prompts);
+
   //boolean to check if the screen size matches a mobile screen
   const match = useMediaQuery('(max-width:768px)');
+
   //router to navigate to the create prompt and respond page
   const router = useRouter();
 
@@ -33,17 +41,17 @@ export default function Explore({user, prompts}: HashMap) {
     try{
 
       //if the search is empty, set the prompts to the original prompts
-      if(search ===  ""){
+      if(search ===  "") {
         setPrompts(prompts);
-      } else{
+      } else {
+
         //fetches the results from the search query
         const {data} = await axios.get(`/api/prompt/search/${search}`);
         setPrompts(data.reverse());
-      }
+      } 
+    } catch(error) {
+        alert("error getting prompts");
     }
-      catch(error){
-        //TODO: handle error
-      }
   };
 
   return (
@@ -56,37 +64,45 @@ export default function Explore({user, prompts}: HashMap) {
       prompts and response for ingame dialogues.
       "
     >
-       <div className={styles.page}>
-            <PageTitle title = {match? "Explore": "Explore Prompts"}>
-                <div className={styles.add} onClick={() => router.push("/add")}>
-                    <h2>
-                        Add
-                    </h2>
-                    <Icon fontSize='large' sx={{color: "#1C98EC"}}>
-                        <Image src={"/resources/PencilSquare.svg"} width={"100%"} height={"100%"} alt="Logo"/>
-                    </Icon>
-                </div>
-            </PageTitle>
-            <div className={styles.searchField}>
-                <SearchBar onSubmit={onSearch}
-                    placeholder={"search for prompts"}
-                />
-            </div>
-            <div className={styles.prompts}>
-              {promptsList && promptsList.length > 0? promptsList.map(({prompt, _id}, index) => (
-                <Prompt key={index} prompt={prompt} onClick={()=>router.push(`/response/${_id}`)}/>
-              )): <div className={styles.noPrompts}>No prompts found</div>}
-            </div> 
+      <div className={styles.page}>
+        <div className={styles.header}>
+          <PageTitle title = {match? "Explore": "Explore Prompts"}>
+              <div className={styles.add} onClick={() => router.push("/add")}>
+                  <h2>
+                      Add
+                  </h2>
+                  <Icon fontSize='large' sx={{color: "#1C98EC"}}>
+                      <Image src={"/resources/PencilSquare.svg"} width={"100%"} height={"100%"} alt="Logo"/>
+                  </Icon>
+              </div>
+          </PageTitle>
+          <div className={styles.searchField}>
+              <SearchBar onSubmit={onSearch}
+                placeholder={"search for prompts"}
+              />
+          </div>
         </div>
+        <div className={styles.prompts}>
+          {promptsList && promptsList.length > 0? promptsList.map(({prompt, _id}, index) => (
+            <Prompt key={index} prompt={prompt} onClick={()=>router.push(`/response/${_id}`)}/>
+          )): <div className={styles.noPrompts}>No prompts found</div>}
+        </div> 
+      </div>
     </Page>
   );
 }
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
+
+  //get user session
   const session = await getSession(context);
+
+  // check if use session exists
   if (session && session.user) {
       const prompts = await pController.getPrompts();
+
+      //return user and list of prompts as props
       return {
         props: {
           user: JSON.parse(JSON.stringify(session.user)),
@@ -94,6 +110,8 @@ export async function getServerSideProps(context) {
         },
       };
   } else {
+
+      //redirect to login page
       return {
         redirect: {
             destination: "/auth/login",

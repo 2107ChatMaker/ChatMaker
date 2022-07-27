@@ -12,6 +12,7 @@ export async function sendEmailVerification(email: string, token: string, userId
                 <a href="${process.env.BASEURL}/api/user/auth/verification/email/${userId}?token=${token}">Verify your email</a>`
     };
     await sgMail.send(msg);
+
     return;
 }
 
@@ -27,5 +28,6 @@ export async function sendPasswordConfirmation(email: string, token: string, use
                <a href="${process.env.BASEURL}/api/user/auth/verification/password/${userId}/${token}">confirm your password change</a>`
     };
     await sgMail.send(msg);
+    
     return;
 }

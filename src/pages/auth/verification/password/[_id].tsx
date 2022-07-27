@@ -1,21 +1,32 @@
 //react imports
 import { useRouter } from "next/router";
 import { useState } from 'react';
+
 //utils
 import axios from "@utils/constants/axios";
+
 //components
 import Template from "@components/templates/Verification";
 import Button from "@components/Button";
+
 //custom styles
 import styles from "@styles/VerificationPage.module.sass";
+
 //next-auth
 import { signOut, useSession } from "next-auth/react";
 
-
 export default function PasswordVerification() {
+
+    //router for getting user id and navigate to login page
     const router = useRouter();
+
+    //get user id
     const { _id } = router.query;
+
+    //server side error
     const [error, setError] = useState();
+
+    //user session
     const {data: session} = useSession();
 
     //resend password confirmation email
@@ -24,6 +35,7 @@ export default function PasswordVerification() {
 
             //send password verification link to email
             await axios.post(`/api/user/auth/verification/password`, {id: _id});
+        
         } catch(err) {
 
             //handle error
@@ -33,6 +45,8 @@ export default function PasswordVerification() {
 
     //redirect to login and logged out user after password is reset
     function exitToLogin() {
+        
+        //check if user is logged in
         if (session && session.user) signOut();
         router.push("/auth/login");
     }

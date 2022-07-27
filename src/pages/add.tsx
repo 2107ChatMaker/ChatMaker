@@ -1,15 +1,19 @@
 //react imports
 import { getSession } from 'next-auth/react';
 import useForm from '@hook/useForm';
+
 //utils
 import axios from '@utils/constants/axios';
+
 //components
 import Page from '@components/templates/Page';
 import TextArea from '@components/TextArea';
 import Button from '@components/Button';
 import PageTitle from '@components/PageTitle';
+
 //interfaces
 import { HashMap } from '@interfaces/HashMap';
+
 //custom styles
 import styles from '@styles/Add.module.sass';
 
@@ -18,20 +22,22 @@ export default function AddPrompt({user}: HashMap) {
 
         //get userID from session
         const userId = user.id;
-    
+
         try{
+
             //fetch request to add prompt
             const result = await axios.post('/api/prompt', {userId, prompt: form.prompt});
+
             // alert users upload was successful
             alert(result.data.message);
         } catch (error) {
-            //TODO: handle error
             alert(`${error.response.data.message}, please try agan later`);
         }
     };
 
     //validates the prompt entered by the user
     const validatePrompt = ({prompt}) => {
+
         //prompt length must be at least 10 characters
         if (prompt.length < 10) {
             return {
@@ -90,21 +96,30 @@ export default function AddPrompt({user}: HashMap) {
         </form>
         </Page>  
     );
+
 }
 
 //redirect page to login if user is not logged in
 export async function getServerSideProps(context) {
+
+  // get user session
   const session = await getSession(context);
+
+  //check if user session exists
   if (session && session.user) {
-    
+
       //caching
       context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+
+      //return user as props
       return {
         props: {
           user: JSON.parse(JSON.stringify(session.user)),
         },
       };
-  } else {
+    } else {
+
+        //redirect to login page
         return {
             redirect: {
                 destination: "/auth/login",

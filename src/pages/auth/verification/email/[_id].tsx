@@ -1,14 +1,16 @@
 //react imports
 import { useRouter } from "next/router";
 import { useState } from "react";
+
 //utils
 import axios from "@utils/constants/axios";
+
 //components
 import VerficationTemplate from "@components/templates/Verification";
 import Button from "@components/Button";
+
 //custom styles
 import styles from '@styles/VerificationPage.module.sass';
-
 
 export default function EmailVerification() {
 
@@ -24,9 +26,11 @@ export default function EmailVerification() {
     //send verification email to user
     async function sendVerificationEmail() {
         try {
+
             //send verification email
             await axios.post(`/api/user/auth/verification/email/${_id}`);
         } catch(err) {
+
             //handle error
             setError(err.response.data.err);
         }

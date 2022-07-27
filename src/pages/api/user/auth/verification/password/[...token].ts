@@ -1,14 +1,19 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
+
 //utils
 import { verifyToken, generateToken } from "@utils/token";
+
 import { sendPasswordConfirmation } from "@utils/mailing";
+
 //data access object
 import { UserController } from "@/dataAccessLayer/actions/user";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
     try {
+
         if (req.method == "GET") {
 
             //retrieve userId and reset password token from request query
@@ -31,25 +36,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                        //clear provisional password and reset password token
                        user.resetPassword.resetPasswordToken = null;
+
                        user.resetPassword.provisionalPassword = null;
 
                        //update user in database
                        await user.save();
-                    }
+                    
+}
+
                     res.status(200).send("Your password has been reset");
-                } catch (error) {
+                
+} catch (error) {
+
                     const { code = 400, message = "Invalid id" } = error;
+
                     throw {
                         code, message
                     };
-                }
-            } else {
+                
+}
+            
+} else {
+
                 throw {
                     code: 400,
                     message: "Invalid token or id"
                 };
-            }
-        } else if (req.method==="POST") {
+            
+}
+        
+} else if (req.method==="POST") {
 
             //retrieve user id from request query
             const { id } = req.body;
@@ -62,28 +78,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
                 //check if token is expired
                 if (!verifyToken(user.resetPassword.resetPasswordToken)) {
+
                     const newToken = await generateToken(user._id);
+
                     user.resetPassword.resetPasswordToken = newToken;
+
                     await user.save();
-                }
+                
+}
 
                 //send password confirmation link to user email
                 await sendPasswordConfirmation(user.email, user.resetPassword.resetPasswordToken, user._id);
+
                 res.status(200).json({ message: "send password confirmation" });
-            } else {
+            
+} else {
+
                 throw {
                     code: 400,
                     message: "Invalid request"
                 };
-            }
-        } else {
+            
+}
+        
+} else {
+
             throw {
                 code: 400,
                 message: "Invalid method"
             };
-        }
-    } catch(error) {
+        
+}
+    
+} catch(error) {
+
         const { code = 500, message } = error;
+
         res.status(code).json({ err: message });
-    }
+    
+}
+
 }

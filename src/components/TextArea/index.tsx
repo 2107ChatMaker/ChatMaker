@@ -1,8 +1,8 @@
 //react imports
 import { ChangeEventHandler } from 'react';
+
 //custom style
 import styles from './TextArea.module.sass';
-
 
 interface Props{
     value: string,
@@ -13,7 +13,7 @@ interface Props{
     name: string
 }
 
-export default function TextArea(props: Props){
+export default function TextArea(props: Props) {
     return(
         <div className={styles.textarea}>
             <textarea

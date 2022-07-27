@@ -1,9 +1,9 @@
 //react imports
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+
 //custom style sheet
 import styles from './Button.module.sass';
-
 
 //props type
 interface ButtonProps {

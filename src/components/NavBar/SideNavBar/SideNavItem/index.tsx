@@ -1,11 +1,12 @@
 //react imports
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+
 //custom style
 import styles from './SideNavItem.module.sass';
+
 //utilities
 import getTabLinkAndIcon  from '@utils/navigation/GetTabLinkAndIcon';
-
 
 export default function NavItem({name, onClick}: {name: string, onClick?: () => void}) {
     
@@ -29,4 +30,5 @@ export default function NavItem({name, onClick}: {name: string, onClick?: () => 
             </li>
         </Link>
     );
+    
 }

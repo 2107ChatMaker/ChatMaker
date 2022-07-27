@@ -3,21 +3,27 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Link from "next/link";
 import { getSession, signOut } from 'next-auth/react';
+
 //utils
 import axios from "@utils/constants/axios";
+
 //material UI
 import { Logout } from "@mui/icons-material";
+
 //interfaces
 import type { HashMap } from "@interfaces/HashMap";
+
 //components
 import Page from "@components/templates/Page";
 import PageTitle from "@components/PageTitle";
 import SavedResponseList from "@components/SavedResponseList";
 import Button from "@components/Button";
+
 //controllers
 import { UserController as userController } from "@/dataAccessLayer/actions/user";
 import { ApprovedResponseController as arController } from "@/dataAccessLayer/actions/approvedRating";
 import { PromptController as promptController } from "@/dataAccessLayer/actions/prompt";
+
 //custom style
 import styles from "@styles/Profile.module.sass";
 
@@ -35,12 +41,15 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
 
     //handle selecting response 
     const handleSelect = (_id: string, isSelected: boolean) => {
+
         //if response is selected/checked
         if (isSelected) {
+
             //add response to selected responses list
             const res = selectedResponses.concat(_id);
             setSelectedResponses(res);
         } else {
+
             // if not remove it from the selected responses list
             setSelectedResponses(selectedResponses.filter(id => id !== _id));
         }
@@ -52,25 +61,27 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
             
             //check if there is any selected response
             if (selectedResponses.length > 0) {
+
                 //delete selected responses from user saved responses
                 const deletedResponses = savedResponsesIds.filter(response => !selectedResponses.includes(response));
                 const { data } = await axios.put(`/api/user/${uid}/response/delete`, {responseIDs: deletedResponses});
+
                 //reload the page after delete 
                 router.reload();
                
                 //throw request error if there is any 
                 if (data.error) {
                     throw new Error(data.error);
-                }
+                }          
             }
-
         } catch(error) {
-            //TODO: handle error
+            alert("error occured while deleting responses");
         }
     };
 
     // reference https://stackoverflow.com/questions/34156282/how-do-i-save-json-to-local-text-file
     async function download() {
+
         // get the custom export json for the user id
         const {status, data: response} = await axios.get(`api/user/${uid}/response/export`);
 
@@ -78,14 +89,19 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
         if (status != 200) {
             return;
         }
+
         // create an a tag
         var a = document.createElement("a");
+
         // create a blob that holds our export json
         var file = new Blob([response], {type: "application/json"});
+
         // create a url containing our json information via our blob and assign it to our a tag
         a.href = URL.createObjectURL(file);
+
         // assigns a download filename to our a tag
         a.download = `${email}_Saved_Responses.json`;
+
         // execute (click) on our nameTag
         a.click();
     }
@@ -145,20 +161,31 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
             </div>
         </Page>
   );
+
 }
 
 //redirect page to login if user is not logged in and get list of user's saved responses
 export async function getServerSideProps(context) {
+
+    //get user session
     const session = await getSession(context);
+
+    //check if user session exist
     if (session && session.user) {
+
         //get user save responses ids
         const saveResponsesIds: string[] = await userController.getSavedResponses(session.user.id);
+
         //get saved responses by ids
         const savedResponses = await arController.getApprovedResponses(saveResponsesIds);
+
         //group responses by prompt
         let groupedResponses = await groupResponse(savedResponses);
+
         //caching
         context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+
+        //return list of saved responses, list of saved responses ids, and user as props
         return {
             props: {
             user: JSON.parse(JSON.stringify(session.user)),
@@ -167,6 +194,8 @@ export async function getServerSideProps(context) {
             },
         };
     }
+
+    //redirect to login page if user session not exist
     return {
         redirect: {
             destination: "/auth/login",
@@ -177,14 +206,18 @@ export async function getServerSideProps(context) {
 
 //group responses by prompt
 const groupResponse = async (responses) => {
+
     //initialize empty object to store responses
     let groupedResponses = {};
+
     //check if user has any saved response
     if (responses.length > 0) {
+
         //loop through all responses and group them by prompt
         for (let i = 0; i< responses.length; i++) {
             const response = responses[i];
             const { prompt } = await promptController.getPrompt(response.promptID);
+
             if (groupedResponses[prompt]) {
                 groupedResponses[prompt].push(response);
             } else {
@@ -192,5 +225,6 @@ const groupResponse = async (responses) => {
             }
         }
     }
+
     return groupedResponses;
 };

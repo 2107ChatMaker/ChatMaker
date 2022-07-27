@@ -1,26 +1,33 @@
 //mongo imports
 import { _id } from "@next-auth/mongodb-adapter";
+
 //interfaces
 import { HashMap } from "@interfaces/HashMap";
 import { Saveable } from "@interfaces/Saveable";
 import { DatabaseObject } from "@interfaces/DatabaseObject";
 import { Prompt } from "@interfaces/Prompt";
+
 //data access object
 import { ObjectManager } from "./objectManager";
+
 //model
 import PromptModel from "../schemas/prompt";
 
 
 // actions accessable to manipulate promps or add new ones.
 export class PromptController implements DatabaseObject, Saveable, Prompt {
+
     // The user submitting the prompts ID
     userID: string;
+
     // The prompt the user has given
     prompt: string;
     
     constructor(userID: string, prompt: string) {
+
         this.userID = userID;
         this.prompt = prompt;
+
     }
 
     /// Saves this object to the database or update it if it already exists
@@ -47,6 +54,7 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     static async searchPrompts(searchQuery: string) {
         return await ObjectManager.findByRegex(PromptModel, searchQuery, "prompt");
     }
+
     //searches by the promptID
     static findPromptByID(promptID: string) {
         return ObjectManager.find(PromptModel, promptID);
