@@ -14,45 +14,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { email , password } = req.body;
 
     try {
-        switch(req.method) {
-            case "POST":
-                
-                //wait for the database connection
-                await Database.setupClient();
+        if (req.method === "POST") {
 
-                //check if user already exists
+            //wait for the database connection
+            await Database.setupClient();
+
+            //check if user already exists
+            try {
+
+                //register user
+                const user = await userController.register(email.toLowerCase(), password);
+
                 try {
-                    const user = await userController.register(email.toLowerCase(), password);
+                    
+                    //send email verification
+                    await sendEmailVerification(email.toLowerCase(), user.emailToken, user._id);
 
-                    try {
-                        
-                        //send email verification
-                        await sendEmailVerification(email.toLowerCase(), user.emailToken, user._id);
-
-                        //send user id as response
-                        res.status(201).json({
-                            message: "account created",
-                            _id: user._id.toString()
-                        });
-                    } catch {
-                        throw {
-                            code: 500,
-                            message: "cannot send email"
-                        };
-                    }
+                    //send user id as response
+                    res.status(201).json({
+                        message: "account created",
+                        _id: user._id.toString()
+                    });
                 } catch {
                     throw {
-                        code: 400,
-                        message: "Email already exists"
+                        code: 500,
+                        message: "cannot send email"
                     };
                 }
-                break;
-            default:
+            } catch {
                 throw {
                     code: 400,
-                    message: "Method not allowed"
+                    message: "Email already exists"
                 };
-            
+            }
+        } else {
+            throw {
+                code: 400,
+                message: "Method not allowed"
+            };
         }
     } catch(err: any) {
         const {code = 500, message} = err;
