@@ -44,7 +44,7 @@ export default function ResponsePage(props: ResponseProps) {
         //will show a blue loading circle while loading in the content
         loading: () => <div><CircularProgress /></div>
     })
- 
+
     return (
         <Page
         >
@@ -52,7 +52,12 @@ export default function ResponsePage(props: ResponseProps) {
             <AddResponseHeader prompt={props.returnPrompt} userID={props.userID} promptID={props.PID} />
             <div id='scrollContainer' className={styles.responseContainer}>
                 {/* this renders the approved responses of the prompt */}
-                <Content returnPrompt={props.returnPrompt} PID = {props.PID} userID = {props.userID} retrievedIDs = {props.retrievedIDs} retrievedResponses = {props.retrievedResponses}/>
+                <Content 
+                    returnPrompt={props.returnPrompt} 
+                    PID = {props.PID} userID = {props.userID} 
+                    retrievedIDs = {props.retrievedIDs} 
+                    retrievedResponses = {props.retrievedResponses}
+                />
             </div>
         </Page>
     );
