@@ -9,8 +9,8 @@ import dynamic from "next/dynamic";
 import AddResponseHeader from '@components/ResponsePageComponents/addResponse/AddResponseHeader';
 import Page from '@templates/Page';
 //controllers
-import { PromptController } from '@/dataAccessLayer/actions/prompt';
-import { ApprovedResponseController } from '@/dataAccessLayer/actions/approvedRating';
+import { PromptController } from '@/dataAccessLayer/controllers/prompt';
+import { ApprovedResponseController } from '@/dataAccessLayer/controllers/approvedRating';
 //material UI
 import CircularProgress from '@mui/material/CircularProgress';
 //interfaces
@@ -90,9 +90,6 @@ export async function getServerSideProps({req, query, res}) {
                 const queryResult = await ApprovedResponseController.getRandomResponse(retrievedIDs as [string], PID);
                 // if there are no more approved responses, query result will return null and we break the loop
                 if (queryResult == null) {
-                    console.log("breaking query result");
-                    console.log("retrievedIDs: ", retrievedIDs)
-                    console.log("PID: ", PID)
                     break;
                 } 
                 //parsing the database result

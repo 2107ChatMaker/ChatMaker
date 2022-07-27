@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { verifyToken, generateToken } from "@utils/token";
 import { sendPasswordConfirmation } from "@utils/mailing";
 //data access object
-import { UserController } from "@/dataAccessLayer/actions/user";
+import { UserController } from "@/dataAccessLayer/controllers/user";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

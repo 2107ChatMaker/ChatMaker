@@ -1,7 +1,7 @@
 //react imports
 import { NextApiRequest, NextApiResponse } from "next";
 //data access object
-import { UserController } from "@/dataAccessLayer/actions/user";
+import { UserController } from "@/dataAccessLayer/controllers/user";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
