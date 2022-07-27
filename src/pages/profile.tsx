@@ -136,7 +136,7 @@ export default function Profile({user, savedResponses, savedResponsesIds}: HashM
                 <hr className={styles.hr}/>
                 <div className={styles.favorite}>
                     <h2 className={styles.favoriteTitle}>
-                        Saved
+                        Favorites
                     </h2>
                     <div className={styles.action}>
                         <div className={styles.btn}>
