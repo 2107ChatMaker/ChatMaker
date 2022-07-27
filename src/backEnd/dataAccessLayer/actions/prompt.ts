@@ -34,8 +34,9 @@ export class PromptController implements DatabaseObject, Saveable, Prompt {
     }
 
     // retrieves all prompts
-    static async getPrompts() {
-        return await ObjectManager.findAll(PromptModel);
+    static async getPrompts(skip: number) {
+        const getPrompts = await ObjectManager.findTen(PromptModel, skip);
+        return getPrompts;
     }
 
     //get prompt by content

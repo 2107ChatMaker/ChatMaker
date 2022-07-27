@@ -41,9 +41,7 @@ const Content = (data: ResponseProps) => {
     }
 
     if (!responses) {
-        return (
-            <WhiteDiv > </WhiteDiv>
-        )
+        setHasMore(false)
     }
     return (
         <>
@@ -51,7 +49,7 @@ const Content = (data: ResponseProps) => {
             dataLength={responses.length}
             next={getNewResponses}
             hasMore={hasMore}
-            loader={<div><CircularProgress/></div>}
+            loader={<WhiteDiv> No responses yet</WhiteDiv>}
             endMessage={<h4>Nothing more to show</h4>}
             >
                 {
