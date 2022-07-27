@@ -1,5 +1,6 @@
 import { LoginFormData as FormData } from '@interfaces/LoginFormData';
 
+
 export function loginValidation(formData: FormData): {} {
     
     //erros object to be returned

@@ -1,5 +1,6 @@
 import { paths } from '@constants/paths';
 
+
 //get tab name base on the route/link
 export default function GetTabName(link: string) {
     switch (link) {

@@ -2,6 +2,7 @@ import { Explore, Star, Person, AddBox, ExitToApp, Login } from '@mui/icons-mate
 import { paths } from '@constants/paths';
 import { ReactNode } from 'react';
 
+
 interface TabLinkAndIcon {
     href: string;
     icon: ReactNode;

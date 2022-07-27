@@ -1,5 +1,6 @@
 import { SignupFormData as FormData } from "@interfaces/SignupFormData";
 
+
 export function signupValidation(formData: FormData): {} {
     
     //erros object to be returned
@@ -24,7 +25,7 @@ export function signupValidation(formData: FormData): {} {
     if (formData.password !== formData.passwordConfirm) {
         errors.passwordConfirm = "Passwords do not match";
     }
-    
+
     return errors.email !== "" || 
            errors.password !== "" || 
            errors.passwordConfirm !== "" ? errors : {};

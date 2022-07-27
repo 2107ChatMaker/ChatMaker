@@ -1,5 +1,6 @@
 import sgMail from '@sendgrid/mail';
 
+
 export async function sendEmailVerification(email: string, token: string, userId: string) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
@@ -28,6 +29,6 @@ export async function sendPasswordConfirmation(email: string, token: string, use
                <a href="${process.env.BASEURL}/api/user/auth/verification/password/${userId}/${token}">confirm your password change</a>`
     };
     await sgMail.send(msg);
-    
+
     return;
 }
