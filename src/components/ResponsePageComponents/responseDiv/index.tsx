@@ -54,7 +54,9 @@ export default function ResponseDiv(props: Props){
         setIconBool(true)
     }
     
-
+    if (!props.tags) {
+        return
+    }
     return(
         <>
         <div className={styles.background}>

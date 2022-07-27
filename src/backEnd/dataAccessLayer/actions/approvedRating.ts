@@ -20,4 +20,9 @@ export class ApprovedResponseController {
         //finds the responses by id     
         return await ObjectManager.create(ApprovedResponseModel, response);
     }
+
+    // get a random response thats not in the given id list
+    static async getRandomResponse(ignoredIDs: [string?], promptID: string) {
+        return await ObjectManager.findRandomApproved(ApprovedResponseModel, ignoredIDs, promptID);
+    }
 }
