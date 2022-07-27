@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 message: "method not allowed"
             };
         } else {
-            //grobbing the user id
+            //grabbing the user id
             const { id } = req.query;
             //check to see if id is valid
             if (typeof id !== "string" || !id) {

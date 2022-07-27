@@ -90,6 +90,9 @@ export async function getServerSideProps({req, query, res}) {
                 const queryResult = await ApprovedResponseController.getRandomResponse(retrievedIDs as [string], PID);
                 // if there are no more approved responses, query result will return null and we break the loop
                 if (queryResult == null) {
+                    console.log("breaking query result");
+                    console.log("retrievedIDs: ", retrievedIDs)
+                    console.log("PID: ", PID)
                     break;
                 } 
                 //parsing the database result

@@ -83,20 +83,20 @@ export class ObjectManager {
 
     // Reference:
     // https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
-    /// find a specific object by it's model and mongoose _id and returns a mongoose query
-    /// Cast the result as the object type you expect from the call.
-    static async findRandomApproved(model: mongoose.Model<any>, ratedResponseIDs: [string?], promptID: string) {
+    /// get a random approved response that isn't in our retrieved response ids and that matches the given prompt ID
+    static async findRandomApproved(model: mongoose.Model<any>, retrievedResponseIDs: [string?], promptID: string) {
         /// establishes a connection to the database
         await Database.setupClient();
         // get the number of documents in the given model
-        const numberOfDocuments: number = await model.estimatedDocumentCount();
+        const numberOfDocuments: number = await model.countDocuments({promptID: promptID});
         
         // get a random number of documents to skip
-        var random = Math.floor(Math.random() * (numberOfDocuments-ratedResponseIDs.length));
+        var random = Math.floor(Math.random() * (numberOfDocuments-retrievedResponseIDs.length));
+
         /// returns the request query that needs to be Cast to the requested object type 
         const foundEntry = await model.findOne({
             promptID: promptID,
-            '_id': { $nin: ratedResponseIDs }
+            '_id': { $nin: retrievedResponseIDs }
             }
             ).skip(random);
 
