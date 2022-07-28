@@ -67,7 +67,7 @@ const LoadPrompts = ({prompts, setPrompts}: PromptProps) => {
     };
 
     //if prompts is empty, display no prompts warning
-    if (prompts.lengt < 1 ) {
+    if (prompts.length < 1 ) {
         return (
             <div className={styles.noPrompts}>no prompt found</div>
         );
