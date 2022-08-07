@@ -57,26 +57,21 @@ export const authOptions: NextAuthOptions = {
 
                         //return password error if not matched
                         throw new Error('password is incorrect');
-                    
-}
+                    }
 
                     if (!user.isVerified) {
 
                         //return email not verified error if not verified
                         throw new Error('email is not verified?' + user._id);
-                    
-}
-                
-} else {
+                    }
+                } else {
 
                     //return email error if user not found
                     throw new Error('email does not exist');
-                
-}
+                }
 
                 return user;
-            
-}
+            }
         })
     ],
     pages: {
@@ -90,26 +85,18 @@ export const authOptions: NextAuthOptions = {
         //called when user is successfully authenticated, get the user id
         //ref:https://github.com/nextauthjs/next-auth/discussions/536#discussioncomment-1932922
         session: async ({ session, token }) => {
-
             if (session?.user) {
-
-                session.user.id = token.sub;
-            
-}
+                session.user.id = token.sub;    
+            }
 
             return session;
-        
-},
+        },
 
         async redirect() {
-
             return process.env.NEXTAUTH_URL;
-        
-}
+        }
     },
-
     secret: process.env.NEXTAUTH_SECRET,
-    
 };
 
 export default NextAuth(
