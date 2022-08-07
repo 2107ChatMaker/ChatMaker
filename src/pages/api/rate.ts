@@ -57,6 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             let tags = [];
             let response = "";
             let prompt = "";
+            console.log('newResponseQuery', JSON.stringify(newResponseQuery));
 
             // if response exists
             if (!!newResponseQuery) {
