@@ -11,7 +11,7 @@ const responseSchema = new Schema({
     promptID: {type: String, required: false},
 
     // the given response to be rated or retrieved
-    response: {type: String, required: true, unique: true},
+    response: {type: String, required: true},
 
     // the rating for the response used to determine if the response should be saved permanently
     rating: {type: Number, required: false},

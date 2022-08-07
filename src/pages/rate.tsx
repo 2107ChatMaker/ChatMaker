@@ -83,27 +83,31 @@ export default function Rating(props: RatingCard) {
 
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
     async function getNewCard(execute:boolean = false) {
-        
-        // guards against multiple button presses
-        if (execute || (!execute && !buttonClicked)) {
+        try {
+            // guards against multiple button presses
+            if (execute || (!execute && !buttonClicked)) {
 
-            // stop user from executing this function again until buttonClicked is set to false
-            setButtonClicked(true);
+                // stop user from executing this function again until buttonClicked is set to false
+                setButtonClicked(true);
 
-            // forces card to exit right when skipping
-            if (!execute) {setRating(true);}
+                // forces card to exit right when skipping
+                if (!execute) {setRating(true);}
 
-            // make an API fetch request to generate a RateCard
-            const {data: rateResponse}= await axios.get(`api/rate?userID=${userID}`); // catches the response
+                // make an API fetch request to generate a RateCard
+                const {data: rateResponse}= await axios.get(`api/rate?userID=${userID}`); // catches the response
 
-            // parses into a rating Card
-            const newCard = rateResponse as RatingCard; 
+                // parses into a rating Card
+                const newCard = rateResponse as RatingCard; 
 
-            // sets the bottom card with the new card values
-            setAlternateCard(newCard); 
+                // sets the bottom card with the new card values
+                setAlternateCard(newCard); 
 
-            // animates the top card off screen, applies the new cards values, then returns it to above the bottom card
-            animateTopCard(newCard);
+                // animates the top card off screen, applies the new cards values, then returns it to above the bottom card
+                animateTopCard(newCard);
+            }
+        }
+        catch {
+            alert("failed to retrieve new card. Please try again later")
         }
     }
 

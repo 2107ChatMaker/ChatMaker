@@ -87,7 +87,7 @@ export class ResponseController implements DatabaseObject, Saveable {
         //update response rating
         const retval = await ObjectManager.updateByID(ratingID , { $inc: { rating: inc } }, ResponseModel);
        
-        if(retval.rating >= 30) {
+        if(retval.rating >= 1) {
             const {response, userID, promptID, tags} = retval;
 
             // if the response has a rating of 30 or more, add it to the approved responses list

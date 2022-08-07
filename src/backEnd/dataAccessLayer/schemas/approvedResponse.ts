@@ -11,7 +11,7 @@ const approvedResponseSchema = new Schema({
     promptID: {type: String, required: false},
 
     // the given response to be rated or retrieved
-    response: {type: String, required: true, unique: true},
+    response: {type: String, required: true},
     
     // tags used to give context to the responses
     tags: {type: [String], required: true}

@@ -20,8 +20,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             
             //check if response with same content for this prompt exists
             const isResponseExist = await ResponseController.getResponseByContentAndPrompt(response, promptID);
-            
-            if (isResponseExist) {
+
+            //check if an approved response with same content for this prompt exists
+            const isApprovedResponseExist = await ApprovedResponseController.getResponseByContentAndPrompt(response, promptID);
+
+            if (isResponseExist || isApprovedResponseExist) {
                 throw {
                     code: 400,
                     message: "Response already exist"
