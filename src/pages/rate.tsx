@@ -84,6 +84,7 @@ export default function Rating(props: RatingCard) {
     // Reference: https://stackoverflow.com/questions/29391073/update-by-id-not-working-in-mongoose
     async function getNewCard(execute:boolean = false) {
         try {
+
             // guards against multiple button presses
             if (execute || (!execute && !buttonClicked)) {
 
@@ -107,7 +108,7 @@ export default function Rating(props: RatingCard) {
             }
         }
         catch {
-            alert("failed to retrieve new card. Please try again later")
+            alert("failed to retrieve new card. Please try again later");
         }
     }
 

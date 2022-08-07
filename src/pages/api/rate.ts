@@ -70,6 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         message: 'error retrieving prompt'
                     };
                 }
+                
                 // parse our responses
                 const newResponse = JSON.parse(JSON.stringify(newResponseQuery)) as CMResponse;
                 const newPrompt = JSON.parse(JSON.stringify(promptQueryResult)) as Prompt;
