@@ -38,4 +38,11 @@ export class ApprovedResponseController {
 
         return results;
     }
+
+    // get response by response content and prompt id
+    static async getResponseByContentAndPrompt(content: string, promptID: string) {
+        const results = await ObjectManager.findByQuery(ApprovedResponseModel, { response: content, promptID });
+        
+        return results; 
+    }
 }

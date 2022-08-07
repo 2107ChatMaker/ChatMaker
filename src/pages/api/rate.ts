@@ -59,14 +59,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             let prompt = "";
 
             // if response exists
-            if (!!newResponseQuery) {
+            if (!!newResponseQuery && newResponseQuery != null) {
 
                 // the the prompt that matches the id from the retrieved query
-                const promptqueryResult = await PromptController.getPrompt(newResponseQuery.promptID);
+                const promptQueryResult = await PromptController.getPrompt(newResponseQuery.promptID);
 
+                if (promptQueryResult == null) {
+                    throw {
+                        code: 400,
+                        message: 'error retrieving prompt'
+                    };
+                }
                 // parse our responses
                 const newResponse = JSON.parse(JSON.stringify(newResponseQuery)) as CMResponse;
-                const newPrompt = JSON.parse(JSON.stringify(promptqueryResult)) as Prompt;
+                const newPrompt = JSON.parse(JSON.stringify(promptQueryResult)) as Prompt;
 
                 // assign our return values from our retrieved responses
                 responseId = newResponse._id as string;
